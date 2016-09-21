@@ -14,4 +14,5 @@ public class Project {
     private Date mStartDate;
     private Date mEndDate;
     private UnitPrice mUnitPrice;
+
 }
