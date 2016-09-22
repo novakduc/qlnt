@@ -1,5 +1,6 @@
 package com.novakduc.forbega.qlnt.model;
 
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -8,12 +9,13 @@ import java.util.Date;
 
 public class Project {
 
+    private Long mProjectId;
     private String mName;
     private String mAddress;
     private Long mInvestment;
     private Long mTotalIncome;
-    private Date mStartDate;
-    private Date mEndDate;
+    private Calendar mStartDate;
+    private Calendar mEndDate;
     private UnitPrice mUnitPrice;
     private LoanList mLoanList;
 
@@ -49,6 +51,14 @@ public class Project {
     }
 
     // Getter and setter section
+    public Long getProjectId() {
+        return mProjectId;
+    }
+
+    public void setProjectId(Long projectId) {
+        mProjectId = projectId;
+    }
+
     public String getName() {
         return mName;
     }
@@ -81,19 +91,19 @@ public class Project {
         mTotalIncome = totalIncome;
     }
 
-    public Date getStartDate() {
+    public Calendar getStartDate() {
         return mStartDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(Calendar startDate) {
         mStartDate = startDate;
     }
 
-    public Date getEndDate() {
+    public Calendar getEndDate() {
         return mEndDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(Calendar endDate) {
         mEndDate = endDate;
     }
 

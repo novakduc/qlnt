@@ -3,7 +3,7 @@ package com.novakduc.forbega.qlnt.model;
 import android.content.Context;
 import android.os.AsyncTask;
 
-import com.novakduc.forbega.qlnt.db.DatabaseManager;
+import com.novakduc.forbega.qlnt.db.ProjectDbManager;
 
 import java.util.ArrayList;
 
@@ -34,7 +34,7 @@ public class Qlnt {
         @Override
         protected Object doInBackground(Object[] objects) {
             Project project = (Project) objects[0];
-            DatabaseManager databaseManager = new DatabaseManager(sContext);
+            ProjectDbManager databaseManager = new ProjectDbManager(sContext);
             databaseManager.recordProject(project);
             return null;
         }
