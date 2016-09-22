@@ -27,6 +27,7 @@ public class ProjectDbManager implements StringForDB {
     //Record project information
     public Long recordProject(Project project) {
         mDatabase = mHelper.getWritableDatabase();
+        Long result = Long.valueOf(1);
 
         ContentValues contentValues = new ContentValues();
         contentValues.put(PROJECT_ID_ROW, project.getProjectId());
@@ -36,7 +37,12 @@ public class ProjectDbManager implements StringForDB {
         contentValues.put(PROJECT_INVESTMENT_ROW, project.getInvestment());
         contentValues.put(PROJECT_START_DATE_ROW, project.getStartDate().getTimeInMillis());
         contentValues.put(PROJECT_TOTAL_INCOME_ROW, project.getTotalIncome());
-        return mDatabase.insert(PROJECT_TABLE, null, contentValues);
+
+        mDatabase.insert(PROJECT_TABLE, null, contentValues);
+
+        // TODO: 9/22/2016 update other table
+
+        return result;
     }
 
 }

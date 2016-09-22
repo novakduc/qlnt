@@ -2,7 +2,9 @@ package com.novakduc.forbega.qlnt.model;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.widget.Toast;
 
+import com.novakduc.forbega.qlnt.R;
 import com.novakduc.forbega.qlnt.db.ProjectDbManager;
 
 import java.util.ArrayList;
@@ -25,6 +27,7 @@ public class Qlnt {
     }
 
     public Boolean addProject(Project project) {
+        new RecordProject().execute(project);
         return mProjectList.add(project);
     }
 
@@ -37,6 +40,11 @@ public class Qlnt {
             ProjectDbManager databaseManager = new ProjectDbManager(sContext);
             databaseManager.recordProject(project);
             return null;
+        }
+
+        @Override
+        protected void onPostExecute(Object o) {
+            Toast.makeText(sContext, R.string.project_recorded, Toast.LENGTH_SHORT).show();
         }
     }
 }
