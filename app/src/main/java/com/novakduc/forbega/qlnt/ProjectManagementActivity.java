@@ -22,10 +22,18 @@ public class ProjectManagementActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
-        tabLayout.addTab(tabLayout.newTab().setText(R.string.page1_title));
-        tabLayout.addTab(tabLayout.newTab().setText(R.string.page2_title));
-        tabLayout.addTab(tabLayout.newTab().setText(R.string.page3_title));
-        //tabLayout.addTab(tabLayout.newTab().setText(R.string.page4_title));
+        TabLayout.Tab tab1 = tabLayout.newTab();
+        tab1.setIcon(R.drawable.ic_create);
+        tabLayout.addTab(tab1);
+
+        TabLayout.Tab tab2 = tabLayout.newTab();
+        tab2.setIcon(R.drawable.ic_payment);
+        tabLayout.addTab(tab2);
+
+        TabLayout.Tab tab3 = tabLayout.newTab();
+        tab3.setIcon(R.drawable.ic_trending_up);
+        tabLayout.addTab(tab3);
+
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
