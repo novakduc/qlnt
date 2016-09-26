@@ -19,6 +19,11 @@ public class Project {
     private UnitPrice mUnitPrice;
     private LoanList mLoanList;
 
+    public Project() {
+        mProjectId = Calendar.getInstance().getTimeInMillis();
+        mUnitPrice = new UnitPrice(mProjectId);
+    }
+
     public Boolean addLoan(String name, Long amount, Date loanDate, Double rate) {
         Loan loan = new Loan(name, amount, loanDate, rate);
         return mLoanList.add(loan);
@@ -110,5 +115,4 @@ public class Project {
     public UnitPrice getUnitPrice() {
         return mUnitPrice;
     }
-
 }

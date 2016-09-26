@@ -27,7 +27,6 @@ public class ProjectDbManager implements StringForDB {
     //Record project information
     public Long recordProject(Project project) {
         mDatabase = mHelper.getWritableDatabase();
-        Long result = Long.valueOf(1);
 
         ContentValues contentValues = new ContentValues();
         contentValues.put(PROJECT_ID_ROW, project.getProjectId());
@@ -42,7 +41,7 @@ public class ProjectDbManager implements StringForDB {
 
         // TODO: 9/22/2016 update other table
 
-        return result;
+        return project.getProjectId();
     }
 
 }
