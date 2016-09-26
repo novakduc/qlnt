@@ -8,16 +8,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.novakduc.forbega.qlnt.model.TabPostion;
-
 /**
  * Created by Novak on 9/25/2016.
  */
 
 public class TabFragment extends Fragment {
-    private TabPostion position;
     private static String TAB_POSITION_KEY = "qlnt.tab.position";
     TextView mTextView;
+    private TabPostion position;
 
     public static Fragment getInstance(TabPostion position) {
         TabFragment tabFragment = new TabFragment();

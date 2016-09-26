@@ -1,4 +1,4 @@
-package com.novakduc.forbega.qlnt.model;
+package com.novakduc.forbega.qlnt;
 
 /**
  * Created by Novak on 9/25/2016.

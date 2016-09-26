@@ -1,7 +1,5 @@
 package com.novakduc.forbega.qlnt;
 
-import com.novakduc.forbega.qlnt.model.TabPostion;
-
 /**
  * Created by Novak on 9/25/2016.
  */
