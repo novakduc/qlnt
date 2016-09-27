@@ -1,5 +1,7 @@
 package com.novakduc.forbega.qlnt;
 
+import android.support.design.widget.TabLayout;
+
 /**
  * Created by Novak on 9/25/2016.
  */
