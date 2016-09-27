@@ -1,7 +1,5 @@
 package com.novakduc.forbega.qlnt;
 
-import android.support.design.widget.TabLayout;
-
 /**
  * Created by Novak on 9/25/2016.
  */
@@ -17,8 +15,8 @@ public class TabAdapter extends android.support.v13.app.FragmentPagerAdapter {
 
     @Override
     public android.app.Fragment getItem(int position) {
-        TabPostion tabPostion = TabPostion.values()[position];
-        return TabFragment.getInstance(tabPostion);
+        TabPosition tabPosition = TabPosition.values()[position];
+        return TabFragment.getInstance(tabPosition);
     }
 
     @Override

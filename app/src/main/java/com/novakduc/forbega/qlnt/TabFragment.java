@@ -15,9 +15,9 @@ import android.widget.TextView;
 public class TabFragment extends Fragment {
     private static String TAB_POSITION_KEY = "qlnt.tab.position";
     TextView mTextView;
-    private TabPostion position;
+    private TabPosition position;
 
-    public static Fragment getInstance(TabPostion position) {
+    public static Fragment getInstance(TabPosition position) {
         TabFragment tabFragment = new TabFragment();
         Bundle bundle = new Bundle();
         bundle.putSerializable(TAB_POSITION_KEY, position);
@@ -28,7 +28,7 @@ public class TabFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        position = (TabPostion) getArguments().getSerializable(TAB_POSITION_KEY);
+        position = (TabPosition) getArguments().getSerializable(TAB_POSITION_KEY);
     }
 
     @Nullable
