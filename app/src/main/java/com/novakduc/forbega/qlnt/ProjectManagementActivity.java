@@ -23,15 +23,15 @@ public class ProjectManagementActivity extends AppCompatActivity {
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         TabLayout.Tab tab1 = tabLayout.newTab();
-        tab1.setIcon(R.drawable.ic_create);
+        tab1.setIcon(R.drawable.ic_view_list);
         tabLayout.addTab(tab1);
 
         TabLayout.Tab tab2 = tabLayout.newTab();
-        tab2.setIcon(R.drawable.ic_payment);
+        tab2.setIcon(R.drawable.ic_calculator);
         tabLayout.addTab(tab2);
 
         TabLayout.Tab tab3 = tabLayout.newTab();
-        tab3.setIcon(R.drawable.ic_trending_up);
+        tab3.setIcon(R.drawable.ic_currency_usd);
         tabLayout.addTab(tab3);
 
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
