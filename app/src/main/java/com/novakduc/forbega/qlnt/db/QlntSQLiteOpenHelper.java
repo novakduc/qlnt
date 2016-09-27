@@ -20,6 +20,8 @@ class QlntSQLiteOpenHelper extends SQLiteOpenHelper implements StringForDB {
         db.execSQL(CREATE_TABLE_PHONG);
         db.execSQL(CREATE_TABLE_COST);
         db.execSQL(CREATE_TABLE_INCOME);
+        db.execSQL(CREATE_TABLE_UNIT_PRICE);
+        db.execSQL(CREATE_TABLE_LOAN);
     }
 
     @Override
@@ -29,6 +31,8 @@ class QlntSQLiteOpenHelper extends SQLiteOpenHelper implements StringForDB {
         db.execSQL(DROP_TABLE + PHONG_TABLE);
         db.execSQL(DROP_TABLE + COST_TABLE);
         db.execSQL(DROP_TABLE + INCOME_TABLE);
+        db.execSQL(DROP_TABLE + UNIT_PRICE_TABLE);
+        db.execSQL(DROP_TABLE + LOAN_TABLE);
 
         onCreate(db);
     }

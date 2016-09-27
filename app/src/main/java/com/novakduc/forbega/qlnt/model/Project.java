@@ -1,7 +1,6 @@
 package com.novakduc.forbega.qlnt.model;
 
 import java.util.Calendar;
-import java.util.Date;
 
 /**
  * Created by n.thanh on 9/21/2016.
@@ -21,10 +20,11 @@ public class Project {
 
     public Project() {
         mProjectId = Calendar.getInstance().getTimeInMillis();
+        mLoanList = new LoanList(mProjectId);
         mUnitPrice = new UnitPrice(mProjectId);
     }
 
-    public Boolean addLoan(String name, Long amount, Date loanDate, Double rate) {
+    public Boolean addLoan(String name, Long amount, Calendar loanDate, Double rate) {
         Loan loan = new Loan(name, amount, loanDate, rate);
         return mLoanList.add(loan);
     }
@@ -114,5 +114,9 @@ public class Project {
 
     public UnitPrice getUnitPrice() {
         return mUnitPrice;
+    }
+
+    public LoanList getLoanList() {
+        return mLoanList;
     }
 }

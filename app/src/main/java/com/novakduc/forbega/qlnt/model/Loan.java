@@ -1,17 +1,22 @@
 package com.novakduc.forbega.qlnt.model;
 
-import java.util.Date;
+import java.util.Calendar;
 
 /**
  * Created by n.thanh on 9/21/2016.
  */
 public class Loan {
+    //private Long mProjectId;
     private String mName;
     private Long mAmount;
-    private Date mLoanDate;
+    private Calendar mLoanDate;
     private Double mInterestRate;
 
-    public Loan(String name, Long amount, Date loanDate, Double rate) {
+    public Loan(String name, Long amount, Calendar loanDate, Double rate) {
+        mName = name;
+        mAmount = amount;
+        mLoanDate = loanDate;
+        mInterestRate = rate;
     }
 
     //Getter setter
@@ -31,11 +36,11 @@ public class Loan {
         mAmount = amount;
     }
 
-    public Date getLoanDate() {
+    public Calendar getLoanDate() {
         return mLoanDate;
     }
 
-    public void setLoanDate(Date loanDate) {
+    public void setLoanDate(Calendar loanDate) {
         mLoanDate = loanDate;
     }
 

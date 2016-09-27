@@ -4,6 +4,8 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.novakduc.forbega.qlnt.model.Loan;
+import com.novakduc.forbega.qlnt.model.LoanList;
 import com.novakduc.forbega.qlnt.model.Project;
 
 /**
@@ -28,6 +30,7 @@ public class ProjectDbManager implements StringForDB {
     public Long recordProject(Project project) {
         mDatabase = mHelper.getWritableDatabase();
 
+        //Record project
         ContentValues contentValues = new ContentValues();
         contentValues.put(PROJECT_ID_ROW, project.getProjectId());
         contentValues.put(PROJECT_NAME_ROW, project.getName());
@@ -39,7 +42,33 @@ public class ProjectDbManager implements StringForDB {
 
         mDatabase.insert(PROJECT_TABLE, null, contentValues);
 
-        // TODO: 9/22/2016 update other table
+        //record unit price
+        contentValues = new ContentValues();
+        contentValues.put(UP_PROJECT_ID_ROW, project.getProjectId());
+        contentValues.put(UP_ELECTRICITY_ROW, project.getUnitPrice().getElectricity());
+        contentValues.put(UP_WATER_ROW, project.getUnitPrice().getWater());
+        contentValues.put(UP_INTERNET_ROW, project.getUnitPrice().getInternet());
+        contentValues.put(UP_TV_ROW, project.getUnitPrice().getTv());
+        contentValues.put(UP_TRASH_COLLECTION_ROW, project.getUnitPrice().getTrashCollection());
+        contentValues.put(UP_SECURITY_ROW, project.getUnitPrice().getSecurity());
+
+        mDatabase.insert(UNIT_PRICE_TABLE, null, contentValues);
+
+        //Record loans
+        LoanList loanList = project.getLoanList();
+
+        for (Object loan : loanList) {
+            Loan tmpLoan = (Loan) loan;
+
+            contentValues = new ContentValues();
+            contentValues.put(LOAN_PROJECT_ID, project.getProjectId());
+            contentValues.put(LOAN_NAME, tmpLoan.getName());
+            contentValues.put(LOAN_AMOUNT, tmpLoan.getAmount());
+            contentValues.put(LOAN_DATE, tmpLoan.getLoanDate().getTimeInMillis());
+            contentValues.put(LOAN_INTEREST_RATE, tmpLoan.getInterestRate());
+
+            mDatabase.insert(LOAN_TABLE, null, contentValues);
+        }
 
         return project.getProjectId();
     }
