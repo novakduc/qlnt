@@ -21,7 +21,7 @@ public class Project implements Cloneable {
 
     public Project() {
         mProjectId = Calendar.getInstance().getTimeInMillis();
-        mLoanList = new LoanList<Loan>(mProjectId);
+        mLoanList = new LoanList<Loan>();
         mUnitPrice = new UnitPrice(mProjectId);
     }
 
@@ -35,14 +35,18 @@ public class Project implements Cloneable {
         Project project = (Project) super.clone();
         project.setUnitPrice((UnitPrice) mUnitPrice.clone());
         //Clone loan list
-        LoanList<Loan> loanList = new LoanList<Loan>(mProjectId);
+        LoanList<Loan> loanList = new LoanList<Loan>();
         for (Loan loan :
                 mLoanList) {
             loanList.add((Loan) loan.clone());
         }
         project.setLoanList((LoanList<Loan>) mLoanList.clone());
         //Clone room list
-        RoomList<Room> rooms = new RoomList<Room>(mProjectId);
+        RoomList<Room> rooms = new RoomList<Room>();
+        for (Room room :
+                mRoomList) {
+            rooms.add((Room) room.clone());
+        }
         project.setRoomList((RoomList<Room>) mRoomList.clone());
         return project;
     }

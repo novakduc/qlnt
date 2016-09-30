@@ -7,17 +7,5 @@ import java.util.ArrayList;
  */
 
 public class RoomList<R> extends ArrayList<R> implements Cloneable {
-    private Long mProjectId;
-    // TODO: 9/30/2016
-
-    public RoomList(Long projectId) {
-        mProjectId = projectId;
-    }
-
-    @Override
-
-    public Object clone() {
-        // TODO: 9/30/2016
-        return super.clone();
-    }
+    // TODO: 9/30/2016  
 }
