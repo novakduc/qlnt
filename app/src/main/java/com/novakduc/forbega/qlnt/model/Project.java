@@ -6,7 +6,7 @@ import java.util.Calendar;
  * Created by n.thanh on 9/21/2016.
  */
 
-public class Project {
+public class Project implements Cloneable {
 
     private Long mProjectId;
     private String mName;
@@ -17,6 +17,7 @@ public class Project {
     private Calendar mEndDate;
     private UnitPrice mUnitPrice;
     private LoanList<Loan> mLoanList;
+    private RoomList<Room> mRoomList;
 
     public Project() {
         mProjectId = Calendar.getInstance().getTimeInMillis();
@@ -27,6 +28,23 @@ public class Project {
     public Boolean addLoan(String name, Long amount, Calendar loanDate, Double rate) {
         Loan loan = new Loan(name, amount, loanDate, rate);
         return mLoanList.add(loan);
+    }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        Project project = (Project) super.clone();
+        project.setUnitPrice((UnitPrice) mUnitPrice.clone());
+        //Clone loan list
+        LoanList<Loan> loanList = new LoanList<Loan>(mProjectId);
+        for (Loan loan :
+                mLoanList) {
+            loanList.add((Loan) loan.clone());
+        }
+        project.setLoanList((LoanList<Loan>) mLoanList.clone());
+        //Clone room list
+        RoomList<Room> rooms = new RoomList<Room>(mProjectId);
+        project.setRoomList((RoomList<Room>) mRoomList.clone());
+        return project;
     }
 
     //Unit price setting section
@@ -116,7 +134,19 @@ public class Project {
         return mUnitPrice;
     }
 
+    private void setUnitPrice(UnitPrice unitPrice) {
+        mUnitPrice = unitPrice;
+    }
+
     public LoanList<Loan> getLoanList() {
         return mLoanList;
+    }
+
+    private void setLoanList(LoanList<Loan> loanList) {
+        mLoanList = loanList;
+    }
+
+    private void setRoomList(RoomList<Room> list) {
+        mRoomList = list;
     }
 }

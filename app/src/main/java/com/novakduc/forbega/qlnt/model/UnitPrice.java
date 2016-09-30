@@ -3,7 +3,7 @@ package com.novakduc.forbega.qlnt.model;
 /**
  * Created by n.thanh on 9/21/2016.
  */
-public class UnitPrice {
+public class UnitPrice implements Cloneable {
     private Long mProjectId;
     private Long mElectricity;
     private Long mWater;
@@ -67,5 +67,10 @@ public class UnitPrice {
 
     public void setSecurity(Long security) {
         mSecurity = security;
+    }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
 }

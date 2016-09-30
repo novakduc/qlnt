@@ -5,7 +5,7 @@ import java.util.Calendar;
 /**
  * Created by n.thanh on 9/21/2016.
  */
-public class Loan {
+public class Loan implements Cloneable {
     //private Long mProjectId;
     private String mName;
     private Long mAmount;
@@ -17,6 +17,13 @@ public class Loan {
         mAmount = amount;
         mLoanDate = loanDate;
         mInterestRate = rate;
+    }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        Loan loan = (Loan) super.clone();
+        loan.setLoanDate((Calendar) this.mLoanDate.clone());
+        return loan;
     }
 
     //Getter setter

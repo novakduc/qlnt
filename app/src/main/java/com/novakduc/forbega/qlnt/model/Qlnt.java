@@ -42,6 +42,16 @@ public class Qlnt {
         return mProjectList.add(project);
     }
 
+    public Project getProject(Long projectId) {
+        for (Project project :
+                mProjectList) {
+            if (project.getProjectId() == projectId) {
+                return project;
+            }
+        }
+        return null;    //no such project
+    }
+
 
     //Create thread to remove project
     private class RemoveProject extends AsyncTask {
