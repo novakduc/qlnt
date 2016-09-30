@@ -52,7 +52,6 @@ public class Project implements Cloneable {
     }
 
     //Unit price setting section
-
     public void setElectricityUnitPrice(Long electricityUnitPrice) {
         mUnitPrice.setElectricity(electricityUnitPrice);
     }
