@@ -7,6 +7,7 @@ package com.novakduc.forbega.qlnt.db;
 public interface StringForDB {
     String DB_NAME = "qlnt";
     int DB_VERSION = 1;
+
     //String constant for Project table
     String PROJECT_TABLE = "PROJECT_table";
     String PROJECT_ID_ROW = "_id";

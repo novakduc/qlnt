@@ -55,11 +55,9 @@ public class ProjectDbManager implements StringForDB {
         mDatabase.insert(UNIT_PRICE_TABLE, null, contentValues);
 
         //Record loans
-        LoanList<L> loanList = project.getLoanList();
+        LoanList<Loan> loanList = project.getLoanList();
 
-        for (Object loan : loanList) {
-            Loan tmpLoan = (Loan) loan;
-
+        for (Loan tmpLoan : loanList) {
             contentValues = new ContentValues();
             contentValues.put(LOAN_PROJECT_ID, project.getProjectId());
             contentValues.put(LOAN_NAME, tmpLoan.getName());

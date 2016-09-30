@@ -26,9 +26,38 @@ public class Qlnt {
         return ourInstance;
     }
 
+    public boolean removeProject(Long projectId) {
+        for (Project project :
+                mProjectList) {
+            if (project.getProjectId() == projectId) {
+                new RemoveProject().execute(project);   //delete project in db
+                return mProjectList.remove(project);
+            }
+        }
+        return false;   //there is no such project in list
+    }
+
     public Boolean addProject(Project project) {
         new RecordProject().execute(project);
         return mProjectList.add(project);
+    }
+
+
+    //Create thread to remove project
+    private class RemoveProject extends AsyncTask {
+
+        @Override
+        protected Object doInBackground(Object[] objects) {
+            Project project = (Project) objects[0];
+            // TODO: 9/30/2016 only one database can be access at the same time. care!
+            ProjectDbManager db = new ProjectDbManager(sContext);
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Object o) {
+            Toast.makeText(sContext, R.string.delete_project_confirm, Toast.LENGTH_SHORT).show();
+        }
     }
 
     ///Create thread to record project to DB
@@ -37,6 +66,7 @@ public class Qlnt {
         @Override
         protected Object doInBackground(Object[] objects) {
             Project project = (Project) objects[0];
+            // TODO: 9/30/2016 only one database can be accessed at the same time. Care!
             ProjectDbManager databaseManager = new ProjectDbManager(sContext);
             databaseManager.recordProject(project);
             return null;
