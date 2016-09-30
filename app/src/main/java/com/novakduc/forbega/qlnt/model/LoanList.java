@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * Created by n.thanh on 9/21/2016.
  */
-public class LoanList extends ArrayList {
+public class LoanList<L> extends ArrayList<L> {
     private static Long mProjectId;
 
     public LoanList(Long projectId) {

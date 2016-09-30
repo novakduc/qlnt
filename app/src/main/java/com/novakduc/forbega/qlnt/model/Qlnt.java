@@ -15,10 +15,10 @@ import java.util.ArrayList;
 public class Qlnt {
     private static Qlnt ourInstance = new Qlnt();
     private static Context sContext;
-    private ArrayList mProjectList;
+    private ArrayList<Project> mProjectList;
 
     private Qlnt() {
-        mProjectList = new ArrayList();
+        mProjectList = new ArrayList<Project>();
     }
 
     public static Qlnt getInstance(Context context) {

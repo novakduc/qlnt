@@ -16,11 +16,11 @@ public class Project {
     private Calendar mStartDate;
     private Calendar mEndDate;
     private UnitPrice mUnitPrice;
-    private LoanList mLoanList;
+    private LoanList<Loan> mLoanList;
 
     public Project() {
         mProjectId = Calendar.getInstance().getTimeInMillis();
-        mLoanList = new LoanList(mProjectId);
+        mLoanList = new LoanList<Loan>(mProjectId);
         mUnitPrice = new UnitPrice(mProjectId);
     }
 
@@ -116,7 +116,7 @@ public class Project {
         return mUnitPrice;
     }
 
-    public LoanList getLoanList() {
+    public LoanList<Loan> getLoanList() {
         return mLoanList;
     }
 }

@@ -55,7 +55,7 @@ public class ProjectDbManager implements StringForDB {
         mDatabase.insert(UNIT_PRICE_TABLE, null, contentValues);
 
         //Record loans
-        LoanList loanList = project.getLoanList();
+        LoanList<L> loanList = project.getLoanList();
 
         for (Object loan : loanList) {
             Loan tmpLoan = (Loan) loan;
@@ -72,5 +72,4 @@ public class ProjectDbManager implements StringForDB {
 
         return project.getProjectId();
     }
-
 }
