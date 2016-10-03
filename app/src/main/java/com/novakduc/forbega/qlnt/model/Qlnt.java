@@ -66,7 +66,7 @@ public class Qlnt {
 
         @Override
         protected void onPostExecute(Object o) {
-            Toast.makeText(sContext, R.string.delete_project_confirm, Toast.LENGTH_SHORT).show();
+            Toast.makeText(sContext, R.string.project_deleted_confirm, Toast.LENGTH_SHORT).show();
         }
     }
 
