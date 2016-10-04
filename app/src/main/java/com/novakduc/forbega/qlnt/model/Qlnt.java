@@ -23,7 +23,9 @@ public class Qlnt {
         // TODO: 10/4/2016 Need to be removed
         //Test test test
         for (int i = 0; i < 20; i++) {
-            mProjectList.add(new Project());
+            Project project = new Project();
+            project.setName(String.valueOf(i));
+            mProjectList.add(project);
         }
     }
 

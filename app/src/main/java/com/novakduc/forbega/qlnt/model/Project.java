@@ -25,6 +25,15 @@ public class Project implements Cloneable {
         mUnitPrice = new UnitPrice(mProjectId);
     }
 
+    @Override
+    public String toString() {
+        if (mName == null) {
+            return mProjectId.toString();
+        }
+
+        return mName;
+    }
+
     public Boolean addLoan(String name, Long amount, Calendar loanDate, Double rate) {
         Loan loan = new Loan(name, amount, loanDate, rate);
         return mLoanList.add(loan);
