@@ -19,6 +19,12 @@ public class Qlnt {
 
     private Qlnt() {
         mProjectList = new ArrayList<Project>();
+
+        // TODO: 10/4/2016 Need to be removed
+        //Test test test
+        for (int i = 0; i < 20; i++) {
+            mProjectList.add(new Project());
+        }
     }
 
     public static Qlnt getInstance(Context context) {
@@ -50,6 +56,10 @@ public class Qlnt {
             }
         }
         return null;    //no such project
+    }
+
+    public ArrayList<Project> getProjectList() {
+        return mProjectList;
     }
 
 
