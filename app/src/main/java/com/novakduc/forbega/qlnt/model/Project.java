@@ -30,7 +30,6 @@ public class Project implements Cloneable {
         if (mName == null) {
             return mProjectId.toString();
         }
-
         return mName;
     }
 

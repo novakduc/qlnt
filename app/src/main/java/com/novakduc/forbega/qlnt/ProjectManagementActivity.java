@@ -13,6 +13,7 @@ import android.view.View;
 
 public class ProjectManagementActivity extends AppCompatActivity {
     private final int numberOfPage = 3;
+    private Long mActiveProject = Long.valueOf(-1);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
