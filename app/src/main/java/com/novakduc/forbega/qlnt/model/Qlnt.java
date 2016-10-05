@@ -16,6 +16,7 @@ public class Qlnt {
     private static Qlnt ourInstance = new Qlnt();
     private static Context sContext;
     private ArrayList<Project> mProjectList;
+    private Long mActiveProjectId = Long.valueOf(-1);
 
     private Qlnt() {
         mProjectList = new ArrayList<Project>();
@@ -64,6 +65,24 @@ public class Qlnt {
         return mProjectList;
     }
 
+    public Long getActiveProjectId() {
+        return mActiveProjectId;
+    }
+
+    public void setActiveProjectId(Long activeProjectId) {
+        mActiveProjectId = activeProjectId;
+    }
+
+    public Project getActiveProject(Long activeProjectId) {
+        for (Project project :
+                mProjectList) {
+            if (project.getProjectId() == activeProjectId) {
+                return project;
+            }
+        }
+
+        return null;
+    }
 
     //Create thread to remove project
     private class RemoveProject extends AsyncTask {

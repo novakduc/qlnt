@@ -1,5 +1,6 @@
 package com.novakduc.forbega.qlnt;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -11,7 +12,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.novakduc.forbega.qlnt.model.Qlnt;
+
 public class ProjectManagementActivity extends AppCompatActivity {
+    public static final String PREF_QLNT = "com.novak.forbequ.qlnt";
+    private static final String ACTIVE_PROJECT_ID = "active_project_id";
     private final int numberOfPage = 3;
     private Long mActiveProject = Long.valueOf(-1);
 
@@ -22,6 +27,12 @@ public class ProjectManagementActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        //Load active project ID
+        SharedPreferences preferences = getSharedPreferences(PREF_QLNT, 0);
+        Long id = preferences.getLong(ACTIVE_PROJECT_ID, -1);
+        Qlnt.getInstance(getApplicationContext()).setActiveProjectId(id);
+
+        //Add tabs
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         TabLayout.Tab tab1 = tabLayout.newTab();
         tab1.setIcon(R.drawable.ic_view_list);
@@ -51,6 +62,17 @@ public class ProjectManagementActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        //Save active project ID
+        SharedPreferences preferences = getSharedPreferences(PREF_QLNT, MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putLong(ACTIVE_PROJECT_ID, mActiveProject);
+        editor.commit();
     }
 
     private TabLayout.OnTabSelectedListener onTabSelectedListener(final ViewPager pager) {
