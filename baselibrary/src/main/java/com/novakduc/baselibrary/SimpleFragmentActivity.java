@@ -1,15 +1,16 @@
 package com.novakduc.baselibrary;
 
-import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 /**
  * Created by n.thanh on 9/29/2016.
  */
 
-public abstract class SimpleFragmentActivity extends Activity {
+public abstract class SimpleFragmentActivity extends AppCompatActivity {
     protected abstract Fragment createFragment();
 
     @Override
@@ -23,5 +24,6 @@ public abstract class SimpleFragmentActivity extends Activity {
             fragment = createFragment();
             fragmentManager.beginTransaction().add(R.id.fragmentContainer, fragment).commit();
         }
+        Log.d("Check", "Activity created");
     }
 }

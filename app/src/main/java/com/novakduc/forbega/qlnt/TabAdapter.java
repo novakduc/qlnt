@@ -15,9 +15,11 @@ public class TabAdapter extends android.support.v13.app.FragmentPagerAdapter {
 
     @Override
     public android.app.Fragment getItem(int position) {
+        /*
         if (position == 0) {
             return new ProjectListFragment();
         }
+        */
         TabPosition tabPosition = TabPosition.values()[position];
         return TabFragment.getInstance(tabPosition);
     }

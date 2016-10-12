@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.novakduc.forbega.qlnt.ProjectManagementActivity">
+    tools:context="com.novakduc.forbega.qlnt.ProjectListActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -22,7 +22,7 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/project_card_view"/>
+    <include layout="@layout/content_project_management"/>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"

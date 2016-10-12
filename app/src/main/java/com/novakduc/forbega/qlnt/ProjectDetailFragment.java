@@ -1,39 +1,72 @@
 package com.novakduc.forbega.qlnt;
 
+import android.app.Fragment;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.novakduc.forbega.qlnt.model.Qlnt;
 
-public class ProjectManagementActivity extends AppCompatActivity {
+/**
+ * Created by n.thanh on 10/12/2016.
+ */
+
+public class ProjectDetailFragment extends Fragment {
     public static final String PREF_QLNT = "com.novak.forbequ.qlnt";
     private static final String ACTIVE_PROJECT_ID = "active_project_id";
     private final int numberOfPage = 3;
     private Long mActiveProject = Long.valueOf(-1);
+    // TODO: 10/12/2016
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_project_management);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_project_management, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_project_detail, container, false);
+        Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
 
         //Load active project ID
-        SharedPreferences preferences = getSharedPreferences(PREF_QLNT, 0);
+        SharedPreferences preferences = getActivity().getSharedPreferences(PREF_QLNT, 0);
         Long id = preferences.getLong(ACTIVE_PROJECT_ID, -1);
-        Qlnt.getInstance(getApplicationContext()).setActiveProjectId(id);
+        Qlnt.getInstance(getActivity()).setActiveProjectId(id);
 
         //Add tabs
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+        TabLayout tabLayout = (TabLayout) view.findViewById(R.id.tab_layout);
         TabLayout.Tab tab1 = tabLayout.newTab();
         tab1.setIcon(R.drawable.ic_view_list);
         tabLayout.addTab(tab1);
@@ -48,13 +81,13 @@ public class ProjectManagementActivity extends AppCompatActivity {
 
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
-        final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
+        final ViewPager viewPager = (ViewPager) view.findViewById(R.id.pager);
         final TabAdapter tabAdapter = new TabAdapter(getFragmentManager(), numberOfPage);
         viewPager.setAdapter(tabAdapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(onTabSelectedListener(viewPager));
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -62,17 +95,8 @@ public class ProjectManagementActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
-    }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-
-        //Save active project ID
-        SharedPreferences preferences = getSharedPreferences(PREF_QLNT, MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putLong(ACTIVE_PROJECT_ID, mActiveProject);
-        editor.commit();
+        return view;
     }
 
     private TabLayout.OnTabSelectedListener onTabSelectedListener(final ViewPager pager) {
@@ -92,27 +116,5 @@ public class ProjectManagementActivity extends AppCompatActivity {
 
             }
         };
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_project_management, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 }
