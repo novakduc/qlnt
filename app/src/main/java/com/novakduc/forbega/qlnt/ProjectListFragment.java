@@ -35,7 +35,6 @@ public class ProjectListFragment extends Fragment {
     // TODO: 9/29/2016
     public static final String PREF_QLNT = "com.novak.forbequ.qlnt";
     private static final String ACTIVE_PROJECT_ID = "active_project_id";
-    private final int numberOfPage = 3;
     private Long mActiveProject = Long.valueOf(-1);
     private ArrayList<Project> mProjects;
 
@@ -77,7 +76,7 @@ public class ProjectListFragment extends Fragment {
         setupRecyclerView(recyclerView);
         Log.d("Check", "RC has set");
 
-        return super.onCreateView(inflater, container, savedInstanceState);
+        return view;
     }
 
     private void setupRecyclerView(RecyclerView recyclerView) {
@@ -161,7 +160,7 @@ public class ProjectListFragment extends Fragment {
                 super(view);
                 mView = view;
                 mImageView = (ImageView) view.findViewById(R.id.project_avatar);
-                mTextView = (TextView) view.findViewById(android.R.id.text1);
+                mTextView = (TextView) view.findViewById(R.id.textViewProjectName);
             }
 
             @Override
