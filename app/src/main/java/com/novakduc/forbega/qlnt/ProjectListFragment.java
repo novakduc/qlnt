@@ -72,6 +72,9 @@ public class ProjectListFragment extends Fragment {
         ab.setHomeAsUpIndicator(R.drawable.ic_view_list);
         ab.setDisplayHomeAsUpEnabled(true);
 
+        final ImageView imageView = (ImageView) view.findViewById(R.id.backdrop);
+        Glide.with(this).load(R.drawable.pic).centerCrop().into(imageView);
+
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.rv_project_list);
         setupRecyclerView(recyclerView);
         Log.d("Check", "RC has set");
