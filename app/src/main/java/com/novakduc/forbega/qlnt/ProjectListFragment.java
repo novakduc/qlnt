@@ -78,6 +78,7 @@ public class ProjectListFragment extends Fragment {
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.rv_project_list);
         LinearLayoutManager layoutManager = new LinearLayoutManager(activity);
         recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(new SimpleStringRecyclerViewAdapter(activity, mProjects));
 
         Log.d("Check", "RC has set");
