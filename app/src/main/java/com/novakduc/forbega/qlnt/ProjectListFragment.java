@@ -76,16 +76,13 @@ public class ProjectListFragment extends Fragment {
         Glide.with(this).load(R.drawable.pic).centerCrop().into(imageView);
 
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.rv_project_list);
-        setupRecyclerView(recyclerView);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(activity);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(new SimpleStringRecyclerViewAdapter(activity, mProjects));
+
         Log.d("Check", "RC has set");
 
         return view;
-    }
-
-    private void setupRecyclerView(RecyclerView recyclerView) {
-        recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()));
-        recyclerView.setAdapter(new SimpleStringRecyclerViewAdapter(getActivity(),
-                mProjects));
     }
 
     public static class SimpleStringRecyclerViewAdapter
