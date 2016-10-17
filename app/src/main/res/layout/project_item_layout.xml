@@ -3,29 +3,79 @@
               xmlns:app="http://schemas.android.com/apk/res-auto"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:layout_margin="4dp">
+              android:layout_margin="8dp">
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="120dp"
         android:layout_gravity="center"
+        android:background="@color/cardview_light_background"
         android:clickable="true"
-        android:elevation="6dp"
+        android:elevation="2dp"
         android:foreground="?android:attr/selectableItemBackground"
-        app:cardBackgroundColor="#E6E6E6"
+        android:padding="8dp"
         app:cardCornerRadius="4dp">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/project_avatar"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginRight="16dp"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/textViewProjectName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TextView"
-            android:textSize="24dp"/>
+            <LinearLayout
+                android:id="@+id/cardTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:id="@+id/textViewProjectName"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:maxLines="1"
+                    android:paddingEnd="16dp"
+                    android:paddingStart="16dp"
+                    android:text="Huy Hoang Sang Lan"
+                    android:textSize="24sp"/>
+
+                <TextView
+                    android:id="@+id/textViewProjectDuration"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:layout_gravity="right"
+                    android:gravity="center_vertical"
+                    android:maxLines="1"
+                    android:paddingEnd="16dp"
+                    android:paddingStart="16dp"
+                    android:text="2015 - 2025"
+                    android:textSize="14sp"/>
+            </LinearLayout>
+
+            <RatingBar
+                android:id="@+id/ratingBar"
+                style="@style/Base.Widget.AppCompat.RatingBar.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/cardTitle"
+                android:layout_marginStart="16dp"
+                android:foregroundGravity="center_vertical"
+                android:rating="4.4"/>
+
+            <TextView
+                android:id="@+id/textViewProjectProduceRate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/cardTitle"
+                android:layout_toEndOf="@id/ratingBar"
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:paddingStart="8dp"
+                android:text="8/9"
+                android:textSize="14sp"/>
+
+
+        </RelativeLayout>
+
     </android.support.v7.widget.CardView>
 </LinearLayout>

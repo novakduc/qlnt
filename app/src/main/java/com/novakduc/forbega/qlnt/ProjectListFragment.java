@@ -124,10 +124,6 @@ public class ProjectListFragment extends Fragment {
                 }
             });
 
-            Glide.with(holder.mImageView.getContext())
-                    .load(getRandomCheeseDrawable())
-                    .fitCenter()
-                    .into(holder.mImageView);
         }
 
         private int getRandomCheeseDrawable() {
@@ -153,14 +149,13 @@ public class ProjectListFragment extends Fragment {
 
         public static class ViewHolder extends RecyclerView.ViewHolder {
             public final View mView;
-            public final ImageView mImageView;
             public final TextView mTextView;
             public String mBoundString;
 
             public ViewHolder(View view) {
                 super(view);
                 mView = view;
-                mImageView = (ImageView) view.findViewById(R.id.project_avatar);
+
                 mTextView = (TextView) view.findViewById(R.id.textViewProjectName);
             }
 
