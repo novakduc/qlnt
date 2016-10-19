@@ -10,4 +10,7 @@
     <string name="txtViewIncomeTitle">Income:</string>
     <string name="txtViewDeptTitle">Dept:</string>
     <string name="txtViewRevenueTitle">Revenue:</string>
+    <string name="btEdit">Edit</string>
+    <string name="btDelete">Delete</string>
+    <string name="btCopy">Copy</string>
 </resources>
