@@ -9,4 +9,5 @@
     <string name="project_deleted_confirm">Project has been deleted</string>
     <string name="txtViewIncomeTitle">Income:</string>
     <string name="txtViewDeptTitle">Dept:</string>
+    <string name="txtViewRevenueTitle">Revenue:</string>
 </resources>
