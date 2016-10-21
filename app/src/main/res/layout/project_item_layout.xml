@@ -36,14 +36,13 @@
                     android:paddingEnd="16dp"
                     android:paddingStart="16dp"
                     android:paddingTop="16dp"
-                    android:text="Huy Hoang Sang Lan"
                     android:textSize="24sp"/>
 
                 <TextView
                     android:id="@+id/textViewProjectDuration"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="right"
+                    android:layout_gravity="end"
                     android:gravity="center_vertical"
                     android:maxLines="1"
                     android:paddingEnd="16dp"

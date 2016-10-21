@@ -13,4 +13,10 @@
     <string name="btEdit">Edit</string>
     <string name="btDelete">Delete</string>
     <string name="btCopy">Copy</string>
+    <string name="txtViewProjectNameTitle">Name:</string>
+    <string name="eTxtProjectNameHint">Input project name</string>
+    <string name="etxtProjectNameHint">Input project name</string>
+    <string name="inputProjectNameHint">Project name</string>
+    <string name="inputProjectAddressHint">Address</string>
+    <string name="inputProjectInvestmentHint">Investment amount</string>
 </resources>
