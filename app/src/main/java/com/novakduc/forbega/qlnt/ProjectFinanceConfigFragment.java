@@ -26,7 +26,7 @@ public class ProjectFinanceConfigFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_project_base_config, container, false);
+        View view = inflater.inflate(R.layout.fragment_project_finance_config, container, false);
         return view;
     }
 
