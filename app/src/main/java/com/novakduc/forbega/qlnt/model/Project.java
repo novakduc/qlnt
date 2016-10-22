@@ -1,12 +1,13 @@
 package com.novakduc.forbega.qlnt.model;
 
+import java.io.Serializable;
 import java.util.Calendar;
 
 /**
  * Created by n.thanh on 9/21/2016.
  */
 
-public class Project implements Cloneable {
+public class Project implements Cloneable, Serializable {
 
     private Long mProjectId;
     private String mName;

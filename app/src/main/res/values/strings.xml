@@ -25,4 +25,5 @@
     <string name="inputInternetUprice">Internet VND/month</string>
     <string name="inputTVUprice">TV cable VND/month</string>
     <string name="inputSecurityUprice">Security VND/month</string>
+    <string name="startDate">Start date:</string>
 </resources>

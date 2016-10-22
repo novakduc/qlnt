@@ -90,6 +90,8 @@ public class ProjectListFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), ProjectConfigurationActivity.class);
+                Project tempProject = new Project();
+                intent.putExtra(ProjectBaseConfigFragment.TEMP_PROJECT, tempProject);
                 startActivity(intent);
                 // TODO: 10/20/2016 Register activity
             }
