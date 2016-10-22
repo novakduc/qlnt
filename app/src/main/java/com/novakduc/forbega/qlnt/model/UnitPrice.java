@@ -1,9 +1,11 @@
 package com.novakduc.forbega.qlnt.model;
 
+import java.io.Serializable;
+
 /**
  * Created by n.thanh on 9/21/2016.
  */
-public class UnitPrice implements Cloneable {
+public class UnitPrice implements Cloneable, Serializable {
     private Long mProjectId;
     private Long mElectricity;
     private Long mWater;

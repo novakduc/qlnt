@@ -26,4 +26,6 @@
     <string name="inputTVUprice">TV cable VND/month</string>
     <string name="inputSecurityUprice">Security VND/month</string>
     <string name="startDate">Start date:</string>
+    <string name="endDate">End date:</string>
+    <string name="next">Next</string>
 </resources>
