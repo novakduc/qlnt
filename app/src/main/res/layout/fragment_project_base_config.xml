@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,6 +10,15 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.novakduc.forbega.qlnt.ProjectConfigurationActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        app:titleTextColor="@android:color/white">
+    </android.support.v7.widget.Toolbar>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -42,12 +52,12 @@
             android:layout_height="wrap_content">
 
             <android.support.design.widget.TextInputEditText
+                android:id="@+id/editTextStartDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="date"
                 android:ems="10"
                 android:hint="@string/startDate"
-                android:id="@+id/editTextStartDate"/>
+                android:inputType="date"/>
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -55,19 +65,12 @@
             android:layout_height="wrap_content">
 
             <android.support.design.widget.TextInputEditText
+                android:id="@+id/editTextEndDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="date"
                 android:ems="10"
                 android:hint="@string/endDate"
-                android:id="@+id/editTextEndDate"/>
+                android:inputType="date"/>
         </android.support.design.widget.TextInputLayout>
-
-        <Button
-            android:id="@+id/next"
-            android:layout_width="88dp"
-            android:layout_height="36dp"
-            android:text="@string/next"
-            android:layout_gravity="end"/>
     </LinearLayout>
 </android.support.design.widget.CoordinatorLayout>
