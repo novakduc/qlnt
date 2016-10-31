@@ -1,6 +1,7 @@
 package com.novakduc.forbega.qlnt;
 
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
@@ -9,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -51,6 +53,16 @@ public class ProjectBaseConfigFragment extends Fragment {
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         return view;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.next) {
+            FragmentManager manager = getActivity().getFragmentManager();
+            manager.beginTransaction().replace(R.id.fragmentContainer,
+                    ProjectFinanceConfigFragment.newInstance(mProject)).commit();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
