@@ -28,6 +28,6 @@
     <string name="startDate">Start date:</string>
     <string name="endDate">End date:</string>
     <string name="next">Next</string>
-    <string name="txtViewBaseTitile">Project Base Information</string>
+    <string name="txtViewBaseTitile">Base Information</string>
     <string name="project_list">Projects</string>
 </resources>

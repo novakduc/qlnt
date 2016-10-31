@@ -3,6 +3,7 @@ package com.novakduc.forbega.qlnt;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -41,6 +42,10 @@ public class ProjectBaseConfigFragment extends Fragment {
         Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         activity.setSupportActionBar(toolbar);
+
+        final ActionBar actionBar = activity.getSupportActionBar();
+        actionBar.setHomeAsUpIndicator(R.drawable.ic_view_list);
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         return view;
     }
