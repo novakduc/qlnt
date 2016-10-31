@@ -41,8 +41,6 @@ public class ProjectBaseConfigFragment extends Fragment {
         Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         activity.setSupportActionBar(toolbar);
-        activity.getSupportActionBar().setHomeAsUpIndicator(R.drawable.cheese_1);
-        activity.getSupportActionBar().setHomeButtonEnabled(true);
 
         return view;
     }
