@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.novakduc.forbega.qlnt.ProjectListActivity">
+    tools:context="com.novakduc.forbega.qlnt.list.ProjectListActivity">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
@@ -61,7 +61,7 @@
         android:layout_margin="@dimen/fab_margin"
         app:layout_anchor="@id/rv_project_list"
         app:layout_anchorGravity="bottom|right|end"
-        app:layout_behavior="com.novakduc.forbega.qlnt.ScrollAwareFABBehavior"
+        app:layout_behavior="com.novakduc.forbega.qlnt.list.ScrollAwareFABBehavior"
         app:srcCompat="@android:drawable/ic_input_add"/>
 
 </android.support.design.widget.CoordinatorLayout>

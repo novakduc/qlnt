@@ -1,4 +1,4 @@
-package com.novakduc.forbega.qlnt;
+package com.novakduc.forbega.qlnt.list;
 
 import android.content.Context;
 import android.support.design.widget.CoordinatorLayout;

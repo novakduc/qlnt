@@ -1,4 +1,4 @@
-package com.novakduc.forbega.qlnt;
+package com.novakduc.forbega.qlnt.list;
 
 import android.app.Fragment;
 import android.content.Context;
@@ -21,6 +21,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.novakduc.forbega.qlnt.R;
+import com.novakduc.forbega.qlnt.config.ProjectConfigurationActivity;
+import com.novakduc.forbega.qlnt.config.base.ProjectBaseConfigFragment;
 import com.novakduc.forbega.qlnt.model.Project;
 import com.novakduc.forbega.qlnt.model.Qlnt;
 
@@ -71,8 +74,10 @@ public class ProjectListFragment extends Fragment {
         activity.setSupportActionBar(toolbar);
 
         final ActionBar ab = activity.getSupportActionBar();
-        ab.setHomeAsUpIndicator(R.drawable.ic_view_list);
-        ab.setDisplayHomeAsUpEnabled(true);
+        if (ab != null) {
+            ab.setHomeAsUpIndicator(R.drawable.ic_view_list);
+            ab.setDisplayHomeAsUpEnabled(true);
+        }
 
         final ImageView imageView = (ImageView) view.findViewById(R.id.backdrop);
         Glide.with(this).load(R.drawable.pic).centerCrop().into(imageView);

@@ -9,7 +9,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ProjectListActivity"
+            android:name=".list.ProjectListActivity"
             android:label="@string/project_list"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ProjectConfigurationActivity"
+            android:name=".config.ProjectConfigurationActivity"
             android:label="@string/txtViewBaseTitile"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
