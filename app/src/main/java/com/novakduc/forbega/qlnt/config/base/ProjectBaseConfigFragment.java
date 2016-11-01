@@ -25,7 +25,10 @@ import com.novakduc.forbega.qlnt.R;
 import com.novakduc.forbega.qlnt.config.finance.ProjectFinanceConfigFragment;
 import com.novakduc.forbega.qlnt.model.Project;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Created by n.thanh on 10/21/2016.
@@ -90,7 +93,11 @@ public class ProjectBaseConfigFragment extends Fragment {
         if (resultCode != AppCompatActivity.RESULT_OK) return;
         if (requestCode == START_DATE_PICKED) {
             Calendar calendar = (Calendar) data.getSerializableExtra(DatePickerFragment.PICKED_DATE);
-            mEditTextStartDate.setText(calendar.toString());
+            mProject.setStartDate(calendar);
+            Date date = calendar.getTime();
+            DateFormat format = SimpleDateFormat.getDateInstance();
+            String s = format.format(date);
+            mEditTextStartDate.setText(s);
         }
         super.onActivityResult(requestCode, resultCode, data);
     }

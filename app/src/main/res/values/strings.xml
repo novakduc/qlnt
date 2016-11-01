@@ -31,4 +31,6 @@
     <string name="txtViewBaseTitile">Base Information</string>
     <string name="project_list">Projects</string>
     <string name="duration">Duration (year)</string>
+    <string name="to">to</string>
+    <string name="duration_title">Duration:</string>
 </resources>
