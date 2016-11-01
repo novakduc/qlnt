@@ -12,6 +12,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -84,6 +86,24 @@ public class ProjectBaseConfigFragment extends Fragment {
             }
         });
         mEditTextEndDate = (EditText) view.findViewById(R.id.editTextEndDate);
+        mEditTextDuration = (EditText) view.findViewById(R.id.editTextDuration);
+        mEditTextDuration.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                // TODO: 11/1/2016 Update end date
+                Double year = Double.parseDouble(editable.toString());
+            }
+        });
 
         return view;
     }

@@ -25,12 +25,13 @@
     <string name="inputInternetUprice">Internet VND/month</string>
     <string name="inputTVUprice">TV cable VND/month</string>
     <string name="inputSecurityUprice">Security VND/month</string>
-    <string name="startDate">Start date:</string>
-    <string name="endDate">End date:</string>
+    <string name="startDate">Start date</string>
+    <string name="endDate">End date</string>
     <string name="next">Next</string>
     <string name="txtViewBaseTitile">Base Information</string>
     <string name="project_list">Projects</string>
-    <string name="duration">Duration (year)</string>
+    <string name="duration">Duration</string>
     <string name="to">to</string>
     <string name="duration_title">Duration:</string>
+    <string name="duration_unit">year</string>
 </resources>
