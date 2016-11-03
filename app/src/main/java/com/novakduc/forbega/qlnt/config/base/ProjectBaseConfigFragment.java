@@ -12,16 +12,16 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.NumberPicker;
 
 import com.novakduc.forbega.qlnt.R;
 import com.novakduc.forbega.qlnt.config.finance.ProjectFinanceConfigFragment;
@@ -44,7 +44,11 @@ public class ProjectBaseConfigFragment extends Fragment {
     private EditText mEditTextName;
     private EditText mEditTextStartDate;
     private EditText mEditTextEndDate;
-    private EditText mEditTextDuration;
+    private NumberPicker mNumberPickerDuration;
+    private Button mCancel;
+    private Button mNext;
+    private Calendar mStartDate;
+    private String mName, mAddress;
 
     public static ProjectBaseConfigFragment newInstance(Project tempProject) {
         Bundle bundle = new Bundle();
@@ -86,22 +90,34 @@ public class ProjectBaseConfigFragment extends Fragment {
             }
         });
         mEditTextEndDate = (EditText) view.findViewById(R.id.editTextEndDate);
-        mEditTextDuration = (EditText) view.findViewById(R.id.editTextDuration);
-        mEditTextDuration.addTextChangedListener(new TextWatcher() {
+        mNumberPickerDuration =
+                (NumberPicker) view.findViewById(R.id.duration);
+        mNumberPickerDuration.setMinValue(0);
+        mNumberPickerDuration.setMaxValue(100);
+        mNumberPickerDuration.setValue(10);
+        mNumberPickerDuration.setWrapSelectorWheel(true);
+        mNumberPickerDuration.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
+        mNumberPickerDuration.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
+            public void onValueChange(NumberPicker numberPicker, int oldVal, int newVal) {
+                Calendar endDate = (Calendar) mStartDate.clone();
+                endDate.add(Calendar.YEAR, newVal);
             }
+        });
 
+        mCancel = (Button) view.findViewById(R.id.btCancel);
+        mCancel.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
+            public void onClick(View view) {
+                // TODO: 11/3/2016 Show confirmation dialog
+                getActivity().finish();
             }
-
+        });
+        mNext = (Button) view.findViewById(R.id.btNext);
+        mNext.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void afterTextChanged(Editable editable) {
-                // TODO: 11/1/2016 Update end date
-                Double year = Double.parseDouble(editable.toString());
+            public void onClick(View view) {
+                nextAction();   //check information save and go to next
             }
         });
 
@@ -112,9 +128,8 @@ public class ProjectBaseConfigFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode != AppCompatActivity.RESULT_OK) return;
         if (requestCode == START_DATE_PICKED) {
-            Calendar calendar = (Calendar) data.getSerializableExtra(DatePickerFragment.PICKED_DATE);
-            mProject.setStartDate(calendar);
-            Date date = calendar.getTime();
+            mStartDate = (Calendar) data.getSerializableExtra(DatePickerFragment.PICKED_DATE);
+            Date date = mStartDate.getTime();
             DateFormat format = SimpleDateFormat.getDateInstance();
             String s = format.format(date);
             mEditTextStartDate.setText(s);
@@ -132,11 +147,31 @@ public class ProjectBaseConfigFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.next) {
-            FragmentManager manager = getActivity().getFragmentManager();
-            manager.beginTransaction().replace(R.id.fragmentContainer,
-                    ProjectFinanceConfigFragment.newInstance(mProject)).commit();
+            nextAction();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    //Call when next action requested from toolbar or next button
+    private void nextAction() {
+        // TODO: 11/3/2016 Check base information and save to building project
+        if (mName == null) {
+            // TODO: 11/3/2016
+            return;
+        }
+        if (mAddress == null) {
+            // TODO: 11/3/2016
+            return;
+        }
+        if (mStartDate == null) {
+            // TODO: 11/3/2016 remind dialog
+            return;
+        }
+        mProject.setStartDate(mStartDate);
+        mProject.setDuration(mNumberPickerDuration.getValue());
+        FragmentManager manager = getActivity().getFragmentManager();
+        manager.beginTransaction().replace(R.id.fragmentContainer,
+                ProjectFinanceConfigFragment.newInstance(mProject)).commit();
     }
 
     @Override

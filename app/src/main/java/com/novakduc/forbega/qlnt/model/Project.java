@@ -15,7 +15,7 @@ public class Project implements Cloneable, Serializable {
     private Long mInvestment;
     private Long mTotalIncome;
     private Calendar mStartDate;
-    private Calendar mEndDate;
+    private int mYearDuration;
     private UnitPrice mUnitPrice;
     private LoanList<Loan> mLoanList;
     private RoomList<Room> mRoomList;
@@ -37,6 +37,12 @@ public class Project implements Cloneable, Serializable {
     public Boolean addLoan(String name, Long amount, Calendar loanDate, Double rate) {
         Loan loan = new Loan(name, amount, loanDate, rate);
         return mLoanList.add(loan);
+    }
+
+    public Calendar getEndDate() {
+        Calendar endDate = Calendar.getInstance();
+        // TODO: 11/3/2016 Calculate end date based on start date and duration
+        return endDate;
     }
 
     @Override
@@ -134,12 +140,12 @@ public class Project implements Cloneable, Serializable {
         mStartDate = startDate;
     }
 
-    public Calendar getEndDate() {
-        return mEndDate;
+    public int getDuration() {
+        return mYearDuration;
     }
 
-    public void setEndDate(Calendar endDate) {
-        mEndDate = endDate;
+    public void setDuration(int yearDuration) {
+        mYearDuration = yearDuration;
     }
 
     public UnitPrice getUnitPrice() {
