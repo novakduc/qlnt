@@ -6,32 +6,32 @@ import java.io.Serializable;
  * Created by n.thanh on 9/21/2016.
  */
 public class UnitPrice implements Cloneable, Serializable {
-    private Long mProjectId;
-    private Long mElectricity;
-    private Long mWater;
-    private Long mTv;
-    private Long mTrashCollection;
-    private Long mInternet;
-    private Long mSecurity;
+    private long mProjectId;
+    private long mElectricity;
+    private long mWater;
+    private long mTv;
+    private long mTrashCollection;
+    private long mInternet;
+    private long mSecurity;
 
     //Getter and setter section
-    public UnitPrice(Long projectId) {
+    public UnitPrice(long projectId) {
         mProjectId = projectId;
     }
 
-    public Long getProjectId() {
+    public long getProjectId() {
         return mProjectId;
     }
 
-    public Long getElectricity() {
+    public long getElectricity() {
         return mElectricity;
     }
 
-    public void setElectricity(Long electricity) {
+    public void setElectricity(long electricity) {
         mElectricity = electricity;
     }
 
-    public Long getWater() {
+    public long getWater() {
         return mWater;
     }
 
@@ -39,35 +39,35 @@ public class UnitPrice implements Cloneable, Serializable {
         mWater = water;
     }
 
-    public Long getTv() {
+    public long getTv() {
         return mTv;
     }
 
-    public void setTv(Long tv) {
+    public void setTv(long tv) {
         mTv = tv;
     }
 
-    public Long getTrashCollection() {
+    public long getTrashCollection() {
         return mTrashCollection;
     }
 
-    public void setTrashCollection(Long trashCollection) {
+    public void setTrashCollection(long trashCollection) {
         mTrashCollection = trashCollection;
     }
 
-    public Long getInternet() {
+    public long getInternet() {
         return mInternet;
     }
 
-    public void setInternet(Long internet) {
+    public void setInternet(long internet) {
         mInternet = internet;
     }
 
-    public Long getSecurity() {
+    public long getSecurity() {
         return mSecurity;
     }
 
-    public void setSecurity(Long security) {
+    public void setSecurity(long security) {
         mSecurity = security;
     }
 

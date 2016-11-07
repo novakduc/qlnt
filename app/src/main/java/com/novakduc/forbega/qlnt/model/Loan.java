@@ -8,11 +8,11 @@ import java.util.Calendar;
 public class Loan implements Cloneable {
     //private Long mProjectId;
     private String mName;
-    private Long mAmount;
+    private long mAmount;
     private Calendar mLoanDate;
-    private Double mInterestRate;
+    private double mInterestRate;
 
-    public Loan(String name, Long amount, Calendar loanDate, Double rate) {
+    public Loan(String name, long amount, Calendar loanDate, double rate) {
         mName = name;
         mAmount = amount;
         mLoanDate = loanDate;
@@ -35,11 +35,11 @@ public class Loan implements Cloneable {
         mName = name;
     }
 
-    public Long getAmount() {
+    public long getAmount() {
         return mAmount;
     }
 
-    public void setAmount(Long amount) {
+    public void setAmount(long amount) {
         mAmount = amount;
     }
 
@@ -55,12 +55,12 @@ public class Loan implements Cloneable {
         return mInterestRate;
     }
 
-    public void setInterestRate(Double interestRate) {
+    public void setInterestRate(double interestRate) {
         mInterestRate = interestRate;
     }
 
     //Tra no
-    public void pay(Long payAmount) {
+    public void pay(long payAmount) {
         // TODO: 9/21/2016  
     }
 }

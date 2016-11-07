@@ -40,7 +40,7 @@ public class ProjectListFragment extends Fragment {
     // TODO: 9/29/2016
     public static final String PREF_QLNT = "com.novak.forbequ.qlnt";
     private static final String ACTIVE_PROJECT_ID = "active_project_id";
-    private Long mActiveProject = Long.valueOf(-1);
+    private long mActiveProject = -1;
     private ArrayList<Project> mProjects;
 
     @Override

@@ -36,4 +36,5 @@
     <string name="duration_unit">year</string>
     <string name="cancel_button">Cancel</string>
     <string name="next_button">Next</string>
+    <string name="durationInputError">1-100 only</string>
 </resources>

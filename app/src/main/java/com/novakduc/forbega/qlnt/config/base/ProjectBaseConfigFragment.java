@@ -5,13 +5,18 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TextInputLayout;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -44,11 +49,12 @@ public class ProjectBaseConfigFragment extends Fragment {
     private EditText mEditTextName;
     private EditText mEditTextStartDate;
     private EditText mEditTextEndDate;
-    private NumberPicker mNumberPickerDuration;
+    private EditText mEditTextDuration;
     private Button mCancel;
     private Button mNext;
     private Calendar mStartDate;
     private String mName, mAddress;
+    int mDuration = -1;
 
     public static ProjectBaseConfigFragment newInstance(Project tempProject) {
         Bundle bundle = new Bundle();
@@ -90,18 +96,38 @@ public class ProjectBaseConfigFragment extends Fragment {
             }
         });
         mEditTextEndDate = (EditText) view.findViewById(R.id.editTextEndDate);
-        mNumberPickerDuration =
-                (NumberPicker) view.findViewById(R.id.duration);
-        mNumberPickerDuration.setMinValue(0);
-        mNumberPickerDuration.setMaxValue(100);
-        mNumberPickerDuration.setValue(10);
-        mNumberPickerDuration.setWrapSelectorWheel(true);
-        mNumberPickerDuration.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
-        mNumberPickerDuration.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+        mEditTextDuration = (EditText) view.findViewById(R.id.editTextDuration);
+        final TextInputLayout txtLayoutDuration = (TextInputLayout) view.findViewById(R.id.txtLayoutDuration);
+        mEditTextDuration.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onValueChange(NumberPicker numberPicker, int oldVal, int newVal) {
-                Calendar endDate = (Calendar) mStartDate.clone();
-                endDate.add(Calendar.YEAR, newVal);
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                try {
+                    mDuration = Integer.valueOf(s.toString());
+                    if (mDuration <= 0 || mDuration > 100) {
+                        throw new NumberFormatException();
+                    } else {
+                        txtLayoutDuration.setErrorEnabled(false);
+                        if (mStartDate != null) {
+                            Calendar endDate = (Calendar) mStartDate.clone();
+                            endDate.add(Calendar.YEAR, mDuration);
+                            mEditTextEndDate.setText(calendarToString(endDate));
+                        }
+                    }
+                } catch (NumberFormatException e) {
+                    mEditTextDuration.setTextColor(ContextCompat.getColor(getActivity(), R.color.colorRed));
+                    txtLayoutDuration.setError(getString(R.string.durationInputError));
+                    txtLayoutDuration.setErrorEnabled(true);
+                }
             }
         });
 
@@ -129,12 +155,20 @@ public class ProjectBaseConfigFragment extends Fragment {
         if (resultCode != AppCompatActivity.RESULT_OK) return;
         if (requestCode == START_DATE_PICKED) {
             mStartDate = (Calendar) data.getSerializableExtra(DatePickerFragment.PICKED_DATE);
-            Date date = mStartDate.getTime();
-            DateFormat format = SimpleDateFormat.getDateInstance();
-            String s = format.format(date);
-            mEditTextStartDate.setText(s);
+            mEditTextStartDate.setText(calendarToString(mStartDate));
+            if (mDuration <= 0) {
+                Calendar endDate = (Calendar) mStartDate.clone();
+                endDate.add(Calendar.YEAR, mDuration);
+                mEditTextEndDate.setText(calendarToString(endDate));
+            }
         }
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    private String calendarToString(Calendar calendar) {
+        Date date = calendar.getTime();
+        DateFormat format = SimpleDateFormat.getDateInstance();
+        return format.format(date);
     }
 
     private void showDatePicker() {
@@ -154,21 +188,18 @@ public class ProjectBaseConfigFragment extends Fragment {
 
     //Call when next action requested from toolbar or next button
     private void nextAction() {
-        // TODO: 11/3/2016 Check base information and save to building project
-        if (mName == null) {
-            // TODO: 11/3/2016
-            return;
+        if (mName != null) {
+            mProject.setName(mName);
         }
-        if (mAddress == null) {
-            // TODO: 11/3/2016
-            return;
+        if (mAddress != null) {
+            mProject.setAddress(mAddress);
         }
         if (mStartDate == null) {
-            // TODO: 11/3/2016 remind dialog
-            return;
+            mProject.setStartDate(mStartDate);
         }
-        mProject.setStartDate(mStartDate);
-        mProject.setDuration(mNumberPickerDuration.getValue());
+        if (mDuration > 0 && mDuration <= 100) {
+            mProject.setDuration(mDuration);
+        }
         FragmentManager manager = getActivity().getFragmentManager();
         manager.beginTransaction().replace(R.id.fragmentContainer,
                 ProjectFinanceConfigFragment.newInstance(mProject)).commit();

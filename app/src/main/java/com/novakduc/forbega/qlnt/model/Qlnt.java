@@ -16,7 +16,7 @@ public class Qlnt {
     private static Qlnt ourInstance = new Qlnt();
     private static Context sContext;
     private ArrayList<Project> mProjectList;
-    private Long mActiveProjectId = Long.valueOf(-1);
+    private long mActiveProjectId = -1;
 
     private Qlnt() {
         mProjectList = new ArrayList<Project>();
@@ -65,15 +65,15 @@ public class Qlnt {
         return mProjectList;
     }
 
-    public Long getActiveProjectId() {
+    public long getActiveProjectId() {
         return mActiveProjectId;
     }
 
-    public void setActiveProjectId(Long activeProjectId) {
+    public void setActiveProjectId(long activeProjectId) {
         mActiveProjectId = activeProjectId;
     }
 
-    public Project getActiveProject(Long activeProjectId) {
+    public Project getActiveProject(long activeProjectId) {
         for (Project project :
                 mProjectList) {
             if (project.getProjectId() == activeProjectId) {

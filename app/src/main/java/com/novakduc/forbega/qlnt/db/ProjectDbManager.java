@@ -27,7 +27,7 @@ public class ProjectDbManager implements StringForDB {
     }
 
     //Record project information
-    public Long recordProject(Project project) {
+    public long recordProject(Project project) {
         mDatabase = mHelper.getWritableDatabase();
 
         //Record project

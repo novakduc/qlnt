@@ -26,7 +26,7 @@ public class ProjectDetailFragment extends Fragment {
     public static final String PREF_QLNT = "com.novak.forbequ.qlnt";
     private static final String ACTIVE_PROJECT_ID = "active_project_id";
     private final int numberOfPage = 3;
-    private Long mActiveProject = Long.valueOf(-1);
+    private long mActiveProject = -1;
     // TODO: 10/12/2016
 
 
@@ -62,7 +62,7 @@ public class ProjectDetailFragment extends Fragment {
 
         //Load active project ID
         SharedPreferences preferences = getActivity().getSharedPreferences(PREF_QLNT, 0);
-        Long id = preferences.getLong(ACTIVE_PROJECT_ID, -1);
+        long id = preferences.getLong(ACTIVE_PROJECT_ID, -1);
         Qlnt.getInstance(getActivity()).setActiveProjectId(id);
 
         //Add tabs

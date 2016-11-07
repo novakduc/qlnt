@@ -9,11 +9,11 @@ import java.util.Calendar;
 
 public class Project implements Cloneable, Serializable {
 
-    private Long mProjectId;
+    private long mProjectId;
     private String mName;
     private String mAddress;
-    private Long mInvestment;
-    private Long mTotalIncome;
+    private long mInvestment;
+    private long mTotalIncome;
     private Calendar mStartDate;
     private int mYearDuration;
     private UnitPrice mUnitPrice;
@@ -29,12 +29,12 @@ public class Project implements Cloneable, Serializable {
     @Override
     public String toString() {
         if (mName == null) {
-            return mProjectId.toString();
+            return String.valueOf(mProjectId);
         }
         return mName;
     }
 
-    public Boolean addLoan(String name, Long amount, Calendar loanDate, Double rate) {
+    public Boolean addLoan(String name, long amount, Calendar loanDate, double rate) {
         Loan loan = new Loan(name, amount, loanDate, rate);
         return mLoanList.add(loan);
     }
@@ -79,20 +79,20 @@ public class Project implements Cloneable, Serializable {
         mUnitPrice.setTv(tvUnitPrice);
     }
 
-    public void setTrashCollectionUnitPrice(Long trashCollectionUnitPrice) {
+    public void setTrashCollectionUnitPrice(long trashCollectionUnitPrice) {
         mUnitPrice.setTrashCollection(trashCollectionUnitPrice);
     }
 
-    public void setSecurityUnitPrice(Long securityUnitPrice) {
+    public void setSecurityUnitPrice(long securityUnitPrice) {
         mUnitPrice.setSecurity(securityUnitPrice);
     }
 
-    public void setInternetUnitPrice(Long internetUnitPrice) {
+    public void setInternetUnitPrice(long internetUnitPrice) {
         mUnitPrice.setInternet(internetUnitPrice);
     }
 
     // Getter and setter section
-    public Long getProjectId() {
+    public long getProjectId() {
         return mProjectId;
     }
 
@@ -116,7 +116,7 @@ public class Project implements Cloneable, Serializable {
         mAddress = address;
     }
 
-    public Long getInvestment() {
+    public long getInvestment() {
         return mInvestment;
     }
 
@@ -124,7 +124,7 @@ public class Project implements Cloneable, Serializable {
         mInvestment = investment;
     }
 
-    public Long getTotalIncome() {
+    public long getTotalIncome() {
         return mTotalIncome;
     }
 
