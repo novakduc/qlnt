@@ -145,6 +145,7 @@
 
             <Button
                 android:id="@+id/btCancel"
+                style="?android:borderlessButtonStyle"
                 android:layout_width="80dp"
                 android:layout_height="48dp"
                 android:layout_marginEnd="8dp"
@@ -153,6 +154,7 @@
 
             <Button
                 android:id="@+id/btNext"
+                style="?android:borderlessButtonStyle"
                 android:layout_width="80dp"
                 android:layout_height="48dp"
                 android:layout_marginEnd="8dp"

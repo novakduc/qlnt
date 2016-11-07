@@ -204,7 +204,7 @@ public class ProjectBaseConfigFragment extends Fragment {
         if (mAddress != null) {
             mProject.setAddress(mAddress);
         }
-        if (mStartDate == null) {
+        if (mStartDate != null) {
             mProject.setStartDate(mStartDate);
         }
         if (mDuration > 0 && mDuration <= 100) {
