@@ -5,14 +5,14 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
@@ -26,7 +26,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.NumberPicker;
 
 import com.novakduc.forbega.qlnt.R;
 import com.novakduc.forbega.qlnt.config.finance.ProjectFinanceConfigFragment;
@@ -44,6 +43,8 @@ import java.util.Date;
 public class ProjectBaseConfigFragment extends Fragment {
     public static final String TEMP_PROJECT = "com.novakduc.forbega.qlnt.tempproject";
     private static final int START_DATE_PICKED = 0;
+    private static final int PROJECT_DISCARD_CONFIRMATION = 1;
+    int mDuration = 10;
     private Project mProject;
     private EditText mEditTextAddress;
     private EditText mEditTextName;
@@ -54,7 +55,6 @@ public class ProjectBaseConfigFragment extends Fragment {
     private Button mNext;
     private Calendar mStartDate;
     private String mName, mAddress;
-    int mDuration = -1;
 
     public static ProjectBaseConfigFragment newInstance(Project tempProject) {
         Bundle bundle = new Bundle();
@@ -92,11 +92,12 @@ public class ProjectBaseConfigFragment extends Fragment {
         mEditTextStartDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showDatePicker();
+                showDialog(new DatePickerFragment(), START_DATE_PICKED);
             }
         });
         mEditTextEndDate = (EditText) view.findViewById(R.id.editTextEndDate);
         mEditTextDuration = (EditText) view.findViewById(R.id.editTextDuration);
+        mEditTextDuration.setText(String.valueOf(mDuration));
         final TextInputLayout txtLayoutDuration = (TextInputLayout) view.findViewById(R.id.txtLayoutDuration);
         mEditTextDuration.addTextChangedListener(new TextWatcher() {
             @Override
@@ -121,10 +122,11 @@ public class ProjectBaseConfigFragment extends Fragment {
                             Calendar endDate = (Calendar) mStartDate.clone();
                             endDate.add(Calendar.YEAR, mDuration);
                             mEditTextEndDate.setText(calendarToString(endDate));
+                        } else {
+                            mEditTextEndDate.setText("");
                         }
                     }
                 } catch (NumberFormatException e) {
-                    mEditTextDuration.setTextColor(ContextCompat.getColor(getActivity(), R.color.colorRed));
                     txtLayoutDuration.setError(getString(R.string.durationInputError));
                     txtLayoutDuration.setErrorEnabled(true);
                 }
@@ -136,7 +138,7 @@ public class ProjectBaseConfigFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 // TODO: 11/3/2016 Show confirmation dialog
-                getActivity().finish();
+                showDialog(new DiscardConfirmation(), PROJECT_DISCARD_CONFIRMATION);
             }
         });
         mNext = (Button) view.findViewById(R.id.btNext);
@@ -152,14 +154,23 @@ public class ProjectBaseConfigFragment extends Fragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode != AppCompatActivity.RESULT_OK) return;
+        //RESULT FROM DATE PICKER
         if (requestCode == START_DATE_PICKED) {
+            if (resultCode != AppCompatActivity.RESULT_OK) return;
             mStartDate = (Calendar) data.getSerializableExtra(DatePickerFragment.PICKED_DATE);
             mEditTextStartDate.setText(calendarToString(mStartDate));
-            if (mDuration <= 0) {
+            if (mDuration > 0 && mDuration <= 100) {
                 Calendar endDate = (Calendar) mStartDate.clone();
                 endDate.add(Calendar.YEAR, mDuration);
                 mEditTextEndDate.setText(calendarToString(endDate));
+            } else {
+                mEditTextEndDate.setText("");
+            }
+        }
+        //RESULT FROM PROJECT DISCARD DIALOG
+        if (requestCode == PROJECT_DISCARD_CONFIRMATION) {
+            if (resultCode == AppCompatActivity.RESULT_OK) {
+                getActivity().finish();
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
@@ -171,11 +182,10 @@ public class ProjectBaseConfigFragment extends Fragment {
         return format.format(date);
     }
 
-    private void showDatePicker() {
-        DialogFragment dialogFragment = new DatePickerFragment();
-        dialogFragment.setTargetFragment(this, START_DATE_PICKED);
-        dialogFragment.show(getActivity().getFragmentManager(),
-                "startDatePicker");
+    private void showDialog(DialogFragment fragment, int target) {
+        fragment.setTargetFragment(this, target);
+        fragment.show(getActivity().getFragmentManager(),
+                "dialog");
     }
 
     @Override
@@ -209,6 +219,30 @@ public class ProjectBaseConfigFragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.toolbar_menu, menu);
         super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    //Project cancel confirmation dialog
+    public static class DiscardConfirmation extends DialogFragment {
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setMessage(R.string.project_create_discard)
+                    .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            // TODO: 11/7/2016 OK action
+                            getTargetFragment().onActivityResult(PROJECT_DISCARD_CONFIRMATION,
+                                    AppCompatActivity.RESULT_OK, new Intent());
+                        }
+                    })
+                    .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            // TODO: 11/7/2016 No action
+                        }
+                    });
+            return builder.create();
+        }
     }
 
     //Date picker
