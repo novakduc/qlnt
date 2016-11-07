@@ -36,7 +36,7 @@
     <string name="duration_unit">year</string>
     <string name="cancel_button">Cancel</string>
     <string name="next_button">Next</string>
-    <string name="durationInputError">1-100 only</string>
+    <string name="durationInputError">1&#8211;100 only</string>
     <string name="yes">Yes</string>
     <string name="project_create_discard">Discard current project?</string>
     <string name="no">No</string>
