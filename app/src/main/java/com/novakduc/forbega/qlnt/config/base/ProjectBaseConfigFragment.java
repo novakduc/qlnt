@@ -5,7 +5,6 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.TypedArray;
 import android.os.Bundle;
@@ -14,7 +13,6 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
@@ -43,9 +41,9 @@ import java.util.Date;
  */
 
 public class ProjectBaseConfigFragment extends Fragment {
+
     public static final String TEMP_PROJECT = "com.novakduc.forbega.qlnt.tempproject";
     private static final int START_DATE_PICKED = 0;
-    private static final int PROJECT_DISCARD_CONFIRMATION = 1;
     int mDuration = 10;
     private Project mProject;
     private EditText mEditTextAddress;
@@ -58,6 +56,7 @@ public class ProjectBaseConfigFragment extends Fragment {
     private Calendar mStartDate;
     private String mName, mAddress;
     private TextInputLayout mLayoutName, mLayoutAddress, mLayoutDuration;
+    private DiscardListener mCallback;
 
     public static ProjectBaseConfigFragment newInstance(Project tempProject) {
         Bundle bundle = new Bundle();
@@ -88,6 +87,7 @@ public class ProjectBaseConfigFragment extends Fragment {
             actionBar.setHomeAsUpIndicator(R.drawable.ic_view_list);
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
+        mCallback = (DiscardListener) getActivity();
         mLayoutName = (TextInputLayout) view.findViewById(R.id.txtLayoutName);
         mEditTextName = (EditText) view.findViewById(R.id.name);
         mEditTextName.addTextChangedListener(new TextWatcher() {
@@ -112,6 +112,17 @@ public class ProjectBaseConfigFragment extends Fragment {
                 }
             }
         });
+        mEditTextName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if (b) return;
+                Editable editable = mEditTextName.getText();
+                if (editable.length() == 0) {
+                    mLayoutName.setError(getString(R.string.invalidName));
+                    mLayoutName.setErrorEnabled(true);
+                } else mLayoutName.setErrorEnabled(false);
+            }
+        });
         mLayoutAddress = (TextInputLayout) view.findViewById(R.id.txtLayoutAddress);
         mEditTextAddress = (EditText) view.findViewById(R.id.address);
         mEditTextAddress.addTextChangedListener(new TextWatcher() {
@@ -128,12 +139,23 @@ public class ProjectBaseConfigFragment extends Fragment {
             @Override
             public void afterTextChanged(Editable editable) {
                 if (editable.length() == 0) {
-                    mLayoutAddress.setError(getString(R.string.invalidName));
+                    mLayoutAddress.setError(getString(R.string.invalidAddress));
                     mLayoutAddress.setErrorEnabled(true);
                 } else {
                     mLayoutAddress.setErrorEnabled(false);
                     mAddress = editable.toString();
                 }
+            }
+        });
+        mEditTextAddress.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if (b) return;
+                Editable editable = mEditTextAddress.getText();
+                if (editable.length() == 0) {
+                    mLayoutAddress.setError(getString(R.string.invalidAddress));
+                    mLayoutAddress.setErrorEnabled(true);
+                } else mLayoutAddress.setErrorEnabled(false);
             }
         });
         mEditTextStartDate = (EditText) view.findViewById(R.id.editTextStartDate);
@@ -145,8 +167,8 @@ public class ProjectBaseConfigFragment extends Fragment {
         });
         mEditTextEndDate = (EditText) view.findViewById(R.id.editTextEndDate);
         mEditTextDuration = (EditText) view.findViewById(R.id.editTextDuration);
-        mEditTextDuration.setText(String.valueOf(mDuration));
         mLayoutDuration = (TextInputLayout) view.findViewById(R.id.txtLayoutDuration);
+        mLayoutDuration.setError(getString(R.string.durationInputError));
         mEditTextDuration.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -175,7 +197,7 @@ public class ProjectBaseConfigFragment extends Fragment {
                         }
                     }
                 } catch (NumberFormatException e) {
-                    mLayoutDuration.setError(getString(R.string.durationInputError));
+                    mEditTextDuration.setText(String.valueOf(mDuration));
                     mLayoutDuration.setErrorEnabled(true);
                 }
             }
@@ -185,8 +207,7 @@ public class ProjectBaseConfigFragment extends Fragment {
         mCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO: 11/3/2016 Show confirmation dialog
-                showDialog(new DiscardConfirmation(), PROJECT_DISCARD_CONFIRMATION);
+                mCallback.discardConfirmation();
             }
         });
         mNext = (Button) view.findViewById(R.id.btNext);
@@ -226,12 +247,6 @@ public class ProjectBaseConfigFragment extends Fragment {
                 mEditTextEndDate.setText("");
             }
         }
-        //RESULT FROM PROJECT DISCARD DIALOG
-        if (requestCode == PROJECT_DISCARD_CONFIRMATION) {
-            if (resultCode == AppCompatActivity.RESULT_OK) {
-                getActivity().finish();
-            }
-        }
         super.onActivityResult(requestCode, resultCode, data);
     }
 
@@ -252,6 +267,10 @@ public class ProjectBaseConfigFragment extends Fragment {
         if (item.getItemId() == R.id.next) {
             nextAction();
         }
+
+        if (item.getItemId() == android.R.id.home)
+            mCallback.discardConfirmation();
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -261,14 +280,12 @@ public class ProjectBaseConfigFragment extends Fragment {
         if (mName != null) {
             mProject.setName(mName);
         } else {
-            mLayoutName.setError(getResources().getString(R.string.invalidName));
             mLayoutName.setErrorEnabled(true);
             error = true;
         }
         if (mAddress != null) {
             mProject.setAddress(mAddress);
         } else {
-            mLayoutAddress.setError(getResources().getString(R.string.invalidAddress));
             mLayoutAddress.setErrorEnabled(true);
             error = true;
         }
@@ -282,7 +299,6 @@ public class ProjectBaseConfigFragment extends Fragment {
         if (mDuration > 0 && mDuration <= 100) {
             mProject.setDuration(mDuration);
         } else {
-            mLayoutDuration.setError(getString(R.string.durationInputError));
             mLayoutDuration.setErrorEnabled(true);
             error = true;
         }
@@ -302,28 +318,8 @@ public class ProjectBaseConfigFragment extends Fragment {
         super.onCreateOptionsMenu(menu, inflater);
     }
 
-    //Project cancel confirmation dialog
-    public static class DiscardConfirmation extends DialogFragment {
-        @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            builder.setMessage(R.string.project_create_discard)
-                    .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            // TODO: 11/7/2016 OK action
-                            getTargetFragment().onActivityResult(PROJECT_DISCARD_CONFIRMATION,
-                                    AppCompatActivity.RESULT_OK, new Intent());
-                        }
-                    })
-                    .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            // TODO: 11/7/2016 No action
-                        }
-                    });
-            return builder.create();
-        }
+    public interface DiscardListener {
+        public void discardConfirmation();
     }
 
     //Date picker
