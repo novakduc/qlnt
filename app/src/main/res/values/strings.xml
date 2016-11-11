@@ -40,4 +40,7 @@
     <string name="yes">Yes</string>
     <string name="project_create_discard">Discard current project?</string>
     <string name="no">No</string>
+    <string name="invalidName">invalid name</string>
+    <string name="invalidAddress">invalid address</string>
+    <string name="pickDay">pick a date</string>
 </resources>

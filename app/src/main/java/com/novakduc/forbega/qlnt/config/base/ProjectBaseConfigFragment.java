@@ -7,10 +7,12 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -55,6 +57,7 @@ public class ProjectBaseConfigFragment extends Fragment {
     private Button mNext;
     private Calendar mStartDate;
     private String mName, mAddress;
+    private TextInputLayout mLayoutName, mLayoutAddress, mLayoutDuration;
 
     public static ProjectBaseConfigFragment newInstance(Project tempProject) {
         Bundle bundle = new Bundle();
@@ -85,9 +88,54 @@ public class ProjectBaseConfigFragment extends Fragment {
             actionBar.setHomeAsUpIndicator(R.drawable.ic_view_list);
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-
+        mLayoutName = (TextInputLayout) view.findViewById(R.id.txtLayoutName);
         mEditTextName = (EditText) view.findViewById(R.id.name);
+        mEditTextName.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (editable.length() == 0) {
+                    mLayoutName.setError(getString(R.string.invalidName));
+                    mLayoutName.setErrorEnabled(true);
+                } else {
+                    mLayoutName.setErrorEnabled(false);
+                    mName = editable.toString();
+                }
+            }
+        });
+        mLayoutAddress = (TextInputLayout) view.findViewById(R.id.txtLayoutAddress);
         mEditTextAddress = (EditText) view.findViewById(R.id.address);
+        mEditTextAddress.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (editable.length() == 0) {
+                    mLayoutAddress.setError(getString(R.string.invalidName));
+                    mLayoutAddress.setErrorEnabled(true);
+                } else {
+                    mLayoutAddress.setErrorEnabled(false);
+                    mAddress = editable.toString();
+                }
+            }
+        });
         mEditTextStartDate = (EditText) view.findViewById(R.id.editTextStartDate);
         mEditTextStartDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,15 +146,15 @@ public class ProjectBaseConfigFragment extends Fragment {
         mEditTextEndDate = (EditText) view.findViewById(R.id.editTextEndDate);
         mEditTextDuration = (EditText) view.findViewById(R.id.editTextDuration);
         mEditTextDuration.setText(String.valueOf(mDuration));
-        final TextInputLayout txtLayoutDuration = (TextInputLayout) view.findViewById(R.id.txtLayoutDuration);
+        mLayoutDuration = (TextInputLayout) view.findViewById(R.id.txtLayoutDuration);
         mEditTextDuration.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
             }
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
             }
 
@@ -117,7 +165,7 @@ public class ProjectBaseConfigFragment extends Fragment {
                     if (mDuration <= 0 || mDuration > 100) {
                         throw new NumberFormatException();
                     } else {
-                        txtLayoutDuration.setErrorEnabled(false);
+                        mLayoutDuration.setErrorEnabled(false);
                         if (mStartDate != null) {
                             Calendar endDate = (Calendar) mStartDate.clone();
                             endDate.add(Calendar.YEAR, mDuration);
@@ -127,8 +175,8 @@ public class ProjectBaseConfigFragment extends Fragment {
                         }
                     }
                 } catch (NumberFormatException e) {
-                    txtLayoutDuration.setError(getString(R.string.durationInputError));
-                    txtLayoutDuration.setErrorEnabled(true);
+                    mLayoutDuration.setError(getString(R.string.durationInputError));
+                    mLayoutDuration.setErrorEnabled(true);
                 }
             }
         });
@@ -159,6 +207,17 @@ public class ProjectBaseConfigFragment extends Fragment {
             if (resultCode != AppCompatActivity.RESULT_OK) return;
             mStartDate = (Calendar) data.getSerializableExtra(DatePickerFragment.PICKED_DATE);
             mEditTextStartDate.setText(calendarToString(mStartDate));
+            TypedArray themeArray = getActivity().getTheme().obtainStyledAttributes(
+                    new int[]{android.R.attr.editTextColor});
+            try {
+                int index = 0;
+                int defaultColourValue = 0;
+                int editTextColour = themeArray.getColor(index, defaultColourValue);
+                mEditTextStartDate.setTextColor(editTextColour);
+            } finally {
+                // Calling recycle() is important. Especially if you use alot of TypedArrays
+                themeArray.recycle();
+            }
             if (mDuration > 0 && mDuration <= 100) {
                 Calendar endDate = (Calendar) mStartDate.clone();
                 endDate.add(Calendar.YEAR, mDuration);
@@ -198,21 +257,43 @@ public class ProjectBaseConfigFragment extends Fragment {
 
     //Call when next action requested from toolbar or next button
     private void nextAction() {
+        boolean error = false;
         if (mName != null) {
             mProject.setName(mName);
+        } else {
+            mLayoutName.setError(getResources().getString(R.string.invalidName));
+            mLayoutName.setErrorEnabled(true);
+            error = true;
         }
         if (mAddress != null) {
             mProject.setAddress(mAddress);
+        } else {
+            mLayoutAddress.setError(getResources().getString(R.string.invalidAddress));
+            mLayoutAddress.setErrorEnabled(true);
+            error = true;
         }
         if (mStartDate != null) {
             mProject.setStartDate(mStartDate);
+        } else {
+            mEditTextStartDate.setText(R.string.pickDay);
+            mEditTextStartDate.setTextColor(ContextCompat.getColor(getActivity(), R.color.colorRed));
+            error = true;
         }
         if (mDuration > 0 && mDuration <= 100) {
             mProject.setDuration(mDuration);
+        } else {
+            mLayoutDuration.setError(getString(R.string.durationInputError));
+            mLayoutDuration.setErrorEnabled(true);
+            error = true;
         }
+
+        if (error) {
+            return;
+        }
+
         FragmentManager manager = getActivity().getFragmentManager();
         manager.beginTransaction().replace(R.id.fragmentContainer,
-                ProjectFinanceConfigFragment.newInstance(mProject)).commit();
+                ProjectFinanceConfigFragment.newInstance(mProject)).addToBackStack(null).commit();
     }
 
     @Override
