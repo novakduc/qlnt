@@ -167,8 +167,8 @@ public class ProjectBaseConfigFragment extends Fragment {
         });
         mEditTextEndDate = (EditText) view.findViewById(R.id.editTextEndDate);
         mEditTextDuration = (EditText) view.findViewById(R.id.editTextDuration);
+        mEditTextDuration.setText(String.valueOf(mDuration));
         mLayoutDuration = (TextInputLayout) view.findViewById(R.id.txtLayoutDuration);
-        mLayoutDuration.setError(getString(R.string.durationInputError));
         mEditTextDuration.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -197,7 +197,7 @@ public class ProjectBaseConfigFragment extends Fragment {
                         }
                     }
                 } catch (NumberFormatException e) {
-                    mEditTextDuration.setText(String.valueOf(mDuration));
+                    mLayoutDuration.setError(getString(R.string.durationInputError));
                     mLayoutDuration.setErrorEnabled(true);
                 }
             }
@@ -280,12 +280,14 @@ public class ProjectBaseConfigFragment extends Fragment {
         if (mName != null) {
             mProject.setName(mName);
         } else {
+            mLayoutName.setError(getString(R.string.invalidName));
             mLayoutName.setErrorEnabled(true);
             error = true;
         }
         if (mAddress != null) {
             mProject.setAddress(mAddress);
         } else {
+            mLayoutAddress.setError(getString(R.string.invalidAddress));
             mLayoutAddress.setErrorEnabled(true);
             error = true;
         }
@@ -299,6 +301,7 @@ public class ProjectBaseConfigFragment extends Fragment {
         if (mDuration > 0 && mDuration <= 100) {
             mProject.setDuration(mDuration);
         } else {
+            mEditTextDuration.setError(getString(R.string.durationInputError));
             mLayoutDuration.setErrorEnabled(true);
             error = true;
         }

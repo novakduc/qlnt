@@ -18,7 +18,7 @@
     <string name="etxtProjectNameHint">Input project name</string>
     <string name="inputProjectNameHint">Project name</string>
     <string name="inputProjectAddressHint">Address</string>
-    <string name="inputProjectInvestmentHint">Investment amount (VND)</string>
+    <string name="inputProjectInvestmentHint">Investment amount (mil VND)</string>
     <string name="inputElectricUpriceHint">Electrical VND/kWh</string>
     <string name="inputWaterUpriceHint">Water VND/m3</string>
     <string name="inputTrashUprice">Trash collection VND/month</string>
