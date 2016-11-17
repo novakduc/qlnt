@@ -28,7 +28,6 @@ import com.novakduc.forbega.qlnt.model.Project;
 import com.novakduc.forbega.qlnt.model.Qlnt;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -86,7 +85,7 @@ public class ProjectListFragment extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(activity);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
-        recyclerView.setAdapter(new SimpleStringRecyclerViewAdapter(activity, mProjects));
+        recyclerView.setAdapter(new ProjectsRecyclerViewAdapter(activity, mProjects));
 
         Log.d("Check", "RC has set");
 
@@ -105,14 +104,14 @@ public class ProjectListFragment extends Fragment {
         return view;
     }
 
-    public static class SimpleStringRecyclerViewAdapter
-            extends RecyclerView.Adapter<SimpleStringRecyclerViewAdapter.ViewHolder> {
+    public static class ProjectsRecyclerViewAdapter
+            extends RecyclerView.Adapter<ProjectsRecyclerViewAdapter.ViewHolder> {
 
         private final TypedValue mTypedValue = new TypedValue();
         private int mBackground;
         private ArrayList<Project> mValues;
 
-        public SimpleStringRecyclerViewAdapter(Context context, ArrayList<Project> items) {
+        public ProjectsRecyclerViewAdapter(Context context, ArrayList<Project> items) {
             context.getTheme().resolveAttribute(R.attr.selectableItemBackground, mTypedValue, true);
             mBackground = mTypedValue.resourceId;
             mValues = items;
@@ -145,22 +144,6 @@ public class ProjectListFragment extends Fragment {
 
         }
 
-        private int getRandomCheeseDrawable() {
-            switch (new Random().nextInt(5)) {
-                default:
-                case 0:
-                    return R.drawable.cheese_1;
-                case 1:
-                    return R.drawable.cheese_2;
-                case 2:
-                    return R.drawable.cheese_3;
-                case 3:
-                    return R.drawable.cheese_4;
-                case 4:
-                    return R.drawable.cheese_5;
-            }
-        }
-
         @Override
         public int getItemCount() {
             return mValues.size();
@@ -174,7 +157,6 @@ public class ProjectListFragment extends Fragment {
             public ViewHolder(View view) {
                 super(view);
                 mView = view;
-
                 mTextView = (TextView) view.findViewById(R.id.textViewProjectName);
             }
 

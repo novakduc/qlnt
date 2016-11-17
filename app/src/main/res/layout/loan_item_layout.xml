@@ -60,7 +60,7 @@
                 style="?android:borderlessButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_above="@id/lineSeparate"
+                android:layout_above="@+id/lineSeparate"
                 android:layout_alignEnd="@+id/lineSeparate"
                 android:layout_marginStart="8dp"
                 android:src="@android:drawable/ic_menu_delete"/>
@@ -86,7 +86,6 @@
                     android:id="@+id/txtViewTotalIncome"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingEnd="8dp"
                     android:paddingStart="16dp"
                     android:text="4000.00"
                     android:textSize="20sp"/>
@@ -97,8 +96,7 @@
                     android:layout_gravity="start"
                     android:layout_weight="1"
                     android:gravity="start"
-                    android:paddingEnd="8dp"
-                    android:paddingStart="16dp"
+                    android:paddingStart="8dp"
                     android:text="@string/currencyUnit"
                     android:textSize="20sp"/>
 
