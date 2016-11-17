@@ -43,4 +43,7 @@
     <string name="invalidName">invalid name</string>
     <string name="invalidAddress">invalid address</string>
     <string name="pickDay">pick a date</string>
+    <string name="loanList">Loans:</string>
+    <string name="interestRateUnit">%/year</string>
+    <string name="currencyUnit">mil VND</string>
 </resources>
