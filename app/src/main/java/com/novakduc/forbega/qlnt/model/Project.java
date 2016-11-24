@@ -41,6 +41,10 @@ public class Project implements Cloneable {
         return mName;
     }
 
+    //Add cost
+    // TODO: 11/24/2016 add cost
+
+    //Add loan
     public Boolean addLoan(String name, long amount, long loanDate, double rate) {
         Loan loan = new Loan(name, amount, loanDate, rate);
         return mLoanList.add(loan);
