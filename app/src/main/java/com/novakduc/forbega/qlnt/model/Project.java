@@ -24,7 +24,8 @@ public class Project implements Cloneable {
         // TODO: 11/24/2016 need to be remove
         //Test test test
         for (int i = 0; i < 10; i++) {
-            Loan loan = new Loan(String.valueOf(i), i * 1000, Calendar.getInstance(), 0.5);
+            Loan loan = new Loan(String.valueOf(i), i * 1000,
+                    Calendar.getInstance().getTimeInMillis(), 0.5);
             mLoanList.add(loan);
         }
         ////end of test
@@ -40,7 +41,7 @@ public class Project implements Cloneable {
         return mName;
     }
 
-    public Boolean addLoan(String name, long amount, Calendar loanDate, double rate) {
+    public Boolean addLoan(String name, long amount, long loanDate, double rate) {
         Loan loan = new Loan(name, amount, loanDate, rate);
         return mLoanList.add(loan);
     }
@@ -70,31 +71,6 @@ public class Project implements Cloneable {
         }
         project.setRoomList((RoomList<Room>) mRoomList.clone());
         return project;
-    }
-
-    //Unit price setting section
-    public void setElectricityUnitPrice(Long electricityUnitPrice) {
-        mUnitPrice.setElectricity(electricityUnitPrice);
-    }
-
-    public void setWaterUnitPrice(Long waterUnitPrice) {
-        mUnitPrice.setWater(waterUnitPrice);
-    }
-
-    public void setTvUnitPrice(Long tvUnitPrice) {
-        mUnitPrice.setTv(tvUnitPrice);
-    }
-
-    public void setTrashCollectionUnitPrice(long trashCollectionUnitPrice) {
-        mUnitPrice.setTrashCollection(trashCollectionUnitPrice);
-    }
-
-    public void setSecurityUnitPrice(long securityUnitPrice) {
-        mUnitPrice.setSecurity(securityUnitPrice);
-    }
-
-    public void setInternetUnitPrice(long internetUnitPrice) {
-        mUnitPrice.setInternet(internetUnitPrice);
     }
 
     // Getter and setter section

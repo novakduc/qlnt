@@ -35,9 +35,9 @@ public class ProjectDbManager implements StringForDB {
         contentValues.put(PROJECT_ID_ROW, project.getProjectId());
         contentValues.put(PROJECT_NAME_ROW, project.getName());
         contentValues.put(PROJECT_ADDRESS_ROW, project.getAddress());
-        contentValues.put(PROJECT_END_DATE_ROW, project.getEndDate().getTimeInMillis());
+        contentValues.put(PROJECT_END_DATE_ROW, project.getEndDate());
         contentValues.put(PROJECT_INVESTMENT_ROW, project.getInvestment());
-        contentValues.put(PROJECT_START_DATE_ROW, project.getStartDate().getTimeInMillis());
+        contentValues.put(PROJECT_START_DATE_ROW, project.getStartDate());
         contentValues.put(PROJECT_TOTAL_INCOME_ROW, project.getTotalIncome());
 
         mDatabase.insert(PROJECT_TABLE, null, contentValues);
@@ -62,7 +62,7 @@ public class ProjectDbManager implements StringForDB {
             contentValues.put(LOAN_PROJECT_ID, project.getProjectId());
             contentValues.put(LOAN_NAME, tmpLoan.getName());
             contentValues.put(LOAN_AMOUNT, tmpLoan.getAmount());
-            contentValues.put(LOAN_DATE, tmpLoan.getLoanDate().getTimeInMillis());
+            contentValues.put(LOAN_DATE, tmpLoan.getLoanDate());
             contentValues.put(LOAN_INTEREST_RATE, tmpLoan.getInterestRate());
 
             mDatabase.insert(LOAN_TABLE, null, contentValues);
