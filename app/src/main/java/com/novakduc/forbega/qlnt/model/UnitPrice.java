@@ -1,11 +1,23 @@
 package com.novakduc.forbega.qlnt.model;
 
-import java.io.Serializable;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 /**
  * Created by n.thanh on 9/21/2016.
  */
-public class UnitPrice implements Cloneable, Serializable {
+public class UnitPrice implements Cloneable, Parcelable {
+    public static final Parcelable.Creator<UnitPrice> CREATOR = new Parcelable.Creator<UnitPrice>() {
+        @Override
+        public UnitPrice createFromParcel(Parcel source) {
+            return new UnitPrice(source);
+        }
+
+        @Override
+        public UnitPrice[] newArray(int size) {
+            return new UnitPrice[size];
+        }
+    };
     private long mProjectId;
     private long mElectricity;
     private long mWater;
@@ -17,6 +29,16 @@ public class UnitPrice implements Cloneable, Serializable {
     //Getter and setter section
     public UnitPrice(long projectId) {
         mProjectId = projectId;
+    }
+
+    protected UnitPrice(Parcel in) {
+        this.mProjectId = in.readLong();
+        this.mElectricity = in.readLong();
+        this.mWater = in.readLong();
+        this.mTv = in.readLong();
+        this.mTrashCollection = in.readLong();
+        this.mInternet = in.readLong();
+        this.mSecurity = in.readLong();
     }
 
     public long getProjectId() {
@@ -74,5 +96,21 @@ public class UnitPrice implements Cloneable, Serializable {
     @Override
     protected Object clone() throws CloneNotSupportedException {
         return super.clone();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(this.mProjectId);
+        dest.writeLong(this.mElectricity);
+        dest.writeLong(this.mWater);
+        dest.writeLong(this.mTv);
+        dest.writeLong(this.mTrashCollection);
+        dest.writeLong(this.mInternet);
+        dest.writeLong(this.mSecurity);
     }
 }

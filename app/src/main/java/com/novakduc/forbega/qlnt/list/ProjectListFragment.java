@@ -133,6 +133,7 @@ public class ProjectListFragment extends Fragment {
         public void onBindViewHolder(final ViewHolder holder, final int position) {
             holder.mBoundString = mValues.get(position).getName();
             holder.mTextView.setText(mValues.get(position).getName());
+            // TODO: 11/24/2016 update project information
 
             holder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override

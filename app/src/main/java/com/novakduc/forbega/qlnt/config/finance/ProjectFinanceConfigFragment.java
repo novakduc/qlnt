@@ -1,6 +1,7 @@
 package com.novakduc.forbega.qlnt.config.finance;
 
 import android.app.Fragment;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
@@ -15,10 +16,18 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.novakduc.forbega.qlnt.R;
+import com.novakduc.forbega.qlnt.model.Loan;
 import com.novakduc.forbega.qlnt.model.Project;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 
 /**
  * Created by n.thanh on 10/21/2016.
@@ -66,6 +75,7 @@ public class ProjectFinanceConfigFragment extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(activity);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
+        recyclerView.setAdapter(new LoansAdapter(activity, mProject.getLoanList()));
 
         return view;
     }
@@ -81,28 +91,54 @@ public class ProjectFinanceConfigFragment extends Fragment {
         return super.onOptionsItemSelected(item);
     }
 
-    public static class LoansRecyclerViewAdapter extends
-            RecyclerView.Adapter<LoansRecyclerViewAdapter.ViewHolder> {
+    public static class LoansAdapter extends RecyclerView.Adapter<LoansAdapter.ViewHolder> {
+        private Context mContext;
+        private List<Loan> mLoans;
 
-        @Override
-        public LoansRecyclerViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            return null;
+        public LoansAdapter(Context context, List<Loan> loanList) {
+            mContext = context;
+            mLoans = loanList;
         }
 
         @Override
-        public void onBindViewHolder(LoansRecyclerViewAdapter.ViewHolder holder, int position) {
 
+        public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+            View loanView = inflater.inflate(R.layout.loan_item_layout, parent, false);
+            ViewHolder viewHolder = new ViewHolder(loanView);
+            return viewHolder;
+        }
+
+        @Override
+        public void onBindViewHolder(final ViewHolder holder, final int position) {
+            Loan loan = mLoans.get(position);
+            holder.mTextViewBankName.setText(loan.getName());
+            Date date = loan.getLoanDate().getTime();
+            DateFormat format = SimpleDateFormat.getDateInstance();
+            holder.mTextViewStartDate.setText(format.format(date));
+            holder.mTextViewLoanAmount.setText(String.valueOf(loan.getAmount()));
+            holder.mTextViewInterestRate.setText(String.valueOf(loan.getInterestRate()));
         }
 
         @Override
         public int getItemCount() {
-            return 0;
+            return mLoans.size();
         }
 
-        public class ViewHolder extends RecyclerView.ViewHolder {
+        public static class ViewHolder extends RecyclerView.ViewHolder {
+            TextView mTextViewBankName, mTextViewStartDate, mTextViewLoanAmount, mTextViewInterestRate;
+            Button mButtonEdit, mButtonDelete;
 
             public ViewHolder(View itemView) {
                 super(itemView);
+
+                mTextViewBankName = (TextView) itemView.findViewById(R.id.textViewBankName);
+                mTextViewStartDate = (TextView) itemView.findViewById(R.id.textViewStartDate);
+                mTextViewLoanAmount = (TextView) itemView.findViewById(R.id.txtViewLoanAmount);
+                mTextViewInterestRate = (TextView) itemView.findViewById(R.id.interestRate);
+                mButtonDelete = (Button) itemView.findViewById(R.id.btDelete);
+                mButtonEdit = (Button) itemView.findViewById(R.id.btEdit);
+                // TODO: 11/24/2016 view event and update
             }
         }
     }

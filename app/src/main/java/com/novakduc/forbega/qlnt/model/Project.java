@@ -1,20 +1,18 @@
 package com.novakduc.forbega.qlnt.model;
 
-import java.io.Serializable;
 import java.util.Calendar;
 
 /**
  * Created by n.thanh on 9/21/2016.
  */
-
-public class Project implements Cloneable, Serializable {
+public class Project implements Cloneable {
 
     private long mProjectId;
     private String mName;
     private String mAddress;
     private long mInvestment;
     private long mTotalIncome;
-    private Calendar mStartDate;
+    private long mStartDate;
     private int mYearDuration;
     private UnitPrice mUnitPrice;
     private LoanList<Loan> mLoanList;
@@ -23,6 +21,14 @@ public class Project implements Cloneable, Serializable {
     public Project() {
         mProjectId = Calendar.getInstance().getTimeInMillis();
         mLoanList = new LoanList<Loan>();
+        // TODO: 11/24/2016 need to be remove
+        //Test test test
+        for (int i = 0; i < 10; i++) {
+            Loan loan = new Loan(String.valueOf(i), i * 1000, Calendar.getInstance(), 0.5);
+            mLoanList.add(loan);
+        }
+        ////end of test
+
         mUnitPrice = new UnitPrice(mProjectId);
     }
 
@@ -39,8 +45,8 @@ public class Project implements Cloneable, Serializable {
         return mLoanList.add(loan);
     }
 
-    public Calendar getEndDate() {
-        Calendar endDate = Calendar.getInstance();
+    public long getEndDate() {
+        long endDate = Calendar.getInstance().getTimeInMillis();
         // TODO: 11/3/2016 Calculate end date based on start date and duration
         return endDate;
     }
@@ -132,11 +138,11 @@ public class Project implements Cloneable, Serializable {
         mTotalIncome = totalIncome;
     }
 
-    public Calendar getStartDate() {
+    public long getStartDate() {
         return mStartDate;
     }
 
-    public void setStartDate(Calendar startDate) {
+    public void setStartDate(long startDate) {
         mStartDate = startDate;
     }
 
