@@ -42,7 +42,10 @@ public class Project implements Cloneable {
     }
 
     //Add cost
-    // TODO: 11/24/2016 add cost
+    public long addCost(long amount, CostType type, long date, boolean repeatable) {
+
+        return -1;
+    }
 
     //Add loan
     public Boolean addLoan(String name, long amount, long loanDate, double rate) {
