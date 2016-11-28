@@ -24,7 +24,11 @@ public class Cost implements Parcelable {
     private CostType mType;
     private boolean mRepeatable;
 
-    public Cost() {
+    public Cost(long amount, CostType type, long date, boolean repeatable) {
+        this.mAmount = amount;
+        this.mType = type;
+        this.mDate = date;
+        this.mRepeatable = repeatable;
     }
 
     protected Cost(Parcel in) {
@@ -67,6 +71,7 @@ public class Cost implements Parcelable {
         mAmount = amount;
     }
 
+    //Parcel...
     @Override
     public int describeContents() {
         return 0;

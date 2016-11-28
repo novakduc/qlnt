@@ -17,6 +17,7 @@ public class Project implements Cloneable {
     private UnitPrice mUnitPrice;
     private LoanList<Loan> mLoanList;
     private RoomList<Room> mRoomList;
+    private CostManager<Cost> mCostManager;
 
     public Project() {
         mProjectId = Calendar.getInstance().getTimeInMillis();
@@ -31,6 +32,7 @@ public class Project implements Cloneable {
         ////end of test
 
         mUnitPrice = new UnitPrice(mProjectId);
+        mCostManager = new CostManager<Cost>();
     }
 
     @Override
@@ -42,9 +44,8 @@ public class Project implements Cloneable {
     }
 
     //Add cost
-    public long addCost(long amount, CostType type, long date, boolean repeatable) {
-
-        return -1;
+    public boolean addCost(long amount, CostType type, long date, boolean repeatable) {
+        return mCostManager.add(new Cost(amount, type, date, repeatable));
     }
 
     //Add loan
