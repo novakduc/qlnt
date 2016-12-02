@@ -9,6 +9,7 @@ public class Room implements Cloneable {
     private String mName;
     private double area;
     private long charge;
+    private Project mProject; // TODO: 12/2/2016 check check ...
 
     public Room(String name, double area, long charge) {
         mName = name;
