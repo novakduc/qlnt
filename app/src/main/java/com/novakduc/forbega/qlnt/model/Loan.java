@@ -6,7 +6,7 @@ import android.os.Parcelable;
 /**
  * Created by n.thanh on 9/21/2016.
  */
-public class Loan implements Cloneable, Parcelable {
+public class Loan extends DBObject implements Cloneable, Parcelable {
     public static final Parcelable.Creator<Loan> CREATOR = new Parcelable.Creator<Loan>() {
         @Override
         public Loan createFromParcel(Parcel source) {

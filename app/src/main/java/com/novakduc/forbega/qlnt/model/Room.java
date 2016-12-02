@@ -6,6 +6,15 @@ package com.novakduc.forbega.qlnt.model;
 
 public class Room implements Cloneable {
     // TODO: 9/30/2016
+    private String mName;
+    private double area;
+    private long charge;
+
+    public Room(String name, double area, long charge) {
+        mName = name;
+        this.area = area;
+        this.charge = charge;
+    }
 
     @Override
     protected Object clone() throws CloneNotSupportedException {

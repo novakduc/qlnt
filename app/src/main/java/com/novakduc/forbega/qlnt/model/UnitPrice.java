@@ -6,7 +6,7 @@ import android.os.Parcelable;
 /**
  * Created by n.thanh on 9/21/2016.
  */
-public class UnitPrice implements Cloneable, Parcelable {
+public class UnitPrice extends DBObject implements Cloneable, Parcelable {
     public static final Parcelable.Creator<UnitPrice> CREATOR = new Parcelable.Creator<UnitPrice>() {
         @Override
         public UnitPrice createFromParcel(Parcel source) {
@@ -39,6 +39,7 @@ public class UnitPrice implements Cloneable, Parcelable {
         this.mTrashCollection = in.readLong();
         this.mInternet = in.readLong();
         this.mSecurity = in.readLong();
+        this.isChanged = in.readByte() != 0;
     }
 
     public long getProjectId() {
@@ -98,6 +99,7 @@ public class UnitPrice implements Cloneable, Parcelable {
         return super.clone();
     }
 
+    //Parcel
     @Override
     public int describeContents() {
         return 0;
@@ -112,5 +114,6 @@ public class UnitPrice implements Cloneable, Parcelable {
         dest.writeLong(this.mTrashCollection);
         dest.writeLong(this.mInternet);
         dest.writeLong(this.mSecurity);
+        dest.writeByte(this.isChanged ? (byte) 1 : (byte) 0);
     }
 }

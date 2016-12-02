@@ -68,6 +68,7 @@ public class ProjectDbManager implements StringForDB {
             mDatabase.insert(LOAN_TABLE, null, contentValues);
         }
 
+        mHelper.close();
         return project.getProjectId();
     }
 }

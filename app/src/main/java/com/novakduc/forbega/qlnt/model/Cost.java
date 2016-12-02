@@ -7,7 +7,7 @@ import android.os.Parcelable;
  * Created by n.thanh on 11/25/2016.
  */
 
-public class Cost implements Parcelable {
+public class Cost extends DBObject implements Parcelable {
     public static final Parcelable.Creator<Cost> CREATOR = new Parcelable.Creator<Cost>() {
         @Override
         public Cost createFromParcel(Parcel source) {
@@ -37,6 +37,7 @@ public class Cost implements Parcelable {
         int tmpMType = in.readInt();
         this.mType = tmpMType == -1 ? null : CostType.values()[tmpMType];
         this.mRepeatable = in.readByte() != 0;
+        this.setChanged(in.readByte() != 0);
     }
 
     public long getDate() {
@@ -71,7 +72,6 @@ public class Cost implements Parcelable {
         mAmount = amount;
     }
 
-    //Parcel...
     @Override
     public int describeContents() {
         return 0;
@@ -83,5 +83,6 @@ public class Cost implements Parcelable {
         dest.writeLong(this.mDate);
         dest.writeInt(this.mType == null ? -1 : this.mType.ordinal());
         dest.writeByte(this.mRepeatable ? (byte) 1 : (byte) 0);
+        dest.writeByte(this.isChanged() ? (byte) 1 : (byte) 0);
     }
 }

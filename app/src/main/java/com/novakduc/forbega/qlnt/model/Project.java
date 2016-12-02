@@ -5,7 +5,7 @@ import java.util.Calendar;
 /**
  * Created by n.thanh on 9/21/2016.
  */
-public class Project implements Cloneable {
+public class Project extends DBObject implements Cloneable {
 
     private long mProjectId;
     private String mName;
@@ -33,6 +33,11 @@ public class Project implements Cloneable {
 
         mUnitPrice = new UnitPrice(mProjectId);
         mCostManager = new CostManager<Cost>();
+        mRoomList = new RoomList<Room>();
+    }
+
+    public boolean createRoom(String name, double area, long charge) {
+        return mRoomList.add(new Room(name, area, charge));
     }
 
     @Override
