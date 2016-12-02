@@ -6,6 +6,7 @@ package com.novakduc.forbega.qlnt.model;
 
 public abstract class RoomService extends DBObject {
     protected boolean mUse;
+    protected Room mRoom;
 
     public abstract long charge();
 }
