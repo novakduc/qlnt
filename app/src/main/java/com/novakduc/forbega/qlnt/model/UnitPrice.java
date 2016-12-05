@@ -26,7 +26,6 @@ public class UnitPrice extends DBObject implements Cloneable, Parcelable {
     private long mInternet;
     private long mSecurity;
 
-    //Getter and setter section
     public UnitPrice(long projectId) {
         mProjectId = projectId;
     }
@@ -42,6 +41,26 @@ public class UnitPrice extends DBObject implements Cloneable, Parcelable {
         this.isChanged = in.readByte() != 0;
     }
 
+    public long get(CostType type) {
+        switch (type) {
+            case ELECTRICITY:
+                return mElectricity;
+            case WATER:
+                return mWater;
+            case INTERNET:
+                return mInternet;
+            case SECURITY:
+                return mSecurity;
+            case TRASH_COLLECTION:
+                return mTrashCollection;
+            case TV_CABLE:
+                return mTv;
+            default:
+                return -1;
+        }
+    }
+
+    //Getter and setter section
     public long getProjectId() {
         return mProjectId;
     }

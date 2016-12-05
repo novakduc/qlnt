@@ -37,7 +37,7 @@ public class Project extends DBObject implements Cloneable {
     }
 
     public boolean createRoom(String name, double area, long charge) {
-        return mRoomList.add(new Room(name, area, charge));
+        return mRoomList.add(new Room(this, name, area, charge));
     }
 
     @Override
