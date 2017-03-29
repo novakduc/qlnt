@@ -1,12 +1,26 @@
 package com.novakduc.forbega.qlnt.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.Calendar;
 
 /**
  * Created by n.thanh on 9/21/2016.
  */
-public class Project extends DBObject implements Cloneable {
+public class Project extends DBObject implements Cloneable, Parcelable {
 
+    public static final Creator<Project> CREATOR = new Creator<Project>() {
+        @Override
+        public Project createFromParcel(Parcel source) {
+            return new Project(source);
+        }
+
+        @Override
+        public Project[] newArray(int size) {
+            return new Project[size];
+        }
+    };
     private long mProjectId;
     private String mName;
     private String mAddress;
@@ -18,6 +32,7 @@ public class Project extends DBObject implements Cloneable {
     private LoanList<Loan> mLoanList;
     private RoomList<Room> mRoomList;
     private CostManager<Cost> mCostManager;
+
 
     public Project() {
         mProjectId = Calendar.getInstance().getTimeInMillis();
@@ -36,8 +51,23 @@ public class Project extends DBObject implements Cloneable {
         mRoomList = new RoomList<Room>();
     }
 
+    protected Project(Parcel in) {
+        this.mProjectId = in.readLong();
+        this.mName = in.readString();
+        this.mAddress = in.readString();
+        this.mInvestment = in.readLong();
+        this.mTotalIncome = in.readLong();
+        this.mStartDate = in.readLong();
+        this.mYearDuration = in.readInt();
+        this.mUnitPrice = in.readParcelable(UnitPrice.class.getClassLoader());
+        this.mLoanList = in.readParcelable(LoanList.class.getClassLoader());
+        this.mRoomList = in.readParcelable(RoomList.class.getClassLoader());
+        this.mCostManager = in.readParcelable(CostManager.class.getClassLoader());
+        this.isChanged = in.readByte() != 0;
+    }
+
     public boolean createRoom(String name, double area, long charge) {
-        return mRoomList.add(new Room(this, name, area, charge));
+        return mRoomList.add(new Room(this.mProjectId, name, area, charge));
     }
 
     @Override
@@ -155,11 +185,34 @@ public class Project extends DBObject implements Cloneable {
         return mLoanList;
     }
 
+    //Parcel
+
     private void setLoanList(LoanList<Loan> loanList) {
         mLoanList = loanList;
     }
 
     private void setRoomList(RoomList<Room> list) {
         mRoomList = list;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(this.mProjectId);
+        dest.writeString(this.mName);
+        dest.writeString(this.mAddress);
+        dest.writeLong(this.mInvestment);
+        dest.writeLong(this.mTotalIncome);
+        dest.writeLong(this.mStartDate);
+        dest.writeInt(this.mYearDuration);
+        dest.writeParcelable(this.mUnitPrice, flags);
+        dest.writeParcelable(this.mLoanList, flags);
+        dest.writeParcelable(this.mRoomList, flags);
+        dest.writeParcelable(this.mCostManager, flags);
+        dest.writeByte(this.isChanged ? (byte) 1 : (byte) 0);
     }
 }

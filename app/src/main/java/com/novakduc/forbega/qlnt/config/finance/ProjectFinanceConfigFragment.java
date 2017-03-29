@@ -41,7 +41,7 @@ public class ProjectFinanceConfigFragment extends Fragment {
 
     public static ProjectFinanceConfigFragment newInstance(Project tempProject) {
         Bundle bundle = new Bundle();
-        bundle.putSerializable(TEMP_PROJECT, tempProject);
+        bundle.putParcelable(TEMP_PROJECT, tempProject);
         ProjectFinanceConfigFragment fragment = new ProjectFinanceConfigFragment();
         fragment.setArguments(bundle);
         return fragment;
@@ -50,7 +50,7 @@ public class ProjectFinanceConfigFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mProject = (Project) getArguments().getSerializable(TEMP_PROJECT);
+        mProject = (Project) getArguments().getParcelable(TEMP_PROJECT);
     }
 
     @Nullable
@@ -113,7 +113,8 @@ public class ProjectFinanceConfigFragment extends Fragment {
         public void onBindViewHolder(final ViewHolder holder, final int position) {
             Loan loan = mLoans.get(position);
             holder.mTextViewBankName.setText(loan.getName());
-            Date date = loan.getLoanDate().getTime();
+            Date date = new Date();
+            date.setTime(loan.getLoanDate());
             DateFormat format = SimpleDateFormat.getDateInstance();
             holder.mTextViewStartDate.setText(format.format(date));
             holder.mTextViewLoanAmount.setText(String.valueOf(loan.getAmount()));

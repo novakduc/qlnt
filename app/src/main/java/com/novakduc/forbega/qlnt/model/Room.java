@@ -12,13 +12,13 @@ public class Room implements Cloneable {
     private double mArea;
     private long mCharge;
     private ArrayList<RoomService> mRoomServices;
-    private Project mProject; // TODO: 12/2/2016 check check ...
+    private long mProjectId; // TODO: 12/2/2016 check check ...
 
-    public Room(Project project, String name, double area, long charge) {
+    public Room(long projectId, String name, double area, long charge) {
         mName = name;
         this.mArea = area;
         this.mCharge = charge;
-        mProject = project;
+        mProjectId = projectId;
         mRoomServices = new ArrayList<RoomService>(5);
     }
 
@@ -46,8 +46,8 @@ public class Room implements Cloneable {
         mCharge = charge;
     }
 
-    public Project getProject() {
-        return mProject;
+    public long getProjectId() {
+        return mProjectId;
     }
 
     @Override

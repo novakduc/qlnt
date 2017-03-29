@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -53,14 +52,14 @@ public class ProjectBaseConfigFragment extends Fragment {
     private EditText mEditTextDuration;
     private Button mCancel;
     private Button mNext;
-    private Calendar mStartDate;
+    private long mStartDate;
     private String mName, mAddress;
     private TextInputLayout mLayoutName, mLayoutAddress, mLayoutDuration;
     private DiscardListener mCallback;
 
     public static ProjectBaseConfigFragment newInstance(Project tempProject) {
         Bundle bundle = new Bundle();
-        bundle.putSerializable(TEMP_PROJECT, tempProject);
+        bundle.putParcelable(TEMP_PROJECT, tempProject);
         ProjectBaseConfigFragment fragment = new ProjectBaseConfigFragment();
         fragment.setArguments(bundle);
         return fragment;
@@ -69,7 +68,7 @@ public class ProjectBaseConfigFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mProject = (Project) getArguments().getSerializable(TEMP_PROJECT);
+        mProject = (Project) getArguments().getParcelable(TEMP_PROJECT);
         setHasOptionsMenu(true);
     }
 
@@ -159,6 +158,9 @@ public class ProjectBaseConfigFragment extends Fragment {
             }
         });
         mEditTextStartDate = (EditText) view.findViewById(R.id.editTextStartDate);
+        Calendar tmp = Calendar.getInstance();
+        mStartDate = tmp.getTimeInMillis();
+        mEditTextStartDate.setText(calendarToString(tmp));
         mEditTextStartDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -188,13 +190,10 @@ public class ProjectBaseConfigFragment extends Fragment {
                         throw new NumberFormatException();
                     } else {
                         mLayoutDuration.setErrorEnabled(false);
-                        if (mStartDate != null) {
-                            Calendar endDate = (Calendar) mStartDate.clone();
+                        Calendar endDate = Calendar.getInstance();
+                        endDate.setTimeInMillis(mStartDate);
                             endDate.add(Calendar.YEAR, mDuration);
                             mEditTextEndDate.setText(calendarToString(endDate));
-                        } else {
-                            mEditTextEndDate.setText("");
-                        }
                     }
                 } catch (NumberFormatException e) {
                     mLayoutDuration.setError(getString(R.string.durationInputError));
@@ -226,8 +225,9 @@ public class ProjectBaseConfigFragment extends Fragment {
         //RESULT FROM DATE PICKER
         if (requestCode == START_DATE_PICKED) {
             if (resultCode != AppCompatActivity.RESULT_OK) return;
-            mStartDate = (Calendar) data.getSerializableExtra(DatePickerFragment.PICKED_DATE);
-            mEditTextStartDate.setText(calendarToString(mStartDate));
+            Calendar tmpCalendar = (Calendar) data.getSerializableExtra(DatePickerFragment.PICKED_DATE);
+            mStartDate = tmpCalendar.getTimeInMillis();
+            mEditTextStartDate.setText(calendarToString(tmpCalendar));
             TypedArray themeArray = getActivity().getTheme().obtainStyledAttributes(
                     new int[]{android.R.attr.editTextColor});
             try {
@@ -240,7 +240,7 @@ public class ProjectBaseConfigFragment extends Fragment {
                 themeArray.recycle();
             }
             if (mDuration > 0 && mDuration <= 100) {
-                Calendar endDate = (Calendar) mStartDate.clone();
+                Calendar endDate = (Calendar) tmpCalendar.clone();
                 endDate.add(Calendar.YEAR, mDuration);
                 mEditTextEndDate.setText(calendarToString(endDate));
             } else {
@@ -291,13 +291,8 @@ public class ProjectBaseConfigFragment extends Fragment {
             mLayoutAddress.setErrorEnabled(true);
             error = true;
         }
-        if (mStartDate != null) {
-            mProject.setStartDate(mStartDate);
-        } else {
-            mEditTextStartDate.setText(R.string.pickDay);
-            mEditTextStartDate.setTextColor(ContextCompat.getColor(getActivity(), R.color.colorRed));
-            error = true;
-        }
+        ///update start date
+        mProject.setStartDate(mStartDate);
         if (mDuration > 0 && mDuration <= 100) {
             mProject.setDuration(mDuration);
         } else {
