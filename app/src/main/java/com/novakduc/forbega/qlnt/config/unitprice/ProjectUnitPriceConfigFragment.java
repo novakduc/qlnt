@@ -20,7 +20,7 @@ public class ProjectUnitPriceConfigFragment extends Fragment {
 
     public static ProjectUnitPriceConfigFragment newInstance(Project tempProject) {
         Bundle bundle = new Bundle();
-        bundle.putSerializable(TEMP_PROJECT, tempProject);
+        bundle.putParcelable(TEMP_PROJECT, tempProject);
         ProjectUnitPriceConfigFragment fragment = new ProjectUnitPriceConfigFragment();
         fragment.setArguments(bundle);
         return fragment;
@@ -29,7 +29,7 @@ public class ProjectUnitPriceConfigFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mProject = (Project) getArguments().getSerializable(TEMP_PROJECT);
+        mProject = (Project) getArguments().getParcelable(TEMP_PROJECT);
     }
 
     @Nullable

@@ -277,6 +277,7 @@ public class ProjectBaseConfigFragment extends Fragment {
     //Call when next action requested from toolbar or next button
     private void nextAction() {
         boolean error = false;
+        // TODO: 3/29/2017 Project parcel has some problem. Every time access to project lead to error
         if (mName != null) {
             mProject.setName(mName);
         } else {
@@ -304,6 +305,8 @@ public class ProjectBaseConfigFragment extends Fragment {
         if (error) {
             return;
         }
+        //Toast.makeText(this.getActivity(), "Reach here", Toast.LENGTH_SHORT).show();
+        ///////////////////////////////////////
 
         FragmentManager manager = getActivity().getFragmentManager();
         manager.beginTransaction().replace(R.id.fragmentContainer,
