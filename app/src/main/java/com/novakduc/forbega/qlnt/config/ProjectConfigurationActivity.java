@@ -16,7 +16,7 @@ public class ProjectConfigurationActivity extends SimpleFragmentActivity
     @Override
     protected Fragment createFragment() {
         mTempProject = (Project) getIntent()
-                .getSerializableExtra(ProjectBaseConfigFragment.TEMP_PROJECT);
+                .getParcelableExtra(ProjectBaseConfigFragment.TEMP_PROJECT);
         return ProjectBaseConfigFragment.newInstance(mTempProject);
     }
 

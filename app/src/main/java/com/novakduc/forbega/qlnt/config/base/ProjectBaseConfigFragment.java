@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.content.res.TypedArray;
 import android.os.Bundle;
@@ -27,6 +28,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.novakduc.forbega.qlnt.R;
+import com.novakduc.forbega.qlnt.config.finance.ProjectFinanceConfigFragment;
 import com.novakduc.forbega.qlnt.model.Project;
 
 import java.text.DateFormat;
@@ -306,12 +308,10 @@ public class ProjectBaseConfigFragment extends Fragment {
         }
 
         Toast.makeText(this.getActivity(), "Reach here", Toast.LENGTH_SHORT).show();
-        ///////////////////////////////////////
-        /*
+        //////////////////////////////////////
         FragmentManager manager = getActivity().getFragmentManager();
         manager.beginTransaction().replace(R.id.fragmentContainer,
                 ProjectFinanceConfigFragment.newInstance(mProject)).addToBackStack(null).commit();
-                */
     }
 
     @Override
