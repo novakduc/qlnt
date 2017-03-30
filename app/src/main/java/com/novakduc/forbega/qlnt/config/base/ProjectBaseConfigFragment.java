@@ -169,6 +169,11 @@ public class ProjectBaseConfigFragment extends Fragment {
             }
         });
         mEditTextEndDate = (EditText) view.findViewById(R.id.editTextEndDate);
+        Calendar endDate = Calendar.getInstance();
+        endDate.setTimeInMillis(mStartDate);
+        endDate.add(Calendar.YEAR, mDuration);
+        mEditTextEndDate.setText(calendarToString(endDate));
+
         mEditTextDuration = (EditText) view.findViewById(R.id.editTextDuration);
         mEditTextDuration.setText(String.valueOf(mDuration));
         mLayoutDuration = (TextInputLayout) view.findViewById(R.id.txtLayoutDuration);
