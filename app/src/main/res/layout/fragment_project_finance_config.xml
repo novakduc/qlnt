@@ -47,7 +47,6 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_weight="1"
-            android:focusable="false"
             android:orientation="vertical">
 
             <LinearLayout
@@ -60,7 +59,6 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_weight="1"
-                    android:focusable="false"
                     android:text="@string/loanList"
                     android:textSize="20sp"/>
 
@@ -78,8 +76,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scrollbars="vertical">
-
             </android.support.v7.widget.RecyclerView>
+
         </LinearLayout>
 
         <LinearLayout
@@ -88,6 +86,15 @@
             android:layout_marginBottom="16dp"
             android:focusable="false"
             android:gravity="center_horizontal|bottom">
+
+            <Button
+                android:id="@+id/btBack"
+                style="?android:borderlessButtonStyle"
+                android:layout_width="80dp"
+                android:layout_height="48dp"
+                android:layout_marginEnd="8dp"
+                android:text="@string/back_button"
+                android:textColor="@color/colorAccent"/>
 
             <Button
                 android:id="@+id/btCancel"

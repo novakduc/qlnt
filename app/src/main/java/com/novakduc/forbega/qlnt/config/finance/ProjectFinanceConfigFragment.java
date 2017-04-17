@@ -7,7 +7,6 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -50,7 +49,8 @@ public class ProjectFinanceConfigFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mProject = (Project) getArguments().getParcelable(TEMP_PROJECT);
+        mProject = getArguments().getParcelable(TEMP_PROJECT);
+        setHasOptionsMenu(true);
     }
 
     @Nullable
@@ -64,19 +64,20 @@ public class ProjectFinanceConfigFragment extends Fragment {
 
         final ActionBar actionBar = activity.getSupportActionBar();
         if (actionBar != null) {
-            actionBar.setHomeAsUpIndicator(R.drawable.ic_view_list);
+            actionBar.setHomeAsUpIndicator(R.drawable.ic_navigate_before);
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
         mLayoutAmount = (TextInputLayout) view.findViewById(R.id.txtLayoutInvestment);
         mEditTextAmount = (EditText) view.findViewById(R.id.investmentAmount);
 
+        /*
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.loanList);
         LinearLayoutManager layoutManager = new LinearLayoutManager(activity);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(new LoansAdapter(activity, mProject.getLoanList()));
-
+        */
         return view;
     }
 
