@@ -51,8 +51,6 @@ public class ProjectBaseConfigFragment extends Fragment {
     private EditText mEditTextStartDate;
     private EditText mEditTextEndDate;
     private EditText mEditTextDuration;
-    private Button mCancel;
-    private Button mNext;
     private long mStartDate;
     private String mName, mAddress;
     private TextInputLayout mLayoutName, mLayoutAddress, mLayoutDuration;
@@ -208,15 +206,15 @@ public class ProjectBaseConfigFragment extends Fragment {
             }
         });
 
-        mCancel = (Button) view.findViewById(R.id.btCancel);
-        mCancel.setOnClickListener(new View.OnClickListener() {
+        Button cancel = (Button) view.findViewById(R.id.btCancel);
+        cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mCallback.discardConfirmation();
             }
         });
-        mNext = (Button) view.findViewById(R.id.btNext);
-        mNext.setOnClickListener(new View.OnClickListener() {
+        Button next = (Button) view.findViewById(R.id.btNext);
+        next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 nextAction();   //check information save and go to next

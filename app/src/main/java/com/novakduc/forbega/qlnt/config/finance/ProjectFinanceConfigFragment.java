@@ -10,6 +10,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -36,6 +38,7 @@ import java.util.List;
 public class ProjectFinanceConfigFragment extends Fragment {
     public static final String TEMP_PROJECT = "com.novakduc.forbega.qlnt.tempproject";
     private Project mProject;
+    private long mAmount;
     private TextInputLayout mLayoutAmount;
     private EditText mEditTextAmount;
 
@@ -71,6 +74,32 @@ public class ProjectFinanceConfigFragment extends Fragment {
 
         mLayoutAmount = (TextInputLayout) view.findViewById(R.id.txtLayoutInvestment);
         mEditTextAmount = (EditText) view.findViewById(R.id.investmentAmount);
+        mEditTextAmount.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                try {
+                    mAmount = Long.valueOf(editable.toString());
+                    if (mAmount <= 0) {
+                        throw new NumberFormatException();
+                    } else {
+                        mLayoutAmount.setErrorEnabled(false);
+                    }
+                } catch (NumberFormatException e) {
+                    mLayoutAmount.setError(getString(R.string.invesment_amount_error));
+                    mLayoutAmount.setErrorEnabled(true);
+                }
+            }
+        });
 
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.loanList);
         LinearLayoutManager layoutManager = new LinearLayoutManager(activity);

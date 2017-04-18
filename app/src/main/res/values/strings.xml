@@ -48,4 +48,5 @@
     <string name="currencyUnit">mil VND</string>
     <string name="financeConfigTitle">Finance Information</string>
     <string name="back_button">Back</string>
+    <string name="invesment_amount_error">invalid amount</string>
 </resources>
