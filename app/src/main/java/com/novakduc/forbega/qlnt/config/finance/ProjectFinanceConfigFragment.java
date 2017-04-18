@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -71,13 +72,11 @@ public class ProjectFinanceConfigFragment extends Fragment {
         mLayoutAmount = (TextInputLayout) view.findViewById(R.id.txtLayoutInvestment);
         mEditTextAmount = (EditText) view.findViewById(R.id.investmentAmount);
 
-        /*
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.loanList);
         LinearLayoutManager layoutManager = new LinearLayoutManager(activity);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(new LoansAdapter(activity, mProject.getLoanList()));
-        */
         return view;
     }
 
