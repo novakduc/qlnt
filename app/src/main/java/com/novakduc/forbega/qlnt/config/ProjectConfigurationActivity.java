@@ -10,7 +10,7 @@ import com.novakduc.forbega.qlnt.config.base.ProjectBaseConfigFragment;
 import com.novakduc.forbega.qlnt.model.Project;
 
 public class ProjectConfigurationActivity extends SimpleFragmentActivity
-        implements ProjectBaseConfigFragment.DiscardListener, ConfirmationDialogFragment.ConfirmListener {
+        implements DiscardListener, ConfirmationDialogFragment.ConfirmListener {
     private Project mTempProject;
 
     @Override

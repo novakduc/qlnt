@@ -23,6 +23,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.novakduc.forbega.qlnt.R;
+import com.novakduc.forbega.qlnt.config.DiscardListener;
 import com.novakduc.forbega.qlnt.model.Loan;
 import com.novakduc.forbega.qlnt.model.Project;
 
@@ -40,7 +41,7 @@ public class ProjectFinanceConfigFragment extends Fragment {
     private Project mProject;
     private long mAmount;
     private TextInputLayout mLayoutAmount;
-    private EditText mEditTextAmount;
+    private DiscardListener mCallBack;
 
     public static ProjectFinanceConfigFragment newInstance(Project tempProject) {
         Bundle bundle = new Bundle();
@@ -72,9 +73,10 @@ public class ProjectFinanceConfigFragment extends Fragment {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
+        mCallBack = (DiscardListener) getActivity();
         mLayoutAmount = (TextInputLayout) view.findViewById(R.id.txtLayoutInvestment);
-        mEditTextAmount = (EditText) view.findViewById(R.id.investmentAmount);
-        mEditTextAmount.addTextChangedListener(new TextWatcher() {
+        EditText editTextAmount = (EditText) view.findViewById(R.id.investmentAmount);
+        editTextAmount.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -98,6 +100,22 @@ public class ProjectFinanceConfigFragment extends Fragment {
                     mLayoutAmount.setError(getString(R.string.invesment_amount_error));
                     mLayoutAmount.setErrorEnabled(true);
                 }
+            }
+        });
+
+        Button next = (Button) view.findViewById(R.id.btNext);
+        Button cancel = (Button) view.findViewById(R.id.btCancel);
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mCallBack.discardConfirmation();
+            }
+        });
+        Button back = (Button) view.findViewById(R.id.btBack);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().onBackPressed();
             }
         });
 
