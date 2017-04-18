@@ -15,7 +15,7 @@ public class ProjectConfigurationActivity extends SimpleFragmentActivity
 
     @Override
     protected Fragment createFragment() {
-        mTempProject = (Project) getIntent()
+        mTempProject = getIntent()
                 .getParcelableExtra(ProjectBaseConfigFragment.TEMP_PROJECT);
         return ProjectBaseConfigFragment.newInstance(mTempProject);
     }
@@ -42,7 +42,7 @@ public class ProjectConfigurationActivity extends SimpleFragmentActivity
     public void discardDialog(int result) {
         if (result == ConfirmationDialogFragment.RESULT_OK) {
             //user confirm to discard project creation.
-            super.onBackPressed();
+            finish();
         }
     }
 }

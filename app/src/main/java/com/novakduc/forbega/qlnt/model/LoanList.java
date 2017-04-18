@@ -25,6 +25,7 @@ public class LoanList<E> extends ArrayList<E> implements Parcelable {
     };
 
     public LoanList() {
+        super(3);
     }
 
     protected LoanList(Parcel in) {

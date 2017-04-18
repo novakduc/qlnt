@@ -20,11 +20,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.novakduc.forbega.qlnt.R;
 import com.novakduc.forbega.qlnt.config.DiscardListener;
 import com.novakduc.forbega.qlnt.model.Loan;
+import com.novakduc.forbega.qlnt.model.LoanList;
 import com.novakduc.forbega.qlnt.model.Project;
 
 import java.text.DateFormat;
@@ -42,6 +44,7 @@ public class ProjectFinanceConfigFragment extends Fragment {
     private long mAmount;
     private TextInputLayout mLayoutAmount;
     private DiscardListener mCallBack;
+    private LoanList<Loan> mLoanList;
 
     public static ProjectFinanceConfigFragment newInstance(Project tempProject) {
         Bundle bundle = new Bundle();
@@ -55,6 +58,7 @@ public class ProjectFinanceConfigFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mProject = getArguments().getParcelable(TEMP_PROJECT);
+        mLoanList = new LoanList<Loan>();
         setHasOptionsMenu(true);
     }
 
@@ -103,6 +107,14 @@ public class ProjectFinanceConfigFragment extends Fragment {
             }
         });
 
+        ImageButton addLoan = (ImageButton) view.findViewById(R.id.btAddLoan);
+        addLoan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // TODO: 4/18/2017 create loan
+            }
+        });
+
         Button next = (Button) view.findViewById(R.id.btNext);
         Button cancel = (Button) view.findViewById(R.id.btCancel);
         cancel.setOnClickListener(new View.OnClickListener() {
@@ -115,7 +127,8 @@ public class ProjectFinanceConfigFragment extends Fragment {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getActivity().onBackPressed();
+                getFragmentManager().popBackStack();
+                //getActivity().onBackPressed();
             }
         });
 
@@ -135,6 +148,13 @@ public class ProjectFinanceConfigFragment extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.next) {
+            // TODO: 4/18/2017 next action
+            //nextAction();
+        }
+
+        if (item.getItemId() == android.R.id.home)
+            mCallBack.discardConfirmation();
         return super.onOptionsItemSelected(item);
     }
 
