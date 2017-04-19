@@ -27,6 +27,7 @@ import com.novakduc.forbega.qlnt.R;
 import com.novakduc.forbega.qlnt.config.UpdateListener;
 import com.novakduc.forbega.qlnt.model.Loan;
 import com.novakduc.forbega.qlnt.model.LoanList;
+import com.novakduc.forbega.qlnt.model.Project;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -37,20 +38,27 @@ import java.util.List;
  * Created by n.thanh on 10/21/2016.
  */
 
-public class ProjectFinanceConfigFragment extends Fragment {
+public class ProjectLoanDeclareFragment extends Fragment {
     public static final String TEMP_PROJECT = "com.novakduc.forbega.qlnt.tempproject";
+    private Project mProject;
     private long mAmount;
     private TextInputLayout mLayoutAmount;
     private UpdateListener mCallBack;
     private LoanList<Loan> mLoanList;
 
-    public static ProjectFinanceConfigFragment newInstance() {
-        return new ProjectFinanceConfigFragment();
+    public static ProjectLoanDeclareFragment newInstance(Project tempProject) {
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(TEMP_PROJECT, tempProject);
+        ProjectLoanDeclareFragment fragment = new ProjectLoanDeclareFragment();
+        fragment.setArguments(bundle);
+        return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mProject = getArguments().getParcelable(TEMP_PROJECT);
+        mLoanList = new LoanList<Loan>();
         setHasOptionsMenu(true);
     }
 
@@ -104,7 +112,6 @@ public class ProjectFinanceConfigFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 // TODO: 4/18/2017 create loan
-
             }
         });
 
@@ -129,7 +136,7 @@ public class ProjectFinanceConfigFragment extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(activity);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
-        recyclerView.setAdapter(new LoansAdapter(activity, mLoanList));
+        recyclerView.setAdapter(new LoansAdapter(activity, mProject.getLoanList()));
         return view;
     }
 

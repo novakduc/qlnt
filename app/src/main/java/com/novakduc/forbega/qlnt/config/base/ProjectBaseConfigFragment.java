@@ -27,9 +27,8 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 
 import com.novakduc.forbega.qlnt.R;
-import com.novakduc.forbega.qlnt.config.DiscardListener;
+import com.novakduc.forbega.qlnt.config.UpdateListener;
 import com.novakduc.forbega.qlnt.config.finance.ProjectFinanceConfigFragment;
-import com.novakduc.forbega.qlnt.model.Project;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -45,7 +44,6 @@ public class ProjectBaseConfigFragment extends Fragment {
     public static final String TEMP_PROJECT = "com.novakduc.forbega.qlnt.tempproject";
     private static final int START_DATE_PICKED = 0;
     int mDuration = 10;
-    private Project mProject;
     private EditText mEditTextAddress;
     private EditText mEditTextName;
     private EditText mEditTextStartDate;
@@ -54,20 +52,15 @@ public class ProjectBaseConfigFragment extends Fragment {
     private long mStartDate;
     private String mName, mAddress;
     private TextInputLayout mLayoutName, mLayoutAddress, mLayoutDuration;
-    private DiscardListener mCallback;
+    private UpdateListener mCallback;
 
-    public static ProjectBaseConfigFragment newInstance(Project tempProject) {
-        Bundle bundle = new Bundle();
-        bundle.putParcelable(TEMP_PROJECT, tempProject);
-        ProjectBaseConfigFragment fragment = new ProjectBaseConfigFragment();
-        fragment.setArguments(bundle);
-        return fragment;
+    public static ProjectBaseConfigFragment newInstance() {
+        return new ProjectBaseConfigFragment();
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mProject = (Project) getArguments().getParcelable(TEMP_PROJECT);
         setHasOptionsMenu(true);
     }
 
@@ -85,7 +78,7 @@ public class ProjectBaseConfigFragment extends Fragment {
             actionBar.setHomeAsUpIndicator(R.drawable.ic_view_list);
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-        mCallback = (DiscardListener) getActivity();
+        mCallback = (UpdateListener) getActivity();
         mLayoutName = (TextInputLayout) view.findViewById(R.id.txtLayoutName);
         mEditTextName = (EditText) view.findViewById(R.id.name);
         mEditTextName.addTextChangedListener(new TextWatcher() {
@@ -282,25 +275,17 @@ public class ProjectBaseConfigFragment extends Fragment {
     private void nextAction() {
         boolean error = false;
         // TODO: 3/29/2017 Project parcel has some problem. Every time access to project lead to error
-        if (mName != null) {
-            mProject.setName(mName);
-        } else {
+        if (mName == null) {
             mLayoutName.setError(getString(R.string.invalidName));
             mLayoutName.setErrorEnabled(true);
             error = true;
         }
-        if (mAddress != null) {
-            mProject.setAddress(mAddress);
-        } else {
+        if (mAddress == null) {
             mLayoutAddress.setError(getString(R.string.invalidAddress));
             mLayoutAddress.setErrorEnabled(true);
             error = true;
         }
-        ///update start date
-        mProject.setStartDate(mStartDate);
-        if (mDuration > 0 && mDuration <= 100) {
-            mProject.setDuration(mDuration);
-        } else {
+        if (mDuration <= 0 || mDuration > 100) {
             mEditTextDuration.setError(getString(R.string.durationInputError));
             mLayoutDuration.setErrorEnabled(true);
             error = true;
@@ -310,14 +295,15 @@ public class ProjectBaseConfigFragment extends Fragment {
             return;
         }
 
+        mCallback.updateBase(mName, mAddress, mDuration, mStartDate);
         FragmentManager manager = getActivity().getFragmentManager();
         manager.beginTransaction().replace(R.id.fragmentContainer,
-                ProjectFinanceConfigFragment.newInstance(mProject)).addToBackStack(null).commit();
+                ProjectFinanceConfigFragment.newInstance()).addToBackStack(null).commit();
     }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.toolbar_menu, menu);
+        inflater.inflate(R.menu.next_toolbar, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
 

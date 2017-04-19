@@ -3,6 +3,7 @@ package com.novakduc.forbega.qlnt.config;
 import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.os.Bundle;
 import android.util.Log;
 
 import com.novakduc.baselibrary.SimpleFragmentActivity;
@@ -10,14 +11,18 @@ import com.novakduc.forbega.qlnt.config.base.ProjectBaseConfigFragment;
 import com.novakduc.forbega.qlnt.model.Project;
 
 public class ProjectConfigurationActivity extends SimpleFragmentActivity
-        implements DiscardListener, ConfirmationDialogFragment.ConfirmListener {
+        implements UpdateListener, ConfirmationDialogFragment.ConfirmListener {
     private Project mTempProject;
 
     @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mTempProject = new Project();
+    }
+
+    @Override
     protected Fragment createFragment() {
-        mTempProject = getIntent()
-                .getParcelableExtra(ProjectBaseConfigFragment.TEMP_PROJECT);
-        return ProjectBaseConfigFragment.newInstance(mTempProject);
+        return ProjectBaseConfigFragment.newInstance();
     }
 
     @Override
@@ -36,6 +41,14 @@ public class ProjectConfigurationActivity extends SimpleFragmentActivity
     public void discardConfirmation() {
         DialogFragment dialogFragment = new ConfirmationDialogFragment();
         dialogFragment.show(getFragmentManager(), "discardConfirm");
+    }
+
+    @Override
+    public void updateBase(String name, String address, int duration, long startDate) {
+        mTempProject.setName(name);
+        mTempProject.setAddress(address);
+        mTempProject.setDuration(duration);
+        mTempProject.setStartDate(startDate);
     }
 
     @Override

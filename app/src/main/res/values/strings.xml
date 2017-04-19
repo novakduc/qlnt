@@ -50,4 +50,8 @@
     <string name="back_button">Back</string>
     <string name="invesment_amount_error">invalid amount</string>
     <string name="inputBankHint">Bank</string>
+    <string name="inputLoanAmountHint">Loan amount (mil VND)</string>
+    <string name="interestRateHint">Rate</string>
+    <string name="LoanDate">Loan date</string>
+    <string name="confirm_button">Confirm</string>
 </resources>

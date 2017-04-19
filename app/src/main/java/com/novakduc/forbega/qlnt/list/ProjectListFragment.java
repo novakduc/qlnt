@@ -23,7 +23,6 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.novakduc.forbega.qlnt.R;
 import com.novakduc.forbega.qlnt.config.ProjectConfigurationActivity;
-import com.novakduc.forbega.qlnt.config.base.ProjectBaseConfigFragment;
 import com.novakduc.forbega.qlnt.model.Project;
 import com.novakduc.forbega.qlnt.model.Qlnt;
 
@@ -39,6 +38,7 @@ public class ProjectListFragment extends Fragment {
     // TODO: 9/29/2016
     public static final String PREF_QLNT = "com.novak.forbequ.qlnt";
     private static final String ACTIVE_PROJECT_ID = "active_project_id";
+    private static final int PROJECT_CONFIG_RESULT = 0;
     private long mActiveProject = -1;
     private ArrayList<Project> mProjects;
 
@@ -94,14 +94,18 @@ public class ProjectListFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), ProjectConfigurationActivity.class);
-                Project tempProject = new Project();
-                intent.putExtra(ProjectBaseConfigFragment.TEMP_PROJECT, tempProject);
-                startActivity(intent);
-                // TODO: 10/20/2016 Register activity
+                startActivityForResult(intent, PROJECT_CONFIG_RESULT);
             }
         });
 
         return view;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        // TODO: 4/19/2017 Update result from project configuration activity
+
     }
 
     public static class ProjectsRecyclerViewAdapter

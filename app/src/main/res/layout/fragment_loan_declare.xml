@@ -41,68 +41,76 @@
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
-            android:id="@+id/txtLayoutDate"
+            android:id="@+id/txtLayoutAmount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp">
+            android:layout_marginStart="16dp">
 
             <android.support.design.widget.TextInputEditText
-                android:id="@+id/txtInputDate"
+                android:id="@+id/txtInputAmount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/inputProjectInvestmentHint"
-                android:inputType="number"/>
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/txtLayoutInvestment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp">
-
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/investmentAmount"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/inputProjectInvestmentHint"
-                android:inputType="number"/>
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/txtLayoutInvestment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp">
-
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/investmentAmount"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/inputProjectInvestmentHint"
+                android:hint="@string/inputLoanAmountHint"
                 android:inputType="number"/>
         </android.support.design.widget.TextInputLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
+            android:layout_height="88dp"
+            android:layout_marginEnd="16dp"
+            android:orientation="horizontal">
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/txtLayoutRate"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="16dp"
+                android:layout_weight="20">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/editTextRate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="6"
+                    android:hint="@string/interestRateHint"
+                    android:inputType="number"
+                    android:maxLength="4"/>
+            </android.support.design.widget.TextInputLayout>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="30"
+                android:paddingBottom="12dp"
+                android:text="@string/interestRateUnit"
+                android:textSize="20sp"/>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/txtLayoutLoanDate"
+                android:layout_width="0dp"
+                android:layout_height="72dp"
+                android:layout_marginStart="16dp"
+                android:layout_weight="50">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/editTextLoanDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:focusableInTouchMode="false"
+                    android:hint="@string/LoanDate"
+                    android:inputType="date"/>
+            </android.support.design.widget.TextInputLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="52dp"
             android:layout_marginBottom="16dp"
-            android:focusable="false"
             android:gravity="center_horizontal|bottom">
-
-            <Button
-                android:id="@+id/btBack"
-                style="?android:borderlessButtonStyle"
-                android:layout_width="80dp"
-                android:layout_height="48dp"
-                android:layout_marginEnd="8dp"
-                android:text="@string/back_button"
-                android:textColor="@color/colorAccent"/>
 
             <Button
                 android:id="@+id/btCancel"
@@ -114,12 +122,12 @@
                 android:textColor="@color/colorAccent"/>
 
             <Button
-                android:id="@+id/btNext"
+                android:id="@+id/btConfirm"
                 style="?android:borderlessButtonStyle"
-                android:layout_width="80dp"
+                android:layout_width="wrap_content"
                 android:layout_height="48dp"
                 android:layout_marginEnd="8dp"
-                android:text="@string/next_button"
+                android:text="@string/confirm_button"
                 android:textColor="@color/colorAccent"/>
         </LinearLayout>
     </LinearLayout>
