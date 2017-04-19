@@ -54,4 +54,6 @@
     <string name="interestRateHint">Rate</string>
     <string name="LoanDate">Loan date</string>
     <string name="confirm_button">Confirm</string>
+    <string name="loanDeclareTitle">Loan Declaration</string>
+    <string name="invalidBankName">invalid bank name</string>
 </resources>

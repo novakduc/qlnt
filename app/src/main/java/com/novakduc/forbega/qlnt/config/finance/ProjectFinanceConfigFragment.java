@@ -1,7 +1,9 @@
 package com.novakduc.forbega.qlnt.config.finance;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
@@ -39,6 +41,7 @@ import java.util.List;
 
 public class ProjectFinanceConfigFragment extends Fragment {
     public static final String TEMP_PROJECT = "com.novakduc.forbega.qlnt.tempproject";
+    private static final int LOAN_DECLARE_REQUEST = 1;
     private long mAmount;
     private TextInputLayout mLayoutAmount;
     private UpdateListener mCallBack;
@@ -103,8 +106,8 @@ public class ProjectFinanceConfigFragment extends Fragment {
         addLoan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO: 4/18/2017 create loan
-
+                Intent intent = new Intent(getActivity(), ProjectLoanDeclareActivity.class);
+                startActivityForResult(intent, LOAN_DECLARE_REQUEST);
             }
         });
 
@@ -149,6 +152,16 @@ public class ProjectFinanceConfigFragment extends Fragment {
         if (item.getItemId() == android.R.id.home)
             mCallBack.discardConfirmation();
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == LOAN_DECLARE_REQUEST) {
+            if (resultCode == Activity.RESULT_OK) {
+                // TODO: 4/19/2017 update loan to loanlist
+            }
+        }
     }
 
     public static class LoansAdapter extends RecyclerView.Adapter<LoansAdapter.ViewHolder> {

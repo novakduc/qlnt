@@ -33,7 +33,7 @@
             android:layout_marginTop="16dp">
 
             <android.support.design.widget.TextInputEditText
-                android:id="@+id/txtInputBank"
+                android:id="@+id/edtInputLoanBank"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/inputBankHint"
@@ -41,14 +41,14 @@
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
-            android:id="@+id/txtLayoutAmount"
+            android:id="@+id/txtLayoutLoanAmount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:layout_marginStart="16dp">
 
             <android.support.design.widget.TextInputEditText
-                android:id="@+id/txtInputAmount"
+                android:id="@+id/edtLoanAmount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/inputLoanAmountHint"
@@ -70,7 +70,7 @@
                 android:layout_weight="20">
 
                 <android.support.design.widget.TextInputEditText
-                    android:id="@+id/editTextRate"
+                    android:id="@+id/edtRate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="6"
@@ -96,7 +96,7 @@
                 android:layout_weight="50">
 
                 <android.support.design.widget.TextInputEditText
-                    android:id="@+id/editTextLoanDate"
+                    android:id="@+id/edtLoanDate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
