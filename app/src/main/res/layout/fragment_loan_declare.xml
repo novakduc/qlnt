@@ -37,7 +37,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/inputBankHint"
-                android:inputType="number"/>
+                android:inputType="textCapSentences"/>
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -75,7 +75,7 @@
                     android:layout_height="wrap_content"
                     android:ems="6"
                     android:hint="@string/interestRateHint"
-                    android:inputType="number"
+                    android:inputType="numberDecimal"
                     android:maxLength="4"/>
             </android.support.design.widget.TextInputLayout>
 

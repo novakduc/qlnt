@@ -2,6 +2,7 @@ package com.novakduc.forbega.qlnt.config.finance;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -27,6 +28,7 @@ import android.widget.TextView;
 
 import com.novakduc.forbega.qlnt.R;
 import com.novakduc.forbega.qlnt.config.UpdateListener;
+import com.novakduc.forbega.qlnt.config.unitprice.ProjectUnitPriceConfigFragment;
 import com.novakduc.forbega.qlnt.model.Loan;
 import com.novakduc.forbega.qlnt.model.LoanList;
 
@@ -42,7 +44,7 @@ import java.util.List;
 public class ProjectFinanceConfigFragment extends Fragment {
     public static final String TEMP_PROJECT = "com.novakduc.forbega.qlnt.tempproject";
     private static final int LOAN_DECLARE_REQUEST = 1;
-    private long mAmount;
+    private long mAmount = 0;
     private TextInputLayout mLayoutAmount;
     private UpdateListener mCallBack;
     private LoanList<Loan> mLoanList;
@@ -54,6 +56,7 @@ public class ProjectFinanceConfigFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mLoanList = new LoanList<Loan>();
         setHasOptionsMenu(true);
     }
 
@@ -75,6 +78,7 @@ public class ProjectFinanceConfigFragment extends Fragment {
         mCallBack = (UpdateListener) getActivity();
         mLayoutAmount = (TextInputLayout) view.findViewById(R.id.txtLayoutInvestment);
         EditText editTextAmount = (EditText) view.findViewById(R.id.investmentAmount);
+        editTextAmount.setText(String.valueOf(mAmount));
         editTextAmount.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -90,7 +94,7 @@ public class ProjectFinanceConfigFragment extends Fragment {
             public void afterTextChanged(Editable editable) {
                 try {
                     mAmount = Long.valueOf(editable.toString());
-                    if (mAmount <= 0) {
+                    if (mAmount < 0) {
                         throw new NumberFormatException();
                     } else {
                         mLayoutAmount.setErrorEnabled(false);
@@ -112,6 +116,12 @@ public class ProjectFinanceConfigFragment extends Fragment {
         });
 
         Button next = (Button) view.findViewById(R.id.btNext);
+        next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                nextAction();   //to unit price config
+            }
+        });
         Button cancel = (Button) view.findViewById(R.id.btCancel);
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -145,13 +155,19 @@ public class ProjectFinanceConfigFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.next) {
-            // TODO: 4/18/2017 next action
-            //nextAction();
+            nextAction();   //to unit price config
         }
 
         if (item.getItemId() == android.R.id.home)
-            mCallBack.discardConfirmation();
+            getFragmentManager().popBackStack();
         return super.onOptionsItemSelected(item);
+    }
+
+    public void nextAction() {
+        mCallBack.updateFinance(mAmount, mLoanList);
+        FragmentManager manager = getActivity().getFragmentManager();
+        manager.beginTransaction().replace(R.id.fragmentContainer,
+                ProjectUnitPriceConfigFragment.newInstance()).addToBackStack(null).commit();
     }
 
     @Override

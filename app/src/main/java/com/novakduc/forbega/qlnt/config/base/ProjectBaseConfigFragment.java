@@ -1,14 +1,11 @@
 package com.novakduc.forbega.qlnt.config.base;
 
-import android.app.DatePickerDialog;
-import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.content.res.TypedArray;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.ActionBar;
@@ -23,9 +20,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 
+import com.novakduc.forbega.qlnt.DatePickerFragment;
 import com.novakduc.forbega.qlnt.R;
 import com.novakduc.forbega.qlnt.config.UpdateListener;
 import com.novakduc.forbega.qlnt.config.finance.ProjectFinanceConfigFragment;
@@ -42,7 +39,6 @@ import java.util.Date;
 public class ProjectBaseConfigFragment extends Fragment {
 
     public static final String TEMP_PROJECT = "com.novakduc.forbega.qlnt.tempproject";
-    private static final int START_DATE_PICKED = 0;
     int mDuration = 10;
     private EditText mEditTextAddress;
     private EditText mEditTextName;
@@ -156,7 +152,7 @@ public class ProjectBaseConfigFragment extends Fragment {
         mEditTextStartDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showDialog(new DatePickerFragment(), START_DATE_PICKED);
+                showDialog(new DatePickerFragment(), DatePickerFragment.START_DATE_PICKED);
             }
         });
         mEditTextEndDate = (EditText) view.findViewById(R.id.editTextEndDate);
@@ -220,7 +216,7 @@ public class ProjectBaseConfigFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         //RESULT FROM DATE PICKER
-        if (requestCode == START_DATE_PICKED) {
+        if (requestCode == DatePickerFragment.START_DATE_PICKED) {
             if (resultCode != AppCompatActivity.RESULT_OK) return;
             Calendar tmpCalendar = (Calendar) data.getSerializableExtra(DatePickerFragment.PICKED_DATE);
             mStartDate = tmpCalendar.getTimeInMillis();
@@ -304,35 +300,5 @@ public class ProjectBaseConfigFragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.next_toolbar, menu);
         super.onCreateOptionsMenu(menu, inflater);
-    }
-
-    //Date picker
-    public static class DatePickerFragment extends DialogFragment
-            implements DatePickerDialog.OnDateSetListener {
-        public static final String PICKED_DATE = "qlnt.config.base.startDate";
-
-        @NonNull
-        @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
-            // Use the current date as the default date in the picker
-            final Calendar c = Calendar.getInstance();
-            int year = c.get(Calendar.YEAR);
-            int month = c.get(Calendar.MONTH);
-            int day = c.get(Calendar.DAY_OF_MONTH);
-            return new DatePickerDialog(getActivity(), this, year, month, day);
-        }
-
-        @Override
-        public void onDateSet(DatePicker datePicker, int year, int month, int dateOfMonth) {
-            Calendar setDate = Calendar.getInstance();
-            setDate.set(Calendar.YEAR, year);
-            setDate.set(Calendar.MONTH, month);
-            setDate.set(Calendar.DAY_OF_MONTH, dateOfMonth);
-
-            Intent intent = new Intent();
-            intent.putExtra(PICKED_DATE, setDate);
-
-            getTargetFragment().onActivityResult(START_DATE_PICKED, AppCompatActivity.RESULT_OK, intent);
-        }
     }
 }

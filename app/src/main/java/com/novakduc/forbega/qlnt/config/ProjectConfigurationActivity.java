@@ -8,6 +8,8 @@ import android.util.Log;
 
 import com.novakduc.baselibrary.SimpleFragmentActivity;
 import com.novakduc.forbega.qlnt.config.base.ProjectBaseConfigFragment;
+import com.novakduc.forbega.qlnt.model.Loan;
+import com.novakduc.forbega.qlnt.model.LoanList;
 import com.novakduc.forbega.qlnt.model.Project;
 
 public class ProjectConfigurationActivity extends SimpleFragmentActivity
@@ -49,6 +51,15 @@ public class ProjectConfigurationActivity extends SimpleFragmentActivity
         mTempProject.setAddress(address);
         mTempProject.setDuration(duration);
         mTempProject.setStartDate(startDate);
+    }
+
+    @Override
+    public void updateFinance(long investment, LoanList<Loan> loanLoanList) {
+        mTempProject.setInvestment(investment);
+        for (Loan loan :
+                loanLoanList) {
+            mTempProject.addLoan(loan);
+        }
     }
 
     @Override

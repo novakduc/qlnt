@@ -37,15 +37,6 @@ public class Project extends DBObject implements Cloneable, Parcelable {
     public Project() {
         mProjectId = Calendar.getInstance().getTimeInMillis();
         mLoanList = new LoanList<Loan>();
-        // TODO: 11/24/2016 need to be remove
-        //Test test test
-        for (int i = 0; i < 10; i++) {
-            Loan loan = new Loan(String.valueOf(i), i * 1000,
-                    Calendar.getInstance().getTimeInMillis(), 0.5);
-            mLoanList.add(loan);
-        }
-        ////end of test
-
         mUnitPrice = new UnitPrice(mProjectId);
         mCostManager = new CostManager<Cost>();
         mRoomList = new RoomList<Room>();
@@ -84,8 +75,7 @@ public class Project extends DBObject implements Cloneable, Parcelable {
     }
 
     //Add loan
-    public Boolean addLoan(String name, long amount, long loanDate, double rate) {
-        Loan loan = new Loan(name, amount, loanDate, rate);
+    public Boolean addLoan(Loan loan) {
         return mLoanList.add(loan);
     }
 

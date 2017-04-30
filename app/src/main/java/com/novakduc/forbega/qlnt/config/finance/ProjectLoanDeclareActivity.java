@@ -9,7 +9,7 @@ public class ProjectLoanDeclareActivity extends SimpleFragmentActivity {
 
     @Override
     protected Fragment createFragment() {
-        return new ProjectLoanDeclareFragment();
+        return ProjectLoanDeclareFragment.newInstance();
     }
 
     @Override
