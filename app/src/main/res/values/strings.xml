@@ -57,4 +57,5 @@
     <string name="loanDeclareTitle">Loan Declaration</string>
     <string name="invalidBankName">invalid bank name</string>
     <string name="rateInputError">0.00 to 50.0 only</string>
+    <string name="loanDiscardConfirm">Discard this loan?</string>
 </resources>

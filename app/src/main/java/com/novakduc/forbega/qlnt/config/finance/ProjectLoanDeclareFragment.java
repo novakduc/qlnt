@@ -41,7 +41,7 @@ public class ProjectLoanDeclareFragment extends Fragment {
     private long mLoanDate;
     private TextInputLayout mLayoutBank, mLayoutAmount, mLayoutRate, mLayoutDate;
     private EditText mEdtLoanDate;
-    //private UpdateListener mCallBack;
+    private LoanDeclareFragmentListener mCallBack;
 
     public static ProjectLoanDeclareFragment newInstance() {
 
@@ -70,7 +70,7 @@ public class ProjectLoanDeclareFragment extends Fragment {
         }
         //*/
 
-        //mCallBack = (UpdateListener) getActivity();
+        mCallBack = (LoanDeclareFragmentListener) getActivity();
         mLayoutBank = (TextInputLayout) view.findViewById(R.id.txtLayoutBank);
         mLayoutDate = (TextInputLayout) view.findViewById(R.id.txtLayoutLoanDate);
         mLayoutRate = (TextInputLayout) view.findViewById(R.id.txtLayoutRate);
@@ -167,8 +167,7 @@ public class ProjectLoanDeclareFragment extends Fragment {
         btCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO: 4/19/2017 cancel action
-                //mCallBack.discardConfirmation();
+                mCallBack.discardConfirm();
             }
         });
         Button btConfirm = (Button) view.findViewById(R.id.btConfirm);
@@ -220,7 +219,8 @@ public class ProjectLoanDeclareFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.home) {
-            // TODO: 4/19/2017 close action
+            // TODO: 4/30/2017 not working yet
+            mCallBack.discardConfirm();
         }
         return super.onOptionsItemSelected(item);
     }

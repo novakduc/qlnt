@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.novakduc.baselibrary.SimpleFragmentActivity;
+import com.novakduc.forbega.qlnt.R;
 import com.novakduc.forbega.qlnt.config.base.ProjectBaseConfigFragment;
 import com.novakduc.forbega.qlnt.model.Loan;
 import com.novakduc.forbega.qlnt.model.LoanList;
@@ -41,7 +42,12 @@ public class ProjectConfigurationActivity extends SimpleFragmentActivity
 
     @Override
     public void discardConfirmation() {
+        Bundle bundle = new Bundle();
+        //dialog title in bundle
+        bundle.putString(ConfirmationDialogFragment.MESSAGE,
+                getResources().getString(R.string.project_create_discard));
         DialogFragment dialogFragment = new ConfirmationDialogFragment();
+        dialogFragment.setArguments(bundle);
         dialogFragment.show(getFragmentManager(), "discardConfirm");
     }
 

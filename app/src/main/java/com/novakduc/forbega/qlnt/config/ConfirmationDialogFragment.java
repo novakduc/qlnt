@@ -15,13 +15,21 @@ import com.novakduc.forbega.qlnt.R;
 public class ConfirmationDialogFragment extends DialogFragment {
     public static final int RESULT_OK = 1;
     public static final int RESULT_CANCEL = 0;
+    public static final java.lang.String MESSAGE = "com.novakduc.forbega.qlnt.confirmation_message";
     private ConfirmListener callback;
+    private String mMessage;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        mMessage = getArguments().getString(MESSAGE);
+        super.onCreate(savedInstanceState);
+    }
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         callback = (ConfirmListener) getActivity();
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setMessage(R.string.project_create_discard)
+        builder.setMessage(mMessage)
                 .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -38,6 +46,6 @@ public class ConfirmationDialogFragment extends DialogFragment {
     }
 
     public interface ConfirmListener {
-        public void discardDialog(int result);
+        void discardDialog(int result);
     }
 }
