@@ -143,7 +143,7 @@ public class ProjectLoanDeclareFragment extends Fragment {
             public void afterTextChanged(Editable editable) {
                 try {
                     mRate = Float.valueOf(editable.toString());
-                    if (mRate <= 0 || mRate > 100) {
+                    if (mRate < 0 || mRate > 50) {
                         throw new NumberFormatException();
                     } else {
                         mLayoutRate.setErrorEnabled(false);
@@ -218,8 +218,7 @@ public class ProjectLoanDeclareFragment extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.home) {
-            // TODO: 4/30/2017 not working yet
+        if (item.getItemId() == android.R.id.home) {
             mCallBack.discardConfirm();
         }
         return super.onOptionsItemSelected(item);

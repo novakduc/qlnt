@@ -31,7 +31,7 @@ public class ProjectLoanDeclareActivity extends SimpleFragmentActivity
 
     @Override
     public void onBackPressed() {
-        // TODO: 4/30/2017 confirm discard loan on back press
+        // TODO: 4/30/2017 confirm discard loan on back press. Consider State save solution!
         super.onBackPressed();
     }
 
