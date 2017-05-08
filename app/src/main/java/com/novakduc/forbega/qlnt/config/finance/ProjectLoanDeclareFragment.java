@@ -1,5 +1,6 @@
 package com.novakduc.forbega.qlnt.config.finance;
 
+import android.app.Activity;
 import android.app.DialogFragment;
 import android.app.Fragment;
 import android.content.Intent;
@@ -23,6 +24,7 @@ import android.widget.EditText;
 
 import com.novakduc.forbega.qlnt.DatePickerFragment;
 import com.novakduc.forbega.qlnt.R;
+import com.novakduc.forbega.qlnt.model.Loan;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -35,9 +37,10 @@ import java.util.Date;
 
 public class ProjectLoanDeclareFragment extends Fragment {
     public static final String TEMP_PROJECT = "com.novakduc.forbega.qlnt.tempproject";
+    public static final String RETURN_LOAN = "com.forbega.qlnt.temproject.loandeclare.returnloan";
     private String mBankName;
-    private long mAmount;
-    private double mRate;
+    private long mAmount = -1;
+    private double mRate = 0;
     private long mLoanDate;
     private TextInputLayout mLayoutBank, mLayoutAmount, mLayoutRate, mLayoutDate;
     private EditText mEdtLoanDate;
@@ -121,7 +124,7 @@ public class ProjectLoanDeclareFragment extends Fragment {
                         mLayoutAmount.setErrorEnabled(false);
                     }
                 } catch (NumberFormatException e) {
-                    mLayoutAmount.setError(getString(R.string.durationInputError));
+                    mLayoutAmount.setError(getString(R.string.invalidLoanAmount));
                     mLayoutAmount.setErrorEnabled(true);
                 }
             }
@@ -156,6 +159,9 @@ public class ProjectLoanDeclareFragment extends Fragment {
         });
 
         mEdtLoanDate = (EditText) view.findViewById(R.id.edtLoanDate);
+        Calendar tmp = Calendar.getInstance();
+        mLoanDate = tmp.getTimeInMillis();
+        mEdtLoanDate.setText(calendarToString(tmp));
         mEdtLoanDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -174,7 +180,28 @@ public class ProjectLoanDeclareFragment extends Fragment {
         btConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO: 4/19/2017 confirm action
+                boolean error = false;
+                if (mBankName == null) {
+                    mLayoutBank.setError(getString(R.string.invalidName));
+                    mLayoutBank.setErrorEnabled(true);
+                    error = true;
+                }
+                if (mAmount == -1) {
+                    mLayoutAmount.setError(getString(R.string.invalidAddress));
+                    mLayoutAmount.setErrorEnabled(true);
+                    error = true;
+                }
+
+                if (error) {
+                    return;
+                }
+
+                //return valid loan
+                Intent returnIntent = new Intent();
+                Loan tmpLoan = new Loan(mBankName, mAmount, mLoanDate, mRate);
+                returnIntent.putExtra(RETURN_LOAN, tmpLoan);
+                getActivity().setResult(Activity.RESULT_OK, returnIntent);
+                getActivity().finish();
             }
         });
 

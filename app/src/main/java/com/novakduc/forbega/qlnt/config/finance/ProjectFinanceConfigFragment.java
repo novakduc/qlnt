@@ -78,7 +78,7 @@ public class ProjectFinanceConfigFragment extends Fragment {
         mCallBack = (UpdateListener) getActivity();
         mLayoutAmount = (TextInputLayout) view.findViewById(R.id.txtLayoutInvestment);
         EditText editTextAmount = (EditText) view.findViewById(R.id.investmentAmount);
-        editTextAmount.setText(String.valueOf(mAmount));
+        //editTextAmount.setText(String.valueOf(mAmount));
         editTextAmount.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -175,7 +175,9 @@ public class ProjectFinanceConfigFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == LOAN_DECLARE_REQUEST) {
             if (resultCode == Activity.RESULT_OK) {
-                // TODO: 4/19/2017 update loan to loanlist
+                // TODO: 4/19/2017 update loan to loanlist - something is not right
+                Loan loan = data.getParcelableExtra(ProjectLoanDeclareFragment.RETURN_LOAN);
+                mLoanList.add(loan);
             }
         }
     }
