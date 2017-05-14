@@ -219,7 +219,7 @@ public class ProjectFinanceConfigFragment extends Fragment {
 
         public static class ViewHolder extends RecyclerView.ViewHolder {
             TextView mTextViewBankName, mTextViewStartDate, mTextViewLoanAmount, mTextViewInterestRate;
-            Button mButtonEdit, mButtonDelete;
+            ImageButton mButtonEdit, mButtonDelete;
 
             public ViewHolder(View itemView) {
                 super(itemView);
@@ -228,8 +228,8 @@ public class ProjectFinanceConfigFragment extends Fragment {
                 mTextViewStartDate = (TextView) itemView.findViewById(R.id.textViewStartDate);
                 mTextViewLoanAmount = (TextView) itemView.findViewById(R.id.txtViewLoanAmount);
                 mTextViewInterestRate = (TextView) itemView.findViewById(R.id.interestRate);
-                mButtonDelete = (Button) itemView.findViewById(R.id.btDelete);
-                mButtonEdit = (Button) itemView.findViewById(R.id.btEdit);
+                mButtonDelete = (ImageButton) itemView.findViewById(R.id.btDelete);
+                mButtonEdit = (ImageButton) itemView.findViewById(R.id.btEdit);
                 // TODO: 11/24/2016 view event and update
             }
         }
