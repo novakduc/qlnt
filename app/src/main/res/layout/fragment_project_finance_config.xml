@@ -28,15 +28,14 @@
             android:id="@+id/txtLayoutInvestment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:elevation="4dp">
+            android:elevation="4dp"
+            android:padding="16dp">
 
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/investmentAmount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:elevation="8dp"
                 android:hint="@string/inputProjectInvestmentHint"
                 android:inputType="number"/>
         </android.support.design.widget.TextInputLayout>
