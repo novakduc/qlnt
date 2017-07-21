@@ -60,4 +60,6 @@
     <string name="loanDiscardConfirm">Discard this loan?</string>
     <string name="invalidLoanAmount">invalid loan amount</string>
     <string name="unitPrice">Unit Price</string>
+    <string name="electricity_unitprice_error">invalid input</string>
+    <string name="invalid_input_error">invalid input</string>
 </resources>

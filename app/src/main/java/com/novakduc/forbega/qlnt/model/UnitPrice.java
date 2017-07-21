@@ -25,7 +25,7 @@ public class UnitPrice extends DBObject implements Cloneable, Parcelable {
     private long mInternet;
     private long mSecurity;
 
-    public UnitPrice(long projectId) {
+    public UnitPrice() {
 
     }
 

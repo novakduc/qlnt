@@ -37,7 +37,6 @@ public class Project extends DBObject implements Cloneable, Parcelable {
     public Project() {
         mProjectId = Calendar.getInstance().getTimeInMillis();
         mLoanList = new LoanList<Loan>();
-        mUnitPrice = new UnitPrice(mProjectId);
         mCostManager = new CostManager<Cost>();
         mRoomList = new RoomList<Room>();
     }
