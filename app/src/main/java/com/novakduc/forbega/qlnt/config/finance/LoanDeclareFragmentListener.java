@@ -6,6 +6,4 @@ package com.novakduc.forbega.qlnt.config.finance;
 
 public interface LoanDeclareFragmentListener {
     void discardConfirm();
-
-    void loanUpdate(String bankName, long amount, float rate, long loanDate);
 }

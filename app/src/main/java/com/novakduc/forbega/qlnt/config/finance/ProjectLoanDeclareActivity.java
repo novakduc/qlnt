@@ -45,9 +45,4 @@ public class ProjectLoanDeclareActivity extends SimpleFragmentActivity
         dialogFragment.setArguments(bundle);
         dialogFragment.show(getFragmentManager(), "discardConfirm");
     }
-
-    @Override
-    public void loanUpdate(String bankName, long amount, float rate, long loanDate) {
-
-    }
 }

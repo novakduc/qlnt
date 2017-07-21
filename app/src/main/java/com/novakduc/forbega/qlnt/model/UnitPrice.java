@@ -18,7 +18,6 @@ public class UnitPrice extends DBObject implements Cloneable, Parcelable {
             return new UnitPrice[size];
         }
     };
-    private long mProjectId;
     private long mElectricity;
     private long mWater;
     private long mTv;
@@ -27,11 +26,10 @@ public class UnitPrice extends DBObject implements Cloneable, Parcelable {
     private long mSecurity;
 
     public UnitPrice(long projectId) {
-        mProjectId = projectId;
+
     }
 
     protected UnitPrice(Parcel in) {
-        this.mProjectId = in.readLong();
         this.mElectricity = in.readLong();
         this.mWater = in.readLong();
         this.mTv = in.readLong();
@@ -61,9 +59,6 @@ public class UnitPrice extends DBObject implements Cloneable, Parcelable {
     }
 
     //Getter and setter section
-    public long getProjectId() {
-        return mProjectId;
-    }
 
     public long getElectricity() {
         return mElectricity;
@@ -126,7 +121,6 @@ public class UnitPrice extends DBObject implements Cloneable, Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeLong(this.mProjectId);
         dest.writeLong(this.mElectricity);
         dest.writeLong(this.mWater);
         dest.writeLong(this.mTv);

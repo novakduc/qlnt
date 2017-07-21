@@ -59,4 +59,5 @@
     <string name="rateInputError">0 to 50</string>
     <string name="loanDiscardConfirm">Discard this loan?</string>
     <string name="invalidLoanAmount">invalid loan amount</string>
+    <string name="unitPrice">Unit Price</string>
 </resources>
