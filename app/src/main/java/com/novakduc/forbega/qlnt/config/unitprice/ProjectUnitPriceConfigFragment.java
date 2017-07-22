@@ -3,7 +3,6 @@ package com.novakduc.forbega.qlnt.config.unitprice;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -30,8 +29,6 @@ public class ProjectUnitPriceConfigFragment extends Fragment {
 
     private TextInputLayout mElectricityLayout, mWaterLayout, mSecurityLayout, mTrashLayout,
             mInternetLayout, mTvLayout;
-    private TextInputEditText mElectricityEditText, mWaterEditText, mSecurityEditText, mTrashEditText,
-            mInternetEditText, mTvEditText;
     private UpdateListener mCallBack;
     private UnitPrice mUnitPrice;
 
