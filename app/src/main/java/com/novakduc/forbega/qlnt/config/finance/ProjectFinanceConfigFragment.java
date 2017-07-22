@@ -44,7 +44,7 @@ import java.util.List;
 public class ProjectFinanceConfigFragment extends Fragment {
     public static final String TEMP_PROJECT = "com.novakduc.forbega.qlnt.tempproject";
     private static final int LOAN_DECLARE_REQUEST = 1;
-    private long mAmount = 0;
+    private long mAmount = -1;
     private TextInputLayout mLayoutAmount;
     private UpdateListener mCallBack;
     private LoanList<Loan> mLoanList;
@@ -102,6 +102,7 @@ public class ProjectFinanceConfigFragment extends Fragment {
                 } catch (NumberFormatException e) {
                     mLayoutAmount.setError(getString(R.string.invesment_amount_error));
                     mLayoutAmount.setErrorEnabled(true);
+                    mAmount = -1;
                 }
             }
         });
@@ -164,10 +165,16 @@ public class ProjectFinanceConfigFragment extends Fragment {
     }
 
     public void nextAction() {
-        mCallBack.updateFinance(mAmount, mLoanList);
-        FragmentManager manager = getActivity().getFragmentManager();
-        manager.beginTransaction().replace(R.id.fragmentContainer,
-                ProjectUnitPriceConfigFragment.newInstance()).addToBackStack(null).commit();
+        if (mAmount != -1) {
+            mCallBack.updateFinance(mAmount, mLoanList);
+            FragmentManager manager = getActivity().getFragmentManager();
+            manager.beginTransaction().replace(R.id.fragmentContainer,
+                    ProjectUnitPriceConfigFragment.newInstance()).addToBackStack(null).commit();
+        } else {
+            mLayoutAmount.setError(getResources().getString(R.string.invesment_amount_error));
+            mLayoutAmount.setErrorEnabled(true);
+        }
+
     }
 
     @Override

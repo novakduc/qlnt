@@ -93,6 +93,7 @@ public class ProjectBaseConfigFragment extends Fragment {
                 if (editable.length() == 0) {
                     mLayoutName.setError(getString(R.string.invalidName));
                     mLayoutName.setErrorEnabled(true);
+                    mName = null;
                 } else {
                     mLayoutName.setErrorEnabled(false);
                     mName = editable.toString();
@@ -128,6 +129,7 @@ public class ProjectBaseConfigFragment extends Fragment {
                 if (editable.length() == 0) {
                     mLayoutAddress.setError(getString(R.string.invalidAddress));
                     mLayoutAddress.setErrorEnabled(true);
+                    mAddress = null;
                 } else {
                     mLayoutAddress.setErrorEnabled(false);
                     mAddress = editable.toString();

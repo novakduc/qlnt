@@ -67,7 +67,7 @@ public class ProjectUnitPriceConfigFragment extends Fragment {
 
         final ActionBar actionBar = activity.getSupportActionBar();
         if (actionBar != null) {
-            actionBar.setHomeAsUpIndicator(R.drawable.ic_view_list);
+            actionBar.setHomeAsUpIndicator(R.drawable.ic_navigate_before);
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
