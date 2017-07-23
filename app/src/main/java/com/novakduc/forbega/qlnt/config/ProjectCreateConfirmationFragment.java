@@ -1,4 +1,4 @@
-package com.novakduc.forbega.qlnt.config.unitprice;
+package com.novakduc.forbega.qlnt.config;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -17,8 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.novakduc.forbega.qlnt.R;
-import com.novakduc.forbega.qlnt.config.ProjectCreateConfirmationFragment;
-import com.novakduc.forbega.qlnt.config.UpdateListener;
+import com.novakduc.forbega.qlnt.config.finance.ProjectFinanceConfigFragment;
 import com.novakduc.forbega.qlnt.model.Project;
 import com.novakduc.forbega.qlnt.model.UnitPrice;
 
@@ -26,7 +25,7 @@ import com.novakduc.forbega.qlnt.model.UnitPrice;
  * Created by n.thanh on 10/21/2016.
  */
 
-public class ProjectUnitPriceConfigFragment extends Fragment {
+public class ProjectCreateConfirmationFragment extends Fragment {
     public static final String TEMP_PROJECT = "com.novakduc.forbega.qlnt.tempproject";
 
     private TextInputLayout mElectricityLayout, mWaterLayout, mSecurityLayout, mTrashLayout,
@@ -34,16 +33,16 @@ public class ProjectUnitPriceConfigFragment extends Fragment {
     private UpdateListener mCallBack;
     private UnitPrice mUnitPrice;
 
-    public static ProjectUnitPriceConfigFragment newInstance(Project tempProject) {
+    public static ProjectCreateConfirmationFragment newInstance(Project tempProject) {
         Bundle bundle = new Bundle();
         bundle.putParcelable(TEMP_PROJECT, tempProject);
-        ProjectUnitPriceConfigFragment fragment = new ProjectUnitPriceConfigFragment();
+        ProjectCreateConfirmationFragment fragment = new ProjectCreateConfirmationFragment();
         fragment.setArguments(bundle);
         return fragment;
     }
 
-    public static ProjectUnitPriceConfigFragment newInstance() {
-        return new ProjectUnitPriceConfigFragment();
+    public static ProjectCreateConfirmationFragment newInstance() {
+        return new ProjectCreateConfirmationFragment();
     }
 
     @Override
@@ -58,6 +57,7 @@ public class ProjectUnitPriceConfigFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_project_unitprice_config, container, false);
 
+        // TODO: 7/23/2017 modify
         mCallBack = (UpdateListener) getActivity();
         Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
         toolbar.setTitle(getResources().getString(R.string.unitPrice));
@@ -330,6 +330,6 @@ public class ProjectUnitPriceConfigFragment extends Fragment {
         mCallBack.updateUnitPrice(mUnitPrice);
         FragmentManager manager = getActivity().getFragmentManager();
         manager.beginTransaction().replace(R.id.fragmentContainer,
-                ProjectCreateConfirmationFragment.newInstance()).addToBackStack(null).commit();
+                ProjectFinanceConfigFragment.newInstance()).addToBackStack(null).commit();
     }
 }
