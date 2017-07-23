@@ -72,7 +72,7 @@ public class UnitPrice extends DBObject implements Cloneable, Parcelable {
         return mWater;
     }
 
-    public void setWater(Long water) {
+    public void setWater(long water) {
         mWater = water;
     }
 

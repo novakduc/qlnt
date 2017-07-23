@@ -1,6 +1,7 @@
 package com.novakduc.forbega.qlnt.config.unitprice;
 
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
@@ -17,6 +18,7 @@ import android.widget.EditText;
 
 import com.novakduc.forbega.qlnt.R;
 import com.novakduc.forbega.qlnt.config.UpdateListener;
+import com.novakduc.forbega.qlnt.config.finance.ProjectFinanceConfigFragment;
 import com.novakduc.forbega.qlnt.model.Project;
 import com.novakduc.forbega.qlnt.model.UnitPrice;
 
@@ -95,6 +97,7 @@ public class ProjectUnitPriceConfigFragment extends Fragment {
                 } catch (NumberFormatException e) {
                     mElectricityLayout.setError(getString(R.string.invalid_input_error));
                     mElectricityLayout.setErrorEnabled(true);
+                    mUnitPrice.setElectricity(-1);
                 }
             }
         });
@@ -126,6 +129,7 @@ public class ProjectUnitPriceConfigFragment extends Fragment {
                 } catch (NumberFormatException e) {
                     mWaterLayout.setError(getString(R.string.invalid_input_error));
                     mWaterLayout.setErrorEnabled(true);
+                    mUnitPrice.setWater(-1);
                 }
             }
         });
@@ -157,6 +161,7 @@ public class ProjectUnitPriceConfigFragment extends Fragment {
                 } catch (NumberFormatException e) {
                     mInternetLayout.setError(getString(R.string.invalid_input_error));
                     mInternetLayout.setErrorEnabled(true);
+                    mUnitPrice.setInternet(-1);
                 }
             }
         });
@@ -188,6 +193,7 @@ public class ProjectUnitPriceConfigFragment extends Fragment {
                 } catch (NumberFormatException e) {
                     mSecurityLayout.setError(getString(R.string.invalid_input_error));
                     mSecurityLayout.setErrorEnabled(true);
+                    mUnitPrice.setSecurity(-1);
                 }
             }
         });
@@ -219,6 +225,7 @@ public class ProjectUnitPriceConfigFragment extends Fragment {
                 } catch (NumberFormatException e) {
                     mTrashLayout.setError(getString(R.string.invalid_input_error));
                     mTrashLayout.setErrorEnabled(true);
+                    mUnitPrice.setTrashCollection(-1);
                 }
             }
         });
@@ -250,6 +257,7 @@ public class ProjectUnitPriceConfigFragment extends Fragment {
                 } catch (NumberFormatException e) {
                     mTvLayout.setError(getString(R.string.invalid_input_error));
                     mTvLayout.setErrorEnabled(true);
+                    mUnitPrice.setTv(-1);
                 }
             }
         });
@@ -280,6 +288,48 @@ public class ProjectUnitPriceConfigFragment extends Fragment {
     }
 
     private void nextAction() {
-        // TODO: 7/21/2017 next action
+        boolean error = false;
+        if (mUnitPrice.getElectricity() < 0) {
+            mElectricityLayout.setError(getString(R.string.electricity_unitprice_error));
+            mElectricityLayout.setErrorEnabled(true);
+            error = true;
+        }
+        if (mUnitPrice.getWater() < 0) {
+            mWaterLayout.setError(getString(R.string.invalid_input_error));
+            mWaterLayout.setErrorEnabled(true);
+            error = true;
+        }
+        if (mUnitPrice.getInternet() < 0) {
+            mInternetLayout.setError(getString(R.string.invalid_input_error));
+            mInternetLayout.setErrorEnabled(true);
+            error = true;
+        }
+
+        if (mUnitPrice.getSecurity() < 0) {
+            mSecurityLayout.setError(getString(R.string.invalid_input_error));
+            mSecurityLayout.setErrorEnabled(true);
+            error = true;
+        }
+
+        if (mUnitPrice.getTrashCollection() < 0) {
+            mTrashLayout.setError(getString(R.string.invalid_input_error));
+            mTrashLayout.setErrorEnabled(true);
+            error = true;
+        }
+
+        if (mUnitPrice.getTv() < 0) {
+            mTvLayout.setError(getString(R.string.invalid_input_error));
+            mTvLayout.setErrorEnabled(true);
+            error = true;
+        }
+
+        if (error) {
+            return;
+        }
+
+        mCallBack.updateUnitPrice(mUnitPrice);
+        FragmentManager manager = getActivity().getFragmentManager();
+        manager.beginTransaction().replace(R.id.fragmentContainer,
+                ProjectFinanceConfigFragment.newInstance()).addToBackStack(null).commit();
     }
 }
