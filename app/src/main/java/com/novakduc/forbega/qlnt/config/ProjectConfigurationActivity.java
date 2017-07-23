@@ -12,6 +12,7 @@ import com.novakduc.forbega.qlnt.config.base.ProjectBaseConfigFragment;
 import com.novakduc.forbega.qlnt.model.Loan;
 import com.novakduc.forbega.qlnt.model.LoanList;
 import com.novakduc.forbega.qlnt.model.Project;
+import com.novakduc.forbega.qlnt.model.UnitPrice;
 
 public class ProjectConfigurationActivity extends SimpleFragmentActivity
         implements UpdateListener, ConfirmationDialogFragment.ConfirmListener {
@@ -66,6 +67,11 @@ public class ProjectConfigurationActivity extends SimpleFragmentActivity
                 loanLoanList) {
             mTempProject.addLoan(loan);
         }
+    }
+
+    @Override
+    public void updateUnitPrice(UnitPrice unitPrice) {
+        mTempProject.setUnitPrice(unitPrice);
     }
 
     @Override

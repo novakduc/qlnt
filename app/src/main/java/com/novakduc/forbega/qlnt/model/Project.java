@@ -166,7 +166,7 @@ public class Project extends DBObject implements Cloneable, Parcelable {
         return mUnitPrice;
     }
 
-    private void setUnitPrice(UnitPrice unitPrice) {
+    public void setUnitPrice(UnitPrice unitPrice) {
         mUnitPrice = unitPrice;
     }
 

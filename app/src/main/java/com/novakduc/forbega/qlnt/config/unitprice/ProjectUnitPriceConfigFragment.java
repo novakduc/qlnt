@@ -217,7 +217,7 @@ public class ProjectUnitPriceConfigFragment extends Fragment {
                         mTrashLayout.setErrorEnabled(false);
                     }
                 } catch (NumberFormatException e) {
-                    mTrashEditText.setError(getString(R.string.invalid_input_error));
+                    mTrashLayout.setError(getString(R.string.invalid_input_error));
                     mTrashLayout.setErrorEnabled(true);
                 }
             }
