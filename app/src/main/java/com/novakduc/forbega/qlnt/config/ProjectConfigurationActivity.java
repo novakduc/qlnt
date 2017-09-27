@@ -35,18 +35,18 @@ public class ProjectConfigurationActivity extends SimpleFragmentActivity
         int count = manager.getBackStackEntryCount();
         Log.i("count", String.valueOf(count));
         if (count == 0) {
-            discardConfirmation();
+            discardConfirmation(R.string.project_create_discard);
         } else {
             super.onBackPressed();
         }
     }
 
     @Override
-    public void discardConfirmation() {
+    public void discardConfirmation(int messageId) {
         Bundle bundle = new Bundle();
         //dialog title in bundle
         bundle.putString(ConfirmationDialogFragment.MESSAGE,
-                getResources().getString(R.string.project_create_discard));
+                getResources().getString(messageId));
         DialogFragment dialogFragment = new ConfirmationDialogFragment();
         dialogFragment.setArguments(bundle);
         dialogFragment.show(getFragmentManager(), "discardConfirm");
@@ -78,7 +78,7 @@ public class ProjectConfigurationActivity extends SimpleFragmentActivity
     public void discardDialog(int result) {
         if (result == ConfirmationDialogFragment.RESULT_OK) {
             //user confirm to discard project creation.
-            finish();
+            super.onBackPressed();
         }
     }
 }

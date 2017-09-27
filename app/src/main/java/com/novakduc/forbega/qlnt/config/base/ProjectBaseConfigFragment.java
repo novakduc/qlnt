@@ -201,7 +201,7 @@ public class ProjectBaseConfigFragment extends Fragment {
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mCallback.discardConfirmation();
+                mCallback.discardConfirmation(R.string.project_create_discard);
             }
         });
         Button next = (Button) view.findViewById(R.id.btNext);
@@ -264,7 +264,7 @@ public class ProjectBaseConfigFragment extends Fragment {
         }
 
         if (item.getItemId() == android.R.id.home)
-            mCallback.discardConfirmation();
+            mCallback.discardConfirmation(R.string.project_create_discard);
 
         return super.onOptionsItemSelected(item);
     }

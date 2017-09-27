@@ -9,7 +9,7 @@ import com.novakduc.forbega.qlnt.model.UnitPrice;
  */
 
 public interface UpdateListener {
-    void discardConfirmation();
+    void discardConfirmation(int messageId);
 
     void updateBase(String name, String address, int duration, long startDate);
 

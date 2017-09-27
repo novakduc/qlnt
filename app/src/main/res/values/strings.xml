@@ -62,4 +62,5 @@
     <string name="unitPrice">Unit Price</string>
     <string name="electricity_unitprice_error">invalid input</string>
     <string name="invalid_input_error">invalid input</string>
+    <string name="currentPageDiscard">Discard content on current page?</string>
 </resources>

@@ -127,7 +127,7 @@ public class ProjectFinanceConfigFragment extends Fragment {
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mCallBack.discardConfirmation();
+                mCallBack.discardConfirmation(R.string.project_create_discard);
             }
         });
         Button back = (Button) view.findViewById(R.id.btBack);
