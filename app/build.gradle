@@ -39,4 +39,5 @@ dependencies {
     compile 'com.shawnlin:number-picker:2.1.0'
     compile 'org.parceler:parceler-api:1.1.1'
     apt 'org.parceler:parceler:1.1.1'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
 }
