@@ -259,8 +259,8 @@ public class ProjectBaseConfigFragment extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.next) {
-            nextAction();
+        if (item.getItemId() == R.id.close) {
+            mCallback.discardConfirmation(R.string.project_create_discard); //close action;
         }
 
         if (item.getItemId() == android.R.id.home)
@@ -300,7 +300,7 @@ public class ProjectBaseConfigFragment extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.next_toolbar, menu);
+        inflater.inflate(R.menu.close_toolbar, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
 }

@@ -75,7 +75,7 @@ public class ProjectListFragment extends Fragment {
         final ActionBar ab = activity.getSupportActionBar();
         if (ab != null) {
             ab.setHomeAsUpIndicator(R.drawable.ic_view_list);
-            ab.setDisplayHomeAsUpEnabled(true);
+            ab.setDisplayHomeAsUpEnabled(false);
         }
 
         final ImageView imageView = (ImageView) view.findViewById(R.id.backdrop);

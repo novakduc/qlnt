@@ -78,7 +78,7 @@ public class ProjectConfigurationActivity extends SimpleFragmentActivity
     public void discardDialog(int result) {
         if (result == ConfirmationDialogFragment.RESULT_OK) {
             //user confirm to discard project creation.
-            super.onBackPressed();
+            finish();
         }
     }
 }
