@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -116,26 +117,11 @@ public class ProjectFinanceConfigFragment extends Fragment {
             }
         });
 
-        Button next = (Button) view.findViewById(R.id.btNext);
-        next.setOnClickListener(new View.OnClickListener() {
+        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.next_fab);
+        fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                nextAction();   //to unit price config
-            }
-        });
-        Button cancel = (Button) view.findViewById(R.id.btCancel);
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mCallBack.discardConfirmation(R.string.project_create_discard);
-            }
-        });
-        Button back = (Button) view.findViewById(R.id.btBack);
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getFragmentManager().popBackStack();
-                //getActivity().onBackPressed();
+                nextAction();
             }
         });
 
@@ -149,14 +135,14 @@ public class ProjectFinanceConfigFragment extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.next_toolbar, menu);
+        inflater.inflate(R.menu.close_toolbar, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.next) {
-            nextAction();   //to unit price config
+        if (item.getItemId() == R.id.close) {
+            mCallBack.discardConfirmation(R.string.project_create_discard);
         }
 
         if (item.getItemId() == android.R.id.home)

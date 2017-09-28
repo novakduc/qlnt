@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -24,6 +25,7 @@ import android.widget.EditText;
 
 import com.novakduc.forbega.qlnt.DatePickerFragment;
 import com.novakduc.forbega.qlnt.R;
+import com.novakduc.forbega.qlnt.config.ProjectConfigurationActivity;
 import com.novakduc.forbega.qlnt.config.UpdateListener;
 import com.novakduc.forbega.qlnt.config.finance.ProjectFinanceConfigFragment;
 
@@ -197,18 +199,11 @@ public class ProjectBaseConfigFragment extends Fragment {
             }
         });
 
-        Button cancel = (Button) view.findViewById(R.id.btCancel);
-        cancel.setOnClickListener(new View.OnClickListener() {
+        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.next_fab);
+        fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mCallback.discardConfirmation(R.string.project_create_discard);
-            }
-        });
-        Button next = (Button) view.findViewById(R.id.btNext);
-        next.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                nextAction();   //check information save and go to next
+                nextAction();
             }
         });
 

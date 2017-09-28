@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <android.support.design.widget.AppBarLayout
@@ -44,19 +45,12 @@
                 android:inputType="number"/>
         </android.support.design.widget.TextInputLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:paddingEnd="16dp"
-            android:paddingStart="16dp"
-            android:paddingTop="8dp">
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:elevation="4dp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -75,49 +69,23 @@
                     android:layout_gravity="end"
                     android:src="@android:drawable/ic_input_add"/>
             </LinearLayout>
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/loanList"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scrollbars="vertical">
-            </android.support.v7.widget.RecyclerView>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="52dp"
-            android:layout_marginBottom="16dp"
-            android:elevation="4dp"
-            android:gravity="center_horizontal|bottom">
-
-            <Button
-                android:id="@+id/btBack"
-                style="?android:borderlessButtonStyle"
-                android:layout_width="80dp"
-                android:layout_height="48dp"
-                android:layout_marginEnd="8dp"
-                android:text="@string/back_button"
-                android:textColor="@color/colorAccent"/>
-
-            <Button
-                android:id="@+id/btCancel"
-                style="?android:borderlessButtonStyle"
-                android:layout_width="80dp"
-                android:layout_height="48dp"
-                android:layout_marginEnd="8dp"
-                android:text="@string/cancel_button"
-                android:textColor="@color/colorAccent"/>
-
-            <Button
-                android:id="@+id/btNext"
-                style="?android:borderlessButtonStyle"
-                android:layout_width="80dp"
-                android:layout_height="48dp"
-                android:layout_marginEnd="8dp"
-                android:text="@string/next_button"
-                android:textColor="@color/colorAccent"/>
-        </LinearLayout>
     </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/loanList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:scrollbars="vertical">
+    </android.support.v7.widget.RecyclerView>
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/next_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center"
+        android:layout_margin="@dimen/fab_margin"
+        app:layout_anchor="@id/loanList"
+        app:layout_anchorGravity="bottom|center"
+        app:srcCompat="@drawable/ic_navigate_next"/>
 </android.support.design.widget.CoordinatorLayout>
