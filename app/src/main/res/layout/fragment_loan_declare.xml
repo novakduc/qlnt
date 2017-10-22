@@ -119,7 +119,7 @@
                 android:layout_height="48dp"
                 android:layout_marginEnd="8dp"
                 android:text="@string/cancel_button"
-                android:textColor="@color/colorAccent"/>
+                android:textColor="@color/secondaryColor"/>
 
             <Button
                 android:id="@+id/btConfirm"
@@ -128,7 +128,7 @@
                 android:layout_height="48dp"
                 android:layout_marginEnd="8dp"
                 android:text="@string/confirm_button"
-                android:textColor="@color/colorAccent"/>
+                android:textColor="@color/secondaryColor"/>
         </LinearLayout>
     </LinearLayout>
 </android.support.design.widget.CoordinatorLayout>

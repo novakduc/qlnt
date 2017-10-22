@@ -28,7 +28,7 @@
             android:id="@+id/txtLayoutElectricity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorWindowBackground"
+            android:background="@color/windowBackgroundColor"
             android:clipToPadding="false"
             android:paddingBottom="8dp"
             android:paddingEnd="16dp"
@@ -48,7 +48,7 @@
             android:id="@+id/txtLayoutWater"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorWindowBackground"
+            android:background="@color/windowBackgroundColor"
             android:clipToPadding="false"
             android:paddingBottom="8dp"
             android:paddingEnd="16dp"
@@ -68,7 +68,7 @@
             android:id="@+id/txtLayoutTv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorWindowBackground"
+            android:background="@color/windowBackgroundColor"
             android:clipToPadding="false"
             android:paddingBottom="8dp"
             android:paddingEnd="16dp"
@@ -88,7 +88,7 @@
             android:id="@+id/txtLayoutTrashCollection"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorWindowBackground"
+            android:background="@color/windowBackgroundColor"
             android:clipToPadding="false"
             android:paddingBottom="8dp"
             android:paddingEnd="16dp"
@@ -108,7 +108,7 @@
             android:id="@+id/txtLayoutInternet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorWindowBackground"
+            android:background="@color/windowBackgroundColor"
             android:clipToPadding="false"
             android:paddingBottom="8dp"
             android:paddingEnd="16dp"
@@ -128,7 +128,7 @@
             android:id="@+id/txtLayoutSecurity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorWindowBackground"
+            android:background="@color/windowBackgroundColor"
             android:clipToPadding="false"
             android:paddingBottom="8dp"
             android:paddingEnd="16dp"
@@ -158,7 +158,7 @@
                 android:layout_height="48dp"
                 android:layout_marginEnd="8dp"
                 android:text="@string/back_button"
-                android:textColor="@color/colorAccent"/>
+                android:textColor="@color/secondaryColor"/>
 
             <Button
                 android:id="@+id/btCancel"
@@ -167,7 +167,7 @@
                 android:layout_height="48dp"
                 android:layout_marginEnd="8dp"
                 android:text="@string/cancel_button"
-                android:textColor="@color/colorAccent"/>
+                android:textColor="@color/secondaryColor"/>
 
             <Button
                 android:id="@+id/btNext"
@@ -176,7 +176,7 @@
                 android:layout_height="48dp"
                 android:layout_marginEnd="8dp"
                 android:text="@string/next_button"
-                android:textColor="@color/colorAccent"/>
+                android:textColor="@color/secondaryColor"/>
         </LinearLayout>
     </LinearLayout>
 </android.support.design.widget.CoordinatorLayout>
