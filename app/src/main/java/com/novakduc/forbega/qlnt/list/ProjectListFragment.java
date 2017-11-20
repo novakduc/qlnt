@@ -21,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.novakduc.forbega.qlnt.R;
 import com.novakduc.forbega.qlnt.config.ProjectConfigurationActivity;
 import com.novakduc.forbega.qlnt.model.Project;
@@ -79,7 +80,10 @@ public class ProjectListFragment extends Fragment {
         }
 
         final ImageView imageView = (ImageView) view.findViewById(R.id.backdrop);
-        Glide.with(this).load(R.drawable.pic).centerCrop().into(imageView);
+        Glide.with(this)
+                .load(R.drawable.pic)
+                .apply(RequestOptions.centerCropTransform())
+                .into(imageView);
 
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.rv_project_list);
         LinearLayoutManager layoutManager = new LinearLayoutManager(activity);
