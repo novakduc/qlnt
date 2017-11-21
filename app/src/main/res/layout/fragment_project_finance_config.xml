@@ -12,6 +12,7 @@
         android:layout_height="56dp"
         android:background="?attr/colorPrimary"
         android:gravity="center_vertical"
+        app:titleTextColor="@color/primaryTextColor"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"></android.support.v7.widget.Toolbar>
