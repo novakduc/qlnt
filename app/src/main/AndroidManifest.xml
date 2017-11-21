@@ -21,7 +21,7 @@
         <activity
             android:name=".config.ProjectConfigurationActivity"
             android:label="@string/txtViewBaseTitile"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar.TransparentStatusBar">
         </activity>
         <activity
             android:name=".config.finance.ProjectLoanDeclareActivity"
