@@ -58,9 +58,9 @@ public class ProjectBaseConfigFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        getActivity().setTheme(R.style.AppTheme_NoActionBarTransparentStatusBar);
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-        getActivity().setTheme(R.style.AppTheme_NoActionBarTransparentStatusBar);
     }
 
     @Nullable
