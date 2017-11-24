@@ -59,7 +59,7 @@ public class ProjectFinanceConfigFragment extends Fragment {
         super.onCreate(savedInstanceState);
         mLoanList = new LoanList<Loan>();
         setHasOptionsMenu(true);
-        getActivity().setTheme(R.style.AppTheme_NoActionBar);
+        getActivity().setTheme(R.style.AppTheme_NoActionBarTransparentStatusBar);
     }
 
     @Nullable
