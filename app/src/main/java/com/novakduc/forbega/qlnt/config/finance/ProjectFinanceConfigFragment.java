@@ -22,7 +22,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -59,14 +58,13 @@ public class ProjectFinanceConfigFragment extends Fragment {
         super.onCreate(savedInstanceState);
         mLoanList = new LoanList<Loan>();
         setHasOptionsMenu(true);
-        getActivity().setTheme(R.style.AppTheme_NoActionBarTransparentStatusBar);
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_project_finance_config, container, false);
-        Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+        Toolbar toolbar = view.findViewById(R.id.toolbar);
         toolbar.setTitle(R.string.financeConfigTitle);
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         activity.setSupportActionBar(toolbar);
@@ -78,8 +76,8 @@ public class ProjectFinanceConfigFragment extends Fragment {
         }
 
         mCallBack = (UpdateListener) getActivity();
-        mLayoutAmount = (TextInputLayout) view.findViewById(R.id.txtLayoutInvestment);
-        EditText editTextAmount = (EditText) view.findViewById(R.id.investmentAmount);
+        mLayoutAmount = view.findViewById(R.id.txtLayoutInvestment);
+        EditText editTextAmount = view.findViewById(R.id.investmentAmount);
         //editTextAmount.setText(String.valueOf(mAmount));
         editTextAmount.addTextChangedListener(new TextWatcher() {
             @Override
@@ -109,7 +107,7 @@ public class ProjectFinanceConfigFragment extends Fragment {
             }
         });
 
-        ImageButton addLoan = (ImageButton) view.findViewById(R.id.btAddLoan);
+        ImageButton addLoan = view.findViewById(R.id.btAddLoan);
         addLoan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -118,7 +116,7 @@ public class ProjectFinanceConfigFragment extends Fragment {
             }
         });
 
-        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.next_fab);
+        FloatingActionButton fab = view.findViewById(R.id.next_fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -126,7 +124,7 @@ public class ProjectFinanceConfigFragment extends Fragment {
             }
         });
 
-        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.loanList);
+        RecyclerView recyclerView = view.findViewById(R.id.loanList);
         LinearLayoutManager layoutManager = new LinearLayoutManager(activity);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
@@ -218,12 +216,12 @@ public class ProjectFinanceConfigFragment extends Fragment {
             public ViewHolder(View itemView) {
                 super(itemView);
 
-                mTextViewBankName = (TextView) itemView.findViewById(R.id.textViewBankName);
-                mTextViewStartDate = (TextView) itemView.findViewById(R.id.textViewStartDate);
-                mTextViewLoanAmount = (TextView) itemView.findViewById(R.id.txtViewLoanAmount);
-                mTextViewInterestRate = (TextView) itemView.findViewById(R.id.interestRate);
-                mButtonDelete = (ImageButton) itemView.findViewById(R.id.btDelete);
-                mButtonEdit = (ImageButton) itemView.findViewById(R.id.btEdit);
+                mTextViewBankName = itemView.findViewById(R.id.textViewBankName);
+                mTextViewStartDate = itemView.findViewById(R.id.textViewStartDate);
+                mTextViewLoanAmount = itemView.findViewById(R.id.txtViewLoanAmount);
+                mTextViewInterestRate = itemView.findViewById(R.id.interestRate);
+                mButtonDelete = itemView.findViewById(R.id.btDelete);
+                mButtonEdit = itemView.findViewById(R.id.btEdit);
                 // TODO: 11/24/2016 view event and update
             }
         }

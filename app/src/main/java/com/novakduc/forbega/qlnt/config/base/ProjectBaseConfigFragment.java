@@ -20,12 +20,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.EditText;
 
 import com.novakduc.forbega.qlnt.DatePickerFragment;
 import com.novakduc.forbega.qlnt.R;
-import com.novakduc.forbega.qlnt.config.ProjectConfigurationActivity;
 import com.novakduc.forbega.qlnt.config.UpdateListener;
 import com.novakduc.forbega.qlnt.config.finance.ProjectFinanceConfigFragment;
 
@@ -58,17 +58,33 @@ public class ProjectBaseConfigFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        getActivity().setTheme(R.style.AppTheme_NoActionBarTransparentStatusBar);
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+        Window window = getActivity().getWindow();
+
+        // clear FLAG_TRANSLUCENT_STATUS flag:
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+
+        // add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+
+        // finally change the color
+        window.setStatusBarColor(getResources().getColor(R.color.primaryDarkColor));
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        /*
+        final Context contextThemeWrapper = new ContextThemeWrapper(getActivity(),
+                R.style.AppTheme_NoActionBarTransparentStatusBar);
+        LayoutInflater localInflater = inflater.cloneInContext(contextThemeWrapper);
+        */
+        //getActivity().getTheme().applyStyle(R.style.AppTheme_NoActionBarTransparentStatusBar, true);
+        //above for applying new theme
         View view = inflater.inflate(R.layout.fragment_project_base_config, container, false);
 
-        Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+        Toolbar toolbar = view.findViewById(R.id.toolbar);
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         activity.setSupportActionBar(toolbar);
 
@@ -78,8 +94,8 @@ public class ProjectBaseConfigFragment extends Fragment {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
         mCallback = (UpdateListener) getActivity();
-        mLayoutName = (TextInputLayout) view.findViewById(R.id.txtLayoutName);
-        mEditTextName = (EditText) view.findViewById(R.id.name);
+        mLayoutName = view.findViewById(R.id.txtLayoutName);
+        mEditTextName = view.findViewById(R.id.name);
         mEditTextName.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -114,8 +130,8 @@ public class ProjectBaseConfigFragment extends Fragment {
                 } else mLayoutName.setErrorEnabled(false);
             }
         });
-        mLayoutAddress = (TextInputLayout) view.findViewById(R.id.txtLayoutAddress);
-        mEditTextAddress = (EditText) view.findViewById(R.id.address);
+        mLayoutAddress = view.findViewById(R.id.txtLayoutAddress);
+        mEditTextAddress = view.findViewById(R.id.address);
         mEditTextAddress.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -150,7 +166,7 @@ public class ProjectBaseConfigFragment extends Fragment {
                 } else mLayoutAddress.setErrorEnabled(false);
             }
         });
-        mEditTextStartDate = (EditText) view.findViewById(R.id.editTextStartDate);
+        mEditTextStartDate = view.findViewById(R.id.editTextStartDate);
         Calendar tmp = Calendar.getInstance();
         mStartDate = tmp.getTimeInMillis();
         mEditTextStartDate.setText(calendarToString(tmp));
@@ -160,15 +176,15 @@ public class ProjectBaseConfigFragment extends Fragment {
                 showDialog(new DatePickerFragment(), DatePickerFragment.START_DATE_PICKED);
             }
         });
-        mEditTextEndDate = (EditText) view.findViewById(R.id.editTextEndDate);
+        mEditTextEndDate = view.findViewById(R.id.editTextEndDate);
         Calendar endDate = Calendar.getInstance();
         endDate.setTimeInMillis(mStartDate);
         endDate.add(Calendar.YEAR, mDuration);
         mEditTextEndDate.setText(calendarToString(endDate));
 
-        mEditTextDuration = (EditText) view.findViewById(R.id.editTextDuration);
+        mEditTextDuration = view.findViewById(R.id.editTextDuration);
         mEditTextDuration.setText(String.valueOf(mDuration));
-        mLayoutDuration = (TextInputLayout) view.findViewById(R.id.txtLayoutDuration);
+        mLayoutDuration = view.findViewById(R.id.txtLayoutDuration);
         mEditTextDuration.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -200,7 +216,7 @@ public class ProjectBaseConfigFragment extends Fragment {
             }
         });
 
-        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.next_fab);
+        FloatingActionButton fab = view.findViewById(R.id.next_fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
