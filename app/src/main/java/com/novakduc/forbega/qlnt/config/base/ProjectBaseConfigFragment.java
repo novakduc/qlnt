@@ -75,13 +75,6 @@ public class ProjectBaseConfigFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        /*
-        final Context contextThemeWrapper = new ContextThemeWrapper(getActivity(),
-                R.style.AppTheme_NoActionBarTransparentStatusBar);
-        LayoutInflater localInflater = inflater.cloneInContext(contextThemeWrapper);
-        */
-        //getActivity().getTheme().applyStyle(R.style.AppTheme_NoActionBarTransparentStatusBar, true);
-        //above for applying new theme
         View view = inflater.inflate(R.layout.fragment_project_base_config, container, false);
 
         Toolbar toolbar = view.findViewById(R.id.toolbar);
