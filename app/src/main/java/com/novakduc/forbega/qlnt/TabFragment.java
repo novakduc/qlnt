@@ -42,7 +42,7 @@ public class TabFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mTextView = (TextView) view.findViewById(R.id.fragment_tab_text);
+        mTextView = view.findViewById(R.id.fragment_tab_text);
         setContentView();
     }
 

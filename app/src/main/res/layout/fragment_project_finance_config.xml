@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
                                              xmlns:app="http://schemas.android.com/apk/res-auto"
-                                             xmlns:tools="http://schemas.android.com/tools"
                                              android:layout_width="match_parent"
                                              android:layout_height="match_parent"
                                              android:fitsSystemWindows="true">
@@ -10,10 +9,10 @@
         android:id="@+id/appbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
         android:theme="@style/AppTheme.AppBarOverlay"
-        app:layout_constraintBaseline_toBaselineOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <android.support.v7.widget.Toolbar
@@ -24,79 +23,86 @@
             android:gravity="center_vertical"/>
     </android.support.design.widget.AppBarLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/loanList"
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:scrollbars="none"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appbar">
+        app:layout_constraintTop_toBottomOf="@id/appbar">
 
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/txtLayoutInvestment"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:background="@color/windowBackgroundColor"
-            android:clipToPadding="false"
-            android:paddingBottom="8dp"
-            android:paddingEnd="16dp"
-            android:paddingStart="16dp"
-            android:paddingTop="8dp"
-            app:layout_constraintLeft_toLeftOf="@+id/appbar"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/appbar">
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/investmentAmount"
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/txtLayoutInvestment"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@color/windowBackgroundColor"
+                android:clipToPadding="false"
+                android:paddingBottom="8dp"
+                android:paddingEnd="16dp"
+                android:paddingStart="16dp"
+                android:paddingTop="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/investmentAmount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:elevation="8dp"
+                    android:hint="@string/inputProjectInvestmentHint"
+                    android:inputType="number"/>
+            </android.support.design.widget.TextInputLayout>
+
+            <ImageButton
+                android:id="@+id/btAddLoan"
+                style="@style/Base.Widget.AppCompat.Button.Borderless"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:contentDescription="@string/add_loan_bt"
+                android:src="@android:drawable/ic_input_add"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtLayoutInvestment"/>
+
+            <TextView
+                android:layout_width="61dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="16dp"
+                android:gravity="center_vertical"
+                android:text="@string/loanList"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="@+id/btAddLoan"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtLayoutInvestment"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/loanList"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:elevation="8dp"
-                android:hint="@string/inputProjectInvestmentHint"
-                android:inputType="number"/>
-        </android.support.design.widget.TextInputLayout>
+                android:layout_marginEnd="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:scrollbars="none"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btAddLoan"/>
 
-        <ImageButton
-            android:id="@+id/btAddLoan"
-            style="@style/Base.Widget.AppCompat.Button.Borderless"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:contentDescription="@string/add_loan_bt"
-            android:src="@android:drawable/ic_input_add"
-            app:layout_constraintRight_toRightOf="@+id/appbar"
-            app:layout_constraintTop_toBottomOf="@+id/txtLayoutInvestment"/>
-
-        <TextView
-            android:layout_width="61dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="16dp"
-            android:gravity="center_vertical"
-            android:text="@string/loanList"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="@+id/btAddLoan"
-            app:layout_constraintLeft_toLeftOf="@+id/txtLayoutInvestment"
-            app:layout_constraintTop_toBottomOf="@+id/txtLayoutInvestment"/>
-    </android.support.v7.widget.RecyclerView>
+        </android.support.constraint.ConstraintLayout>
+    </android.support.v4.widget.NestedScrollView>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/next_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        app:layout_anchor="@id/loanList"
-        app:layout_anchorGravity="bottom|center"
+        android:layout_margin="16dp"
+        app:layout_anchor="@id/nestedScrollView"
+        app:layout_anchorGravity="bottom|center|end"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:srcCompat="@drawable/ic_navigate_next"
-        tools:layout_constraintBottom_creator="1"
-        tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintRight_creator="1"/>
-
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_navigate_next"/>
 </android.support.constraint.ConstraintLayout>

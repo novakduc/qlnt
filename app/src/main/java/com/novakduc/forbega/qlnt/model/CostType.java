@@ -12,5 +12,5 @@ public enum CostType {
     TRASH_COLLECTION,
     SECURITY,
     MAINTENANCE,
-    OTHERS;
+    OTHERS
 }

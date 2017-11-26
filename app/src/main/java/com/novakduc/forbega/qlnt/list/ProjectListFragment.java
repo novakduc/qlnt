@@ -69,7 +69,7 @@ public class ProjectListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_project_list, container, false);
-        Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+        Toolbar toolbar = view.findViewById(R.id.toolbar);
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         activity.setSupportActionBar(toolbar);
 
@@ -79,13 +79,13 @@ public class ProjectListFragment extends Fragment {
             ab.setDisplayHomeAsUpEnabled(false);
         }
 
-        final ImageView imageView = (ImageView) view.findViewById(R.id.backdrop);
+        final ImageView imageView = view.findViewById(R.id.backdrop);
         Glide.with(this)
                 .load(R.drawable.pic)
                 .apply(RequestOptions.centerCropTransform())
                 .into(imageView);
 
-        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.rv_project_list);
+        RecyclerView recyclerView = view.findViewById(R.id.rv_project_list);
         LinearLayoutManager layoutManager = new LinearLayoutManager(activity);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
@@ -93,7 +93,7 @@ public class ProjectListFragment extends Fragment {
 
         Log.d("Check", "RC has set");
 
-        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
+        FloatingActionButton fab = view.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -166,7 +166,7 @@ public class ProjectListFragment extends Fragment {
             public ViewHolder(View view) {
                 super(view);
                 mView = view;
-                mTextView = (TextView) view.findViewById(R.id.textViewProjectName);
+                mTextView = view.findViewById(R.id.textViewProjectName);
             }
 
             @Override

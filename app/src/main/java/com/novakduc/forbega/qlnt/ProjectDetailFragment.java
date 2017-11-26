@@ -58,7 +58,7 @@ public class ProjectDetailFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_project_detail, container, false);
-        Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+        Toolbar toolbar = view.findViewById(R.id.toolbar);
 
         //Load active project ID
         SharedPreferences preferences = getActivity().getSharedPreferences(PREF_QLNT, 0);
@@ -66,7 +66,7 @@ public class ProjectDetailFragment extends Fragment {
         Qlnt.getInstance(getActivity()).setActiveProjectId(id);
 
         //Add tabs
-        TabLayout tabLayout = (TabLayout) view.findViewById(R.id.tab_layout);
+        TabLayout tabLayout = view.findViewById(R.id.tab_layout);
         TabLayout.Tab tab1 = tabLayout.newTab();
         tab1.setIcon(R.drawable.ic_view_list);
         tabLayout.addTab(tab1);
@@ -81,13 +81,13 @@ public class ProjectDetailFragment extends Fragment {
 
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
-        final ViewPager viewPager = (ViewPager) view.findViewById(R.id.pager);
+        final ViewPager viewPager = view.findViewById(R.id.pager);
         final TabAdapter tabAdapter = new TabAdapter(getFragmentManager(), numberOfPage);
         viewPager.setAdapter(tabAdapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(onTabSelectedListener(viewPager));
 
-        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
+        FloatingActionButton fab = view.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

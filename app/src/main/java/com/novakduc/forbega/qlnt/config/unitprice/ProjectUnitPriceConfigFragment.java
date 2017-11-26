@@ -59,7 +59,7 @@ public class ProjectUnitPriceConfigFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_project_unitprice_config, container, false);
 
         mCallBack = (UpdateListener) getActivity();
-        Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+        Toolbar toolbar = view.findViewById(R.id.toolbar);
         toolbar.setTitle(getResources().getString(R.string.unitPrice));
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         activity.setSupportActionBar(toolbar);
@@ -70,8 +70,8 @@ public class ProjectUnitPriceConfigFragment extends Fragment {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-        mElectricityLayout = (TextInputLayout) view.findViewById(R.id.txtLayoutElectricity);
-        EditText electricityEditText = (EditText) view.findViewById(R.id.electricity);
+        mElectricityLayout = view.findViewById(R.id.txtLayoutElectricity);
+        EditText electricityEditText = view.findViewById(R.id.electricity);
         //editTextAmount.setText(String.valueOf(mAmount));
         electricityEditText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -102,8 +102,8 @@ public class ProjectUnitPriceConfigFragment extends Fragment {
             }
         });
 
-        mWaterLayout = (TextInputLayout) view.findViewById(R.id.txtLayoutWater);
-        EditText waterEditText = (EditText) view.findViewById(R.id.water);
+        mWaterLayout = view.findViewById(R.id.txtLayoutWater);
+        EditText waterEditText = view.findViewById(R.id.water);
         //editTextAmount.setText(String.valueOf(mAmount));
         waterEditText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -134,8 +134,8 @@ public class ProjectUnitPriceConfigFragment extends Fragment {
             }
         });
 
-        mInternetLayout = (TextInputLayout) view.findViewById(R.id.txtLayoutInternet);
-        EditText internetEditText = (EditText) view.findViewById(R.id.internet);
+        mInternetLayout = view.findViewById(R.id.txtLayoutInternet);
+        EditText internetEditText = view.findViewById(R.id.internet);
         //editTextAmount.setText(String.valueOf(mAmount));
         internetEditText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -166,8 +166,8 @@ public class ProjectUnitPriceConfigFragment extends Fragment {
             }
         });
 
-        mSecurityLayout = (TextInputLayout) view.findViewById(R.id.txtLayoutSecurity);
-        final EditText securityEditText = (EditText) view.findViewById(R.id.security);
+        mSecurityLayout = view.findViewById(R.id.txtLayoutSecurity);
+        final EditText securityEditText = view.findViewById(R.id.security);
         //editTextAmount.setText(String.valueOf(mAmount));
         securityEditText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -198,8 +198,8 @@ public class ProjectUnitPriceConfigFragment extends Fragment {
             }
         });
 
-        mTrashLayout = (TextInputLayout) view.findViewById(R.id.txtLayoutTrashCollection);
-        EditText trashEditText = (EditText) view.findViewById(R.id.trashCollention);
+        mTrashLayout = view.findViewById(R.id.txtLayoutTrashCollection);
+        EditText trashEditText = view.findViewById(R.id.trashCollention);
         //editTextAmount.setText(String.valueOf(mAmount));
         trashEditText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -230,8 +230,8 @@ public class ProjectUnitPriceConfigFragment extends Fragment {
             }
         });
 
-        mTvLayout = (TextInputLayout) view.findViewById(R.id.txtLayoutTv);
-        EditText tvEditText = (EditText) view.findViewById(R.id.tv);
+        mTvLayout = view.findViewById(R.id.txtLayoutTv);
+        EditText tvEditText = view.findViewById(R.id.tv);
         //editTextAmount.setText(String.valueOf(mAmount));
         tvEditText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -262,21 +262,21 @@ public class ProjectUnitPriceConfigFragment extends Fragment {
             }
         });
 
-        Button next = (Button) view.findViewById(R.id.btNext);
+        Button next = view.findViewById(R.id.btNext);
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 nextAction();   //to unit price config
             }
         });
-        Button cancel = (Button) view.findViewById(R.id.btCancel);
+        Button cancel = view.findViewById(R.id.btCancel);
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mCallBack.discardConfirmation(R.string.project_create_discard);
             }
         });
-        Button back = (Button) view.findViewById(R.id.btBack);
+        Button back = view.findViewById(R.id.btBack);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

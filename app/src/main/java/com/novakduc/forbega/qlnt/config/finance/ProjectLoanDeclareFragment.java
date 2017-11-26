@@ -61,7 +61,7 @@ public class ProjectLoanDeclareFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_loan_declare, container, false);
-        Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+        Toolbar toolbar = view.findViewById(R.id.toolbar);
         toolbar.setTitle(R.string.loanDeclareTitle);
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         activity.setSupportActionBar(toolbar);
@@ -74,11 +74,11 @@ public class ProjectLoanDeclareFragment extends Fragment {
         //*/
 
         mCallBack = (LoanDeclareFragmentListener) getActivity();
-        mLayoutBank = (TextInputLayout) view.findViewById(R.id.txtLayoutBank);
-        mLayoutDate = (TextInputLayout) view.findViewById(R.id.txtLayoutLoanDate);
-        mLayoutRate = (TextInputLayout) view.findViewById(R.id.txtLayoutRate);
-        mLayoutAmount = (TextInputLayout) view.findViewById(R.id.txtLayoutLoanAmount);
-        EditText edtBankName = (EditText) view.findViewById(R.id.edtInputLoanBank);
+        mLayoutBank = view.findViewById(R.id.txtLayoutBank);
+        mLayoutDate = view.findViewById(R.id.txtLayoutLoanDate);
+        mLayoutRate = view.findViewById(R.id.txtLayoutRate);
+        mLayoutAmount = view.findViewById(R.id.txtLayoutLoanAmount);
+        EditText edtBankName = view.findViewById(R.id.edtInputLoanBank);
         edtBankName.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -102,7 +102,7 @@ public class ProjectLoanDeclareFragment extends Fragment {
             }
         });
 
-        EditText edtLoanAmount = (EditText) view.findViewById(R.id.edtLoanAmount);
+        EditText edtLoanAmount = view.findViewById(R.id.edtLoanAmount);
         edtLoanAmount.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -130,7 +130,7 @@ public class ProjectLoanDeclareFragment extends Fragment {
             }
         });
 
-        EditText edtRate = (EditText) view.findViewById(R.id.edtRate);
+        EditText edtRate = view.findViewById(R.id.edtRate);
         edtRate.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -158,7 +158,7 @@ public class ProjectLoanDeclareFragment extends Fragment {
             }
         });
 
-        mEdtLoanDate = (EditText) view.findViewById(R.id.edtLoanDate);
+        mEdtLoanDate = view.findViewById(R.id.edtLoanDate);
         Calendar tmp = Calendar.getInstance();
         mLoanDate = tmp.getTimeInMillis();
         mEdtLoanDate.setText(calendarToString(tmp));
@@ -169,14 +169,14 @@ public class ProjectLoanDeclareFragment extends Fragment {
             }
         });
 
-        Button btCancel = (Button) view.findViewById(R.id.btCancel);
+        Button btCancel = view.findViewById(R.id.btCancel);
         btCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mCallBack.discardConfirm();
             }
         });
-        Button btConfirm = (Button) view.findViewById(R.id.btConfirm);
+        Button btConfirm = view.findViewById(R.id.btConfirm);
         btConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
