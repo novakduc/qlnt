@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -262,26 +263,11 @@ public class ProjectUnitPriceConfigFragment extends Fragment {
             }
         });
 
-        Button next = view.findViewById(R.id.btNext);
-        next.setOnClickListener(new View.OnClickListener() {
+        FloatingActionButton fab = view.findViewById(R.id.next_fab);
+        fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 nextAction();   //to unit price config
-            }
-        });
-        Button cancel = view.findViewById(R.id.btCancel);
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mCallBack.discardConfirmation(R.string.project_create_discard);
-            }
-        });
-        Button back = view.findViewById(R.id.btBack);
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getFragmentManager().popBackStack();
-                //getActivity().onBackPressed();
             }
         });
         return view;

@@ -24,9 +24,9 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:maxLines="1"
-                android:paddingEnd="16dp"
-                android:paddingStart="16dp"
-                android:paddingTop="16dp"
+                android:paddingEnd="@dimen/paddingEnd"
+                android:paddingStart="@dimen/paddingStart"
+                android:paddingTop="@dimen/paddingTop"
                 android:text="Banker"
                 android:textSize="24sp"/>
 

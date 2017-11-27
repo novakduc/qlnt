@@ -27,7 +27,9 @@
         android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/appbar">
+        app:layout_constraintTop_toBottomOf="@id/appbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
@@ -35,14 +37,14 @@
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/txtLayoutInvestment"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/windowBackgroundColor"
                 android:clipToPadding="false"
-                android:paddingBottom="8dp"
-                android:paddingEnd="16dp"
-                android:paddingStart="16dp"
-                android:paddingTop="8dp"
+                android:paddingBottom="@dimen/paddingBottom"
+                android:paddingEnd="@dimen/paddingEnd"
+                android:paddingStart="@dimen/paddingStart"
+                android:paddingTop="@dimen/paddingTop"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -61,7 +63,7 @@
                 style="@style/Base.Widget.AppCompat.Button.Borderless"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
+                android:layout_marginEnd="@dimen/layout_marginEnd"
                 android:contentDescription="@string/add_loan_bt"
                 android:src="@android:drawable/ic_input_add"
                 app:layout_constraintRight_toRightOf="parent"
@@ -69,8 +71,8 @@
 
             <TextView
                 android:layout_width="61dp"
-                android:layout_height="0dp"
-                android:layout_marginStart="16dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/layout_marginStart"
                 android:gravity="center_vertical"
                 android:text="@string/loanList"
                 android:textSize="20sp"
@@ -82,11 +84,9 @@
                 android:id="@+id/loanList"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginEnd="@dimen/layout_marginEnd"
+                android:layout_marginStart="@dimen/layout_marginStart"
+                android:layout_marginTop="@dimen/layout_marginTop"
                 android:scrollbars="none"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -99,7 +99,7 @@
         android:id="@+id/next_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_margin="@dimen/fab_margin"
         app:layout_anchor="@id/nestedScrollView"
         app:layout_anchorGravity="bottom|center|end"
         app:layout_constraintBottom_toBottomOf="parent"

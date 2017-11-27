@@ -25,9 +25,9 @@
         android:id="@+id/txtLayoutName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginEnd="@dimen/layout_marginEnd"
+        android:layout_marginStart="@dimen/layout_marginStart"
+        android:layout_marginTop="@dimen/layout_marginTop"
         app:layout_constraintTop_toBottomOf="@id/appbar">
 
         <android.support.design.widget.TextInputEditText
@@ -42,9 +42,9 @@
         android:id="@+id/txtLayoutAddress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginEnd="@dimen/layout_marginEnd"
+        android:layout_marginStart="@dimen/layout_marginStart"
+        android:layout_marginTop="@dimen/layout_marginTop"
         app:layout_constraintTop_toBottomOf="@id/txtLayoutName">
 
         <android.support.design.widget.TextInputEditText
@@ -59,8 +59,8 @@
         android:id="@+id/txtLayoutDuration"
         android:layout_width="140dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="@dimen/layout_marginStart"
+        android:layout_marginTop="@dimen/layout_marginTop"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/txtLayoutAddress">
 
@@ -68,7 +68,7 @@
             android:id="@+id/editTextDuration"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="@dimen/layout_marginEnd"
             android:ems="10"
             android:hint="@string/duration"
             android:inputType="number"
@@ -89,8 +89,8 @@
         android:id="@+id/txtLayoutStartDate"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginEnd="@dimen/layout_marginEnd"
+        android:layout_marginTop="@dimen/layout_marginTop"
         app:layout_constraintEnd_toStartOf="@+id/textView4"
         app:layout_constraintStart_toStartOf="@id/txtLayoutDuration"
         app:layout_constraintTop_toBottomOf="@id/txtLayoutDuration">
@@ -110,8 +110,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingBottom="0dp"
-        android:paddingEnd="8dp"
-        android:paddingStart="8dp"
+        android:paddingEnd="@dimen/paddingEnd"
+        android:paddingStart="@dimen/paddingStart"
         android:text="@string/to"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@id/txtLayoutStartDate"
@@ -122,8 +122,8 @@
         android:id="@+id/textInputLayout2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginEnd="@dimen/layout_marginEnd"
+        android:layout_marginTop="@dimen/layout_marginTop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/textView4"
         app:layout_constraintTop_toBottomOf="@id/txtLayoutDuration">
@@ -142,11 +142,10 @@
         android:id="@+id/next_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
-        app:layout_anchor="@id/txtLayoutAddress"
-        app:layout_anchorGravity="bottom|center"
-        app:layout_constraintBottom_toTopOf="@id/textView4"
+        android:layout_margin="@dimen/fab_margin"
+        app:layout_anchor="@id/textInputLayout2"
+        app:layout_anchorGravity="bottom|center|end"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txtLayoutAddress"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:srcCompat="@drawable/ic_navigate_next"/>
 </android.support.constraint.ConstraintLayout>
