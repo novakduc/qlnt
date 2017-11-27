@@ -21,7 +21,8 @@ public class ProjectConfigurationActivity extends SimpleFragmentActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+        //this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+        //this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
         super.onCreate(savedInstanceState);
         mTempProject = new Project();
     }
