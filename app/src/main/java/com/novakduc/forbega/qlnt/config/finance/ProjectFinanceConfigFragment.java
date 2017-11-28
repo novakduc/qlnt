@@ -22,6 +22,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -77,7 +79,7 @@ public class ProjectFinanceConfigFragment extends Fragment {
 
         mCallBack = (UpdateListener) getActivity();
         mLayoutAmount = view.findViewById(R.id.txtLayoutInvestment);
-        EditText editTextAmount = view.findViewById(R.id.investmentAmount);
+        final EditText editTextAmount = view.findViewById(R.id.investmentAmount);
         //editTextAmount.setText(String.valueOf(mAmount));
         editTextAmount.addTextChangedListener(new TextWatcher() {
             @Override
@@ -107,7 +109,7 @@ public class ProjectFinanceConfigFragment extends Fragment {
             }
         });
 
-        ImageButton addLoan = view.findViewById(R.id.btAddLoan);
+        Button addLoan = view.findViewById(R.id.btAddLoan);
         addLoan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -170,6 +172,13 @@ public class ProjectFinanceConfigFragment extends Fragment {
                 // TODO: 4/19/2017 update loan to loanlist - something is not right
                 Loan loan = data.getParcelableExtra(ProjectLoanDeclareFragment.RETURN_LOAN);
                 mLoanList.add(loan);
+                // Check if no view has focus:
+                View tmpview = getActivity().getCurrentFocus();
+                if (tmpview != null) {
+                    InputMethodManager imm = (InputMethodManager)getActivity()
+                            .getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(tmpview.getWindowToken(), 0);
+                }
             }
         }
     }

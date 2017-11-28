@@ -63,5 +63,5 @@
     <string name="electricity_unitprice_error">invalid input</string>
     <string name="invalid_input_error">invalid input</string>
     <string name="currentPageDiscard">Discard content on current page?</string>
-    <string name="add_loan_bt">add loan button</string>
+    <string name="add_loan_bt">ADD LOAN</string>
 </resources>
