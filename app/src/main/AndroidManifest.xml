@@ -21,7 +21,7 @@
         <activity
             android:name=".config.ProjectConfigurationActivity"
             android:label="@string/txtViewBaseTitile"
-            android:windowSoftInputMode="stateVisible|adjustResize"
+            android:windowSoftInputMode="adjustResize"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
