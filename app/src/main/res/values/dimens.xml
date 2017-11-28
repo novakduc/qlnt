@@ -6,6 +6,8 @@
     <dimen name="layout_marginEnd">8dp</dimen>
     <dimen name="layout_marginTop">8dp</dimen>
     <dimen name="layout_marginBottom">8dp</dimen>
+    <dimen name="marginNarrow">4dp</dimen>
+    <dimen name="drawablePadding">4dp</dimen>
     <dimen name="paddingStart">8dp</dimen>
     <dimen name="paddingEnd">8dp</dimen>
     <dimen name="paddingTop">8dp</dimen>

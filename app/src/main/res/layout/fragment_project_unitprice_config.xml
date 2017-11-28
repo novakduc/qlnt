@@ -24,62 +24,46 @@
             android:gravity="center_vertical"/>
     </android.support.design.widget.AppBarLayout>
 
-    <android.support.v7.widget.AppCompatImageView
-        android:id="@+id/electricityImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/layout_marginStart"
-        style="@style/Base.Widget.AppCompat.Button.Borderless"
-        android:src="@drawable/ic_power_purple_a700_36dp"
-        app:layout_constraintTop_toBottomOf="@id/appbar"
-        app:layout_constraintBottom_toTopOf="@id/txtLayoutWater"
-        app:layout_constraintStart_toStartOf="parent"/>
-
     <android.support.design.widget.TextInputLayout
         android:id="@+id/txtLayoutElectricity"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/layout_marginStart"
-        android:layout_marginEnd="@dimen/layout_marginEnd"
+        android:layout_marginEnd="@dimen/marginNarrow"
         android:layout_marginTop="@dimen/layout_marginTop"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/electricityImage"
+        app:layout_constraintEnd_toStartOf="@id/txtLayoutWater"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/appbar">
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/electricity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_power_black_24dp"
+            android:drawablePadding="@dimen/drawablePadding"
+            android:maxLength="10"
             android:hint="@string/inputElectricUpriceHint"
             android:inputType="number" />
     </android.support.design.widget.TextInputLayout>
-
-    <android.support.v7.widget.AppCompatImageView
-        android:id="@+id/waterImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/layout_marginStart"
-        style="@style/Base.Widget.AppCompat.Button.Borderless"
-        android:src="@drawable/ic_local_drink_purple_a700_36dp"
-        app:layout_constraintTop_toBottomOf="@id/txtLayoutElectricity"
-        app:layout_constraintBottom_toTopOf="@id/txtLayoutTv"
-        app:layout_constraintStart_toStartOf="parent"/>
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/txtLayoutWater"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/layout_marginStart"
+        android:layout_marginStart="@dimen/marginNarrow"
         android:layout_marginEnd="@dimen/layout_marginEnd"
         android:layout_marginTop="@dimen/layout_marginTop"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/waterImage"
-        app:layout_constraintTop_toBottomOf="@+id/txtLayoutElectricity">
+        app:layout_constraintStart_toEndOf="@id/txtLayoutElectricity"
+        app:layout_constraintTop_toBottomOf="@+id/appbar">
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/water"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_local_drink_black_24dp"
+            android:drawablePadding="@dimen/drawablePadding"
+            android:maxLength="10"
             android:hint="@string/inputWaterUpriceHint"
             android:inputType="number" />
     </android.support.design.widget.TextInputLayout>
@@ -89,120 +73,88 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/layout_marginStart"
-        android:layout_marginEnd="@dimen/layout_marginEnd"
+        android:layout_marginEnd="@dimen/marginNarrow"
         android:layout_marginTop="@dimen/layout_marginTop"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/tvImage"
+        app:layout_constraintEnd_toStartOf="@id/txtLayoutTrashCollection"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtLayoutWater">
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_live_tv_black_24dp"
+            android:drawablePadding="@dimen/drawablePadding"
+            android:maxLength="10"
             android:hint="@string/inputTVUprice"
             android:inputType="number" />
     </android.support.design.widget.TextInputLayout>
-
-    <android.support.v7.widget.AppCompatImageView
-        android:id="@+id/tvImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/layout_marginStart"
-        style="@style/Base.Widget.AppCompat.Button.Borderless"
-        android:src="@drawable/ic_live_tv_purple_a700_36dp"
-        app:layout_constraintTop_toBottomOf="@id/txtLayoutWater"
-        app:layout_constraintBottom_toTopOf="@id/txtLayoutTrashCollection"
-        app:layout_constraintStart_toStartOf="parent"/>
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/txtLayoutTrashCollection"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/layout_marginStart"
+        android:layout_marginStart="@dimen/marginNarrow"
         android:layout_marginEnd="@dimen/layout_marginEnd"
         android:layout_marginTop="@dimen/layout_marginTop"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/trashImage"
-        app:layout_constraintTop_toBottomOf="@+id/txtLayoutTv">
+        app:layout_constraintStart_toEndOf="@id/txtLayoutTv"
+        app:layout_constraintTop_toBottomOf="@+id/txtLayoutWater">
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/trashCollention"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_local_shipping_black_24dp"
+            android:drawablePadding="@dimen/drawablePadding"
+            android:maxLength="10"
             android:hint="@string/inputTrashUprice"
             android:inputType="number" />
     </android.support.design.widget.TextInputLayout>
-
-    <android.support.v7.widget.AppCompatImageView
-        android:id="@+id/trashImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/layout_marginStart"
-        style="@style/Base.Widget.AppCompat.Button.Borderless"
-        android:src="@drawable/ic_local_shipping_purple_a700_36dp"
-        app:layout_constraintTop_toBottomOf="@id/txtLayoutTv"
-        app:layout_constraintBottom_toTopOf="@id/txtLayoutInternet"
-        app:layout_constraintStart_toStartOf="parent"/>
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/txtLayoutInternet"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/layout_marginStart"
-        android:layout_marginEnd="@dimen/layout_marginEnd"
+        android:layout_marginEnd="@dimen/marginNarrow"
         android:layout_marginTop="@dimen/layout_marginTop"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/internetImage"
+        app:layout_constraintEnd_toStartOf="@id/txtLayoutSecurity"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtLayoutTrashCollection">
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/internet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_public_black_24dp"
+            android:drawablePadding="4dp"
+            android:maxLength="10"
             android:hint="@string/inputInternetUprice"
             android:inputType="number" />
     </android.support.design.widget.TextInputLayout>
-
-    <android.support.v7.widget.AppCompatImageView
-        android:id="@+id/internetImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/layout_marginStart"
-        style="@style/Base.Widget.AppCompat.Button.Borderless"
-        android:src="@drawable/ic_public_purple_a700_36dp"
-        app:layout_constraintTop_toBottomOf="@id/txtLayoutTrashCollection"
-        app:layout_constraintBottom_toTopOf="@id/txtLayoutSecurity"
-        app:layout_constraintStart_toStartOf="parent"/>
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/txtLayoutSecurity"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/layout_marginStart"
+        android:layout_marginStart="@dimen/marginNarrow"
         android:layout_marginEnd="@dimen/layout_marginEnd"
         android:layout_marginTop="@dimen/layout_marginTop"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/securityImage"
-        app:layout_constraintTop_toBottomOf="@+id/txtLayoutInternet">
+        app:layout_constraintStart_toEndOf="@id/txtLayoutInternet"
+        app:layout_constraintTop_toBottomOf="@+id/txtLayoutTrashCollection">
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/security"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:maxLength="10"
+            android:drawableStart="@drawable/ic_security_black_24dp"
+            android:drawablePadding="@dimen/drawablePadding"
             android:hint="@string/inputSecurityUprice"
             android:inputType="number" />
     </android.support.design.widget.TextInputLayout>
-
-    <android.support.v7.widget.AppCompatImageView
-        android:id="@+id/securityImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/layout_marginStart"
-        style="@style/Base.Widget.AppCompat.Button.Borderless"
-        android:src="@drawable/ic_security_purple_a700_36dp"
-        app:layout_constraintTop_toBottomOf="@id/txtLayoutInternet"
-        app:layout_constraintBottom_toBottomOf="@id/txtLayoutSecurity"
-        app:layout_constraintStart_toStartOf="parent"/>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/next_fab"
