@@ -267,7 +267,7 @@ public class ProjectUnitPriceConfigFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                nextAction();   //to unit price config
+                nextAction();   //to project creation confirmation
             }
         });
         return view;

@@ -5,93 +5,25 @@
                                              android:layout_height="match_parent"
                                              android:fitsSystemWindows="true">
 
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/appbar"
+    <include
+        android:id="@+id/appbarSection"
+        layout="@layout/fragment_app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <include
+        android:id="@+id/financeSection"
+        layout="@layout/fragment_project_finance"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fitsSystemWindows="true"
-        android:theme="@style/AppTheme.AppBarOverlay"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?attr/colorPrimary"
-            android:gravity="center_vertical"/>
-    </android.support.design.widget.AppBarLayout>
-
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/txtLayoutInvestment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/windowBackgroundColor"
-        android:clipToPadding="false"
-        android:paddingBottom="@dimen/paddingBottom"
-        android:paddingEnd="@dimen/paddingEnd"
-        android:paddingStart="@dimen/paddingStart"
-        android:paddingTop="@dimen/paddingTop"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/appbar">
-
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/investmentAmount"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:elevation="8dp"
-            android:hint="@string/inputProjectInvestmentHint"
-            android:inputType="number"/>
-    </android.support.design.widget.TextInputLayout>
-
-    <LinearLayout
-        android:id="@+id/layoutAddloan"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@id/txtLayoutInvestment">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="@dimen/layout_marginStart"
-                android:layout_weight="1"
-                android:text="@string/loanList"
-                android:textSize="20sp"/>
-
-        <Button
-            android:id="@+id/btAddLoan"
-            style="@style/Base.Widget.AppCompat.Button.Borderless"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|end"
-            android:layout_marginEnd="@dimen/layout_marginEnd"
-            android:layout_weight="1"
-            android:text="@string/add_loan_bt"
-            android:textColor="@color/secondaryColor"/>
-    </LinearLayout>
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/loanList"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginEnd="@dimen/layout_marginEnd"
-        android:layout_marginStart="@dimen/layout_marginStart"
-        android:layout_marginTop="@dimen/layout_marginTop"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/layoutAddloan"/>
+        app:layout_constraintTop_toBottomOf="@id/appbarSection"/>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/next_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/fab_margin"
-        app:layout_anchor="@id/loanList"
+        app:layout_anchor="@id/financeSection"
         app:layout_anchorGravity="bottom|center|end"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
