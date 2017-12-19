@@ -46,7 +46,7 @@ public class ProjectListFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mProjects = Qlnt.getInstance(getActivity()).getProjectList();
+        mProjects = Qlnt.getInstance(getActivity().getApplicationContext()).getProjectList();
 
         //Load active project ID
         SharedPreferences preferences = getActivity().getSharedPreferences(PREF_QLNT, 0);

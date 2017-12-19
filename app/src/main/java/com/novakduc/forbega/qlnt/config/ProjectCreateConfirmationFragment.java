@@ -19,7 +19,9 @@ import android.widget.EditText;
 
 import com.novakduc.forbega.qlnt.R;
 import com.novakduc.forbega.qlnt.config.finance.ProjectFinanceConfigFragment;
+import com.novakduc.forbega.qlnt.list.ProjectListActivity;
 import com.novakduc.forbega.qlnt.model.Project;
+import com.novakduc.forbega.qlnt.model.Qlnt;
 import com.novakduc.forbega.qlnt.model.UnitPrice;
 
 /**
@@ -32,7 +34,8 @@ public class ProjectCreateConfirmationFragment extends Fragment {
     private TextInputLayout mElectricityLayout, mWaterLayout, mSecurityLayout, mTrashLayout,
             mInternetLayout, mTvLayout;
     private UpdateListener mCallBack;
-    private UnitPrice mUnitPrice;
+    private Project mTempProject;
+    private UnitPrice mTempUnitPrice;
 
     public static ProjectCreateConfirmationFragment newInstance(Project tempProject) {
         Bundle bundle = new Bundle();
@@ -49,14 +52,17 @@ public class ProjectCreateConfirmationFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mUnitPrice = new UnitPrice();
-        //mProject = (Project) getArguments().getParcelable(TEMP_PROJECT);
+        if (savedInstanceState != null) {
+            mTempProject = (Project) getArguments().getParcelable(TEMP_PROJECT);
+        }
+
+        setHasOptionsMenu(true);
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_project_unitprice_config, container, false);
+        View view = inflater.inflate(R.layout.fragment_project_confirmation, container, false);
 
         // TODO: 7/23/2017 modify
         mCallBack = (UpdateListener) getActivity();
@@ -71,37 +77,8 @@ public class ProjectCreateConfirmationFragment extends Fragment {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-        mElectricityLayout = view.findViewById(R.id.txtLayoutElectricity);
         EditText electricityEditText = view.findViewById(R.id.electricity);
-        //editTextAmount.setText(String.valueOf(mAmount));
-        electricityEditText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                try {
-                    long temp = Long.valueOf(editable.toString());
-                    if (temp < 0) {
-                        throw new NumberFormatException();
-                    } else {
-                        mUnitPrice.setElectricity(temp);
-                        mElectricityLayout.setErrorEnabled(false);
-                    }
-                } catch (NumberFormatException e) {
-                    mElectricityLayout.setError(getString(R.string.invalid_input_error));
-                    mElectricityLayout.setErrorEnabled(true);
-                    mUnitPrice.setElectricity(-1);
-                }
-            }
-        });
+        electricityEditText.setText(mTempProject.getUnitPrice().getElectricity());
 
         mWaterLayout = view.findViewById(R.id.txtLayoutWater);
         EditText waterEditText = view.findViewById(R.id.water);
@@ -263,7 +240,7 @@ public class ProjectCreateConfirmationFragment extends Fragment {
             }
         });
 
-        FloatingActionButton fab = view.findViewById(R.id.next_fab);
+        FloatingActionButton fab = view.findViewById(R.id.confirm_fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -274,48 +251,7 @@ public class ProjectCreateConfirmationFragment extends Fragment {
     }
 
     private void nextAction() {
-        boolean error = false;
-        if (mUnitPrice.getElectricity() < 0) {
-            mElectricityLayout.setError(getString(R.string.electricity_unitprice_error));
-            mElectricityLayout.setErrorEnabled(true);
-            error = true;
-        }
-        if (mUnitPrice.getWater() < 0) {
-            mWaterLayout.setError(getString(R.string.invalid_input_error));
-            mWaterLayout.setErrorEnabled(true);
-            error = true;
-        }
-        if (mUnitPrice.getInternet() < 0) {
-            mInternetLayout.setError(getString(R.string.invalid_input_error));
-            mInternetLayout.setErrorEnabled(true);
-            error = true;
-        }
 
-        if (mUnitPrice.getSecurity() < 0) {
-            mSecurityLayout.setError(getString(R.string.invalid_input_error));
-            mSecurityLayout.setErrorEnabled(true);
-            error = true;
-        }
-
-        if (mUnitPrice.getTrashCollection() < 0) {
-            mTrashLayout.setError(getString(R.string.invalid_input_error));
-            mTrashLayout.setErrorEnabled(true);
-            error = true;
-        }
-
-        if (mUnitPrice.getTv() < 0) {
-            mTvLayout.setError(getString(R.string.invalid_input_error));
-            mTvLayout.setErrorEnabled(true);
-            error = true;
-        }
-
-        if (error) {
-            return;
-        }
-
-        mCallBack.updateUnitPrice(mUnitPrice);
-        FragmentManager manager = getActivity().getFragmentManager();
-        manager.beginTransaction().replace(R.id.fragmentContainer,
-                ProjectFinanceConfigFragment.newInstance()).addToBackStack(null).commit();
+        Qlnt.getInstance(getActivity().getApplicationContext()).addProject(mTempProject);
     }
 }

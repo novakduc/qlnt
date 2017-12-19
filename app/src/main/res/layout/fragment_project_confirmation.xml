@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/coordinatorLayout2"
+    android:id="@+id/coordinatorProjectConfirm"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:fitsSystemWindows="true">
 
     <include layout="@layout/fragment_app_bar"
@@ -11,23 +11,36 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
+    <include layout="@layout/fragment_project_base"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/baseSection"
+        app:layout_constraintTop_toBottomOf="@id/appbarSection"/>
+
+
+    <include layout="@layout/fragment_project_finance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/financeSection"
+        app:layout_constraintTop_toBottomOf="@id/baseSection"/>
+
     <include layout="@layout/fragment_project_unitprice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/appbarSection"
-        android:id="@+id/unitpriceSection"/>
+        app:layout_constraintTop_toBottomOf="@id/financeSection"
+        android:id="@+id/unitPriceSection"/>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/confirm_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/fab_margin"
-        app:layout_anchor="@id/unitpriceSection"
+        app:layout_anchor="@id/unitPriceSection"
         app:layout_anchorGravity="bottom|center|end"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_navigate_next"/>
+        app:srcCompat="@drawable/ic_done_white_24dp"/>
 </android.support.constraint.ConstraintLayout>
 
