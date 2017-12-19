@@ -16,4 +16,6 @@ public interface UpdateListener {
     void updateFinance(long investment, LoanList<Loan> loanLoanList);
 
     void updateUnitPrice(UnitPrice unitPrice);
+
+    void addProject();
 }

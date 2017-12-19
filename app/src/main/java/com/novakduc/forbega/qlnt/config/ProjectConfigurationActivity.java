@@ -10,6 +10,7 @@ import android.view.WindowManager;
 import com.novakduc.baselibrary.SimpleFragmentActivity;
 import com.novakduc.forbega.qlnt.R;
 import com.novakduc.forbega.qlnt.config.base.ProjectBaseConfigFragment;
+import com.novakduc.forbega.qlnt.config.unitprice.ProjectUnitPriceConfigFragment;
 import com.novakduc.forbega.qlnt.model.Loan;
 import com.novakduc.forbega.qlnt.model.LoanList;
 import com.novakduc.forbega.qlnt.model.Project;
@@ -75,6 +76,13 @@ public class ProjectConfigurationActivity extends SimpleFragmentActivity
     @Override
     public void updateUnitPrice(UnitPrice unitPrice) {
         mTempProject.setUnitPrice(unitPrice);
+    }
+
+    @Override
+    public void addProject() {
+        FragmentManager manager = getFragmentManager();
+        manager.beginTransaction().replace(R.id.fragmentContainer,
+                ProjectCreateConfirmationFragment.newInstance(mTempProject)).addToBackStack(null).commit();
     }
 
     @Override
