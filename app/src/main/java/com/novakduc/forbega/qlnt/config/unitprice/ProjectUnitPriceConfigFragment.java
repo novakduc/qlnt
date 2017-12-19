@@ -317,6 +317,7 @@ public class ProjectUnitPriceConfigFragment extends Fragment {
             return;
         }
 
+        // TODO: 12/19/2017 load project confirmation fragment in activity instead
         mCallBack.updateUnitPrice(mUnitPrice);
         FragmentManager manager = getActivity().getFragmentManager();
         manager.beginTransaction().replace(R.id.fragmentContainer,
