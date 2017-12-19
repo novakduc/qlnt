@@ -2,7 +2,7 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
                                              xmlns:app="http://schemas.android.com/apk/res-auto"
                                              android:layout_width="match_parent"
-                                             android:layout_height="wrap_content">
+                                             android:layout_height="match_parent">
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/txtLayoutInvestment"
@@ -48,7 +48,7 @@
             style="@style/Base.Widget.AppCompat.Button.Borderless"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|end"
+            android:gravity="center_vertical|end"
             android:layout_marginEnd="@dimen/layout_marginEnd"
             android:layout_weight="1"
             android:text="@string/add_loan_bt"
@@ -57,7 +57,7 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/loanList"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginEnd="@dimen/layout_marginEnd"
         android:layout_marginStart="@dimen/layout_marginStart"

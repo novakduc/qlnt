@@ -12,6 +12,9 @@ import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -51,6 +54,7 @@ public class ProjectUnitPriceConfigFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mUnitPrice = new UnitPrice();
+        setHasOptionsMenu(true);
         //mProject = (Project) getArguments().getParcelable(TEMP_PROJECT);
     }
 
@@ -317,5 +321,22 @@ public class ProjectUnitPriceConfigFragment extends Fragment {
         FragmentManager manager = getActivity().getFragmentManager();
         manager.beginTransaction().replace(R.id.fragmentContainer,
                 ProjectCreateConfirmationFragment.newInstance()).addToBackStack(null).commit();
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.close_toolbar, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.close) {
+            mCallBack.discardConfirmation(R.string.project_create_discard);
+        }
+
+        if (item.getItemId() == android.R.id.home)
+            getFragmentManager().popBackStack();
+        return super.onOptionsItemSelected(item);
     }
 }
