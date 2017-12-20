@@ -33,6 +33,11 @@ public class ProjectCreateConfirmationFragment extends Fragment {
 
     private Project mTempProject;
     private UnitPrice mTempUnitPrice;
+    private EditText mEditTextAddress;
+    private EditText mEditTextName;
+    private EditText mEditTextStartDate;
+    private EditText mEditTextEndDate;
+    private EditText mEditTextDuration;
 
     public static ProjectCreateConfirmationFragment newInstance(Project tempProject) {
         Bundle bundle = new Bundle();
@@ -49,10 +54,8 @@ public class ProjectCreateConfirmationFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (savedInstanceState != null) {
             mTempProject = (Project) getArguments().getParcelable(TEMP_PROJECT);
             mTempUnitPrice = mTempProject.getUnitPrice();
-        }
         setHasOptionsMenu(true);
     }
 
@@ -72,10 +75,26 @@ public class ProjectCreateConfirmationFragment extends Fragment {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
+        mEditTextName = view.findViewById(R.id.name);
+        mEditTextName.setFocusableInTouchMode(false);
+        mEditTextName.setText(mTempProject.getName());
+
+        mEditTextAddress = view.findViewById(R.id.address);
+        mEditTextAddress.setFocusableInTouchMode(false);
+        mEditTextAddress.setText(mTempProject.getAddress());
+
+        mEditTextDuration = view.findViewById(R.id.editTextDuration);
+        mEditTextDuration.setFocusableInTouchMode(false);
+        mEditTextDuration.setText(String.valueOf(mTempProject.getDuration()));
+
+
+
         EditText electricityEditText = view.findViewById(R.id.electricity);
+        electricityEditText.setFocusableInTouchMode(false);
         electricityEditText.setText(String.valueOf(mTempUnitPrice.getElectricity()));
 
         EditText waterEditText = view.findViewById(R.id.water);
+        waterEditText.setFocusableInTouchMode(false);
         waterEditText.setText(String.valueOf(mTempUnitPrice.getWater()));
 
         EditText internetEditText = view.findViewById(R.id.internet);
@@ -94,7 +113,7 @@ public class ProjectCreateConfirmationFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                nextAction();   //to unit price config
+                //nextAction();   //to unit price config
             }
         });
         return view;
