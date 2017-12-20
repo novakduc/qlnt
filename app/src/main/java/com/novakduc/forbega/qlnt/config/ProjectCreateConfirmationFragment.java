@@ -8,6 +8,8 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -23,6 +25,11 @@ import com.novakduc.forbega.qlnt.list.ProjectListActivity;
 import com.novakduc.forbega.qlnt.model.Project;
 import com.novakduc.forbega.qlnt.model.Qlnt;
 import com.novakduc.forbega.qlnt.model.UnitPrice;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Created by n.thanh on 10/21/2016.
@@ -87,7 +94,27 @@ public class ProjectCreateConfirmationFragment extends Fragment {
         mEditTextDuration.setFocusableInTouchMode(false);
         mEditTextDuration.setText(String.valueOf(mTempProject.getDuration()));
 
+        mEditTextStartDate = view.findViewById(R.id.editTextStartDate);
+        mEditTextStartDate.setFocusableInTouchMode(false);
+        mEditTextStartDate.setText(Project.calendarToString(mTempProject.getStartDate()));
 
+        mEditTextEndDate = view.findViewById(R.id.editTextEndDate);
+        mEditTextEndDate.setFocusableInTouchMode(false);
+        mEditTextEndDate.setText(Project.calendarToString(mTempProject.getEndDate()));
+
+        EditText editTextInvestmentAmount = view.findViewById(R.id.investmentAmount);
+        editTextInvestmentAmount.setFocusableInTouchMode(false);
+        editTextInvestmentAmount.setText(String.valueOf(mTempProject.getInvestment()));
+
+        Button buttonAddLoan = view.findViewById(R.id.btAddLoan);
+        buttonAddLoan.setEnabled(false);
+
+        RecyclerView recyclerView = view.findViewById(R.id.loanList);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(activity);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setAdapter(new ProjectFinanceConfigFragment.LoansAdapter(activity,
+                mTempProject.getLoanList()));
 
         EditText electricityEditText = view.findViewById(R.id.electricity);
         electricityEditText.setFocusableInTouchMode(false);

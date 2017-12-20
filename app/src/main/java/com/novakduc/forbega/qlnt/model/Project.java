@@ -3,7 +3,10 @@ package com.novakduc.forbega.qlnt.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Created by n.thanh on 9/21/2016.
@@ -56,6 +59,14 @@ public class Project extends DBObject implements Cloneable, Parcelable {
         this.isChanged = in.readByte() != 0;
     }
 
+    public static String calendarToString(long dateInMilis) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(dateInMilis);
+        Date date = calendar.getTime();
+            DateFormat format = SimpleDateFormat.getDateInstance();
+        return format.format(date);
+    }
+
     public boolean createRoom(String name, double area, long charge) {
         return mRoomList.add(new Room(this.mProjectId, name, area, charge));
     }
@@ -79,9 +90,10 @@ public class Project extends DBObject implements Cloneable, Parcelable {
     }
 
     public long getEndDate() {
-        long endDate = Calendar.getInstance().getTimeInMillis();
-        // TODO: 11/3/2016 Calculate end date based on start date and duration
-        return endDate;
+        Calendar endDate = Calendar.getInstance();
+        endDate.setTimeInMillis(mStartDate);
+        endDate.add(Calendar.YEAR, mYearDuration);
+        return endDate.getTimeInMillis();
     }
 
     @Override

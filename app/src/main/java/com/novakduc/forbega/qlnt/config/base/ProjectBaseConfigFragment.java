@@ -28,6 +28,7 @@ import com.novakduc.forbega.qlnt.DatePickerFragment;
 import com.novakduc.forbega.qlnt.R;
 import com.novakduc.forbega.qlnt.config.UpdateListener;
 import com.novakduc.forbega.qlnt.config.finance.ProjectFinanceConfigFragment;
+import com.novakduc.forbega.qlnt.model.Project;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -162,7 +163,7 @@ public class ProjectBaseConfigFragment extends Fragment {
         mEditTextStartDate = view.findViewById(R.id.editTextStartDate);
         Calendar tmp = Calendar.getInstance();
         mStartDate = tmp.getTimeInMillis();
-        mEditTextStartDate.setText(calendarToString(tmp));
+        mEditTextStartDate.setText(Project.calendarToString(mStartDate));
         mEditTextStartDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -173,7 +174,7 @@ public class ProjectBaseConfigFragment extends Fragment {
         Calendar endDate = Calendar.getInstance();
         endDate.setTimeInMillis(mStartDate);
         endDate.add(Calendar.YEAR, mDuration);
-        mEditTextEndDate.setText(calendarToString(endDate));
+        mEditTextEndDate.setText(Project.calendarToString(endDate.getTimeInMillis()));
 
         mEditTextDuration = view.findViewById(R.id.editTextDuration);
         mEditTextDuration.setText(String.valueOf(mDuration));
@@ -200,7 +201,7 @@ public class ProjectBaseConfigFragment extends Fragment {
                         Calendar endDate = Calendar.getInstance();
                         endDate.setTimeInMillis(mStartDate);
                             endDate.add(Calendar.YEAR, mDuration);
-                            mEditTextEndDate.setText(calendarToString(endDate));
+                            mEditTextEndDate.setText(Project.calendarToString(endDate.getTimeInMillis()));
                     }
                 } catch (NumberFormatException e) {
                     mLayoutDuration.setError(getString(R.string.durationInputError));
@@ -227,7 +228,7 @@ public class ProjectBaseConfigFragment extends Fragment {
             if (resultCode != AppCompatActivity.RESULT_OK) return;
             Calendar tmpCalendar = (Calendar) data.getSerializableExtra(DatePickerFragment.PICKED_DATE);
             mStartDate = tmpCalendar.getTimeInMillis();
-            mEditTextStartDate.setText(calendarToString(tmpCalendar));
+            mEditTextStartDate.setText(Project.calendarToString(mStartDate));
             TypedArray themeArray = getActivity().getTheme().obtainStyledAttributes(
                     new int[]{android.R.attr.editTextColor});
             try {
@@ -242,18 +243,12 @@ public class ProjectBaseConfigFragment extends Fragment {
             if (mDuration > 0 && mDuration <= 100) {
                 Calendar endDate = (Calendar) tmpCalendar.clone();
                 endDate.add(Calendar.YEAR, mDuration);
-                mEditTextEndDate.setText(calendarToString(endDate));
+                mEditTextEndDate.setText(Project.calendarToString(endDate.getTimeInMillis()));
             } else {
                 mEditTextEndDate.setText("");
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
-    }
-
-    private String calendarToString(Calendar calendar) {
-        Date date = calendar.getTime();
-        DateFormat format = SimpleDateFormat.getDateInstance();
-        return format.format(date);
     }
 
     private void showDialog(DialogFragment fragment, int target) {
