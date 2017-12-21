@@ -83,6 +83,7 @@
                     android:id="@+id/txtViewLoanAmount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:maxLength="7"
                     android:paddingStart="16dp"
                     android:text="4000.00"
                     android:textSize="20sp"/>
@@ -103,6 +104,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
                     android:layout_weight="1"
+                    android:maxLength="4"
                     android:gravity="end"
                     android:paddingEnd="8dp"
                     android:paddingStart="16dp"

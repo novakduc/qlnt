@@ -39,9 +39,28 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="@dimen/layout_marginStart"
-                android:layout_weight="1"
+                android:layout_weight="2"
                 android:text="@string/loanList"
                 android:textSize="20sp"/>
+
+        <TextView
+            android:id="@+id/totalLoan"
+            android:layout_width="wrap_content"
+            android:maxWidth="100dp"
+            android:maxLength="8"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/layout_marginStart"
+            android:text="--"
+            android:textSize="20sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/layout_marginStart"
+            android:text="@string/currencyUnit"
+            android:textSize="20sp"/>
 
         <Button
             android:id="@+id/btAddLoan"
@@ -50,7 +69,7 @@
             android:layout_height="wrap_content"
             android:gravity="center_vertical|end"
             android:layout_marginEnd="@dimen/layout_marginEnd"
-            android:layout_weight="1"
+            android:layout_weight="3"
             android:text="@string/add_loan_bt"
             android:textColor="@color/secondaryColor"/>
     </LinearLayout>

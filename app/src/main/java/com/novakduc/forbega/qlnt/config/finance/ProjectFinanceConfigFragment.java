@@ -31,6 +31,7 @@ import android.widget.TextView;
 import com.novakduc.forbega.qlnt.R;
 import com.novakduc.forbega.qlnt.config.UpdateListener;
 import com.novakduc.forbega.qlnt.config.unitprice.ProjectUnitPriceConfigFragment;
+import com.novakduc.forbega.qlnt.model.CurrencyUnit;
 import com.novakduc.forbega.qlnt.model.Loan;
 import com.novakduc.forbega.qlnt.model.LoanList;
 
@@ -50,6 +51,9 @@ public class ProjectFinanceConfigFragment extends Fragment {
     private TextInputLayout mLayoutAmount;
     private UpdateListener mCallBack;
     private LoanList<Loan> mLoanList;
+    RecyclerView mRecyclerView;
+    LoansAdapter mLoansAdapter;
+    TextView mTotalLoanTextView;
 
     public static ProjectFinanceConfigFragment newInstance() {
         return new ProjectFinanceConfigFragment();
@@ -109,6 +113,8 @@ public class ProjectFinanceConfigFragment extends Fragment {
             }
         });
 
+        mTotalLoanTextView = view.findViewById(R.id.totalLoan);
+
         Button addLoan = view.findViewById(R.id.btAddLoan);
         addLoan.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,11 +132,12 @@ public class ProjectFinanceConfigFragment extends Fragment {
             }
         });
 
-        RecyclerView recyclerView = view.findViewById(R.id.loanList);
+        mRecyclerView = view.findViewById(R.id.loanList);
         LinearLayoutManager layoutManager = new LinearLayoutManager(activity);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setAdapter(new LoansAdapter(activity, mLoanList));
+        mRecyclerView.setLayoutManager(layoutManager);
+        mRecyclerView.setHasFixedSize(true);
+        mLoansAdapter = new LoansAdapter(activity, mLoanList);
+        mRecyclerView.setAdapter(mLoansAdapter);
         return view;
     }
 
@@ -169,9 +176,12 @@ public class ProjectFinanceConfigFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == LOAN_DECLARE_REQUEST) {
             if (resultCode == Activity.RESULT_OK) {
-                // TODO: 4/19/2017 update loan to loanlist - something is not right
                 Loan loan = data.getParcelableExtra(ProjectLoanDeclareFragment.RETURN_LOAN);
                 mLoanList.add(loan);
+                mLoansAdapter.notifyDataSetChanged();
+                if (mLoanList != null) {
+                    mTotalLoanTextView.setText(String.valueOf(mLoanList.getTotalLoanAmount(CurrencyUnit.MIL_BASE)));
+                }
                 // Check if no view has focus:
                 View tmpview = getActivity().getCurrentFocus();
                 if (tmpview != null) {
@@ -209,7 +219,7 @@ public class ProjectFinanceConfigFragment extends Fragment {
             date.setTime(loan.getLoanDate());
             DateFormat format = SimpleDateFormat.getDateInstance();
             holder.mTextViewStartDate.setText(format.format(date));
-            holder.mTextViewLoanAmount.setText(String.valueOf(loan.getAmount()));
+            holder.mTextViewLoanAmount.setText(String.valueOf(loan.getAmount(CurrencyUnit.MIL_BASE)));
             holder.mTextViewInterestRate.setText(String.valueOf(loan.getInterestRate()));
         }
 

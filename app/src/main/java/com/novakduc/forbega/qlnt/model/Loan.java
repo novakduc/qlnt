@@ -3,10 +3,14 @@ package com.novakduc.forbega.qlnt.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 /**
  * Created by n.thanh on 9/21/2016.
  */
 public class Loan extends DBObject implements Cloneable, Parcelable {
+
     public static final Parcelable.Creator<Loan> CREATOR = new Parcelable.Creator<Loan>() {
         @Override
         public Loan createFromParcel(Parcel source) {
@@ -52,8 +56,13 @@ public class Loan extends DBObject implements Cloneable, Parcelable {
         mName = name;
     }
 
-    public long getAmount() {
-        return mAmount;
+    public double getAmount() {
+        return getAmount(CurrencyUnit.BASE);
+    }
+
+    public double getAmount(CurrencyUnit unit) {
+        double convertedAmount = round(Double.valueOf(mAmount) / unit.getUnit(), 3);
+        return convertedAmount;
     }
 
     public void setAmount(long amount) {
@@ -74,6 +83,14 @@ public class Loan extends DBObject implements Cloneable, Parcelable {
 
     public void setInterestRate(double interestRate) {
         mInterestRate = interestRate;
+    }
+
+    public static double round(double value, int places) {
+        if (places < 0) throw new IllegalArgumentException();
+
+        BigDecimal bd = new BigDecimal(value);
+        bd = bd.setScale(places, RoundingMode.HALF_UP);
+        return bd.doubleValue();
     }
 
     //Tra no

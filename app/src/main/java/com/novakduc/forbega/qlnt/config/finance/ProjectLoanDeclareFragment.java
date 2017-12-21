@@ -145,7 +145,7 @@ public class ProjectLoanDeclareFragment extends Fragment {
             @Override
             public void afterTextChanged(Editable editable) {
                 try {
-                    mRate = Float.valueOf(editable.toString());
+                    mRate = Double.valueOf(editable.toString());
                     if (mRate < 0 || mRate > 50) {
                         throw new NumberFormatException();
                     } else {

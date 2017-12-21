@@ -31,6 +31,17 @@ public class LoanList<E> extends ArrayList<E> implements Parcelable {
     protected LoanList(Parcel in) {
     }
 
+    public double getTotalLoanAmount(CurrencyUnit unit) {
+        double total = 0;
+        for (E i :
+                this) {
+            if (i instanceof Loan) {
+                total += ((Loan) i).getAmount(unit);
+            }
+        }
+        return total;
+    }
+
     @Override
     public int describeContents() {
         return 0;

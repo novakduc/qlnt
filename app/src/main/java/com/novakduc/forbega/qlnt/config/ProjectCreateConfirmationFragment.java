@@ -18,10 +18,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.novakduc.forbega.qlnt.R;
 import com.novakduc.forbega.qlnt.config.finance.ProjectFinanceConfigFragment;
 import com.novakduc.forbega.qlnt.list.ProjectListActivity;
+import com.novakduc.forbega.qlnt.model.CurrencyUnit;
+import com.novakduc.forbega.qlnt.model.LoanList;
 import com.novakduc.forbega.qlnt.model.Project;
 import com.novakduc.forbega.qlnt.model.Qlnt;
 import com.novakduc.forbega.qlnt.model.UnitPrice;
@@ -45,6 +48,10 @@ public class ProjectCreateConfirmationFragment extends Fragment {
     private EditText mEditTextStartDate;
     private EditText mEditTextEndDate;
     private EditText mEditTextDuration;
+
+    RecyclerView mRecyclerView;
+    ProjectFinanceConfigFragment.LoansAdapter mLoansAdapter;
+    TextView mTotalLoanTextView;
 
     public static ProjectCreateConfirmationFragment newInstance(Project tempProject) {
         Bundle bundle = new Bundle();
@@ -72,7 +79,7 @@ public class ProjectCreateConfirmationFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_project_confirmation, container, false);
 
         Toolbar toolbar = view.findViewById(R.id.toolbar);
-        toolbar.setTitle(getResources().getString(R.string.unitPrice));
+        toolbar.setTitle(getResources().getString(R.string.project_create_confirm));
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         activity.setSupportActionBar(toolbar);
 
@@ -108,13 +115,19 @@ public class ProjectCreateConfirmationFragment extends Fragment {
 
         Button buttonAddLoan = view.findViewById(R.id.btAddLoan);
         buttonAddLoan.setEnabled(false);
+        buttonAddLoan.setText("");
 
-        RecyclerView recyclerView = view.findViewById(R.id.loanList);
+        LoanList loanList = mTempProject.getLoanList();
+
+        mTotalLoanTextView = view.findViewById(R.id.totalLoan);
+        mTotalLoanTextView.setText(String.valueOf(loanList.getTotalLoanAmount(CurrencyUnit.MIL_BASE)));
+
+        mRecyclerView = view.findViewById(R.id.loanList);
         LinearLayoutManager layoutManager = new LinearLayoutManager(activity);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setAdapter(new ProjectFinanceConfigFragment.LoansAdapter(activity,
-                mTempProject.getLoanList()));
+        mRecyclerView.setLayoutManager(layoutManager);
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setAdapter(new ProjectFinanceConfigFragment.LoansAdapter(activity,
+                loanList));
 
         EditText electricityEditText = view.findViewById(R.id.electricity);
         electricityEditText.setFocusableInTouchMode(false);
