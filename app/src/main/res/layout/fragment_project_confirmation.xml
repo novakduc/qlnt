@@ -19,10 +19,9 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/appbarSection">
 
-        <LinearLayout
+        <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:layout_width="match_parent"
@@ -41,13 +40,6 @@
                 android:id="@+id/baseSection"
                 app:layout_constraintTop_toBottomOf="@id/baseTitile"/>
 
-
-            <include layout="@layout/fragment_project_finance"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/financeSection"
-                app:layout_constraintTop_toBottomOf="@id/baseSection"/>
-
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -57,7 +49,7 @@
                 android:textSize="20sp"
                 android:id="@+id/unitPriceTitle"
                 android:text="@string/unitPrice"
-                app:layout_constraintTop_toBottomOf="@id/financeSection"/>
+                app:layout_constraintTop_toBottomOf="@id/baseSection"/>
 
             <include layout="@layout/fragment_project_unitprice"
                 android:layout_width="match_parent"
@@ -67,17 +59,34 @@
                 app:layout_constraintTop_toBottomOf="@id/unitPriceTitle"
                 android:id="@+id/unitPriceSection"/>
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="16dp"
+                android:paddingBottom="0dp"
+                android:layout_marginStart="8dp"
+                android:textSize="20sp"
+                android:id="@+id/financeTitle"
+                android:text="@string/financeConfigTitle"
+                app:layout_constraintTop_toBottomOf="@id/unitPriceSection"/>
+
+            <include layout="@layout/fragment_project_finance"
+                android:layout_width="match_parent"
+                android:layout_height="350dp"
+                android:id="@+id/financeSection"
+                app:layout_constraintTop_toBottomOf="@id/financeTitle"/>
+
             <android.support.design.widget.FloatingActionButton
                 android:id="@+id/confirm_fab"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/fab_margin"
-                app:layout_anchor="@id/unitPriceSection"
+                app:layout_anchor="@id/financeTitle"
                 app:layout_anchorGravity="bottom|center|end"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf= "parent"
                 app:srcCompat="@drawable/ic_done_white_24dp"/>
-        </LinearLayout>
+        </android.support.constraint.ConstraintLayout>
     </android.support.v4.widget.NestedScrollView>
 
 </android.support.constraint.ConstraintLayout>
