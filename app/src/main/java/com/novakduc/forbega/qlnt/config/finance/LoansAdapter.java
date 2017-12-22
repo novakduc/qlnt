@@ -1,6 +1,8 @@
 package com.novakduc.forbega.qlnt.config.finance;
 
+import android.app.FragmentManager;
 import android.content.Context;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +11,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.novakduc.forbega.qlnt.R;
+import com.novakduc.forbega.qlnt.config.ProjectCreateConfirmationFragment;
 import com.novakduc.forbega.qlnt.model.CurrencyUnit;
 import com.novakduc.forbega.qlnt.model.Loan;
 
@@ -41,7 +44,7 @@ public final class LoansAdapter extends RecyclerView.Adapter<LoansAdapter.ViewHo
 
         @Override
         public void onBindViewHolder(final ViewHolder holder, final int position) {
-            Loan loan = mLoans.get(position);
+            final Loan loan = mLoans.get(position);
             holder.mTextViewBankName.setText(loan.getName());
             Date date = new Date();
             date.setTime(loan.getLoanDate());
@@ -49,6 +52,14 @@ public final class LoansAdapter extends RecyclerView.Adapter<LoansAdapter.ViewHo
             holder.mTextViewStartDate.setText(format.format(date));
             holder.mTextViewLoanAmount.setText(String.valueOf(loan.getAmount(CurrencyUnit.MIL_BASE)));
             holder.mTextViewInterestRate.setText(String.valueOf(loan.getInterestRate()));
+            holder.mButtonEdit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    FragmentManager manager = ((AppCompatActivity) mContext).getFragmentManager();
+                    manager.beginTransaction().replace(R.id.fragmentContainer,
+                            ProjectLoanDeclareFragment.newIntance(loan)).addToBackStack(null).commit();
+                }
+            });
         }
 
         @Override
@@ -56,7 +67,7 @@ public final class LoansAdapter extends RecyclerView.Adapter<LoansAdapter.ViewHo
             return mLoans.size();
         }
 
-        public static class ViewHolder extends RecyclerView.ViewHolder {
+        public class ViewHolder extends RecyclerView.ViewHolder {
             TextView mTextViewBankName, mTextViewStartDate, mTextViewLoanAmount, mTextViewInterestRate;
             ImageButton mButtonEdit, mButtonDelete;
 

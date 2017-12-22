@@ -36,7 +36,7 @@ import java.util.Date;
  */
 
 public class ProjectLoanDeclareFragment extends Fragment {
-    public static final String TEMP_PROJECT = "com.novakduc.forbega.qlnt.tempproject";
+    public static final String TEMP_LOAN = "com.novakduc.forbega.qlnt.tempLoan";
     public static final String RETURN_LOAN = "com.forbega.qlnt.temproject.loandeclare.returnloan";
     private String mBankName;
     private long mAmount = -1;
@@ -49,6 +49,14 @@ public class ProjectLoanDeclareFragment extends Fragment {
     public static ProjectLoanDeclareFragment newInstance() {
 
         return new ProjectLoanDeclareFragment();
+    }
+
+    public static ProjectLoanDeclareFragment newIntance(Loan loan) {
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(TEMP_LOAN, loan);
+        ProjectLoanDeclareFragment fragment = new ProjectLoanDeclareFragment();
+        fragment.setArguments(bundle);
+        return fragment;
     }
 
     @Override
