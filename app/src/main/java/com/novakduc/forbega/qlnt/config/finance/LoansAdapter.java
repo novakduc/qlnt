@@ -52,9 +52,17 @@ public final class LoansAdapter extends RecyclerView.Adapter<LoansAdapter.ViewHo
             holder.mTextViewStartDate.setText(format.format(date));
             holder.mTextViewLoanAmount.setText(String.valueOf(loan.getAmount(CurrencyUnit.MIL_BASE)));
             holder.mTextViewInterestRate.setText(String.valueOf(loan.getInterestRate()));
+            holder.mButtonDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mLoans.remove(loan);
+                    notifyDataSetChanged();
+                }
+            });
             holder.mButtonEdit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    // TODO: 12/22/2017 check check check!!!!!
                     FragmentManager manager = ((AppCompatActivity) mContext).getFragmentManager();
                     manager.beginTransaction().replace(R.id.fragmentContainer,
                             ProjectLoanDeclareFragment.newIntance(loan)).addToBackStack(null).commit();
@@ -80,7 +88,6 @@ public final class LoansAdapter extends RecyclerView.Adapter<LoansAdapter.ViewHo
                 mTextViewInterestRate = itemView.findViewById(R.id.interestRate);
                 mButtonDelete = itemView.findViewById(R.id.btDelete);
                 mButtonEdit = itemView.findViewById(R.id.btEdit);
-                // TODO: 11/24/2016 view event and update
             }
         }
 }
