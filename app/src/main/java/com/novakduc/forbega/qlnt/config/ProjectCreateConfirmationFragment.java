@@ -178,7 +178,7 @@ public class ProjectCreateConfirmationFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //nextAction();   //to unit price config
+                nextAction();   //confirm to create project
             }
         });
         return view;

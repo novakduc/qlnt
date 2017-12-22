@@ -25,7 +25,7 @@ public interface StringForDB {
                     + PROJECT_INVESTMENT_ROW + " INTEGER,"
                     + PROJECT_TOTAL_INCOME_ROW + " INTEGER,"
                     + PROJECT_START_DATE_ROW + " INTEGER,"
-                    + PROJECT_START_DATE_ROW + " INTEGER" + ");";
+                    + PROJECT_END_DATE_ROW + " INTEGER" + ");";
     //String constant for room table
     String PHONG_TABLE = "PHONG_TABLE";
     String PHONG_ID_ROW = "_ID";
@@ -54,7 +54,7 @@ public interface StringForDB {
     String COST_PROJECT_ID = "PROJECT_ID";
     String COST_LOAI = "LOAI";
     String COST_AMOUNT = "COST_AMOUNT";
-    String COST_REPEATABE = "COST_REPEATABLE";
+    String COST_REPEATABLE = "COST_REPEATABLE";
     String COST_DATE = "COST_DATE";
     String CREATE_TABLE_COST =
             "CREATE TABLE " + COST_TABLE + "("
@@ -62,14 +62,14 @@ public interface StringForDB {
                     + COST_PROJECT_ID + " INTEGER,"
                     + COST_LOAI + " TEXT,"
                     + COST_AMOUNT + " INTEGER,"
-                    + COST_REPEATABE + " INTEGER,"
-                    + COST_LOAI + " INTEGER" + ");";
+                    + COST_REPEATABLE + " INTEGER,"
+                    + COST_DATE + " INTEGER" + ");";
     //String constant for income table
     String INCOME_TABLE = "INCOME_TABLE";
     String INCOME_PROJECT_ID = "INCOME_PROJECT_ID";
     String INCOME_PHONG_ID = "INCOME_PHONG_ID";
     String INCOME_TYPE = "INCOME_TYPE";
-    String INCOME_AMOUNT = "INCOME_TYPE";
+    String INCOME_AMOUNT = "INCOME_AMOUNT";
     String INCOME_DATE = "INCOME_DATE";
     String CREATE_TABLE_INCOME =
             "CREATE TABLE " + INCOME_TABLE + "("
