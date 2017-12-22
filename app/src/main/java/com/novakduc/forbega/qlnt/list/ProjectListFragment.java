@@ -42,6 +42,7 @@ public class ProjectListFragment extends Fragment {
     private static final int PROJECT_CONFIG_RESULT = 0;
     private long mActiveProject = -1;
     private ArrayList<Project> mProjects;
+    ProjectsRecyclerViewAdapter mProjectsRecyclerViewAdapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -85,11 +86,12 @@ public class ProjectListFragment extends Fragment {
                 .apply(RequestOptions.centerCropTransform())
                 .into(imageView);
 
+        mProjectsRecyclerViewAdapter = new ProjectsRecyclerViewAdapter(activity, mProjects);
         RecyclerView recyclerView = view.findViewById(R.id.rv_project_list);
         LinearLayoutManager layoutManager = new LinearLayoutManager(activity);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
-        recyclerView.setAdapter(new ProjectsRecyclerViewAdapter(activity, mProjects));
+        recyclerView.setAdapter(mProjectsRecyclerViewAdapter);
 
         Log.d("Check", "RC has set");
 
@@ -109,7 +111,7 @@ public class ProjectListFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         // TODO: 4/19/2017 Update result from project configuration activity
-
+        mProjectsRecyclerViewAdapter.notifyDataSetChanged();
     }
 
     public static class ProjectsRecyclerViewAdapter

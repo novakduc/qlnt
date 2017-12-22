@@ -176,6 +176,8 @@ public class ProjectFinanceConfigFragment extends Fragment {
                 if (mLoanList != null) {
                     mTotalLoanTextView.setText(String.valueOf(mLoanList.getTotalLoanAmount(CurrencyUnit.MIL_BASE)));
                 }
+
+                /*
                 // Check if no view has focus:
                 View tmpview = getActivity().getCurrentFocus();
                 if (tmpview != null) {
@@ -183,6 +185,7 @@ public class ProjectFinanceConfigFragment extends Fragment {
                             .getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(tmpview.getWindowToken(), 0);
                 }
+                */
             }
         }
     }

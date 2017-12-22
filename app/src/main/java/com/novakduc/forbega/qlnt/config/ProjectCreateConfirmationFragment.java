@@ -204,5 +204,6 @@ public class ProjectCreateConfirmationFragment extends Fragment {
     private void nextAction() {
 
         Qlnt.getInstance(getActivity().getApplicationContext()).addProject(mTempProject);
+        getActivity().finish();
     }
 }
