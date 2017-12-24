@@ -5,12 +5,10 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.WindowManager;
 
 import com.novakduc.baselibrary.SimpleFragmentActivity;
 import com.novakduc.forbega.qlnt.R;
 import com.novakduc.forbega.qlnt.config.base.ProjectBaseConfigFragment;
-import com.novakduc.forbega.qlnt.config.unitprice.ProjectUnitPriceConfigFragment;
 import com.novakduc.forbega.qlnt.model.Loan;
 import com.novakduc.forbega.qlnt.model.LoanList;
 import com.novakduc.forbega.qlnt.model.Project;
@@ -18,6 +16,8 @@ import com.novakduc.forbega.qlnt.model.UnitPrice;
 
 public class ProjectConfigurationActivity extends SimpleFragmentActivity
         implements UpdateListener, ConfirmationDialogFragment.ConfirmListener {
+    public static final int LOAN_DECLARE_REQUEST = 1;
+    public static final int LOAN_DECLARE_REQUEST_FROM_ADAPTER = 2;
     private Project mTempProject;
 
     @Override

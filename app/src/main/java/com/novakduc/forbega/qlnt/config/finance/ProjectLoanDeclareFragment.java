@@ -38,10 +38,12 @@ import java.util.Date;
 public class ProjectLoanDeclareFragment extends Fragment {
     public static final String TEMP_LOAN = "com.novakduc.forbega.qlnt.tempLoan";
     public static final String RETURN_LOAN = "com.forbega.qlnt.temproject.loandeclare.returnloan";
+    public static final String LOAN_ID = "com.novakduc.forbega.qlnt.loanDeclare.loanId";
     private String mBankName;
     private long mAmount = -1;
     private double mRate = 0;
     private long mLoanDate;
+    private Loan mLoan;
     private TextInputLayout mLayoutBank, mLayoutAmount, mLayoutRate, mLayoutDate;
     private EditText mEdtLoanDate;
     private LoanDeclareFragmentListener mCallBack;
@@ -51,7 +53,7 @@ public class ProjectLoanDeclareFragment extends Fragment {
         return new ProjectLoanDeclareFragment();
     }
 
-    public static ProjectLoanDeclareFragment newIntance(Loan loan) {
+    public static ProjectLoanDeclareFragment newInstance(Loan loan) {
         Bundle bundle = new Bundle();
         bundle.putParcelable(TEMP_LOAN, loan);
         ProjectLoanDeclareFragment fragment = new ProjectLoanDeclareFragment();
@@ -62,6 +64,11 @@ public class ProjectLoanDeclareFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Intent intent = getActivity().getIntent();
+        long loanId = intent.getLongExtra(LOAN_ID, -1);
+        if (loanId == -1) {
+
+        }
         setHasOptionsMenu(true);
     }
 

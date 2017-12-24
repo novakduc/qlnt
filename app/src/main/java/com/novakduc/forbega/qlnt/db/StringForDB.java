@@ -101,6 +101,7 @@ public interface StringForDB {
     //String constant for Loan table
     String LOAN_TABLE = "LOAN_TABLE";
     String LOAN_PROJECT_ID = "LOAN_PROJECT_ID";
+    String LOAN_ID = "LOAN_ID";
     String LOAN_NAME = "LOAN_NAME";
     String LOAN_AMOUNT = "LOAN_AMOUNT";
     String LOAN_DATE = "LOAN_DATE";
@@ -108,6 +109,7 @@ public interface StringForDB {
     String CREATE_TABLE_LOAN =
             "CREATE TABLE " + LOAN_TABLE + "("
                     + LOAN_PROJECT_ID + " INTEGER,"
+                    + LOAN_ID + " INTEGER,"
                     + LOAN_NAME + " TEXT,"
                     + LOAN_AMOUNT + " INTEGER,"
                     + LOAN_DATE + " INTEGER,"

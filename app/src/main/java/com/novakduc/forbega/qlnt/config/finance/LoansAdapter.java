@@ -1,7 +1,7 @@
 package com.novakduc.forbega.qlnt.config.finance;
 
-import android.app.FragmentManager;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,7 +11,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.novakduc.forbega.qlnt.R;
-import com.novakduc.forbega.qlnt.config.ProjectCreateConfirmationFragment;
+import com.novakduc.forbega.qlnt.config.ProjectConfigurationActivity;
 import com.novakduc.forbega.qlnt.model.CurrencyUnit;
 import com.novakduc.forbega.qlnt.model.Loan;
 
@@ -63,9 +63,10 @@ public final class LoansAdapter extends RecyclerView.Adapter<LoansAdapter.ViewHo
                 @Override
                 public void onClick(View v) {
                     // TODO: 12/22/2017 check check check!!!!!
-                    FragmentManager manager = ((AppCompatActivity) mContext).getFragmentManager();
-                    manager.beginTransaction().replace(R.id.fragmentContainer,
-                            ProjectLoanDeclareFragment.newIntance(loan)).addToBackStack(null).commit();
+                    AppCompatActivity activity = (AppCompatActivity) mContext;
+                    Intent intent = new Intent(activity, ProjectLoanDeclareActivity.class);
+                    activity.startActivityForResult(intent,
+                            ProjectConfigurationActivity.LOAN_DECLARE_REQUEST_FROM_ADAPTER);
                 }
             });
         }

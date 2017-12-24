@@ -42,6 +42,20 @@ public class LoanList<E> extends ArrayList<E> implements Parcelable {
         return total;
     }
 
+    public Loan getLoan(long loanId) {
+        Loan loan;
+        for (E i :
+                this) {
+            if (i instanceof Loan) {
+                loan = (Loan) i;
+                if (loan.getId() == loanId) {
+                    return loan;
+                }
+            }
+        }
+        return null;
+    }
+
     @Override
     public int describeContents() {
         return 0;

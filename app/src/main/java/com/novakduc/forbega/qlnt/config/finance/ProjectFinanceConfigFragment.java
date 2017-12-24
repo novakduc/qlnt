@@ -3,7 +3,6 @@ package com.novakduc.forbega.qlnt.config.finance;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -22,12 +21,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.novakduc.forbega.qlnt.R;
+import com.novakduc.forbega.qlnt.config.ProjectConfigurationActivity;
 import com.novakduc.forbega.qlnt.config.UpdateListener;
 import com.novakduc.forbega.qlnt.config.unitprice.ProjectUnitPriceConfigFragment;
 import com.novakduc.forbega.qlnt.model.CurrencyUnit;
@@ -40,7 +39,7 @@ import com.novakduc.forbega.qlnt.model.LoanList;
 
 public class ProjectFinanceConfigFragment extends Fragment {
     public static final String TEMP_PROJECT = "com.novakduc.forbega.qlnt.tempproject";
-    private static final int LOAN_DECLARE_REQUEST = 1;
+
     RecyclerView mRecyclerView;
     LoansAdapter mLoansAdapter;
     TextView mTotalLoanTextView;
@@ -114,7 +113,7 @@ public class ProjectFinanceConfigFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), ProjectLoanDeclareActivity.class);
-                startActivityForResult(intent, LOAN_DECLARE_REQUEST);
+                startActivityForResult(intent, ProjectConfigurationActivity.LOAN_DECLARE_REQUEST);
             }
         });
 
@@ -168,7 +167,7 @@ public class ProjectFinanceConfigFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == LOAN_DECLARE_REQUEST) {
+        if (requestCode == ProjectConfigurationActivity.LOAN_DECLARE_REQUEST) {
             if (resultCode == Activity.RESULT_OK) {
                 Loan loan = data.getParcelableExtra(ProjectLoanDeclareFragment.RETURN_LOAN);
                 mLoanList.add(loan);
@@ -176,16 +175,17 @@ public class ProjectFinanceConfigFragment extends Fragment {
                 if (mLoanList != null) {
                     mTotalLoanTextView.setText(String.valueOf(mLoanList.getTotalLoanAmount(CurrencyUnit.MIL_BASE)));
                 }
-
-                /*
-                // Check if no view has focus:
-                View tmpview = getActivity().getCurrentFocus();
-                if (tmpview != null) {
-                    InputMethodManager imm = (InputMethodManager)getActivity()
-                            .getSystemService(Context.INPUT_METHOD_SERVICE);
-                    imm.hideSoftInputFromWindow(tmpview.getWindowToken(), 0);
-                }
-                */
+            }
+        }
+        if (requestCode == ProjectConfigurationActivity.LOAN_DECLARE_REQUEST_FROM_ADAPTER
+        if (resultCode == Activity.RESULT_OK) {
+            Loan loan = data.getParcelableExtra(ProjectLoanDeclareFragment.RETURN_LOAN);
+            Loan tmpLoan = mLoanList.getLoan(loan.getId());
+            // TODO: 12/24/2017 update loan values
+            mLoansAdapter.notifyDataSetChanged();
+            if (mLoanList != null) {
+                mTotalLoanTextView.setText(String.valueOf(mLoanList.getTotalLoanAmount(CurrencyUnit.MIL_BASE)));
+            }
             }
         }
     }

@@ -60,6 +60,7 @@ public class ProjectDbManager implements StringForDB {
         for (Loan tmpLoan : loanList) {
             contentValues = new ContentValues();
             contentValues.put(LOAN_PROJECT_ID, project.getProjectId());
+            contentValues.put(LOAN_ID, tmpLoan.getId());
             contentValues.put(LOAN_NAME, tmpLoan.getName());
             contentValues.put(LOAN_AMOUNT, tmpLoan.getAmount());
             contentValues.put(LOAN_DATE, tmpLoan.getLoanDate());
