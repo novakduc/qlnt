@@ -38,7 +38,7 @@ import java.util.Date;
 public class ProjectLoanDeclareFragment extends Fragment {
     public static final String TEMP_LOAN = "com.novakduc.forbega.qlnt.tempLoan";
     public static final String RETURN_LOAN = "com.forbega.qlnt.temproject.loandeclare.returnloan";
-    public static final String LOAN_ID = "com.novakduc.forbega.qlnt.loanDeclare.loanId";
+    public static final String LOAN_TO_EDIT = "com.novakduc.forbega.qlnt.loanDeclare.loanId";
     private String mBankName;
     private long mAmount = -1;
     private double mRate = 0;
@@ -65,10 +65,7 @@ public class ProjectLoanDeclareFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Intent intent = getActivity().getIntent();
-        long loanId = intent.getLongExtra(LOAN_ID, -1);
-        if (loanId == -1) {
-
-        }
+        mLoan = intent.getParcelableExtra(LOAN_TO_EDIT);
         setHasOptionsMenu(true);
     }
 
@@ -94,6 +91,10 @@ public class ProjectLoanDeclareFragment extends Fragment {
         mLayoutRate = view.findViewById(R.id.txtLayoutRate);
         mLayoutAmount = view.findViewById(R.id.txtLayoutLoanAmount);
         EditText edtBankName = view.findViewById(R.id.edtInputLoanBank);
+        if (mLoan != null) {
+            mBankName = mLoan.getName();
+            edtBankName.setText(mBankName);
+        }
         edtBankName.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -118,6 +119,10 @@ public class ProjectLoanDeclareFragment extends Fragment {
         });
 
         EditText edtLoanAmount = view.findViewById(R.id.edtLoanAmount);
+        if (mLoan != null) {
+            mAmount = mLoan.getAmount();
+            edtLoanAmount.setText(String.valueOf(mAmount));
+        }
         edtLoanAmount.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -146,6 +151,10 @@ public class ProjectLoanDeclareFragment extends Fragment {
         });
 
         EditText edtRate = view.findViewById(R.id.edtRate);
+        if (mLoan != null) {
+            mRate = mLoan.getInterestRate();
+            edtRate.setText(String.valueOf(mRate));
+        }
         edtRate.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -175,8 +184,14 @@ public class ProjectLoanDeclareFragment extends Fragment {
 
         mEdtLoanDate = view.findViewById(R.id.edtLoanDate);
         Calendar tmp = Calendar.getInstance();
-        mLoanDate = tmp.getTimeInMillis();
+        if (mLoan == null) {
+            mLoanDate = tmp.getTimeInMillis();
+        } else {
+            mLoanDate = mLoan.getLoanDate();
+            tmp.setTimeInMillis(mLoanDate);
+        }
         mEdtLoanDate.setText(calendarToString(tmp));
+
         mEdtLoanDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -202,7 +217,7 @@ public class ProjectLoanDeclareFragment extends Fragment {
                     error = true;
                 }
                 if (mAmount == -1) {
-                    mLayoutAmount.setError(getString(R.string.invalidAddress));
+                    mLayoutAmount.setError(getString(R.string.invalidLoanAmount));
                     mLayoutAmount.setErrorEnabled(true);
                     error = true;
                 }
@@ -213,8 +228,15 @@ public class ProjectLoanDeclareFragment extends Fragment {
 
                 //return valid loan
                 Intent returnIntent = new Intent();
-                Loan tmpLoan = new Loan(mBankName, mAmount, mLoanDate, mRate);
-                returnIntent.putExtra(RETURN_LOAN, tmpLoan);
+                if (mLoan == null) {
+                    mLoan = new Loan(mBankName, mAmount, mLoanDate, mRate);
+                } else {
+                    mLoan.setName(mBankName);
+                    mLoan.setLoanDate(mLoanDate);
+                    mLoan.setInterestRate(mRate);
+                    mLoan.setAmount(mAmount);
+                }
+                returnIntent.putExtra(RETURN_LOAN, mLoan);
                 getActivity().setResult(Activity.RESULT_OK, returnIntent);
                 getActivity().finish();
             }

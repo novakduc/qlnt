@@ -16,8 +16,6 @@ import com.novakduc.forbega.qlnt.model.UnitPrice;
 
 public class ProjectConfigurationActivity extends SimpleFragmentActivity
         implements UpdateListener, ConfirmationDialogFragment.ConfirmListener {
-    public static final int LOAN_DECLARE_REQUEST = 1;
-    public static final int LOAN_DECLARE_REQUEST_FROM_ADAPTER = 2;
     private Project mTempProject;
 
     @Override

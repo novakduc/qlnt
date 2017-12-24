@@ -11,7 +11,6 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.novakduc.forbega.qlnt.R;
-import com.novakduc.forbega.qlnt.config.ProjectConfigurationActivity;
 import com.novakduc.forbega.qlnt.model.CurrencyUnit;
 import com.novakduc.forbega.qlnt.model.Loan;
 
@@ -25,6 +24,8 @@ import java.util.List;
  */
 
 public final class LoansAdapter extends RecyclerView.Adapter<LoansAdapter.ViewHolder> {
+    public static final int LOAN_CREATION = 0;
+    public static final int LOAN_EDIT_REQUEST_FROM_ADAPTER = 2;
         private Context mContext;
         private List<Loan> mLoans;
 
@@ -57,16 +58,16 @@ public final class LoansAdapter extends RecyclerView.Adapter<LoansAdapter.ViewHo
                 public void onClick(View v) {
                     mLoans.remove(loan);
                     notifyDataSetChanged();
+                    // TODO: 12/24/2017 update loan total amount
                 }
             });
             holder.mButtonEdit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // TODO: 12/22/2017 check check check!!!!!
                     AppCompatActivity activity = (AppCompatActivity) mContext;
                     Intent intent = new Intent(activity, ProjectLoanDeclareActivity.class);
-                    activity.startActivityForResult(intent,
-                            ProjectConfigurationActivity.LOAN_DECLARE_REQUEST_FROM_ADAPTER);
+                    intent.putExtra(ProjectLoanDeclareFragment.LOAN_TO_EDIT, loan);
+                    activity.startActivityForResult(intent, LOAN_EDIT_REQUEST_FROM_ADAPTER);
                 }
             });
         }

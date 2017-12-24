@@ -1,20 +1,15 @@
 package com.novakduc.forbega.qlnt.config;
 
 import android.app.Fragment;
-import android.app.FragmentManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.text.Editable;
-import android.text.Layout;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -27,18 +22,11 @@ import android.widget.TextView;
 
 import com.novakduc.forbega.qlnt.R;
 import com.novakduc.forbega.qlnt.config.finance.LoansAdapter;
-import com.novakduc.forbega.qlnt.config.finance.ProjectFinanceConfigFragment;
-import com.novakduc.forbega.qlnt.list.ProjectListActivity;
 import com.novakduc.forbega.qlnt.model.CurrencyUnit;
 import com.novakduc.forbega.qlnt.model.LoanList;
 import com.novakduc.forbega.qlnt.model.Project;
 import com.novakduc.forbega.qlnt.model.Qlnt;
 import com.novakduc.forbega.qlnt.model.UnitPrice;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 
 /**
  * Created by n.thanh on 10/21/2016.
@@ -46,7 +34,9 @@ import java.util.Date;
 
 public class ProjectCreateConfirmationFragment extends Fragment {
     public static final String TEMP_PROJECT = "com.novakduc.forbega.qlnt.tempproject";
-
+    RecyclerView mRecyclerView;
+    LoansAdapter mLoansAdapter;
+    TextView mTotalLoanTextView;
     private Project mTempProject;
     private UnitPrice mTempUnitPrice;
     private EditText mEditTextAddress;
@@ -55,10 +45,6 @@ public class ProjectCreateConfirmationFragment extends Fragment {
     private EditText mEditTextEndDate;
     private EditText mEditTextDuration;
     private UpdateListener mCallBack;
-
-    RecyclerView mRecyclerView;
-    LoansAdapter mLoansAdapter;
-    TextView mTotalLoanTextView;
 
     public static ProjectCreateConfirmationFragment newInstance(Project tempProject) {
         Bundle bundle = new Bundle();
@@ -75,7 +61,7 @@ public class ProjectCreateConfirmationFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-            mTempProject = (Project) getArguments().getParcelable(TEMP_PROJECT);
+        mTempProject = getArguments().getParcelable(TEMP_PROJECT);
             mTempUnitPrice = mTempProject.getUnitPrice();
         setHasOptionsMenu(true);
     }
@@ -205,5 +191,11 @@ public class ProjectCreateConfirmationFragment extends Fragment {
 
         Qlnt.getInstance(getActivity().getApplicationContext()).addProject(mTempProject);
         getActivity().finish();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        // TODO: 12/24/2017 loan edit, delete
     }
 }

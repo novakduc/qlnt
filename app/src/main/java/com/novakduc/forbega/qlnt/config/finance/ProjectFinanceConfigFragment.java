@@ -26,7 +26,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.novakduc.forbega.qlnt.R;
-import com.novakduc.forbega.qlnt.config.ProjectConfigurationActivity;
 import com.novakduc.forbega.qlnt.config.UpdateListener;
 import com.novakduc.forbega.qlnt.config.unitprice.ProjectUnitPriceConfigFragment;
 import com.novakduc.forbega.qlnt.model.CurrencyUnit;
@@ -113,7 +112,7 @@ public class ProjectFinanceConfigFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), ProjectLoanDeclareActivity.class);
-                startActivityForResult(intent, ProjectConfigurationActivity.LOAN_DECLARE_REQUEST);
+                startActivityForResult(intent, LoansAdapter.LOAN_CREATION);
             }
         });
 
@@ -167,26 +166,28 @@ public class ProjectFinanceConfigFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == ProjectConfigurationActivity.LOAN_DECLARE_REQUEST) {
+        if (requestCode == LoansAdapter.LOAN_CREATION) {
             if (resultCode == Activity.RESULT_OK) {
                 Loan loan = data.getParcelableExtra(ProjectLoanDeclareFragment.RETURN_LOAN);
                 mLoanList.add(loan);
-                mLoansAdapter.notifyDataSetChanged();
-                if (mLoanList != null) {
-                    mTotalLoanTextView.setText(String.valueOf(mLoanList.getTotalLoanAmount(CurrencyUnit.MIL_BASE)));
+            }
+        }
+        if (requestCode == LoansAdapter.LOAN_EDIT_REQUEST_FROM_ADAPTER) {
+            if (resultCode == Activity.RESULT_OK) {
+                Loan tempLoan = data.getParcelableExtra(ProjectLoanDeclareFragment.RETURN_LOAN);
+                Loan loan = mLoanList.getLoan(tempLoan.getId());
+                if (loan != null) {
+                    loan.setAmount(tempLoan.getAmount());
+                    loan.setInterestRate(tempLoan.getInterestRate());
+                    loan.setLoanDate(tempLoan.getLoanDate());
+                    loan.setName(tempLoan.getName());
                 }
             }
         }
-        if (requestCode == ProjectConfigurationActivity.LOAN_DECLARE_REQUEST_FROM_ADAPTER
-        if (resultCode == Activity.RESULT_OK) {
-            Loan loan = data.getParcelableExtra(ProjectLoanDeclareFragment.RETURN_LOAN);
-            Loan tmpLoan = mLoanList.getLoan(loan.getId());
-            // TODO: 12/24/2017 update loan values
-            mLoansAdapter.notifyDataSetChanged();
-            if (mLoanList != null) {
-                mTotalLoanTextView.setText(String.valueOf(mLoanList.getTotalLoanAmount(CurrencyUnit.MIL_BASE)));
-            }
-            }
+        mLoansAdapter.notifyDataSetChanged();
+        if (mLoanList != null) {
+            mTotalLoanTextView.setText(String.valueOf(
+                    mLoanList.getTotalLoanAmount(CurrencyUnit.MIL_BASE)));
         }
     }
 

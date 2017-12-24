@@ -72,8 +72,8 @@ public class Loan extends DBObject implements Cloneable, Parcelable {
         mName = name;
     }
 
-    public double getAmount() {
-        return getAmount(CurrencyUnit.BASE);
+    public long getAmount() {
+        return mAmount;
     }
 
     public void setAmount(long amount) {
