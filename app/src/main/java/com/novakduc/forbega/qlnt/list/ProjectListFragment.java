@@ -13,11 +13,13 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -117,63 +119,60 @@ public class ProjectListFragment extends Fragment {
     public static class ProjectsRecyclerViewAdapter
             extends RecyclerView.Adapter<ProjectsRecyclerViewAdapter.ViewHolder> {
 
-        private final TypedValue mTypedValue = new TypedValue();
-        private int mBackground;
-        private ArrayList<Project> mValues;
+        private ArrayList<Project> mProjectList;
+        private Context mContext;
 
         public ProjectsRecyclerViewAdapter(Context context, ArrayList<Project> items) {
-            context.getTheme().resolveAttribute(R.attr.selectableItemBackground, mTypedValue, true);
-            mBackground = mTypedValue.resourceId;
-            mValues = items;
+            mProjectList = items;
         }
 
         public Project getValueAt(int position) {
-            return mValues.get(position);
+            return mProjectList.get(position);
         }
 
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.project_item_layout, parent, false);
-            view.setBackgroundResource(mBackground);
+
             return new ViewHolder(view);
         }
 
         @Override
         public void onBindViewHolder(final ViewHolder holder, final int position) {
-            holder.mBoundString = mValues.get(position).getName();
-            holder.mTextView.setText(mValues.get(position).getName());
-            // TODO: 11/24/2016 update project information
-
-            holder.mView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    String s = "Item " + position + " clicked.";
-                    Log.d("rv", s);
-                }
-            });
+            holder.mProjectName = mProjectList.get(position).getName();
+            holder.mNameTextView.setText(mProjectList.get(position).getName());
 
         }
 
         @Override
         public int getItemCount() {
-            return mValues.size();
+            return mProjectList.size();
         }
 
         public static class ViewHolder extends RecyclerView.ViewHolder {
-            public final View mView;
-            public final TextView mTextView;
-            public String mBoundString;
+            public final TextView mNameTextView;
+            public final TextView mDurationTextView;
+            public final TextView mProduceRateTextView;
+            public final RatingBar mRatingBar;
+            public final TextView mIncomeTextView;
+            public final ProgressBar mIncomeProgressBar;
+            public final TextView mDeptTextView;
+            public final ProgressBar mDeptProgressBar;
+            public final TextView mRevenueTextView;
+            public final ProgressBar mRevenueProgressBar;
+            public final Button mDeleteButton, mCopyButton, mEditButton;
+
+            public String mProjectName;
 
             public ViewHolder(View view) {
                 super(view);
-                mView = view;
-                mTextView = view.findViewById(R.id.textViewProjectName);
+                mNameTextView = view.findViewById(R.id.textViewProjectName);
             }
 
             @Override
             public String toString() {
-                return super.toString() + " '" + mTextView.getText();
+                return super.toString() + " '" + mNameTextView.getText();
             }
         }
     }

@@ -33,6 +33,7 @@
                     android:layout_weight="1"
                     android:gravity="center_vertical"
                     android:maxLines="1"
+                    android:maxLength="20"
                     android:paddingEnd="16dp"
                     android:paddingStart="16dp"
                     android:paddingTop="8dp"
@@ -105,9 +106,18 @@
                             android:id="@+id/txtViewTotalIncome"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:gravity="end"
+                            android:paddingEnd="@dimen/paddingEnd"
                             android:layout_weight="35"
+                            android:maxLength="8"
+                            android:text="4000.00"
+                            android:textSize="20sp"/>
+                        <TextView
+                            android:id="@+id/txtViewTotalIncomeUnit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:paddingEnd="8dp"
-                            android:text="4000.00 mil"
+                            android:text="@string/currencyUnit"
                             android:textSize="20sp"/>
 
                         <ProgressBar
@@ -143,8 +153,18 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="35"
+                            android:gravity="end"
                             android:paddingEnd="8dp"
-                            android:text="4000.00 mil"
+                            android:maxLength="8"
+                            android:text="4000.00"
+                            android:textSize="20sp"/>
+
+                        <TextView
+                            android:id="@+id/txtViewDeptUnit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingEnd="8dp"
+                            android:text="mil"
                             android:textSize="20sp"/>
 
                         <ProgressBar
@@ -182,8 +202,18 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="35"
+                    android:gravity="end"
+                    android:maxLength="8"
                     android:paddingEnd="8dp"
-                    android:text="4000.00 mil"
+                    android:text="4000.000"
+                    android:textSize="20sp"/>
+
+                <TextView
+                    android:id="@+id/txtViewRevenueUnit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingEnd="8dp"
+                    android:text="mil"
                     android:textSize="20sp"/>
 
                 <ProgressBar
