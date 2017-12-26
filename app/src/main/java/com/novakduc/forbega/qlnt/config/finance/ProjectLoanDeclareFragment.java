@@ -203,7 +203,7 @@ public class ProjectLoanDeclareFragment extends Fragment {
         btCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mCallBack.discardConfirm();
+                getActivity().finish();
             }
         });
         Button btConfirm = view.findViewById(R.id.btConfirm);

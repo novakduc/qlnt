@@ -1,5 +1,7 @@
 package com.novakduc.forbega.qlnt.config.finance;
 
+import android.annotation.SuppressLint;
+import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -24,10 +26,11 @@ import java.util.List;
  */
 
 public final class LoansAdapter extends RecyclerView.Adapter<LoansAdapter.ViewHolder> {
-    public static final int LOAN_CREATION = 0;
-    public static final int LOAN_EDIT_REQUEST_FROM_ADAPTER = 2;
+    public static final int LOAN_CREATION = 1120;
+    public static final int LOAN_EDIT_REQUEST_FROM_ADAPTER = 1121;
         private Context mContext;
         private List<Loan> mLoans;
+        private LoanContainerListener mContainerCallBack;
 
         public LoansAdapter(Context context, List<Loan> loanList) {
             mContext = context;
@@ -58,7 +61,13 @@ public final class LoansAdapter extends RecyclerView.Adapter<LoansAdapter.ViewHo
                 public void onClick(View v) {
                     mLoans.remove(loan);
                     notifyDataSetChanged();
-                    // TODO: 12/24/2017 update loan total amount
+                    AppCompatActivity activity = (AppCompatActivity) mContext;
+                    Fragment fragment = activity.getFragmentManager().
+                            findFragmentById(R.id.fragmentContainer);
+                    if (fragment instanceof LoanContainerListener) {
+                        mContainerCallBack = (LoanContainerListener) fragment;
+                        mContainerCallBack.loanDeleteUpdate();
+                    }
                 }
             });
             holder.mButtonEdit.setOnClickListener(new View.OnClickListener() {
@@ -67,7 +76,9 @@ public final class LoansAdapter extends RecyclerView.Adapter<LoansAdapter.ViewHo
                     AppCompatActivity activity = (AppCompatActivity) mContext;
                     Intent intent = new Intent(activity, ProjectLoanDeclareActivity.class);
                     intent.putExtra(ProjectLoanDeclareFragment.LOAN_TO_EDIT, loan);
-                    activity.startActivityForResult(intent, LOAN_EDIT_REQUEST_FROM_ADAPTER);
+                    Fragment fragment = activity.getFragmentManager().
+                            findFragmentById(R.id.fragmentContainer);
+                    fragment.startActivityForResult(intent, LOAN_EDIT_REQUEST_FROM_ADAPTER);
                 }
             });
         }
@@ -81,6 +92,7 @@ public final class LoansAdapter extends RecyclerView.Adapter<LoansAdapter.ViewHo
             TextView mTextViewBankName, mTextViewStartDate, mTextViewLoanAmount, mTextViewInterestRate;
             ImageButton mButtonEdit, mButtonDelete;
 
+            @SuppressLint("WrongViewCast")
             public ViewHolder(View itemView) {
                 super(itemView);
 

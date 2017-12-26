@@ -20,14 +20,6 @@ public class Qlnt {
 
     private Qlnt() {
         mProjectList = new ArrayList<Project>();
-
-        // TODO: 10/4/2016 Need to be removed
-        //Test test test
-        for (int i = 0; i < 20; i++) {
-            Project project = new Project();
-            project.setName(String.valueOf(i));
-            mProjectList.add(project);
-        }
     }
 
     public static Qlnt getInstance(Context context) {
@@ -115,7 +107,7 @@ public class Qlnt {
 
         @Override
         protected void onPostExecute(Object o) {
-            Toast.makeText(sContext, R.string.project_recorded, Toast.LENGTH_SHORT).show();
+            Toast.makeText(sContext, R.string.project_recorded, Toast.LENGTH_LONG).show();
         }
     }
 }

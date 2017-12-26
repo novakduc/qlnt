@@ -53,7 +53,9 @@ public class ProjectUnitPriceConfigFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mUnitPrice = new UnitPrice();
+        if (savedInstanceState == null) {
+            mUnitPrice = new UnitPrice();
+        }
         setHasOptionsMenu(true);
         //mProject = (Project) getArguments().getParcelable(TEMP_PROJECT);
     }
@@ -77,6 +79,7 @@ public class ProjectUnitPriceConfigFragment extends Fragment {
 
         mElectricityLayout = view.findViewById(R.id.txtLayoutElectricity);
         EditText electricityEditText = view.findViewById(R.id.electricity);
+        electricityEditText.setText(String.valueOf(mUnitPrice.getElectricity()));
         //editTextAmount.setText(String.valueOf(mAmount));
         electricityEditText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -109,6 +112,7 @@ public class ProjectUnitPriceConfigFragment extends Fragment {
 
         mWaterLayout = view.findViewById(R.id.txtLayoutWater);
         EditText waterEditText = view.findViewById(R.id.water);
+        waterEditText.setText(String.valueOf(mUnitPrice.getWater()));
         //editTextAmount.setText(String.valueOf(mAmount));
         waterEditText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -141,6 +145,7 @@ public class ProjectUnitPriceConfigFragment extends Fragment {
 
         mInternetLayout = view.findViewById(R.id.txtLayoutInternet);
         EditText internetEditText = view.findViewById(R.id.internet);
+        internetEditText.setText(String.valueOf(mUnitPrice.getInternet()));
         //editTextAmount.setText(String.valueOf(mAmount));
         internetEditText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -173,6 +178,7 @@ public class ProjectUnitPriceConfigFragment extends Fragment {
 
         mSecurityLayout = view.findViewById(R.id.txtLayoutSecurity);
         final EditText securityEditText = view.findViewById(R.id.security);
+        securityEditText.setText(String.valueOf(mUnitPrice.getSecurity()));
         //editTextAmount.setText(String.valueOf(mAmount));
         securityEditText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -205,6 +211,7 @@ public class ProjectUnitPriceConfigFragment extends Fragment {
 
         mTrashLayout = view.findViewById(R.id.txtLayoutTrashCollection);
         EditText trashEditText = view.findViewById(R.id.trashCollention);
+        trashEditText.setText(String.valueOf(mUnitPrice.getTrashCollection()));
         //editTextAmount.setText(String.valueOf(mAmount));
         trashEditText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -237,6 +244,7 @@ public class ProjectUnitPriceConfigFragment extends Fragment {
 
         mTvLayout = view.findViewById(R.id.txtLayoutTv);
         EditText tvEditText = view.findViewById(R.id.tv);
+        tvEditText.setText(String.valueOf(mUnitPrice.getTv()));
         //editTextAmount.setText(String.valueOf(mAmount));
         tvEditText.addTextChangedListener(new TextWatcher() {
             @Override

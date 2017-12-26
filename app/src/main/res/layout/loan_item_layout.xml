@@ -22,6 +22,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:maxLines="1"
+                android:maxLength="12"
                 android:paddingEnd="@dimen/paddingEnd"
                 android:paddingStart="@dimen/paddingStart"
                 android:paddingTop="@dimen/paddingTop"

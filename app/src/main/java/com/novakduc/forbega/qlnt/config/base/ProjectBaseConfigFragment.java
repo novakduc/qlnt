@@ -42,6 +42,7 @@ import java.util.Date;
 public class ProjectBaseConfigFragment extends Fragment {
 
     public static final String TEMP_PROJECT = "com.novakduc.forbega.qlnt.tempproject";
+    public static final String FRAGMENT_TAG = "FINANCE_CONFIG_TAG";
     int mDuration = 10;
     private EditText mEditTextAddress;
     private EditText mEditTextName;
@@ -124,6 +125,7 @@ public class ProjectBaseConfigFragment extends Fragment {
                 } else mLayoutName.setErrorEnabled(false);
             }
         });
+
         mLayoutAddress = view.findViewById(R.id.txtLayoutAddress);
         mEditTextAddress = view.findViewById(R.id.address);
         mEditTextAddress.addTextChangedListener(new TextWatcher() {
@@ -295,7 +297,7 @@ public class ProjectBaseConfigFragment extends Fragment {
         mCallback.updateBase(mName, mAddress, mDuration, mStartDate);
         FragmentManager manager = getActivity().getFragmentManager();
         manager.beginTransaction().replace(R.id.fragmentContainer,
-                ProjectFinanceConfigFragment.newInstance()).addToBackStack(null).commit();
+                ProjectFinanceConfigFragment.newInstance(), FRAGMENT_TAG).addToBackStack(null).commit();
     }
 
     @Override

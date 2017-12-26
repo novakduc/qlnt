@@ -13,8 +13,8 @@ import com.novakduc.forbega.qlnt.R;
  */
 
 public class ConfirmationDialogFragment extends DialogFragment {
-    public static final int RESULT_OK = 1;
-    public static final int RESULT_CANCEL = 0;
+    public static final int RESULT_OK = 1001;
+    public static final int RESULT_CANCEL = 1000;
     public static final java.lang.String MESSAGE = "com.novakduc.forbega.qlnt.confirmation_message";
     private ConfirmListener callback;
     private String mMessage;

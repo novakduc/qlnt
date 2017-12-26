@@ -24,6 +24,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.novakduc.forbega.qlnt.R;
 import com.novakduc.forbega.qlnt.config.UpdateListener;
@@ -36,7 +37,7 @@ import com.novakduc.forbega.qlnt.model.LoanList;
  * Created by n.thanh on 10/21/2016.
  */
 
-public class ProjectFinanceConfigFragment extends Fragment {
+public class ProjectFinanceConfigFragment extends Fragment implements LoanContainerListener{
     public static final String TEMP_PROJECT = "com.novakduc.forbega.qlnt.tempproject";
 
     RecyclerView mRecyclerView;
@@ -173,6 +174,7 @@ public class ProjectFinanceConfigFragment extends Fragment {
             }
         }
         if (requestCode == LoansAdapter.LOAN_EDIT_REQUEST_FROM_ADAPTER) {
+
             if (resultCode == Activity.RESULT_OK) {
                 Loan tempLoan = data.getParcelableExtra(ProjectLoanDeclareFragment.RETURN_LOAN);
                 Loan loan = mLoanList.getLoan(tempLoan.getId());
@@ -191,4 +193,8 @@ public class ProjectFinanceConfigFragment extends Fragment {
         }
     }
 
+    @Override
+    public void loanDeleteUpdate() {
+        mTotalLoanTextView.setText(String.valueOf(mLoanList.getTotalLoanAmount(CurrencyUnit.MIL_BASE)));
+    }
 }
