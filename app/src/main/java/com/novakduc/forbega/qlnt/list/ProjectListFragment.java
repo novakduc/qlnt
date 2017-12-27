@@ -97,8 +97,6 @@ public class ProjectListFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(mProjectsRecyclerViewAdapter);
 
-        Log.d("Check", "RC has set");
-
         FloatingActionButton fab = view.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -187,13 +185,13 @@ public class ProjectListFragment extends Fragment {
                 public void onClick(View v) {
                     mProjectList.remove(project);
                     notifyDataSetChanged();
+                    // TODO: 12/27/2017 weird behaviour after deleting project
                 }
             });
 
             holder.mCopyButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // TODO: 12/27/2017  copy action
                     try {
                         Project cloneProject1 = (Project) project.clone();
                         mProjectList.add(cloneProject1);
