@@ -67,4 +67,5 @@
     <string name="project_create_confirm">Final Confirm</string>
     <string name="financeConfigFragmentTag">Finance Config Fragment Tag</string>
     <string name="millionShort">mil</string>
+    <string name="projectCopyError">Error on copying project</string>
 </resources>

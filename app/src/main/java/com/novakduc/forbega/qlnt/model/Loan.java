@@ -59,7 +59,7 @@ public class Loan extends DBObject implements Cloneable, Parcelable {
     }
 
     @Override
-    protected Object clone() throws CloneNotSupportedException {
+    public Object clone() throws CloneNotSupportedException {
         return super.clone();
     }
 

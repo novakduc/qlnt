@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * Created by n.thanh on 3/29/2017.
  */
 
-public class LoanList<E> extends ArrayList<E> implements Parcelable {
+public class LoanList<E> extends ArrayList<E> implements Parcelable, Cloneable {
     // TODO: 3/29/2017
 
     public static final Parcelable.Creator<LoanList> CREATOR = new Parcelable.Creator<LoanList>() {

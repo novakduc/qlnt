@@ -21,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -193,7 +194,14 @@ public class ProjectListFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
                     // TODO: 12/27/2017  copy action
-
+                    try {
+                        Project cloneProject1 = (Project) project.clone();
+                        mProjectList.add(cloneProject1);
+                        notifyDataSetChanged();
+                    } catch (CloneNotSupportedException pE) {
+                        Toast.makeText(mContext, mContext.getResources().getString(R.string.projectCopyError),
+                                Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
 

@@ -130,23 +130,24 @@ public class Project extends DBObject implements Cloneable, Parcelable {
     }
 
     @Override
-    protected Object clone() throws CloneNotSupportedException {
+    public Object clone() throws CloneNotSupportedException {
         Project project = (Project) super.clone();
+        project.setProjectId(Calendar.getInstance().getTimeInMillis());
         project.setUnitPrice((UnitPrice) mUnitPrice.clone());
         //Clone loan list
         LoanList<Loan> loanList = new LoanList<Loan>();
-        for (Loan loan :
+        for (Loan l :
                 mLoanList) {
-            loanList.add((Loan) loan.clone());
+            loanList.add((Loan) l.clone());
         }
-        project.setLoanList((LoanList<Loan>) mLoanList.clone());
+        project.setLoanList(loanList);
         //Clone room list
         RoomList<Room> rooms = new RoomList<Room>();
         for (Room room :
                 mRoomList) {
             rooms.add((Room) room.clone());
         }
-        project.setRoomList((RoomList<Room>) mRoomList.clone());
+        project.setRoomList(rooms);
         return project;
     }
 
@@ -155,7 +156,7 @@ public class Project extends DBObject implements Cloneable, Parcelable {
         return mProjectId;
     }
 
-    public void setProjectId(Long projectId) {
+    private void setProjectId(Long projectId) {
         mProjectId = projectId;
     }
 

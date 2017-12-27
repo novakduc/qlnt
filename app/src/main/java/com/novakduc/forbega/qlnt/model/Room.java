@@ -62,7 +62,7 @@ public class Room implements Cloneable {
 
     @Override
     protected Object clone() throws CloneNotSupportedException {
-        // TODO: 9/30/2016
+        // TODO: 9/30/2016 room clone
         return super.clone();
     }
 }
