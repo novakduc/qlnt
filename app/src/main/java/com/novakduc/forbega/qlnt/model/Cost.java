@@ -68,6 +68,10 @@ public class Cost extends DBObject implements Parcelable {
         return mAmount;
     }
 
+    public double getAmount(CurrencyUnit pUnit) {
+        return Loan.round((double)mAmount / pUnit.getUnit(), 3);
+    }
+
     public void setAmount(long amount) {
         mAmount = amount;
     }

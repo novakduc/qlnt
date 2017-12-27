@@ -27,6 +27,17 @@ public class CostManager<E> extends ArrayList<E> implements Parcelable {
     public CostManager() {
     }
 
+    public double getTotalCost(CurrencyUnit pUnit) {
+        double total = 0;
+        Cost cost;
+        for (E i :
+                this) {
+            cost = (Cost) i;
+            total += cost.getAmount(pUnit);
+        }
+        return total;
+    }
+
     protected CostManager(Parcel in) {
     }
 

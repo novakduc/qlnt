@@ -79,12 +79,25 @@ public class Project extends DBObject implements Cloneable, Parcelable {
         return mName;
     }
 
+
+    public CostManager<Cost> getCostManager() {
+        return mCostManager;
+    }
+
+    public void setCostManager(CostManager<Cost> pCostManager) {
+        mCostManager = pCostManager;
+    }
+
     public RoomList<Room> getRoomList() {
         return mRoomList;
     }
 
+    public double getTotalIncome(CurrencyUnit unit) {
+        return Loan.round(((double) (getTotalIncome()) / unit.getUnit()), 3);
+    }
+
     public double getInvestment(CurrencyUnit unit) {
-        return Loan.round(Double.valueOf(mInvestment) / unit.getUnit(), 3);
+        return Loan.round((double) (mInvestment) / unit.getUnit(), 3);
     }
 
     //Add cost

@@ -81,7 +81,7 @@ public class Loan extends DBObject implements Cloneable, Parcelable {
     }
 
     public double getAmount(CurrencyUnit unit) {
-        double convertedAmount = round(Double.valueOf(mAmount) / unit.getUnit(), 3);
+        double convertedAmount = round((double) (mAmount) / unit.getUnit(), 3);
         return convertedAmount;
     }
 

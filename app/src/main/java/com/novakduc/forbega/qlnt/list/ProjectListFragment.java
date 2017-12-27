@@ -141,7 +141,7 @@ public class ProjectListFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(final ViewHolder holder, final int position) {
-            Project project = mProjectList.get(position);
+            final Project project = mProjectList.get(position);
             holder.mNameTextView.setText(project.getName());
             holder.mDurationTextView.setText(String.valueOf(project.getStartYear()) + "-"
                     + String.valueOf(project.getEndYear()));
@@ -155,7 +155,7 @@ public class ProjectListFragment extends Fragment {
             holder.mRatingBar.setRating(v);
 
             long investmentAmount = project.getInvestment();
-            holder.mIncomeTextView.setText(String.valueOf(project.getInvestment(CurrencyUnit.MIL_BASE)));
+            holder.mIncomeTextView.setText(String.valueOf(project.getTotalIncome(CurrencyUnit.MIL_BASE)));
             if (investmentAmount == 0) {
                 holder.mIncomeProgressBar.setProgress(100);
                 if (project.getLoanList().getTotalLoanAmount(CurrencyUnit.BASE) > 0) {
@@ -171,6 +171,39 @@ public class ProjectListFragment extends Fragment {
 
             holder.mDeptTextView.setText(String.valueOf(project.getLoanList()
                     .getTotalLoanAmount(CurrencyUnit.MIL_BASE)));
+            int deptPercentage = Math.round((float) (project.getLoanList().getTotalLoanAmount(
+                    CurrencyUnit.BASE) * 100/ investmentAmount));
+            holder.mDeptProgressBar.setProgress(deptPercentage);
+
+            holder.mRevenueTextView.setText(String.valueOf(project.getTotalIncome(CurrencyUnit.MIL_BASE)));
+            int revenuePercentage = Math.round((float) (
+                    project.getLoanList().getTotalLoanAmount(CurrencyUnit.BASE)
+                            - project.getCostManager().getTotalCost(CurrencyUnit.BASE))/ investmentAmount);
+            holder.mRevenueProgressBar.setProgress(revenuePercentage);
+
+            holder.mDeleteButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mProjectList.remove(project);
+                    notifyDataSetChanged();
+                }
+            });
+
+            holder.mCopyButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // TODO: 12/27/2017  copy action
+
+                }
+            });
+
+            holder.mEditButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // TODO: 12/27/2017 Edit action
+
+                }
+            });
         }
 
         @Override
