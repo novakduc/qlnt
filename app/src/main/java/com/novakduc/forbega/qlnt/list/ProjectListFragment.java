@@ -147,6 +147,11 @@ public class ProjectListFragment extends Fragment {
             holder.mProduceRateTextView.setText(String.valueOf(
                     project.getRoomList().getNoOfProducingRoom()) + "/"
                     + String.valueOf(project.getRoomList().size()));
+            float v = 0;
+            if (project.getRoomList().size() != 0) {
+                v = project.getRoomList().getNoOfProducingRoom() / project.getRoomList().size();
+            }
+            holder.mRatingBar.setRating(v);
 
         }
 
