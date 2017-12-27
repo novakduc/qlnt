@@ -143,7 +143,7 @@ public class ProjectListFragment extends Fragment {
         public void onBindViewHolder(final ViewHolder holder, final int position) {
             final Project project = mProjectList.get(position);
             holder.mNameTextView.setText(project.getName());
-            holder.mDurationTextView.setText(String.valueOf(project.getStartYear()) + "-"
+            holder.mDurationTextView.setText(String.valueOf(project.getStartYear()) + " - "
                     + String.valueOf(project.getEndYear()));
             holder.mProduceRateTextView.setText(String.valueOf(
                     project.getRoomList().getNoOfProducingRoom()) + "/"
