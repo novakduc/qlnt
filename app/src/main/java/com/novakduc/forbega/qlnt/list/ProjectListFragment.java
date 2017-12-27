@@ -26,6 +26,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.novakduc.forbega.qlnt.R;
 import com.novakduc.forbega.qlnt.config.ProjectConfigurationActivity;
+import com.novakduc.forbega.qlnt.model.CurrencyUnit;
 import com.novakduc.forbega.qlnt.model.Project;
 import com.novakduc.forbega.qlnt.model.Qlnt;
 
@@ -153,6 +154,23 @@ public class ProjectListFragment extends Fragment {
             }
             holder.mRatingBar.setRating(v);
 
+            long investmentAmount = project.getInvestment();
+            holder.mIncomeTextView.setText(String.valueOf(project.getInvestment(CurrencyUnit.MIL_BASE)));
+            if (investmentAmount == 0) {
+                holder.mIncomeProgressBar.setProgress(100);
+                if (project.getLoanList().getTotalLoanAmount(CurrencyUnit.BASE) > 0) {
+                    holder.mDeptProgressBar.setProgress(100);
+                } else {
+                    holder.mDeptProgressBar.setProgress(0);
+                }
+
+                holder.mRevenueProgressBar.setProgress(100);
+            }
+            int incomePercentage = Math.round(project.getTotalIncome() * 100 / investmentAmount);
+            holder.mIncomeProgressBar.setProgress(incomePercentage);
+
+            holder.mDeptTextView.setText(String.valueOf(project.getLoanList()
+                    .getTotalLoanAmount(CurrencyUnit.MIL_BASE)));
         }
 
         @Override

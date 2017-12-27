@@ -83,6 +83,10 @@ public class Project extends DBObject implements Cloneable, Parcelable {
         return mRoomList;
     }
 
+    public double getInvestment(CurrencyUnit unit) {
+        return Loan.round(Double.valueOf(mInvestment) / unit.getUnit(), 3);
+    }
+
     //Add cost
     public boolean addCost(long amount, CostType type, long date, boolean repeatable) {
         return mCostManager.add(new Cost(amount, type, date, repeatable));

@@ -66,4 +66,5 @@
     <string name="add_loan_bt">ADD LOAN</string>
     <string name="project_create_confirm">Final Confirm</string>
     <string name="financeConfigFragmentTag">Finance Config Fragment Tag</string>
+    <string name="millionShort">mil</string>
 </resources>

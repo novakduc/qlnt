@@ -117,7 +117,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:paddingEnd="8dp"
-                            android:text="@string/currencyUnit"
+                            android:text="@string/millionShort"
                             android:textSize="20sp"/>
 
                         <ProgressBar
@@ -128,7 +128,7 @@
                             android:layout_marginTop="2dp"
                             android:layout_weight="35"
                             android:paddingEnd="16dp"
-                            android:paddingStart="16dp"
+                            android:paddingStart="8dp"
                             android:progress="10"
                             android:scaleY="2.5"/>
 
@@ -164,7 +164,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:paddingEnd="8dp"
-                            android:text="mil"
+                            android:text="@string/millionShort"
                             android:textSize="20sp"/>
 
                         <ProgressBar
@@ -175,7 +175,7 @@
                             android:layout_marginTop="2dp"
                             android:layout_weight="35"
                             android:paddingEnd="16dp"
-                            android:paddingStart="16dp"
+                            android:paddingStart="8dp"
                             android:progress="80"
                             android:scaleY="2.5"/>
 
@@ -213,7 +213,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingEnd="8dp"
-                    android:text="mil"
+                    android:text="@string/millionShort"
                     android:textSize="20sp"/>
 
                 <ProgressBar
@@ -224,7 +224,7 @@
                     android:layout_marginTop="2dp"
                     android:layout_weight="35"
                     android:paddingEnd="16dp"
-                    android:paddingStart="16dp"
+                    android:paddingStart="8dp"
                     android:progress="50"
                     android:scaleY="2.5"/>
 
