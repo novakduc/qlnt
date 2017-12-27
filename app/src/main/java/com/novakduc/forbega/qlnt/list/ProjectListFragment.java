@@ -174,9 +174,9 @@ public class ProjectListFragment extends Fragment {
             holder.mDeptProgressBar.setProgress(deptPercentage);
 
             holder.mRevenueTextView.setText(String.valueOf(project.getTotalIncome(CurrencyUnit.MIL_BASE)));
-            int revenuePercentage = Math.round((float) (
-                    project.getLoanList().getTotalLoanAmount(CurrencyUnit.BASE)
-                            - project.getCostManager().getTotalCost(CurrencyUnit.BASE))/ investmentAmount);
+            int revenuePercentage = Math.round(
+                    (project.getLoanList().getTotalLoanAmount() - project.getCostManager().getTotalCost())
+                            / investmentAmount);
             holder.mRevenueProgressBar.setProgress(revenuePercentage);
 
             holder.mDeleteButton.setOnClickListener(new View.OnClickListener() {

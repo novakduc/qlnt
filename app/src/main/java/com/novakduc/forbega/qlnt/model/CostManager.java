@@ -29,11 +29,19 @@ public class CostManager<E> extends ArrayList<E> implements Parcelable {
 
     public double getTotalCost(CurrencyUnit pUnit) {
         double total = 0;
+        for (E i :
+                this) {
+            total += ((Cost) i).getAmount(pUnit);
+        }
+        return total;
+    }
+
+    public long getTotalCost() {
+        long total = 0;
         Cost cost;
         for (E i :
                 this) {
-            cost = (Cost) i;
-            total += cost.getAmount(pUnit);
+            total += ((Cost)i).getAmount();
         }
         return total;
     }
