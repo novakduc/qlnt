@@ -31,6 +31,15 @@ public class LoanList<E> extends ArrayList<E> implements Parcelable, Cloneable {
     protected LoanList(Parcel in) {
     }
 
+    public long getTotalLoanAmount() {
+        long total = 0;
+        for (E i :
+                this) {
+            total += ((Loan) i).getAmount();
+        }
+        return total;
+    }
+
     public double getTotalLoanAmount(CurrencyUnit unit) {
         double total = 0;
         for (E i :

@@ -170,8 +170,7 @@ public class ProjectListFragment extends Fragment {
 
             holder.mDeptTextView.setText(String.valueOf(project.getLoanList()
                     .getTotalLoanAmount(CurrencyUnit.MIL_BASE)));
-            int deptPercentage = Math.round((float) (project.getLoanList().getTotalLoanAmount(
-                    CurrencyUnit.BASE) * 100/ investmentAmount));
+            int deptPercentage = Math.round((project.getLoanList().getTotalLoanAmount() * 100/ investmentAmount));
             holder.mDeptProgressBar.setProgress(deptPercentage);
 
             holder.mRevenueTextView.setText(String.valueOf(project.getTotalIncome(CurrencyUnit.MIL_BASE)));
