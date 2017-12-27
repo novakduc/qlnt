@@ -79,6 +79,10 @@ public class Project extends DBObject implements Cloneable, Parcelable {
         return mName;
     }
 
+    public RoomList<Room> getRoomList() {
+        return mRoomList;
+    }
+
     //Add cost
     public boolean addCost(long amount, CostType type, long date, boolean repeatable) {
         return mCostManager.add(new Cost(amount, type, date, repeatable));
@@ -94,6 +98,18 @@ public class Project extends DBObject implements Cloneable, Parcelable {
         endDate.setTimeInMillis(mStartDate);
         endDate.add(Calendar.YEAR, mYearDuration);
         return endDate.getTimeInMillis();
+    }
+
+    public int getStartYear() {
+        Calendar tmp = Calendar.getInstance();
+        tmp.setTimeInMillis(mStartDate);
+        return tmp.get(Calendar.YEAR);
+    }
+
+    public int getEndYear() {
+        Calendar tmp = Calendar.getInstance();
+        tmp.setTimeInMillis(getEndDate());
+        return tmp.get(Calendar.YEAR);
     }
 
     @Override

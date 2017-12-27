@@ -140,8 +140,13 @@ public class ProjectListFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(final ViewHolder holder, final int position) {
-            holder.mProjectName = mProjectList.get(position).getName();
-            holder.mNameTextView.setText(mProjectList.get(position).getName());
+            Project project = mProjectList.get(position);
+            holder.mNameTextView.setText(project.getName());
+            holder.mDurationTextView.setText(String.valueOf(project.getStartYear()) + "-"
+                    + String.valueOf(project.getEndYear()));
+            holder.mProduceRateTextView.setText(String.valueOf(
+                    project.getRoomList().getNoOfProducingRoom()) + "/"
+                    + String.valueOf(project.getRoomList().size()));
 
         }
 
@@ -168,6 +173,18 @@ public class ProjectListFragment extends Fragment {
             public ViewHolder(View view) {
                 super(view);
                 mNameTextView = view.findViewById(R.id.textViewProjectName);
+                mDurationTextView = view.findViewById(R.id.textViewProjectDuration);
+                mRatingBar = view.findViewById(R.id.ratingBar);
+                mProduceRateTextView = view.findViewById(R.id.textViewProjectProduceRate);
+                mIncomeTextView = view.findViewById(R.id.txtViewTotalIncome);
+                mIncomeProgressBar = view.findViewById(R.id.progressBarIncome);
+                mDeptTextView = view.findViewById(R.id.txtViewDept);
+                mDeptProgressBar = view.findViewById(R.id.progressBarDept);
+                mRevenueTextView = view.findViewById(R.id.txtViewRevenue);
+                mRevenueProgressBar = view.findViewById(R.id.progressBarRevenue);
+                mDeleteButton = view.findViewById(R.id.btDelete);
+                mEditButton = view.findViewById(R.id.btEdit);
+                mCopyButton = view.findViewById(R.id.btCopy);
             }
 
             @Override

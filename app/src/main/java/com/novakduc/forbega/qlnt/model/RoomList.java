@@ -24,6 +24,21 @@ public class RoomList<E> extends ArrayList<E> implements Parcelable {
         }
     };
 
+    public int getNoOfProducingRoom() {
+        return this.size() - getNoOfAvailableRoom();
+    }
+
+    private int getNoOfAvailableRoom() {
+        int availableCount = 0;
+        Room room;
+        for (E i :
+                this) {
+            room = (Room) i;
+            if (room.isAvailable()) availableCount++;
+        }
+        return availableCount;
+    }
+
     public RoomList() {
     }
 

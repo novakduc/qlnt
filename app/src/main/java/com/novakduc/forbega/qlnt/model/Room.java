@@ -11,6 +11,7 @@ public class Room implements Cloneable {
     private String mName;
     private double mArea;
     private long mCharge;
+    private boolean mAvailable;
     private ArrayList<RoomService> mRoomServices;
     private long mProjectId; // TODO: 12/2/2016 check check ...
 
@@ -18,8 +19,17 @@ public class Room implements Cloneable {
         mName = name;
         this.mArea = area;
         this.mCharge = charge;
+        mAvailable = true;
         mProjectId = projectId;
         mRoomServices = new ArrayList<RoomService>(5);
+    }
+
+    public boolean isAvailable() {
+        return mAvailable;
+    }
+
+    public void setAvailable(boolean mAvailable) {
+        this.mAvailable = mAvailable;
     }
 
     public String getName() {
