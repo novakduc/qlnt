@@ -3,7 +3,11 @@ package com.novakduc.forbega.qlnt.db;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.novakduc.forbega.qlnt.model.Loan;
 import com.novakduc.forbega.qlnt.model.LoanList;
 import com.novakduc.forbega.qlnt.model.Project;
@@ -12,9 +16,11 @@ import com.novakduc.forbega.qlnt.model.Project;
  * Created by n.thanh on 10/27/2015.
  */
 public class ProjectDbManager implements StringForDB {
+    private final String TAG = "Project Database Manger";
     private SQLiteDatabase mDatabase;
     private QlntSQLiteOpenHelper mHelper;
     private Context mContext;
+    private FirebaseFirestore mFirestoreDB;
 
     public ProjectDbManager(Context context) {
         mContext = context;
@@ -41,6 +47,18 @@ public class ProjectDbManager implements StringForDB {
         contentValues.put(PROJECT_TOTAL_INCOME_ROW, project.getTotalIncome());
 
         mDatabase.insert(PROJECT_TABLE, null, contentValues);
+        // TODO: 12/28/2017 Check on uploading project to cloudFire
+        /*
+        mFirestoreDB.collection("projects")
+                .add(contentValues)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+
+                    @Override
+                    public void onSuccess(DocumentReference pDocumentReference) {
+                        Log.d(TAG, "Project is written to cloud fire");
+                    }
+                });
+         */
 
         //record unit price
         contentValues = new ContentValues();

@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "967433277216",
+    "firebase_url": "https://second-joy.firebaseio.com",
+    "project_id": "second-joy",
+    "storage_bucket": "second-joy.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:967433277216:android:bb9798551ef503b5",
+        "android_client_info": {
+          "package_name": "com.novakduc.forbega.qlnt"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "967433277216-gf0mq1k38ovfq2qm6bud2pu7cpdpf6k3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.novakduc.forbega.qlnt",
+            "certificate_hash": "e4cc68926b04b65626ef66a528a3d11cbd546c2a"
+          }
+        },
+        {
+          "client_id": "967433277216-kgj4a0lechdueja664boppoab77kpu8t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBmFUZg4zRw4njFJTC4AdgWgPzdhKsVtIY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "967433277216-kgj4a0lechdueja664boppoab77kpu8t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

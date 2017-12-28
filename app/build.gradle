@@ -23,6 +23,8 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.google.firebase:firebase-core:11.8.0'
+    implementation 'com.google.firebase:firebase-firestore:11.8.0'
     androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
@@ -45,3 +47,4 @@ dependencies {
     annotationProcessor 'org.parceler:parceler:1.1.9'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
 }
+apply plugin: 'com.google.gms.google-services'
