@@ -1,5 +1,9 @@
 package com.novakduc.forbega.qlnt.data.database;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.PrimaryKey;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -8,21 +12,38 @@ import java.util.Date;
 /**
  * Created by n.thanh on 9/21/2016.
  */
+@Entity(tableName = "project")
 public class Project implements Cloneable {
 
+    @PrimaryKey
     private long mProjectId;
     private String mName;
     private String mAddress;
     private long mInvestment;
-    private long mTotalIncome;
     private long mStartDate;
     private int mYearDuration;
+    @Ignore
+    private long mTotalIncome;
+    @Ignore
     private UnitPrice mUnitPrice;
+    @Ignore
     private LoanList<Loan> mLoanList;
+    @Ignore
     private RoomList<RoomForRent> mRoomForRentList;
+    @Ignore
     private CostManager<Cost> mCostManager;
 
+    public Project(long mProjectId, String mName, String mAddress, long mInvestment,
+                   long mStartDate, int mYearDuration) {
+        this.mProjectId = mProjectId;
+        this.mName = mName;
+        this.mAddress = mAddress;
+        this.mInvestment = mInvestment;
+        this.mStartDate = mStartDate;
+        this.mYearDuration = mYearDuration;
+    }
 
+    @Ignore
     public Project() {
         mProjectId = Calendar.getInstance().getTimeInMillis();
         mLoanList = new LoanList<Loan>();

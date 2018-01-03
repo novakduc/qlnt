@@ -30,7 +30,19 @@ public interface QlntDao {
     @Query("SELECT * FROM loan WHERE projectId = :projectId")
     List<Loan> getAllLoan(long projectId);
 
-    //Get all loan in project with specified type
+    //Get a loan
     @Query("SELECT * FROM loan WHERE projectId = :projectId AND id = :id")
-    List<Cost> getLoanById(long projectId, long id);
+    Loan getLoanById(long projectId, long id);
+
+    //Get a project
+    @Query("SELECT * FROM project WHERE projectId = :projectId")
+    Project getProject(long projectId);
+
+    //Get all project
+    @Query("SELECT * FROM project")
+    List<Cost> getAllProjects();
+
+    //Insert a project to database
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void insert(Project project);
 }
