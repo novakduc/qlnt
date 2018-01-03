@@ -1,4 +1,4 @@
-package com.novakduc.forbega.qlnt.model;
+package com.novakduc.forbega.qlnt.data.database;
 
 import android.content.Context;
 import android.os.AsyncTask;

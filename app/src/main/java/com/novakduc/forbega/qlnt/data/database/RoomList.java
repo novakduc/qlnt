@@ -1,4 +1,4 @@
-package com.novakduc.forbega.qlnt.model;
+package com.novakduc.forbega.qlnt.data.database;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -24,6 +24,12 @@ public class RoomList<E> extends ArrayList<E> implements Parcelable {
         }
     };
 
+    public RoomList() {
+    }
+
+    protected RoomList(Parcel in) {
+    }
+
     public int getNoOfProducingRoom() {
         return this.size() - getNoOfAvailableRoom();
     }
@@ -37,12 +43,6 @@ public class RoomList<E> extends ArrayList<E> implements Parcelable {
             if (room.isAvailable()) availableCount++;
         }
         return availableCount;
-    }
-
-    public RoomList() {
-    }
-
-    protected RoomList(Parcel in) {
     }
 
     @Override

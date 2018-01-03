@@ -1,4 +1,4 @@
-package com.novakduc.forbega.qlnt.model;
+package com.novakduc.forbega.qlnt.data.database;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -90,6 +90,10 @@ public class Project extends DBObject implements Cloneable, Parcelable {
 
     public RoomList<Room> getRoomList() {
         return mRoomList;
+    }
+
+    private void setRoomList(RoomList<Room> list) {
+        mRoomList = list;
     }
 
     public double getTotalIncome(CurrencyUnit unit) {
@@ -216,18 +220,14 @@ public class Project extends DBObject implements Cloneable, Parcelable {
         mUnitPrice = unitPrice;
     }
 
+    //Parcel
+
     public LoanList<Loan> getLoanList() {
         return mLoanList;
     }
 
-    //Parcel
-
     private void setLoanList(LoanList<Loan> loanList) {
         mLoanList = loanList;
-    }
-
-    private void setRoomList(RoomList<Room> list) {
-        mRoomList = list;
     }
 
     @Override

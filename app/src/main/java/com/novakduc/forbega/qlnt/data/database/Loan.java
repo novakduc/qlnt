@@ -1,4 +1,4 @@
-package com.novakduc.forbega.qlnt.model;
+package com.novakduc.forbega.qlnt.data.database;
 
 import android.os.Parcel;
 import android.os.Parcelable;

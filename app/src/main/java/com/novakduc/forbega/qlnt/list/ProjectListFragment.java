@@ -12,7 +12,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,9 +26,9 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.novakduc.forbega.qlnt.R;
 import com.novakduc.forbega.qlnt.config.ProjectConfigurationActivity;
-import com.novakduc.forbega.qlnt.model.CurrencyUnit;
-import com.novakduc.forbega.qlnt.model.Project;
-import com.novakduc.forbega.qlnt.model.Qlnt;
+import com.novakduc.forbega.qlnt.data.database.CurrencyUnit;
+import com.novakduc.forbega.qlnt.data.database.Project;
+import com.novakduc.forbega.qlnt.data.database.Qlnt;
 
 import java.util.ArrayList;
 
@@ -44,9 +43,9 @@ public class ProjectListFragment extends Fragment {
     public static final String PREF_QLNT = "com.novak.forbequ.qlnt";
     private static final String ACTIVE_PROJECT_ID = "active_project_id";
     private static final int PROJECT_CONFIG_RESULT = 0;
+    ProjectsRecyclerViewAdapter mProjectsRecyclerViewAdapter;
     private long mActiveProject = -1;
     private ArrayList<Project> mProjects;
-    ProjectsRecyclerViewAdapter mProjectsRecyclerViewAdapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

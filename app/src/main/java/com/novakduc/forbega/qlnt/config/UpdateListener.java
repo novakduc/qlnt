@@ -1,8 +1,8 @@
 package com.novakduc.forbega.qlnt.config;
 
-import com.novakduc.forbega.qlnt.model.Loan;
-import com.novakduc.forbega.qlnt.model.LoanList;
-import com.novakduc.forbega.qlnt.model.UnitPrice;
+import com.novakduc.forbega.qlnt.data.database.Loan;
+import com.novakduc.forbega.qlnt.data.database.LoanList;
+import com.novakduc.forbega.qlnt.data.database.UnitPrice;
 
 /**
  * Created by n.thanh on 4/18/2017.

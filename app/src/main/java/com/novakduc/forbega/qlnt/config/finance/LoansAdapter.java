@@ -13,8 +13,8 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.novakduc.forbega.qlnt.R;
-import com.novakduc.forbega.qlnt.model.CurrencyUnit;
-import com.novakduc.forbega.qlnt.model.Loan;
+import com.novakduc.forbega.qlnt.data.database.CurrencyUnit;
+import com.novakduc.forbega.qlnt.data.database.Loan;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

@@ -24,14 +24,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.novakduc.forbega.qlnt.R;
 import com.novakduc.forbega.qlnt.config.UpdateListener;
 import com.novakduc.forbega.qlnt.config.unitprice.ProjectUnitPriceConfigFragment;
-import com.novakduc.forbega.qlnt.model.CurrencyUnit;
-import com.novakduc.forbega.qlnt.model.Loan;
-import com.novakduc.forbega.qlnt.model.LoanList;
+import com.novakduc.forbega.qlnt.data.database.CurrencyUnit;
+import com.novakduc.forbega.qlnt.data.database.Loan;
+import com.novakduc.forbega.qlnt.data.database.LoanList;
 
 /**
  * Created by n.thanh on 10/21/2016.

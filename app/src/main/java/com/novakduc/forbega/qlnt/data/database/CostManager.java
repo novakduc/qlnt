@@ -1,4 +1,4 @@
-package com.novakduc.forbega.qlnt.model;
+package com.novakduc.forbega.qlnt.data.database;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -27,6 +27,9 @@ public class CostManager<E> extends ArrayList<E> implements Parcelable {
     public CostManager() {
     }
 
+    protected CostManager(Parcel in) {
+    }
+
     public double getTotalCost(CurrencyUnit pUnit) {
         double total = 0;
         for (E i :
@@ -44,9 +47,6 @@ public class CostManager<E> extends ArrayList<E> implements Parcelable {
             total += ((Cost)i).getAmount();
         }
         return total;
-    }
-
-    protected CostManager(Parcel in) {
     }
 
     @Override

@@ -16,7 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.novakduc.forbega.qlnt.model.Qlnt;
+import com.novakduc.forbega.qlnt.data.database.Qlnt;
 
 /**
  * Created by n.thanh on 10/12/2016.

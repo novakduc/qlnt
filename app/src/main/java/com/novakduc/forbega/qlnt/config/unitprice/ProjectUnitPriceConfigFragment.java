@@ -1,7 +1,6 @@
 package com.novakduc.forbega.qlnt.config.unitprice;
 
 import android.app.Fragment;
-import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -17,14 +16,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 
 import com.novakduc.forbega.qlnt.R;
-import com.novakduc.forbega.qlnt.config.ProjectCreateConfirmationFragment;
 import com.novakduc.forbega.qlnt.config.UpdateListener;
-import com.novakduc.forbega.qlnt.model.Project;
-import com.novakduc.forbega.qlnt.model.UnitPrice;
+import com.novakduc.forbega.qlnt.data.database.Project;
+import com.novakduc.forbega.qlnt.data.database.UnitPrice;
 
 /**
  * Created by n.thanh on 10/21/2016.

@@ -1,4 +1,4 @@
-package com.novakduc.forbega.qlnt.model;
+package com.novakduc.forbega.qlnt.data.database;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -68,12 +68,12 @@ public class Cost extends DBObject implements Parcelable {
         return mAmount;
     }
 
-    public double getAmount(CurrencyUnit pUnit) {
-        return Loan.round((double)mAmount / pUnit.getUnit(), 3);
-    }
-
     public void setAmount(long amount) {
         mAmount = amount;
+    }
+
+    public double getAmount(CurrencyUnit pUnit) {
+        return Loan.round((double) mAmount / pUnit.getUnit(), 3);
     }
 
     @Override

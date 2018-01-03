@@ -3,14 +3,11 @@ package com.novakduc.forbega.qlnt.db;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.novakduc.forbega.qlnt.model.Loan;
-import com.novakduc.forbega.qlnt.model.LoanList;
-import com.novakduc.forbega.qlnt.model.Project;
+import com.novakduc.forbega.qlnt.data.database.Loan;
+import com.novakduc.forbega.qlnt.data.database.LoanList;
+import com.novakduc.forbega.qlnt.data.database.Project;
 
 /**
  * Created by n.thanh on 10/27/2015.

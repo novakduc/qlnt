@@ -28,12 +28,9 @@ import com.novakduc.forbega.qlnt.DatePickerFragment;
 import com.novakduc.forbega.qlnt.R;
 import com.novakduc.forbega.qlnt.config.UpdateListener;
 import com.novakduc.forbega.qlnt.config.finance.ProjectFinanceConfigFragment;
-import com.novakduc.forbega.qlnt.model.Project;
+import com.novakduc.forbega.qlnt.data.database.Project;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
 /**
  * Created by n.thanh on 10/21/2016.

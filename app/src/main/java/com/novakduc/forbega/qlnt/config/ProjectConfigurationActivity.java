@@ -9,10 +9,10 @@ import android.util.Log;
 import com.novakduc.baselibrary.SimpleFragmentActivity;
 import com.novakduc.forbega.qlnt.R;
 import com.novakduc.forbega.qlnt.config.base.ProjectBaseConfigFragment;
-import com.novakduc.forbega.qlnt.model.Loan;
-import com.novakduc.forbega.qlnt.model.LoanList;
-import com.novakduc.forbega.qlnt.model.Project;
-import com.novakduc.forbega.qlnt.model.UnitPrice;
+import com.novakduc.forbega.qlnt.data.database.Loan;
+import com.novakduc.forbega.qlnt.data.database.LoanList;
+import com.novakduc.forbega.qlnt.data.database.Project;
+import com.novakduc.forbega.qlnt.data.database.UnitPrice;
 
 public class ProjectConfigurationActivity extends SimpleFragmentActivity
         implements UpdateListener, ConfirmationDialogFragment.ConfirmListener {

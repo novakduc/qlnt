@@ -3,7 +3,6 @@ package com.novakduc.forbega.qlnt.config;
 import android.app.Activity;
 import android.app.DialogFragment;
 import android.app.Fragment;
-import android.content.ContentUris;
 import android.content.Intent;
 import android.content.res.TypedArray;
 import android.os.Bundle;
@@ -34,12 +33,12 @@ import com.novakduc.forbega.qlnt.config.finance.LoanContainerListener;
 import com.novakduc.forbega.qlnt.config.finance.LoansAdapter;
 import com.novakduc.forbega.qlnt.config.finance.ProjectLoanDeclareActivity;
 import com.novakduc.forbega.qlnt.config.finance.ProjectLoanDeclareFragment;
-import com.novakduc.forbega.qlnt.model.CurrencyUnit;
-import com.novakduc.forbega.qlnt.model.Loan;
-import com.novakduc.forbega.qlnt.model.LoanList;
-import com.novakduc.forbega.qlnt.model.Project;
-import com.novakduc.forbega.qlnt.model.Qlnt;
-import com.novakduc.forbega.qlnt.model.UnitPrice;
+import com.novakduc.forbega.qlnt.data.database.CurrencyUnit;
+import com.novakduc.forbega.qlnt.data.database.Loan;
+import com.novakduc.forbega.qlnt.data.database.LoanList;
+import com.novakduc.forbega.qlnt.data.database.Project;
+import com.novakduc.forbega.qlnt.data.database.Qlnt;
+import com.novakduc.forbega.qlnt.data.database.UnitPrice;
 
 import java.util.Calendar;
 

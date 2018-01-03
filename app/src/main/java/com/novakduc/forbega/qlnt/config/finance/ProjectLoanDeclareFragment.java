@@ -24,7 +24,7 @@ import android.widget.EditText;
 
 import com.novakduc.forbega.qlnt.DatePickerFragment;
 import com.novakduc.forbega.qlnt.R;
-import com.novakduc.forbega.qlnt.model.Loan;
+import com.novakduc.forbega.qlnt.data.database.Loan;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
