@@ -1,43 +1,16 @@
 package com.novakduc.forbega.qlnt.data.database;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 /**
  * Created by n.thanh on 9/21/2016.
  */
-public class UnitPrice extends DBObject implements Cloneable, Parcelable {
-    public static final Parcelable.Creator<UnitPrice> CREATOR = new Parcelable.Creator<UnitPrice>() {
-        @Override
-        public UnitPrice createFromParcel(Parcel source) {
-            return new UnitPrice(source);
-        }
+public class UnitPrice implements Cloneable {
 
-        @Override
-        public UnitPrice[] newArray(int size) {
-            return new UnitPrice[size];
-        }
-    };
     private long mElectricity;
     private long mWater;
     private long mTv;
     private long mTrashCollection;
     private long mInternet;
     private long mSecurity;
-
-    public UnitPrice() {
-
-    }
-
-    protected UnitPrice(Parcel in) {
-        this.mElectricity = in.readLong();
-        this.mWater = in.readLong();
-        this.mTv = in.readLong();
-        this.mTrashCollection = in.readLong();
-        this.mInternet = in.readLong();
-        this.mSecurity = in.readLong();
-        this.isChanged = in.readByte() != 0;
-    }
 
     public long get(CostType type) {
         switch (type) {
@@ -111,22 +84,5 @@ public class UnitPrice extends DBObject implements Cloneable, Parcelable {
     @Override
     protected Object clone() throws CloneNotSupportedException {
         return super.clone();
-    }
-
-    //Parcel
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeLong(this.mElectricity);
-        dest.writeLong(this.mWater);
-        dest.writeLong(this.mTv);
-        dest.writeLong(this.mTrashCollection);
-        dest.writeLong(this.mInternet);
-        dest.writeLong(this.mSecurity);
-        dest.writeByte(this.isChanged ? (byte) 1 : (byte) 0);
     }
 }

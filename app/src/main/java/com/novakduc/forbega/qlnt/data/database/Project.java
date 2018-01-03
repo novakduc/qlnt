@@ -1,8 +1,5 @@
 package com.novakduc.forbega.qlnt.data.database;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -11,19 +8,8 @@ import java.util.Date;
 /**
  * Created by n.thanh on 9/21/2016.
  */
-public class Project extends DBObject implements Cloneable, Parcelable {
+public class Project implements Cloneable {
 
-    public static final Creator<Project> CREATOR = new Creator<Project>() {
-        @Override
-        public Project createFromParcel(Parcel source) {
-            return new Project(source);
-        }
-
-        @Override
-        public Project[] newArray(int size) {
-            return new Project[size];
-        }
-    };
     private long mProjectId;
     private String mName;
     private String mAddress;
@@ -33,7 +19,7 @@ public class Project extends DBObject implements Cloneable, Parcelable {
     private int mYearDuration;
     private UnitPrice mUnitPrice;
     private LoanList<Loan> mLoanList;
-    private RoomList<Room> mRoomList;
+    private RoomList<RoomForRent> mRoomForRentList;
     private CostManager<Cost> mCostManager;
 
 
@@ -41,22 +27,7 @@ public class Project extends DBObject implements Cloneable, Parcelable {
         mProjectId = Calendar.getInstance().getTimeInMillis();
         mLoanList = new LoanList<Loan>();
         mCostManager = new CostManager<Cost>();
-        mRoomList = new RoomList<Room>();
-    }
-
-    protected Project(Parcel in) {
-        this.mProjectId = in.readLong();
-        this.mName = in.readString();
-        this.mAddress = in.readString();
-        this.mInvestment = in.readLong();
-        this.mTotalIncome = in.readLong();
-        this.mStartDate = in.readLong();
-        this.mYearDuration = in.readInt();
-        this.mUnitPrice = in.readParcelable(UnitPrice.class.getClassLoader());
-        this.mLoanList = in.readParcelable(LoanList.class.getClassLoader());
-        this.mRoomList = in.readParcelable(RoomList.class.getClassLoader());
-        this.mCostManager = in.readParcelable(CostManager.class.getClassLoader());
-        this.isChanged = in.readByte() != 0;
+        mRoomForRentList = new RoomList<RoomForRent>();
     }
 
     public static String calendarToString(long dateInMilis) {
@@ -68,7 +39,7 @@ public class Project extends DBObject implements Cloneable, Parcelable {
     }
 
     public boolean createRoom(String name, double area, long charge) {
-        return mRoomList.add(new Room(this.mProjectId, name, area, charge));
+        return mRoomForRentList.add(new RoomForRent(this.mProjectId, name, area, charge));
     }
 
     @Override
@@ -88,12 +59,12 @@ public class Project extends DBObject implements Cloneable, Parcelable {
         mCostManager = pCostManager;
     }
 
-    public RoomList<Room> getRoomList() {
-        return mRoomList;
+    public RoomList<RoomForRent> getRoomForRentList() {
+        return mRoomForRentList;
     }
 
-    private void setRoomList(RoomList<Room> list) {
-        mRoomList = list;
+    private void setRoomForRentList(RoomList<RoomForRent> list) {
+        mRoomForRentList = list;
     }
 
     public double getTotalIncome(CurrencyUnit unit) {
@@ -146,12 +117,12 @@ public class Project extends DBObject implements Cloneable, Parcelable {
         }
         project.setLoanList(loanList);
         //Clone room list
-        RoomList<Room> rooms = new RoomList<Room>();
-        for (Room room :
-                mRoomList) {
-            rooms.add((Room) room.clone());
+        RoomList<RoomForRent> roomForRents = new RoomList<RoomForRent>();
+        for (RoomForRent roomForRent :
+                mRoomForRentList) {
+            roomForRents.add((RoomForRent) roomForRent.clone());
         }
-        project.setRoomList(rooms);
+        project.setRoomForRentList(roomForRents);
         return project;
     }
 
@@ -230,24 +201,4 @@ public class Project extends DBObject implements Cloneable, Parcelable {
         mLoanList = loanList;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeLong(this.mProjectId);
-        dest.writeString(this.mName);
-        dest.writeString(this.mAddress);
-        dest.writeLong(this.mInvestment);
-        dest.writeLong(this.mTotalIncome);
-        dest.writeLong(this.mStartDate);
-        dest.writeInt(this.mYearDuration);
-        dest.writeParcelable(this.mUnitPrice, flags);
-        dest.writeParcelable(this.mLoanList, flags);
-        dest.writeParcelable(this.mRoomList, flags);
-        dest.writeParcelable(this.mCostManager, flags);
-        dest.writeByte(this.isChanged ? (byte) 1 : (byte) 0);
-    }
 }

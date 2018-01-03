@@ -36,11 +36,11 @@ public class RoomList<E> extends ArrayList<E> implements Parcelable {
 
     private int getNoOfAvailableRoom() {
         int availableCount = 0;
-        Room room;
+        RoomForRent roomForRent;
         for (E i :
                 this) {
-            room = (Room) i;
-            if (room.isAvailable()) availableCount++;
+            roomForRent = (RoomForRent) i;
+            if (roomForRent.isAvailable()) availableCount++;
         }
         return availableCount;
     }

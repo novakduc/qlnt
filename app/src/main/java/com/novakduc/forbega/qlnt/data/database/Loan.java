@@ -1,7 +1,6 @@
 package com.novakduc.forbega.qlnt.data.database;
 
 import android.os.Parcel;
-import android.os.Parcelable;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -10,19 +9,8 @@ import java.util.Calendar;
 /**
  * Created by n.thanh on 9/21/2016.
  */
-public class Loan extends DBObject implements Cloneable, Parcelable {
+public class Loan implements Cloneable {
 
-    public static final Parcelable.Creator<Loan> CREATOR = new Parcelable.Creator<Loan>() {
-        @Override
-        public Loan createFromParcel(Parcel source) {
-            return new Loan(source);
-        }
-
-        @Override
-        public Loan[] newArray(int size) {
-            return new Loan[size];
-        }
-    };
     //private Long mProjectId;
     private long mId;
     private String mName;
@@ -104,19 +92,5 @@ public class Loan extends DBObject implements Cloneable, Parcelable {
     //Tra no
     public void pay(long payAmount) {
         // TODO: 9/21/2016
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeLong(this.mId);
-        dest.writeString(this.mName);
-        dest.writeLong(this.mAmount);
-        dest.writeLong(this.mLoanDate);
-        dest.writeDouble(this.mInterestRate);
     }
 }

@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * Created by n.thanh on 9/30/2016.
  */
 
-public class Room implements Cloneable {
+public class RoomForRent implements Cloneable {
     // TODO: 9/30/2016
     private String mName;
     private double mArea;
@@ -15,7 +15,7 @@ public class Room implements Cloneable {
     private ArrayList<RoomService> mRoomServices;
     private long mProjectId; // TODO: 12/2/2016 check check ...
 
-    public Room(long projectId, String name, double area, long charge) {
+    public RoomForRent(long projectId, String name, double area, long charge) {
         mName = name;
         this.mArea = area;
         this.mCharge = charge;

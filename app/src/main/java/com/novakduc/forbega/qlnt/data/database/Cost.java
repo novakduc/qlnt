@@ -1,25 +1,17 @@
 package com.novakduc.forbega.qlnt.data.database;
 
-import android.os.Parcel;
-import android.os.Parcelable;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
 
 /**
  * Created by n.thanh on 11/25/2016.
  */
 
-public class Cost extends DBObject implements Parcelable {
-    public static final Parcelable.Creator<Cost> CREATOR = new Parcelable.Creator<Cost>() {
-        @Override
-        public Cost createFromParcel(Parcel source) {
-            return new Cost(source);
-        }
+@Entity(tableName = "cost")
+public class Cost {
 
-        @Override
-        public Cost[] newArray(int size) {
-            return new Cost[size];
-        }
-    };
     private long mAmount;
+    @PrimaryKey
     private long mDate;
     private CostType mType;
     private boolean mRepeatable;
@@ -29,15 +21,6 @@ public class Cost extends DBObject implements Parcelable {
         this.mType = type;
         this.mDate = date;
         this.mRepeatable = repeatable;
-    }
-
-    protected Cost(Parcel in) {
-        this.mAmount = in.readLong();
-        this.mDate = in.readLong();
-        int tmpMType = in.readInt();
-        this.mType = tmpMType == -1 ? null : CostType.values()[tmpMType];
-        this.mRepeatable = in.readByte() != 0;
-        this.setChanged(in.readByte() != 0);
     }
 
     public long getDate() {
@@ -74,19 +57,5 @@ public class Cost extends DBObject implements Parcelable {
 
     public double getAmount(CurrencyUnit pUnit) {
         return Loan.round((double) mAmount / pUnit.getUnit(), 3);
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeLong(this.mAmount);
-        dest.writeLong(this.mDate);
-        dest.writeInt(this.mType == null ? -1 : this.mType.ordinal());
-        dest.writeByte(this.mRepeatable ? (byte) 1 : (byte) 0);
-        dest.writeByte(this.isChanged() ? (byte) 1 : (byte) 0);
     }
 }

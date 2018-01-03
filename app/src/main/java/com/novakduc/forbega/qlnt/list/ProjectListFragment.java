@@ -144,11 +144,11 @@ public class ProjectListFragment extends Fragment {
             holder.mDurationTextView.setText(String.valueOf(project.getStartYear()) + " - "
                     + String.valueOf(project.getEndYear()));
             holder.mProduceRateTextView.setText(String.valueOf(
-                    project.getRoomList().getNoOfProducingRoom()) + "/"
-                    + String.valueOf(project.getRoomList().size()));
+                    project.getRoomForRentList().getNoOfProducingRoom()) + "/"
+                    + String.valueOf(project.getRoomForRentList().size()));
             float v = 0;
-            if (project.getRoomList().size() != 0) {
-                v = project.getRoomList().getNoOfProducingRoom() / project.getRoomList().size();
+            if (project.getRoomForRentList().size() != 0) {
+                v = project.getRoomForRentList().getNoOfProducingRoom() / project.getRoomForRentList().size();
             }
             holder.mRatingBar.setRating(v);
 
