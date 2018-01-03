@@ -1,34 +1,13 @@
 package com.novakduc.forbega.qlnt.data.database;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 import java.util.ArrayList;
 
 /**
  * Created by n.thanh on 3/29/2017.
  */
 
-public class RoomList<E> extends ArrayList<E> implements Parcelable {
+public class RoomList<E> extends ArrayList<E> {
     // TODO: 3/29/2017
-
-    public static final Parcelable.Creator<RoomList> CREATOR = new Parcelable.Creator<RoomList>() {
-        @Override
-        public RoomList createFromParcel(Parcel source) {
-            return new RoomList(source);
-        }
-
-        @Override
-        public RoomList[] newArray(int size) {
-            return new RoomList[size];
-        }
-    };
-
-    public RoomList() {
-    }
-
-    protected RoomList(Parcel in) {
-    }
 
     public int getNoOfProducingRoom() {
         return this.size() - getNoOfAvailableRoom();
@@ -43,14 +22,5 @@ public class RoomList<E> extends ArrayList<E> implements Parcelable {
             if (roomForRent.isAvailable()) availableCount++;
         }
         return availableCount;
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
     }
 }
