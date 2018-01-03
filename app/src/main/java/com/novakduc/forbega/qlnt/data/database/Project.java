@@ -77,7 +77,7 @@ public class Project implements Cloneable {
 
     //Add cost
     public boolean addCost(long amount, CostType type, long date, boolean repeatable) {
-        return mCostManager.add(new Cost(amount, type, date, repeatable));
+        return mCostManager.add(new Cost(mProjectId, amount, type, date, repeatable));
     }
 
     //Add loan

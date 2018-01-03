@@ -1,6 +1,8 @@
 package com.novakduc.forbega.qlnt.data.database;
 
-import android.os.Parcel;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.PrimaryKey;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -9,29 +11,34 @@ import java.util.Calendar;
 /**
  * Created by n.thanh on 9/21/2016.
  */
+@Entity(tableName = "loan")
 public class Loan implements Cloneable {
 
-    //private Long mProjectId;
-    private long mId;
-    private String mName;
-    private long mAmount;
-    private long mLoanDate;
-    private double mInterestRate;
+    private Long projectId;
+    @PrimaryKey
+    private long id;
+    private String name;
+    private long amount;
+    private long loanDate;
+    private double interestRate;
 
-    public Loan(String name, long amount, long loanDate, double rate) {
-        mId = Calendar.getInstance().getTimeInMillis();
-        mName = name;
-        mAmount = amount;
-        mLoanDate = loanDate;
-        mInterestRate = rate;
+    //For Room only
+    public Loan(Long projectId, long id, String name, long amount, long loanDate, double interestRate) {
+        this.projectId = projectId;
+        this.id = id;
+        this.name = name;
+        this.amount = amount;
+        this.loanDate = loanDate;
+        this.interestRate = interestRate;
     }
 
-    protected Loan(Parcel in) {
-        this.mId = in.readLong();
-        this.mName = in.readString();
-        this.mAmount = in.readLong();
-        this.mLoanDate = in.readLong();
-        this.mInterestRate = in.readDouble();
+    @Ignore
+    public Loan(long projectId, String name, long amount, long loanDate, double interestRate) {
+        id = Calendar.getInstance().getTimeInMillis();
+        this.name = name;
+        this.amount = amount;
+        this.loanDate = loanDate;
+        this.interestRate = interestRate;
     }
 
     public static double round(double value, int places) {
@@ -42,8 +49,20 @@ public class Loan implements Cloneable {
         return bd.doubleValue();
     }
 
+    public Long getProjectId() {
+        return projectId;
+    }
+
+    private void setProjectId(Long projectId) {
+        this.projectId = projectId;
+    }
+
     public long getId() {
-        return mId;
+        return id;
+    }
+
+    private void setId(long id) {
+        this.id = id;
     }
 
     @Override
@@ -53,40 +72,40 @@ public class Loan implements Cloneable {
 
     //Getter setter
     public String getName() {
-        return mName;
+        return name;
     }
 
     public void setName(String name) {
-        mName = name;
+        this.name = name;
     }
 
     public long getAmount() {
-        return mAmount;
+        return amount;
     }
 
     public void setAmount(long amount) {
-        mAmount = amount;
+        this.amount = amount;
     }
 
     public double getAmount(CurrencyUnit unit) {
-        double convertedAmount = round((double) (mAmount) / unit.getUnit(), 3);
+        double convertedAmount = round((double) (amount) / unit.getUnit(), 3);
         return convertedAmount;
     }
 
     public long getLoanDate() {
-        return mLoanDate;
+        return loanDate;
     }
 
     public void setLoanDate(long loanDate) {
-        mLoanDate = loanDate;
+        this.loanDate = loanDate;
     }
 
     public Double getInterestRate() {
-        return mInterestRate;
+        return interestRate;
     }
 
     public void setInterestRate(double interestRate) {
-        mInterestRate = interestRate;
+        this.interestRate = interestRate;
     }
 
     //Tra no

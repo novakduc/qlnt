@@ -5,12 +5,22 @@ package com.novakduc.forbega.qlnt.data.database;
  */
 
 public enum CostType {
-    ELECTRICITY,
-    WATER,
-    TV_CABLE,
-    INTERNET,
-    TRASH_COLLECTION,
-    SECURITY,
-    MAINTENANCE,
-    OTHERS
+    ELECTRICITY(0),
+    WATER(1),
+    TV_CABLE(2),
+    INTERNET(3),
+    TRASH_COLLECTION(4),
+    SECURITY(5),
+    MAINTENANCE(6),
+    OTHERS(7);
+
+    private final int order;
+
+    CostType(int order) {
+        this.order = order;
+    }
+
+    public int getOrder() {
+        return order;
+    }
 }

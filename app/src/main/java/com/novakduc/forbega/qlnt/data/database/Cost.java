@@ -10,52 +10,58 @@ import android.arch.persistence.room.PrimaryKey;
 @Entity(tableName = "cost")
 public class Cost {
 
-    private long mAmount;
+    private long amount;
     @PrimaryKey
-    private long mDate;
-    private CostType mType;
-    private boolean mRepeatable;
+    private long date;
+    private CostType type;
+    private boolean repeatable;
+    private long projectId;
 
-    public Cost(long amount, CostType type, long date, boolean repeatable) {
-        this.mAmount = amount;
-        this.mType = type;
-        this.mDate = date;
-        this.mRepeatable = repeatable;
+    public Cost(long projectId, long amount, CostType type, long date, boolean repeatable) {
+        this.projectId = projectId;
+        this.amount = amount;
+        this.type = type;
+        this.date = date;
+        this.repeatable = repeatable;
+    }
+
+    public long getProjectId() {
+        return projectId;
     }
 
     public long getDate() {
-        return mDate;
+        return date;
     }
 
     public void setDate(long date) {
-        mDate = date;
+        this.date = date;
     }
 
     public CostType getType() {
-        return mType;
+        return type;
     }
 
     public void setType(CostType type) {
-        mType = type;
+        this.type = type;
     }
 
     public boolean isRepeatable() {
-        return mRepeatable;
+        return repeatable;
     }
 
     public void setRepeatable(boolean repeatable) {
-        mRepeatable = repeatable;
+        this.repeatable = repeatable;
     }
 
     public long getAmount() {
-        return mAmount;
+        return amount;
     }
 
     public void setAmount(long amount) {
-        mAmount = amount;
+        this.amount = amount;
     }
 
     public double getAmount(CurrencyUnit pUnit) {
-        return Loan.round((double) mAmount / pUnit.getUnit(), 3);
+        return Loan.round((double) amount / pUnit.getUnit(), 3);
     }
 }
