@@ -236,7 +236,7 @@ public class ProjectCreateConfirmationFragment extends Fragment implements LoanC
 
         EditText editTextInvestmentAmount = view.findViewById(R.id.investmentAmount);
         editTextInvestmentAmount.setFocusableInTouchMode(false);
-        editTextInvestmentAmount.setText(String.valueOf(mTempProject.getInvestment()));
+        editTextInvestmentAmount.setText(String.valueOf(mTempProject.getInvestmentAmount()));
 
         Button buttonAddLoan = view.findViewById(R.id.btAddLoan);
         buttonAddLoan.setOnClickListener(new View.OnClickListener() {

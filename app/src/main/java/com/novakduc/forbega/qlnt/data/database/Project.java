@@ -16,14 +16,14 @@ import java.util.Date;
 public class Project implements Cloneable {
 
     @PrimaryKey
-    private long mProjectId;
-    private String mName;
-    private String mAddress;
-    private long mInvestment;
-    private long mStartDate;
-    private int mYearDuration;
+    private long projectId;
+    private String name;
+    private String address;
+    private long investmentAmount;
+    private long startDate;
+    private int yearDuration;
     @Ignore
-    private long mTotalIncome;
+    private long totalIncome;
     @Ignore
     private UnitPrice mUnitPrice;
     @Ignore
@@ -33,19 +33,20 @@ public class Project implements Cloneable {
     @Ignore
     private CostManager<Cost> mCostManager;
 
-    public Project(long mProjectId, String mName, String mAddress, long mInvestment,
-                   long mStartDate, int mYearDuration) {
-        this.mProjectId = mProjectId;
-        this.mName = mName;
-        this.mAddress = mAddress;
-        this.mInvestment = mInvestment;
-        this.mStartDate = mStartDate;
-        this.mYearDuration = mYearDuration;
+    //For Room only
+    public Project(long projectId, String name, String address, long investmentAmount,
+                   long startDate, int yearDuration) {
+        this.projectId = projectId;
+        this.name = name;
+        this.address = address;
+        this.investmentAmount = investmentAmount;
+        this.startDate = startDate;
+        this.yearDuration = yearDuration;
     }
 
     @Ignore
     public Project() {
-        mProjectId = Calendar.getInstance().getTimeInMillis();
+        projectId = Calendar.getInstance().getTimeInMillis();
         mLoanList = new LoanList<Loan>();
         mCostManager = new CostManager<Cost>();
         mRoomForRentList = new RoomList<RoomForRent>();
@@ -60,15 +61,15 @@ public class Project implements Cloneable {
     }
 
     public boolean createRoom(String name, double area, long charge) {
-        return mRoomForRentList.add(new RoomForRent(this.mProjectId, name, area, charge));
+        return mRoomForRentList.add(new RoomForRent(this.projectId, name, area, charge));
     }
 
     @Override
     public String toString() {
-        if (mName == null) {
-            return String.valueOf(mProjectId);
+        if (name == null) {
+            return String.valueOf(projectId);
         }
-        return mName;
+        return name;
     }
 
 
@@ -93,12 +94,12 @@ public class Project implements Cloneable {
     }
 
     public double getInvestment(CurrencyUnit unit) {
-        return Loan.round((double) (mInvestment) / unit.getUnit(), 3);
+        return Loan.round((double) (investmentAmount) / unit.getUnit(), 3);
     }
 
     //Add cost
     public boolean addCost(long amount, CostType type, long date, boolean repeatable) {
-        return mCostManager.add(new Cost(mProjectId, amount, type, date, repeatable));
+        return mCostManager.add(new Cost(projectId, amount, type, date, repeatable));
     }
 
     //Add loan
@@ -108,14 +109,14 @@ public class Project implements Cloneable {
 
     public long getEndDate() {
         Calendar endDate = Calendar.getInstance();
-        endDate.setTimeInMillis(mStartDate);
-        endDate.add(Calendar.YEAR, mYearDuration);
+        endDate.setTimeInMillis(startDate);
+        endDate.add(Calendar.YEAR, yearDuration);
         return endDate.getTimeInMillis();
     }
 
     public int getStartYear() {
         Calendar tmp = Calendar.getInstance();
-        tmp.setTimeInMillis(mStartDate);
+        tmp.setTimeInMillis(startDate);
         return tmp.get(Calendar.YEAR);
     }
 
@@ -123,6 +124,22 @@ public class Project implements Cloneable {
         Calendar tmp = Calendar.getInstance();
         tmp.setTimeInMillis(getEndDate());
         return tmp.get(Calendar.YEAR);
+    }
+
+    public void setProjectId(long projectId) {
+        this.projectId = projectId;
+    }
+
+    public void setInvestmentAmount(long investmentAmount) {
+        this.investmentAmount = investmentAmount;
+    }
+
+    public int getYearDuration() {
+        return yearDuration;
+    }
+
+    public void setYearDuration(int yearDuration) {
+        this.yearDuration = yearDuration;
     }
 
     @Override
@@ -149,59 +166,55 @@ public class Project implements Cloneable {
 
     // Getter and setter section
     public long getProjectId() {
-        return mProjectId;
+        return projectId;
     }
 
     private void setProjectId(Long projectId) {
-        mProjectId = projectId;
+        this.projectId = projectId;
     }
 
     public String getName() {
-        return mName;
+        return name;
     }
 
     public void setName(String name) {
-        mName = name;
+        this.name = name;
     }
 
     public String getAddress() {
-        return mAddress;
+        return address;
     }
 
     public void setAddress(String address) {
-        mAddress = address;
+        this.address = address;
     }
 
-    public long getInvestment() {
-        return mInvestment;
+    public long getInvestmentAmount() {
+        return investmentAmount;
     }
 
-    public void setInvestment(Long investment) {
-        mInvestment = investment;
+    public void setInvestmentAmount(Long investmentAmount) {
+        this.investmentAmount = investmentAmount;
     }
 
     public long getTotalIncome() {
-        return mTotalIncome;
-    }
-
-    public void setTotalIncome(Long totalIncome) {
-        mTotalIncome = totalIncome;
+        return totalIncome;
     }
 
     public long getStartDate() {
-        return mStartDate;
+        return startDate;
     }
 
     public void setStartDate(long startDate) {
-        mStartDate = startDate;
+        this.startDate = startDate;
     }
 
     public int getDuration() {
-        return mYearDuration;
+        return yearDuration;
     }
 
     public void setDuration(int yearDuration) {
-        mYearDuration = yearDuration;
+        this.yearDuration = yearDuration;
     }
 
     public UnitPrice getUnitPrice() {
@@ -221,5 +234,4 @@ public class Project implements Cloneable {
     private void setLoanList(LoanList<Loan> loanList) {
         mLoanList = loanList;
     }
-
 }

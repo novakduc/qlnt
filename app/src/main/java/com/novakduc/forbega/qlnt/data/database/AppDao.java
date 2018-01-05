@@ -12,7 +12,7 @@ import java.util.List;
  */
 
 @Dao
-public interface QlntDao {
+public interface AppDao {
 
     //Get all costs in project
     @Query("SELECT * FROM cost WHERE projectId = :projectId")

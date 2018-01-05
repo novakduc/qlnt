@@ -64,4 +64,8 @@ public class Cost {
     public double getAmount(CurrencyUnit pUnit) {
         return Loan.round((double) amount / pUnit.getUnit(), 3);
     }
+
+    public long getId() {
+        return date;
+    }
 }

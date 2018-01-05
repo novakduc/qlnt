@@ -12,24 +12,24 @@ import android.content.Context;
 
 @Database(entities = {Cost.class}, version = 1)
 @TypeConverters(CostTypeConverter.class)
-public abstract class QlntDataBase extends RoomDatabase {
-    private static final String DB_NAME = "qlnt_database";
+public abstract class AppDatabase extends RoomDatabase {
+    private static final String DB_NAME = "com.novakduc.forbega.database";
 
     //Singleton
     private static final Object LOCK = new Object();
-    private static volatile QlntDataBase sInstance;
+    private static volatile AppDatabase sInstance;
 
-    public static QlntDataBase getInstance(Context context) {
+    public static AppDatabase getInstance(Context context) {
         if (sInstance == null) {
             synchronized (LOCK) {
                 if (sInstance == null) {
-                    sInstance = Room.databaseBuilder(context, QlntDataBase.class,
-                            QlntDataBase.DB_NAME).build();
+                    sInstance = Room.databaseBuilder(context, AppDatabase.class,
+                            AppDatabase.DB_NAME).build();
                 }
             }
         }
         return sInstance;
     }
 
-    public abstract QlntDao qlntDao();
+    public abstract AppDao qlntDao();
 }

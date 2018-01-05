@@ -64,7 +64,7 @@ public class ProjectConfigurationActivity extends SimpleFragmentActivity
 
     @Override
     public void updateFinance(long investment, LoanList<Loan> loanLoanList) {
-        mTempProject.setInvestment(investment);
+        mTempProject.setInvestmentAmount(investment);
 
         mTempProject.getLoanList().clear();
 

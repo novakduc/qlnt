@@ -5,14 +5,15 @@ package com.novakduc.forbega.qlnt.data.database;
  */
 
 public class RoomServiceWithIndex extends RoomService {
-    private long mOldIndex, mNewIndex;
+    private long mOldIndex;
+    private long mNewIndex;
 
-    private RoomServiceWithIndex(UnitPrice unitPrice, CostType type) {
-        super(unitPrice, type);
+    private RoomServiceWithIndex(CostType type, UnitPrice unitPrice) {
+        super(type, unitPrice);
     }
 
-    public static RoomServiceWithIndex getInstance(UnitPrice room, CostType type) {
-        return new RoomServiceWithIndex(room, type);
+    public static RoomServiceWithIndex getInstance(CostType costType, UnitPrice unitPrice) {
+        return new RoomServiceWithIndex(costType, unitPrice);
     }
 
     public long getOldIndex() {

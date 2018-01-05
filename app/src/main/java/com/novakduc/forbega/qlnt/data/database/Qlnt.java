@@ -2,19 +2,18 @@ package com.novakduc.forbega.qlnt.data.database;
 
 import android.content.Context;
 
-import java.util.ArrayList;
-
 /**
  * Created by n.thanh on 9/20/2016.
  */
+
 public class Qlnt {
     private static Qlnt ourInstance = new Qlnt();
     private static Context sContext;
-    private ArrayList<Project> mProjectList;
+    private MyArrayList<Project> mProjectList;
     private long mActiveProjectId = -1;
 
     private Qlnt() {
-        mProjectList = new ArrayList<Project>();
+        mProjectList = new MyArrayList<Project>();
     }
 
     public static Qlnt getInstance(Context context) {
@@ -48,7 +47,7 @@ public class Qlnt {
         return null;    //no such project
     }
 
-    public ArrayList<Project> getProjectList() {
+    public MyArrayList<Project> getProjectList() {
         return mProjectList;
     }
 

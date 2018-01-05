@@ -152,7 +152,7 @@ public class ProjectListFragment extends Fragment {
             }
             holder.mRatingBar.setRating(v);
 
-            long investmentAmount = project.getInvestment();
+            long investmentAmount = project.getInvestmentAmount();
             holder.mIncomeTextView.setText(String.valueOf(project.getTotalIncome(CurrencyUnit.MIL_BASE)));
             if (investmentAmount == 0) {
                 holder.mIncomeProgressBar.setProgress(100);

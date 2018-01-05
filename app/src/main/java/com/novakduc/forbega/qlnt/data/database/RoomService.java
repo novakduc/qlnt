@@ -1,31 +1,36 @@
 package com.novakduc.forbega.qlnt.data.database;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
+
 /**
  * Created by n.thanh on 12/2/2016.
  */
-
+@Entity
 public class RoomService {
-    protected CostType mType;
-    protected UnitPrice mUnitPrice;
+    protected CostType type;
+    @Ignore
+    protected UnitPrice unitPrice;
 
-    protected RoomService(UnitPrice unitPrice, CostType type) {
-        this.mUnitPrice = unitPrice;
-        this.mType = type;
+    @Ignore
+    protected RoomService(CostType type, UnitPrice unitPrice) {
+        this.type = type;
+        this.unitPrice = unitPrice;
+    }
+
+    protected RoomService(CostType type) {
+        this.type = type;
     }
 
     public CostType getType() {
-        return mType;
+        return type;
     }
 
-    public void setType(CostType type) {
-        mType = type;
-    }
-
-    public void setUnitPrice(UnitPrice unitPrice) {
-        mUnitPrice = unitPrice;
+    private void setType(CostType type) {
+        this.type = type;
     }
 
     public long charge() {
-        return mUnitPrice.get(mType);
+        return unitPrice.get(type);
     }
 }
