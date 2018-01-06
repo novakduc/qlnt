@@ -7,14 +7,14 @@ import android.arch.persistence.room.PrimaryKey;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Calendar;
+import java.util.Observable;
 
 /**
  * Created by n.thanh on 9/21/2016.
  */
 @Entity(tableName = "loan")
-public class Loan implements Cloneable, ItemWithId {
+public class Loan extends Observable implements Cloneable, ItemWithId {
 
-    private Long projectId;
     @PrimaryKey
     private long id;
     private String name;
@@ -23,8 +23,7 @@ public class Loan implements Cloneable, ItemWithId {
     private double interestRate;
 
     //For Room only
-    public Loan(Long projectId, long id, String name, long amount, long loanDate, double interestRate) {
-        this.projectId = projectId;
+    public Loan(long id, String name, long amount, long loanDate, double interestRate) {
         this.id = id;
         this.name = name;
         this.amount = amount;
@@ -33,7 +32,7 @@ public class Loan implements Cloneable, ItemWithId {
     }
 
     @Ignore
-    public Loan(long projectId, String name, long amount, long loanDate, double interestRate) {
+    public Loan(String name, long amount, long loanDate, double interestRate) {
         id = Calendar.getInstance().getTimeInMillis();
         this.name = name;
         this.amount = amount;
@@ -47,14 +46,6 @@ public class Loan implements Cloneable, ItemWithId {
         BigDecimal bd = new BigDecimal(value);
         bd = bd.setScale(places, RoundingMode.HALF_UP);
         return bd.doubleValue();
-    }
-
-    public Long getProjectId() {
-        return projectId;
-    }
-
-    private void setProjectId(Long projectId) {
-        this.projectId = projectId;
     }
 
     @Override
@@ -111,6 +102,22 @@ public class Loan implements Cloneable, ItemWithId {
 
     //Tra no
     public void pay(long payAmount) {
-        // TODO: 9/21/2016
+        this.amount = payAmount < this.amount ? this.amount - payAmount
+                : 0;
+        update();
+    }
+
+    public void payAll() {
+        this.amount = 0;
+        update();
+    }
+
+    private void update() {
+        setChanged();
+        if (amount <= 0) {
+            notifyObservers(LoanList.DELETE);
+        } else {
+            notifyObservers(LoanList.TOTAL_AMOUNT_CHANGE);
+        }
     }
 }

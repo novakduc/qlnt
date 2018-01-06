@@ -64,7 +64,6 @@ public class CostManager<E> extends MyArrayList<E> {
                 this) {
             total += ((Cost)i).getAmount();
         }
-
         return total;
     }
 }

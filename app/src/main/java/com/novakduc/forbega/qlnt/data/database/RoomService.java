@@ -12,9 +12,8 @@ import java.util.Calendar;
 @Entity(tableName = "room_service")
 public class RoomService implements RoomServiceInterface {
     @PrimaryKey
-    protected long id;
-    protected CostType type;
-    private boolean withIndex;
+    private long id;
+    private CostType type;
     private long mOldIndex;
     private long mNewIndex;
     @Ignore
@@ -24,7 +23,6 @@ public class RoomService implements RoomServiceInterface {
     public RoomService(long id, CostType type, boolean withIndex, long oldIndex, long newIndex) {
         this.id = id;
         this.type = type;
-        this.withIndex = withIndex;
         mOldIndex = oldIndex;
         mNewIndex = newIndex;
     }
@@ -43,6 +41,7 @@ public class RoomService implements RoomServiceInterface {
         this.type = type;
     }
 
+    @Override
     public CostType getType() {
         return type;
     }
@@ -51,8 +50,14 @@ public class RoomService implements RoomServiceInterface {
         this.type = type;
     }
 
+    @Override
     public long charge() {
-        return unitPrice.get(type);
+        long factor = 1;
+        if (isWithIndex()) {
+            factor = this.mNewIndex - this.mOldIndex > 0 ?
+                        this.mNewIndex - this.mOldIndex : 1;
+        }
+        return unitPrice.get(type) * factor;
     }
 
     @Override
@@ -72,7 +77,30 @@ public class RoomService implements RoomServiceInterface {
     }
 
     @Override
+    public boolean isWithIndex() {
+        switch (this.type) {
+            case WATER:
+                return true;
+            case INTERNET:
+                return true;
+            case TV_CABLE:
+                return true;
+            case ELECTRICITY:
+                return true;
+            case SECURITY:
+                return false;
+            case MAINTENANCE:
+                return false;
+            case TRASH_COLLECTION:
+                return false;
+            case OTHERS:
+                return false;
+        }
+        return false;
+    }
+
+    @Override
     public long getId() {
-        return 0;
+        return this.id;
     }
 }

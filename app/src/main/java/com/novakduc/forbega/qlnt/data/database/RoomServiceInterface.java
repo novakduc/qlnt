@@ -5,6 +5,9 @@ package com.novakduc.forbega.qlnt.data.database;
  */
 
 public interface RoomServiceInterface extends ItemWithId {
+
+    CostType getType();
+
     long charge();
 
     long getOldIndex();
@@ -12,4 +15,6 @@ public interface RoomServiceInterface extends ItemWithId {
     long getNewIndex();
 
     void setNewIndex(long newIndex);
+
+    boolean isWithIndex();
 }
