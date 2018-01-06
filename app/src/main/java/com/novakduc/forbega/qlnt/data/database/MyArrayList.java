@@ -29,16 +29,26 @@ public abstract class MyArrayList<E> extends ArrayList<E> implements ArrayListGs
         Gson gson = new Gson();
         Type collectionType = new TypeToken<ArrayList>() {
         }.getType();
-        return gson.fromJson(getGsonIdList(), collectionType);
+        return gson.fromJson(getIdListGsonStringValue(), collectionType);
     }
 
     @Override
     public String idListToString() {
         Gson gson = new Gson();
-        return gson.toJson(getIdListLong());
+        return gson.toJson(getIdList());
     }
 
-    public abstract String getGsonIdList();
+    @Override
+    public boolean add(E e) {
+        boolean b = true;
+        if (e instanceof ItemWithId) {
+            ItemWithId itemWithId = (ItemWithId) e;
+            b = getIdList().add(itemWithId.getId());
+        }
+        return b && super.add(e);
+    }
 
-    public abstract ArrayList getIdListLong();
+    public abstract String getIdListGsonStringValue();
+
+    public abstract ArrayList getIdList();
 }

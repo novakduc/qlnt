@@ -12,7 +12,7 @@ import java.util.Calendar;
  */
 
 @Entity(tableName = "room")
-public class RoomForRent implements Cloneable {
+public class RoomForRent implements Cloneable, ItemWithId {
     // TODO: 9/30/2016
     @PrimaryKey
     private long id;
@@ -46,6 +46,7 @@ public class RoomForRent implements Cloneable {
         roomServices = new ArrayList<RoomService>(5);
     }
 
+    @Override
     public long getId() {
         return id;
     }

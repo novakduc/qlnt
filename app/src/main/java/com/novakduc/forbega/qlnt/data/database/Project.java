@@ -13,7 +13,7 @@ import java.util.Date;
  * Created by n.thanh on 9/21/2016.
  */
 @Entity(tableName = "project")
-public class Project implements Cloneable {
+public class Project implements Cloneable, ItemWithId {
 
     @PrimaryKey
     private long projectId;
@@ -233,5 +233,10 @@ public class Project implements Cloneable {
 
     private void setLoanList(LoanList<Loan> loanList) {
         mLoanList = loanList;
+    }
+
+    @Override
+    public long getId() {
+        return projectId;
     }
 }

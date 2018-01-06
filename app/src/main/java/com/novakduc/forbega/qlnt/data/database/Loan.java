@@ -12,7 +12,7 @@ import java.util.Calendar;
  * Created by n.thanh on 9/21/2016.
  */
 @Entity(tableName = "loan")
-public class Loan implements Cloneable {
+public class Loan implements Cloneable, ItemWithId {
 
     private Long projectId;
     @PrimaryKey
@@ -57,6 +57,7 @@ public class Loan implements Cloneable {
         this.projectId = projectId;
     }
 
+    @Override
     public long getId() {
         return id;
     }

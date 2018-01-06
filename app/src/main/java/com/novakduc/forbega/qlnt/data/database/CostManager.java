@@ -14,38 +14,38 @@ import java.util.ArrayList;
 public class CostManager<E> extends MyArrayList<E> {
     @PrimaryKey
     private long projectId;
-    private String gSonIdString;
+    private String idListGsonStringValue;
     @Ignore
-    private ArrayList idListLong;
+    private ArrayList idList;
 
     //For Room only
-    public CostManager(long projectId, String gSonIdString) {
+    public CostManager(long projectId, String idListGsonStringValue) {
         super(3);
         this.projectId = projectId;
-        this.gSonIdString = gSonIdString;
-        this.idListLong = getIdListFromGson();
+        this.idListGsonStringValue = idListGsonStringValue;
+        this.idList = getIdListFromGson();
     }
 
     @Ignore
     public CostManager() {
         super(3);
-        this.idListLong = new ArrayList(3);
+        this.idList = new ArrayList(3);
     }
 
     @Ignore
     public CostManager(int i) {
         super(i);
-        this.idListLong = new ArrayList(i);
+        this.idList = new ArrayList(i);
     }
 
     @Override
-    public String getGsonIdList() {
-        return gSonIdString;
+    public String getIdListGsonStringValue() {
+        return idListGsonStringValue;
     }
 
     @Override
-    public ArrayList getIdListLong() {
-        return idListLong;
+    public ArrayList getIdList() {
+        return idList;
     }
 
     public double getTotalCost(CurrencyUnit pUnit) {

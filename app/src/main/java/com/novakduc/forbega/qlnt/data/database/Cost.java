@@ -8,7 +8,7 @@ import android.arch.persistence.room.PrimaryKey;
  */
 
 @Entity(tableName = "cost")
-public class Cost {
+public class Cost implements ItemWithId{
 
     private long amount;
     @PrimaryKey
@@ -65,6 +65,7 @@ public class Cost {
         return Loan.round((double) amount / pUnit.getUnit(), 3);
     }
 
+    @Override
     public long getId() {
         return date;
     }

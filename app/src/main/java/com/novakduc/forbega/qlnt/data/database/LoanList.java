@@ -15,30 +15,30 @@ public class LoanList<E> extends MyArrayList<E> {
 
     @PrimaryKey
     private long projectId;
-    private String gSonIdString;
+    private String idListGsonStringValue;
     @Ignore
-    private ArrayList idListLong;
+    private ArrayList idList;
 
-    public LoanList(long projectId, String gSonIdString) {
+    public LoanList(long projectId, String idListGsonStringValue) {
         super(3);
         this.projectId = projectId;
-        this.gSonIdString = gSonIdString;
-        idListLong = getIdListFromGson();
+        this.idListGsonStringValue = idListGsonStringValue;
+        idList = getIdListFromGson();
     }
 
     @Ignore
     public LoanList() {
         super(3);
-        idListLong = new ArrayList(3);
+        idList = new ArrayList(3);
     }
 
     @Override
-    public String getGsonIdList() {
+    public String getIdListGsonStringValue() {
         return null;
     }
 
     @Override
-    public ArrayList getIdListLong() {
+    public ArrayList getIdList() {
         return null;
     }
 

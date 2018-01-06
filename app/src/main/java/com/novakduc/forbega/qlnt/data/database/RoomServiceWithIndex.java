@@ -1,9 +1,11 @@
 package com.novakduc.forbega.qlnt.data.database;
 
+import android.arch.persistence.room.Entity;
+
 /**
  * Created by n.thanh on 12/2/2016.
  */
-
+@Entity(tableName = "room_service")
 public class RoomServiceWithIndex extends RoomService {
     private long mOldIndex;
     private long mNewIndex;
@@ -25,7 +27,6 @@ public class RoomServiceWithIndex extends RoomService {
     }
 
     public void setNewIndex(long newIndex) {
-        mOldIndex = mNewIndex;  //update old index
-        mNewIndex = newIndex;
+
     }
 }

@@ -2,9 +2,12 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/QLNT.iml" filepath="$PROJECT_DIR$/QLNT.iml" />
+      <module fileurl="file://C:\Users\Novak\AndroidStudioProjects\QLNT Applied Arch\QLNT.iml" filepath="C:\Users\Novak\AndroidStudioProjects\QLNT Applied Arch\QLNT.iml" />
+      <module fileurl="file://$PROJECT_DIR$/QLNT Applied Arch.iml" filepath="$PROJECT_DIR$/QLNT Applied Arch.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://C:\Users\Novak\AndroidStudioProjects\QLNT Applied Arch\app\app.iml" filepath="C:\Users\Novak\AndroidStudioProjects\QLNT Applied Arch\app\app.iml" />
       <module fileurl="file://$PROJECT_DIR$/baselibrary/baselibrary.iml" filepath="$PROJECT_DIR$/baselibrary/baselibrary.iml" />
+      <module fileurl="file://C:\Users\Novak\AndroidStudioProjects\QLNT Applied Arch\baselibrary\baselibrary.iml" filepath="C:\Users\Novak\AndroidStudioProjects\QLNT Applied Arch\baselibrary\baselibrary.iml" />
     </modules>
   </component>
 </project>
