@@ -17,7 +17,7 @@ public class LoanList<E> extends MyArrayList<E> implements Observer {
 
     @PrimaryKey
     private long projectId;
-    private String idListGsonStringValue;
+    private String idListGSonString;
     private long totalLoanAmount;
     @Ignore
     private ArrayList idList;
@@ -26,12 +26,13 @@ public class LoanList<E> extends MyArrayList<E> implements Observer {
     @Ignore
     public static final int TOTAL_AMOUNT_CHANGE = 1;
 
-    public LoanList(long projectId, String idListGsonStringValue, long totalLoanAmount) {
+    //For Room only
+    public LoanList(long projectId, String idListGSonString, long totalLoanAmount) {
         super(3);
         this.projectId = projectId;
-        this.idListGsonStringValue = idListGsonStringValue;
+        this.idListGSonString = idListGSonString;
         this.totalLoanAmount = totalLoanAmount;
-        idList = getIdListFromGson();
+        idList = gSonStringToList();
     }
 
     @Ignore
@@ -41,8 +42,8 @@ public class LoanList<E> extends MyArrayList<E> implements Observer {
     }
 
     @Override
-    public String getIdListGsonStringValue() {
-        return this.idListGsonStringValue;
+    public String getIdListGSonString() {
+        return this.idListGSonString;
     }
 
     @Override
@@ -50,30 +51,9 @@ public class LoanList<E> extends MyArrayList<E> implements Observer {
         return this.idList;
     }
 
-    private void updateTotalAmount() {
-        long total = 0;
-        for (E i :
-                this) {
-            total += ((Loan) i).getAmount();
-        }
-
-        this.totalLoanAmount = total;
-    }
-
     public long getTotalLoanAmount() {
 
         return this.totalLoanAmount;
-    }
-
-    public double getTotalLoanAmount(CurrencyUnit unit) {
-        double total = 0;
-        for (E i :
-                this) {
-            if (i instanceof Loan) {
-                total += ((Loan) i).getAmount(unit);
-            }
-        }
-        return total;
     }
 
     public Loan getLoan(long loanId) {
@@ -94,18 +74,25 @@ public class LoanList<E> extends MyArrayList<E> implements Observer {
     public void update(Observable observable, Object o) {
         int arg = (int) o;
         if (arg == LoanList.TOTAL_AMOUNT_CHANGE) {
-            updateTotalAmount();
+            this.getTotalAmount();
         }
         if (arg == LoanList.DELETE) {
             E e = (E) observable;
             remove(e);
+            this.getTotalAmount();
         }
     }
 
     @Override
     public boolean add(E e) {
         boolean b = super.add(e);
-        updateTotalAmount();
+        this.totalLoanAmount = super.getTotalAmount();
         return b;
+    }
+
+    @Override
+    public long getTotalAmount() {
+        this.totalLoanAmount = super.getTotalAmount();
+        return this.totalLoanAmount;
     }
 }

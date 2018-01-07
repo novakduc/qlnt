@@ -7,7 +7,9 @@ import java.util.ArrayList;
  */
 
 public interface ArrayListGsonExchange {
-    ArrayList getIdListFromGson();
+    ArrayList gSonStringToList();
 
-    String idListToString();
+    String listToGSonString();
+
+    long getTotalAmount();
 }

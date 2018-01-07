@@ -79,11 +79,6 @@ public class Loan extends Observable implements Cloneable, ItemWithId {
         this.amount = amount;
     }
 
-    public double getAmount(CurrencyUnit unit) {
-        double convertedAmount = round((double) (amount) / unit.getUnit(), 3);
-        return convertedAmount;
-    }
-
     public long getLoanDate() {
         return loanDate;
     }
@@ -104,15 +99,15 @@ public class Loan extends Observable implements Cloneable, ItemWithId {
     public void pay(long payAmount) {
         this.amount = payAmount < this.amount ? this.amount - payAmount
                 : 0;
-        update();
+        updateToObserver();
     }
 
     public void payAll() {
         this.amount = 0;
-        update();
+        updateToObserver();
     }
 
-    private void update() {
+    private void updateToObserver() {
         setChanged();
         if (amount <= 0) {
             notifyObservers(LoanList.DELETE);

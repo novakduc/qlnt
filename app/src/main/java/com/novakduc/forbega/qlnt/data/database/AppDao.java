@@ -15,11 +15,11 @@ import java.util.List;
 public interface AppDao {
 
     //Get all costs in project
-    @Query("SELECT * FROM cost WHERE projectId = :projectId")
+    @Query("SELECT * FROM cost WHERE roomId = :projectId")
     List<Cost> getAllCost(long projectId);
 
     //Get all costs in project with specified type
-    @Query("SELECT * FROM cost WHERE projectId = :projectId AND type = :type")
+    @Query("SELECT * FROM cost WHERE roomId = :projectId AND type = :type")
     List<Cost> getAllCostByType(long projectId, CostType type);
 
     //Insert a cost to cost table
@@ -27,15 +27,15 @@ public interface AppDao {
     void insert(Cost cost);
 
     //Get all loan in project
-    @Query("SELECT * FROM loan WHERE projectId = :projectId")
+    @Query("SELECT * FROM loan WHERE roomId = :projectId")
     List<Loan> getAllLoan(long projectId);
 
     //Get a loan
-    @Query("SELECT * FROM loan WHERE projectId = :projectId AND id = :id")
+    @Query("SELECT * FROM loan WHERE roomId = :projectId AND id = :id")
     Loan getLoanById(long projectId, long id);
 
     //Get a project
-    @Query("SELECT * FROM project WHERE projectId = :projectId")
+    @Query("SELECT * FROM project WHERE roomId = :projectId")
     Project getProject(long projectId);
 
     //Get all project

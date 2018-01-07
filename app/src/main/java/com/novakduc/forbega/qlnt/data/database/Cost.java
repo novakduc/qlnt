@@ -53,16 +53,13 @@ public class Cost implements ItemWithId{
         this.repeatable = repeatable;
     }
 
+    @Override
     public long getAmount() {
         return amount;
     }
 
     public void setAmount(long amount) {
         this.amount = amount;
-    }
-
-    public double getAmount(CurrencyUnit pUnit) {
-        return Loan.round((double) amount / pUnit.getUnit(), 3);
     }
 
     @Override

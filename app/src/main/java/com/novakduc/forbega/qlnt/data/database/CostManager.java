@@ -14,16 +14,18 @@ import java.util.ArrayList;
 public class CostManager<E> extends MyArrayList<E> {
     @PrimaryKey
     private long projectId;
-    private String idListGsonStringValue;
+    private String idListGSonString;
+    private long totalAmount;
     @Ignore
     private ArrayList idList;
 
     //For Room only
-    public CostManager(long projectId, String idListGsonStringValue) {
+    public CostManager(long projectId, String idListGSonString, long totalAmount) {
         super(3);
         this.projectId = projectId;
-        this.idListGsonStringValue = idListGsonStringValue;
-        this.idList = getIdListFromGson();
+        this.idListGSonString = idListGSonString;
+        this.idList = gSonStringToList();
+        this.totalAmount = totalAmount;
     }
 
     @Ignore
@@ -32,15 +34,9 @@ public class CostManager<E> extends MyArrayList<E> {
         this.idList = new ArrayList(3);
     }
 
-    @Ignore
-    public CostManager(int i) {
-        super(i);
-        this.idList = new ArrayList(i);
-    }
-
     @Override
-    public String getIdListGsonStringValue() {
-        return idListGsonStringValue;
+    public String getIdListGSonString() {
+        return idListGSonString;
     }
 
     @Override
@@ -48,22 +44,16 @@ public class CostManager<E> extends MyArrayList<E> {
         return idList;
     }
 
-    public double getTotalCost(CurrencyUnit pUnit) {
-        double total = 0;
-        for (E i :
-                this) {
-            total += ((Cost) i).getAmount(pUnit);
-        }
-        return total;
+    @Override
+    public long getTotalAmount() {
+        totalAmount = super.getTotalAmount();
+        return totalAmount;
     }
 
-    public long getTotalCost() {
-        long total = 0;
-        Cost cost;
-        for (E i :
-                this) {
-            total += ((Cost)i).getAmount();
-        }
-        return total;
+    @Override
+    public boolean add(E e) {
+        boolean b = super.add(e);
+        totalAmount = super.getTotalAmount();
+        return b;
     }
 }

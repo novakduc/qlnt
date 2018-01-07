@@ -7,41 +7,27 @@ import android.arch.persistence.room.Index;
 import java.util.ArrayList;
 
 /**
- * Created by n.thanh on 3/29/2017.
+ * Created by Novak on 1/7/2018.
  */
-@Entity(tableName = "room_list", indices = @Index(value = {"roomId"}, unique = true))
-public class RoomList<E> extends MyArrayList<E> {
+@Entity(tableName = "room_service_list", indices = @Index(value = {"roomId"}, unique = true))
+public class RoomServiceList<E> extends MyArrayList<E> {
     private long roomId;
     private String idListGSonString;
     @Ignore
     private ArrayList idList;
 
     //For Room only
-    public RoomList(long roomId, String idListGSonString) {
+    public RoomServiceList(long roomId, String idListGSonString) {
         this.roomId = roomId;
         this.idListGSonString = idListGSonString;
 
         this.idList = gSonStringToList();
     }
 
-    public RoomList(long roomId) {
+    @Ignore
+    public RoomServiceList(long roomId) {
         super(10);
         this.roomId = roomId;
-    }
-
-    public int getNoOfProducingRoom() {
-        return this.size() - getNoOfAvailableRoom();
-    }
-
-    private int getNoOfAvailableRoom() {
-        int availableCount = 0;
-        RoomForRent roomForRent;
-        for (E i :
-                this) {
-            roomForRent = (RoomForRent) i;
-            if (roomForRent.isAvailable()) availableCount++;
-        }
-        return availableCount;
     }
 
     @Override

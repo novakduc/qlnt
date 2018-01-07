@@ -239,4 +239,9 @@ public class Project implements Cloneable, ItemWithId {
     public long getId() {
         return projectId;
     }
+
+    @Override
+    public long getAmount() {
+        return this.investmentAmount;
+    }
 }

@@ -20,35 +20,36 @@ public class RoomForRent implements Cloneable, ItemWithId {
     private double area;
     private long charge;
     private boolean available;
-    private long projectId;
     @Ignore
     private ArrayList<RoomService> roomServices;
 
     //For Room only
-    public RoomForRent(long id, String name, double area, long charge, boolean available,
-                       long projectId) {
+    public RoomForRent(long id, String name, double area, long charge, boolean available) {
         this.id = id;
         this.name = name;
         this.area = area;
         this.charge = charge;
         this.available = available;
-        this.projectId = projectId;
     }
 
     @Ignore
-    public RoomForRent(long projectId, String name, double area, long charge) {
+    public RoomForRent(String name, double area, long charge) {
         this.id = Calendar.getInstance().getTimeInMillis();
         this.name = name;
         this.area = area;
         this.charge = charge;
         available = true;
-        this.projectId = projectId;
         roomServices = new ArrayList<RoomService>(5);
     }
 
     @Override
     public long getId() {
         return id;
+    }
+
+    @Override
+    public long getAmount() {
+        return charge;
     }
 
     public void setId(long id) {
@@ -93,14 +94,6 @@ public class RoomForRent implements Cloneable, ItemWithId {
 
     public void setCharge(long charge) {
         this.charge = charge;
-    }
-
-    public long getProjectId() {
-        return projectId;
-    }
-
-    public void setProjectId(long projectId) {
-        this.projectId = projectId;
     }
 
     @Override

@@ -25,16 +25,13 @@ public abstract class MyArrayList<E> extends ArrayList<E> implements ArrayListGs
 
 
     @Override
-    public ArrayList getIdListFromGson() {
-        Gson gson = new Gson();
-        Type collectionType = new TypeToken<ArrayList>() {
-        }.getType();
-        return gson.fromJson(getIdListGsonStringValue(), collectionType);
+    public ArrayList gSonStringToList() {
+        Type collectionType = new TypeToken<ArrayList>() {}.getType();
+        return gson.fromJson(getIdListGSonString(), collectionType);
     }
 
     @Override
-    public String idListToString() {
-        Gson gson = new Gson();
+    public String listToGSonString() {
         return gson.toJson(getIdList());
     }
 
@@ -48,7 +45,17 @@ public abstract class MyArrayList<E> extends ArrayList<E> implements ArrayListGs
         return b && super.add(e);
     }
 
-    public abstract String getIdListGsonStringValue();
+    public long getTotalAmount() {
+        long total = 0;
+        for (E i :
+                this) {
+            total += ((ItemWithId) i).getAmount();
+        }
+
+        return total;
+    }
+
+    public abstract String getIdListGSonString();
 
     public abstract ArrayList getIdList();
 }
