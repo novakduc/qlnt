@@ -36,8 +36,9 @@ public class LoanList<E> extends MyArrayList<E> implements Observer {
     }
 
     @Ignore
-    public LoanList() {
+    public LoanList(long projectId) {
         super(3);
+        this.projectId = projectId;
         idList = new ArrayList(3);
     }
 
@@ -54,6 +55,10 @@ public class LoanList<E> extends MyArrayList<E> implements Observer {
     public long getTotalLoanAmount() {
 
         return this.totalLoanAmount;
+    }
+
+    public long getProjectId() {
+        return projectId;
     }
 
     public Loan getLoan(long loanId) {

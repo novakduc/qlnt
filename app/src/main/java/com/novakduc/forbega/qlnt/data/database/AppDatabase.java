@@ -10,7 +10,9 @@ import android.content.Context;
  * Created by Nguyen Quoc Thanh on 1/3/2018.
  */
 
-@Database(entities = {Cost.class}, version = 1)
+@Database(entities = {Cost.class, CostManager.class, Loan.class, LoanList.class,
+        Project.class, RoomForRent.class, RoomList.class, RoomService.class,
+        RoomServiceList.class, UnitPrice.class}, version = 1)
 @TypeConverters(CostTypeConverter.class)
 public abstract class AppDatabase extends RoomDatabase {
     private static final String DB_NAME = "com.novakduc.forbega.database";

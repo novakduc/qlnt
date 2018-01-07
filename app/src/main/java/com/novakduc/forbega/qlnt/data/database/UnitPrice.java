@@ -1,6 +1,10 @@
 package com.novakduc.forbega.qlnt.data.database;
 
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.PrimaryKey;
+
+import java.util.Calendar;
 
 /**
  * Created by n.thanh on 9/21/2016.
@@ -8,6 +12,8 @@ import android.arch.persistence.room.Entity;
 @Entity(tableName = "unit_price")
 public class UnitPrice implements Cloneable {
 
+    @PrimaryKey
+    private long id;
     private long electricity;
     private long water;
     private long tv;
@@ -16,13 +22,24 @@ public class UnitPrice implements Cloneable {
     private long security;
 
     //For room only
-    public UnitPrice(long electricity, long water, long tv, long trashCollection, long internet, long security) {
+    public UnitPrice(long id, long electricity, long water, long tv, long trashCollection,
+                     long internet, long security) {
+        this.id = id;
         this.electricity = electricity;
         this.water = water;
         this.tv = tv;
         this.trashCollection = trashCollection;
         this.internet = internet;
         this.security = security;
+    }
+
+    @Ignore
+    public UnitPrice() {
+        this.id = Calendar.getInstance().getTimeInMillis();
+    }
+
+    public long getId() {
+        return id;
     }
 
     public long get(CostType type) {

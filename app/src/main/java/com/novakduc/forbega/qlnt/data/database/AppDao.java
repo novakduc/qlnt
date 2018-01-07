@@ -15,32 +15,36 @@ import java.util.List;
 public interface AppDao {
 
     //Get all costs in project
-    @Query("SELECT * FROM cost WHERE roomId = :projectId")
-    List<Cost> getAllCost(long projectId);
+    @Query("SELECT * FROM cost")
+    List<Cost> getAllCost();
 
     //Get all costs in project with specified type
-    @Query("SELECT * FROM cost WHERE roomId = :projectId AND type = :type")
-    List<Cost> getAllCostByType(long projectId, CostType type);
+    @Query("SELECT * FROM cost WHERE type = :type")
+    List<Cost> getAllCostByType(CostType type);
+
+    //Get all costs in project with specified date
+    @Query("SELECT * FROM cost WHERE date = :date")
+    List<Cost> getAllCostByDate(long date);
 
     //Insert a cost to cost table
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(Cost cost);
 
     //Get all loan in project
-    @Query("SELECT * FROM loan WHERE roomId = :projectId")
-    List<Loan> getAllLoan(long projectId);
+    @Query("SELECT * FROM loan")
+    List<Loan> getAllLoan();
 
     //Get a loan
-    @Query("SELECT * FROM loan WHERE roomId = :projectId AND id = :id")
-    Loan getLoanById(long projectId, long id);
+    @Query("SELECT * FROM loan WHERE id = :id")
+    Loan getLoanById(long id);
 
     //Get a project
-    @Query("SELECT * FROM project WHERE roomId = :projectId")
+    @Query("SELECT * FROM project WHERE projectId = :projectId")
     Project getProject(long projectId);
 
     //Get all project
     @Query("SELECT * FROM project")
-    List<Cost> getAllProjects();
+    List<Project> getAllProjects();
 
     //Insert a project to database
     @Insert(onConflict = OnConflictStrategy.REPLACE)

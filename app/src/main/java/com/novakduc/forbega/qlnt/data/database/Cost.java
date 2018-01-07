@@ -15,18 +15,12 @@ public class Cost implements ItemWithId{
     private long date;
     private CostType type;
     private boolean repeatable;
-    private long projectId;
 
-    public Cost(long projectId, long amount, CostType type, long date, boolean repeatable) {
-        this.projectId = projectId;
+    public Cost(long amount, CostType type, long date, boolean repeatable) {
         this.amount = amount;
         this.type = type;
         this.date = date;
         this.repeatable = repeatable;
-    }
-
-    public long getProjectId() {
-        return projectId;
     }
 
     public long getDate() {

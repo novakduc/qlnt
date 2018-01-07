@@ -47,9 +47,9 @@ public class Project implements Cloneable, ItemWithId {
     @Ignore
     public Project() {
         projectId = Calendar.getInstance().getTimeInMillis();
-        mLoanList = new LoanList<Loan>();
-        mCostManager = new CostManager<Cost>();
-        mRoomForRentList = new RoomList<RoomForRent>();
+        mLoanList = new LoanList<Loan>(projectId);
+        mCostManager = new CostManager<Cost>(projectId);
+        mRoomForRentList = new RoomList<RoomForRent>(projectId);
     }
 
     public static String calendarToString(long dateInMilis) {
@@ -61,7 +61,7 @@ public class Project implements Cloneable, ItemWithId {
     }
 
     public boolean createRoom(String name, double area, long charge) {
-        return mRoomForRentList.add(new RoomForRent(this.projectId, name, area, charge));
+        return mRoomForRentList.add(new RoomForRent(name, area, charge));
     }
 
     @Override
@@ -99,7 +99,7 @@ public class Project implements Cloneable, ItemWithId {
 
     //Add cost
     public boolean addCost(long amount, CostType type, long date, boolean repeatable) {
-        return mCostManager.add(new Cost(projectId, amount, type, date, repeatable));
+        return mCostManager.add(new Cost(amount, type, date, repeatable));
     }
 
     //Add loan
@@ -148,14 +148,14 @@ public class Project implements Cloneable, ItemWithId {
         project.setProjectId(Calendar.getInstance().getTimeInMillis());
         project.setUnitPrice((UnitPrice) mUnitPrice.clone());
         //Clone loan list
-        LoanList<Loan> loanList = new LoanList<Loan>();
+        LoanList<Loan> loanList = new LoanList<Loan>(project.getId());
         for (Loan l :
                 mLoanList) {
             loanList.add((Loan) l.clone());
         }
         project.setLoanList(loanList);
         //Clone room list
-        RoomList<RoomForRent> roomForRents = new RoomList<RoomForRent>();
+        RoomList<RoomForRent> roomForRents = new RoomList<RoomForRent>(project.getId());
         for (RoomForRent roomForRent :
                 mRoomForRentList) {
             roomForRents.add((RoomForRent) roomForRent.clone());

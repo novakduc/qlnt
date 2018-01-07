@@ -3,30 +3,37 @@ package com.novakduc.forbega.qlnt.data.database;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.Index;
+import android.arch.persistence.room.PrimaryKey;
 
 import java.util.ArrayList;
 
 /**
  * Created by n.thanh on 3/29/2017.
  */
-@Entity(tableName = "room_list", indices = @Index(value = {"roomId"}, unique = true))
+@Entity(tableName = "room_list", indices = @Index(value = {"projectId"}, unique = true))
 public class RoomList<E> extends MyArrayList<E> {
-    private long roomId;
+    @PrimaryKey
+    private long projectId;
     private String idListGSonString;
     @Ignore
     private ArrayList idList;
 
     //For Room only
-    public RoomList(long roomId, String idListGSonString) {
-        this.roomId = roomId;
+    public RoomList(long projectId, String idListGSonString) {
+        this.projectId = projectId;
         this.idListGSonString = idListGSonString;
 
         this.idList = gSonStringToList();
     }
 
-    public RoomList(long roomId) {
+    @Ignore
+    public RoomList(long projectId) {
         super(10);
-        this.roomId = roomId;
+        this.projectId = projectId;
+    }
+
+    public long getProjectId() {
+        return projectId;
     }
 
     public int getNoOfProducingRoom() {

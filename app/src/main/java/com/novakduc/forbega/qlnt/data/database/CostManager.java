@@ -12,6 +12,7 @@ import java.util.ArrayList;
  */
 @Entity(tableName = "cost_manager", indices = @Index(value = {"projectId"}, unique = true))
 public class CostManager<E> extends MyArrayList<E> {
+
     @PrimaryKey
     private long projectId;
     private String idListGSonString;
@@ -21,7 +22,6 @@ public class CostManager<E> extends MyArrayList<E> {
 
     //For Room only
     public CostManager(long projectId, String idListGSonString, long totalAmount) {
-        super(3);
         this.projectId = projectId;
         this.idListGSonString = idListGSonString;
         this.idList = gSonStringToList();
@@ -29,9 +29,14 @@ public class CostManager<E> extends MyArrayList<E> {
     }
 
     @Ignore
-    public CostManager() {
+    public CostManager(long projectId) {
         super(3);
+        this.projectId = projectId;
         this.idList = new ArrayList(3);
+    }
+
+    public long getProjectId() {
+        return projectId;
     }
 
     @Override

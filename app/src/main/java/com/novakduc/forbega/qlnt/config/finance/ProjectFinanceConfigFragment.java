@@ -194,6 +194,6 @@ public class ProjectFinanceConfigFragment extends Fragment implements LoanContai
 
     @Override
     public void loanDeleteUpdate() {
-        mTotalLoanTextView.setText(String.valueOf(mLoanList.getTotalLoanAmount(CurrencyUnit.MIL_BASE)));
+        mTotalLoanTextView.setText(String.valueOf(mLoanList.getTotalLoanAmount()));
     }
 }

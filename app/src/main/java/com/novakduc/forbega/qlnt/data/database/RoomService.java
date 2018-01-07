@@ -14,17 +14,17 @@ public class RoomService implements RoomServiceInterface {
     @PrimaryKey
     private long id;
     private CostType type;
-    private long mOldIndex;
-    private long mNewIndex;
+    private long oldIndex;
+    private long newIndex;
     @Ignore
     protected UnitPrice unitPrice;
 
     //For Room only
-    public RoomService(long id, CostType type, boolean withIndex, long oldIndex, long newIndex) {
+    public RoomService(long id, CostType type, long oldIndex, long newIndex) {
         this.id = id;
         this.type = type;
-        mOldIndex = oldIndex;
-        mNewIndex = newIndex;
+        this.oldIndex = oldIndex;
+        this.newIndex = newIndex;
     }
 
     @Ignore
@@ -54,26 +54,26 @@ public class RoomService implements RoomServiceInterface {
     public long charge() {
         long factor = 1;
         if (isWithIndex()) {
-            factor = this.mNewIndex - this.mOldIndex > 0 ?
-                        this.mNewIndex - this.mOldIndex : 1;
+            factor = this.newIndex - this.oldIndex > 0 ?
+                        this.newIndex - this.oldIndex : 1;
         }
         return unitPrice.get(type) * factor;
     }
 
     @Override
     public long getOldIndex() {
-        return mOldIndex;
+        return oldIndex;
     }
 
     @Override
     public long getNewIndex() {
-        return mNewIndex;
+        return newIndex;
     }
 
     @Override
     public void setNewIndex(long newIndex) {
-        mOldIndex = mNewIndex;  //update old index
-        mNewIndex = newIndex;
+        oldIndex = this.newIndex;  //update old index
+        this.newIndex = newIndex;
     }
 
     @Override

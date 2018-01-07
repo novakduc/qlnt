@@ -3,6 +3,7 @@ package com.novakduc.forbega.qlnt.data.database;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.Index;
+import android.arch.persistence.room.PrimaryKey;
 
 import java.util.ArrayList;
 
@@ -11,6 +12,7 @@ import java.util.ArrayList;
  */
 @Entity(tableName = "room_service_list", indices = @Index(value = {"roomId"}, unique = true))
 public class RoomServiceList<E> extends MyArrayList<E> {
+    @PrimaryKey
     private long roomId;
     private String idListGSonString;
     @Ignore
@@ -28,6 +30,10 @@ public class RoomServiceList<E> extends MyArrayList<E> {
     public RoomServiceList(long roomId) {
         super(10);
         this.roomId = roomId;
+    }
+
+    public long getRoomId() {
+        return roomId;
     }
 
     @Override
