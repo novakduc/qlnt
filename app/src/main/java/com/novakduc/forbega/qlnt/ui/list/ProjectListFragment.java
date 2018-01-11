@@ -1,7 +1,6 @@
 package com.novakduc.forbega.qlnt.ui.list;
 
 import android.app.Fragment;
-import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
@@ -48,7 +47,7 @@ public class ProjectListFragment extends Fragment {
     private static final int PROJECT_CONFIG_RESULT = 0;
     ProjectsRecyclerViewAdapter mProjectsRecyclerViewAdapter;
     private long mActiveProject = -1;
-    private ViewModel mViewModel;
+    private ProjectListFragmentViewModel mViewModel;
     private ArrayList<Project> mProjects;
 
     @Override
@@ -56,7 +55,7 @@ public class ProjectListFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         ProjectListViewModelFactory factory =
-                InjectorUtils.provideProjectListViewModelFactory(this);
+                InjectorUtils.provideProjectListViewModelFactory(getActivity());
 
         mViewModel = ViewModelProviders.of(this, factory).get(ProjectListFragmentViewModel.class);
 
