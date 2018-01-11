@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="com.novakduc.forbega.qlnt"
-          xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.novakduc.forbega.qlnt">
 
     <application
         android:allowBackup="true"
@@ -9,7 +9,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".list.ProjectListActivity"
+            android:name=".ui.list.ProjectListActivity"
             android:label="@string/project_list"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -19,13 +19,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".config.ProjectConfigurationActivity"
+            android:name=".ui.config.ProjectConfigurationActivity"
             android:label="@string/txtViewBaseTitile"
-            android:windowSoftInputMode="adjustResize"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustResize">
         </activity>
         <activity
-            android:name=".config.finance.ProjectLoanDeclareActivity"
+            android:name=".ui.config.finance.ProjectLoanDeclareActivity"
             android:label="@string/txtViewBaseTitile"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
