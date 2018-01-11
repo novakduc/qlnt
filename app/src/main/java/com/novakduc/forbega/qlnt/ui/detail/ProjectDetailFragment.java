@@ -17,7 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.novakduc.forbega.qlnt.R;
-import com.novakduc.forbega.qlnt.data.database.Qlnt;
+import com.novakduc.forbega.qlnt.data.QlntRepository;
 import com.novakduc.forbega.qlnt.ui.TabAdapter;
 
 /**
@@ -65,7 +65,7 @@ public class ProjectDetailFragment extends Fragment {
         //Load active project ID
         SharedPreferences preferences = getActivity().getSharedPreferences(PREF_QLNT, 0);
         long id = preferences.getLong(ACTIVE_PROJECT_ID, -1);
-        Qlnt.getInstance(getActivity()).setActiveProjectId(id);
+        QlntRepository.getInstance(getActivity()).setActiveProjectId(id);
 
         //Add tabs
         TabLayout tabLayout = view.findViewById(R.id.tab_layout);

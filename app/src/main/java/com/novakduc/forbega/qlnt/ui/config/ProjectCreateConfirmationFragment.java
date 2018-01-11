@@ -28,11 +28,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.novakduc.forbega.qlnt.R;
+import com.novakduc.forbega.qlnt.data.QlntRepository;
 import com.novakduc.forbega.qlnt.data.database.CurrencyUnit;
 import com.novakduc.forbega.qlnt.data.database.Loan;
 import com.novakduc.forbega.qlnt.data.database.LoanList;
 import com.novakduc.forbega.qlnt.data.database.Project;
-import com.novakduc.forbega.qlnt.data.database.Qlnt;
 import com.novakduc.forbega.qlnt.data.database.UnitPrice;
 import com.novakduc.forbega.qlnt.ui.config.finance.LoanContainerListener;
 import com.novakduc.forbega.qlnt.ui.config.finance.LoansAdapter;
@@ -516,7 +516,7 @@ public class ProjectCreateConfirmationFragment extends Fragment implements LoanC
 
     private void nextAction() {
 
-        Qlnt.getInstance(getActivity().getApplicationContext()).addProject(mTempProject);
+        QlntRepository.getInstance(getActivity().getApplicationContext()).addProject(mTempProject);
         getActivity().finish();
     }
 

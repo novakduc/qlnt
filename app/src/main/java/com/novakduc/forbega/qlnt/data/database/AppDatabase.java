@@ -33,5 +33,5 @@ public abstract class AppDatabase extends RoomDatabase {
         return sInstance;
     }
 
-    public abstract AppDao qlntDao();
+    public abstract AppDao appDao();
 }

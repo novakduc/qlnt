@@ -1,6 +1,8 @@
 package com.novakduc.forbega.qlnt.ui.list;
 
 import android.app.Fragment;
+import android.arch.lifecycle.ViewModel;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -25,10 +27,11 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.novakduc.forbega.qlnt.R;
+import com.novakduc.forbega.qlnt.data.QlntRepository;
 import com.novakduc.forbega.qlnt.data.database.CurrencyUnit;
 import com.novakduc.forbega.qlnt.data.database.Project;
-import com.novakduc.forbega.qlnt.data.database.Qlnt;
 import com.novakduc.forbega.qlnt.ui.config.ProjectConfigurationActivity;
+import com.novakduc.forbega.qlnt.ultilities.InjectorUtils;
 
 import java.util.ArrayList;
 
@@ -45,17 +48,22 @@ public class ProjectListFragment extends Fragment {
     private static final int PROJECT_CONFIG_RESULT = 0;
     ProjectsRecyclerViewAdapter mProjectsRecyclerViewAdapter;
     private long mActiveProject = -1;
+    private ViewModel mViewModel;
     private ArrayList<Project> mProjects;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mProjects = Qlnt.getInstance(getActivity().getApplicationContext()).getProjectList();
+
+        ProjectListViewModelFactory factory =
+                InjectorUtils.provideProjectListViewModelFactory(this);
+
+        mViewModel = ViewModelProviders.of(this, factory).get(ProjectListFragmentViewModel.class);
 
         //Load active project ID
         SharedPreferences preferences = getActivity().getSharedPreferences(PREF_QLNT, 0);
         Long id = preferences.getLong(ACTIVE_PROJECT_ID, -1);
-        Qlnt.getInstance(getActivity().getApplicationContext()).setActiveProjectId(id);
+        QlntRepository.getInstance(getActivity().getApplicationContext()).setActiveProjectId(id);
     }
 
     @Override

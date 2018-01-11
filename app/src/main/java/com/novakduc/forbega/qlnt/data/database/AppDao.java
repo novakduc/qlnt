@@ -1,6 +1,8 @@
 package com.novakduc.forbega.qlnt.data.database;
 
+import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;
+import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
@@ -40,13 +42,16 @@ public interface AppDao {
 
     //Get a project
     @Query("SELECT * FROM project WHERE projectId = :projectId")
-    Project getProject(long projectId);
+    LiveData<Project> getProject(long projectId);
 
     //Get all project
     @Query("SELECT * FROM project")
-    List<Project> getAllProjects();
+    LiveData<Project[]> getAllProjects();
 
     //Insert a project to database
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(Project project);
+
+    @Delete
+    void removeProject(Project project);
 }

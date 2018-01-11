@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.novakduc.forbega.qlnt;
+package com.novakduc.baselibrary;
 
 import android.os.Handler;
 import android.os.Looper;
