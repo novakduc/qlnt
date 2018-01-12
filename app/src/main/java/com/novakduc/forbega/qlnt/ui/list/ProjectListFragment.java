@@ -1,5 +1,6 @@
 package com.novakduc.forbega.qlnt.ui.list;
 
+import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -69,9 +70,9 @@ public class ProjectListFragment extends android.support.v4.app.Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_project_list, container, false);
+        final View view = inflater.inflate(R.layout.fragment_project_list, container, false);
         Toolbar toolbar = view.findViewById(R.id.toolbar);
-        AppCompatActivity activity = (AppCompatActivity) getActivity();
+        final AppCompatActivity activity = (AppCompatActivity) getActivity();
         activity.setSupportActionBar(toolbar);
 
         final ActionBar ab = activity.getSupportActionBar();
@@ -90,14 +91,18 @@ public class ProjectListFragment extends android.support.v4.app.Fragment {
                 InjectorUtils.provideProjectListViewModelFactory(getActivity());
 
         mViewModel = ViewModelProviders.of(this, factory).get(ProjectListFragmentViewModel.class);
-        mViewModel.getProjects().observe(this, projects -> {
-            if (projects == null) {
-                mProjectsRecyclerViewAdapter = new ProjectsRecyclerViewAdapter(activity, Arrays.asList(projects));
-                RecyclerView recyclerView = view.findViewById(R.id.rv_project_list);
-                LinearLayoutManager layoutManager = new LinearLayoutManager(activity);
-                recyclerView.setLayoutManager(layoutManager);
-                recyclerView.setHasFixedSize(true);
-                recyclerView.setAdapter(mProjectsRecyclerViewAdapter);
+        mViewModel.getProjects().observe(this, new Observer<Project[]>() {
+            @Override
+            public void onChanged(@Nullable Project[] projects) {
+                if (projects == null) {
+                    mProjectsRecyclerViewAdapter = new ProjectsRecyclerViewAdapter(activity,
+                            Arrays.asList(projects));
+                    RecyclerView recyclerView = view.findViewById(R.id.rv_project_list);
+                    LinearLayoutManager layoutManager = new LinearLayoutManager(activity);
+                    recyclerView.setLayoutManager(layoutManager);
+                    recyclerView.setHasFixedSize(true);
+                    recyclerView.setAdapter(mProjectsRecyclerViewAdapter);
+                }
             }
         });
 
