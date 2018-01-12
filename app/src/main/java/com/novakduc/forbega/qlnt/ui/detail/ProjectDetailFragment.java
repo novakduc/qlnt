@@ -1,6 +1,5 @@
 package com.novakduc.forbega.qlnt.ui.detail;
 
-import android.app.Fragment;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -17,14 +16,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.novakduc.forbega.qlnt.R;
-import com.novakduc.forbega.qlnt.data.QlntRepository;
 import com.novakduc.forbega.qlnt.ui.TabAdapter;
 
 /**
  * Created by n.thanh on 10/12/2016.
  */
 
-public class ProjectDetailFragment extends Fragment {
+public class ProjectDetailFragment extends android.support.v4.app.Fragment {
     public static final String PREF_QLNT = "com.novak.forbequ.qlnt";
     private static final String ACTIVE_PROJECT_ID = "active_project_id";
     private final int numberOfPage = 3;
@@ -65,7 +63,7 @@ public class ProjectDetailFragment extends Fragment {
         //Load active project ID
         SharedPreferences preferences = getActivity().getSharedPreferences(PREF_QLNT, 0);
         long id = preferences.getLong(ACTIVE_PROJECT_ID, -1);
-        QlntRepository.getInstance(getActivity()).setActiveProjectId(id);
+//        QlntRepository.getInstance(getActivity()).setActiveProjectId(id);
 
         //Add tabs
         TabLayout tabLayout = view.findViewById(R.id.tab_layout);

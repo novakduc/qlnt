@@ -1,7 +1,5 @@
 package com.novakduc.forbega.qlnt.ui.config.base;
 
-import android.app.DialogFragment;
-import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.content.res.TypedArray;
@@ -36,7 +34,7 @@ import java.util.Calendar;
  * Created by n.thanh on 10/21/2016.
  */
 
-public class ProjectBaseConfigFragment extends Fragment {
+public class ProjectBaseConfigFragment extends android.support.v4.app.Fragment {
 
     public static final String TEMP_PROJECT = "com.novakduc.forbega.qlnt.tempproject";
     public static final String FRAGMENT_TAG = "FINANCE_CONFIG_TAG";
@@ -250,9 +248,9 @@ public class ProjectBaseConfigFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    private void showDialog(DialogFragment fragment, int target) {
+    private void showDialog(android.support.v4.app.DialogFragment fragment, int target) {
         fragment.setTargetFragment(this, target);
-        fragment.show(getActivity().getFragmentManager(),
+        fragment.show(getActivity().getSupportFragmentManager(),
                 "dialog");
     }
 

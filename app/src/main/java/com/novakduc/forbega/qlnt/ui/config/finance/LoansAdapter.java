@@ -53,7 +53,7 @@ public final class LoansAdapter extends RecyclerView.Adapter<LoansAdapter.ViewHo
         date.setTime(loan.getLoanDate());
         DateFormat format = SimpleDateFormat.getDateInstance();
         holder.mTextViewStartDate.setText(format.format(date));
-        holder.mTextViewLoanAmount.setText(String.valueOf(loan.getAmount());
+        holder.mTextViewLoanAmount.setText(String.valueOf(loan.getAmount()));
         holder.mTextViewInterestRate.setText(String.valueOf(loan.getInterestRate()));
         holder.mButtonDelete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,7 +74,7 @@ public final class LoansAdapter extends RecyclerView.Adapter<LoansAdapter.ViewHo
             public void onClick(View v) {
                 AppCompatActivity activity = (AppCompatActivity) mContext;
                 Intent intent = new Intent(activity, ProjectLoanDeclareActivity.class);
-                intent.putExtra(ProjectLoanDeclareFragment.LOAN_TO_EDIT, loan);
+                //intent.putExtra(ProjectLoanDeclareFragment.LOAN_TO_EDIT, loan);
                 Fragment fragment = activity.getFragmentManager().
                         findFragmentById(R.id.fragmentContainer);
                 fragment.startActivityForResult(intent, LOAN_EDIT_REQUEST_FROM_ADAPTER);

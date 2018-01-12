@@ -1,7 +1,6 @@
 package com.novakduc.forbega.qlnt.ui.config.finance;
 
 import android.app.DialogFragment;
-import android.app.Fragment;
 import android.os.Bundle;
 
 import com.novakduc.baselibrary.SimpleFragmentActivity;
@@ -12,7 +11,7 @@ public class ProjectLoanDeclareActivity extends SimpleFragmentActivity
         implements ConfirmationDialogFragment.ConfirmListener, LoanDeclareFragmentListener {
 
     @Override
-    protected Fragment createFragment() {
+    protected android.support.v4.app.Fragment createFragment() {
         return ProjectLoanDeclareFragment.newInstance();
     }
 

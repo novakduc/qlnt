@@ -1,6 +1,5 @@
 package com.novakduc.forbega.qlnt.ui.list;
 
-import android.app.Fragment;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
@@ -26,7 +25,6 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.novakduc.forbega.qlnt.R;
-import com.novakduc.forbega.qlnt.data.QlntRepository;
 import com.novakduc.forbega.qlnt.data.database.CurrencyUnit;
 import com.novakduc.forbega.qlnt.data.database.Project;
 import com.novakduc.forbega.qlnt.ui.config.ProjectConfigurationActivity;
@@ -40,7 +38,7 @@ import static android.content.Context.MODE_PRIVATE;
  * Created by n.thanh on 9/29/2016.
  */
 
-public class ProjectListFragment extends Fragment {
+public class ProjectListFragment extends android.support.v4.app.Fragment {
     // TODO: 9/29/2016
     public static final String PREF_QLNT = "com.novak.forbequ.qlnt";
     private static final String ACTIVE_PROJECT_ID = "active_project_id";
@@ -62,7 +60,6 @@ public class ProjectListFragment extends Fragment {
         //Load active project ID
         SharedPreferences preferences = getActivity().getSharedPreferences(PREF_QLNT, 0);
         Long id = preferences.getLong(ACTIVE_PROJECT_ID, -1);
-        QlntRepository.getInstance(getActivity().getApplicationContext()).setActiveProjectId(id);
     }
 
     @Override

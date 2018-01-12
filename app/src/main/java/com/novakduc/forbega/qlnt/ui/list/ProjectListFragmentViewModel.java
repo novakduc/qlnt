@@ -6,6 +6,8 @@ import android.arch.lifecycle.ViewModel;
 import com.novakduc.forbega.qlnt.data.QlntRepository;
 import com.novakduc.forbega.qlnt.data.database.Project;
 
+import javax.inject.Inject;
+
 /**
  * Created by Nguyen Quoc Thanh on 1/11/2018.
  */
@@ -13,6 +15,7 @@ import com.novakduc.forbega.qlnt.data.database.Project;
 public class ProjectListFragmentViewModel extends ViewModel {
     private LiveData<Project[]> mProjects;
 
+    @Inject
     public ProjectListFragmentViewModel(QlntRepository repository) {
         mProjects = repository.getProjectList();
     }

@@ -37,7 +37,7 @@ public class ProjectUnitPriceConfigFragment extends Fragment {
 
     public static ProjectUnitPriceConfigFragment newInstance(Project tempProject) {
         Bundle bundle = new Bundle();
-        bundle.putParcelable(TEMP_PROJECT, tempProject);
+        //bundle.putParcelable(TEMP_PROJECT, tempProject);
         ProjectUnitPriceConfigFragment fragment = new ProjectUnitPriceConfigFragment();
         fragment.setArguments(bundle);
         return fragment;

@@ -1,7 +1,6 @@
 package com.novakduc.forbega.qlnt.ui.config;
 
 import android.app.DialogFragment;
-import android.app.Fragment;
 import android.app.FragmentManager;
 import android.os.Bundle;
 import android.util.Log;
@@ -27,7 +26,7 @@ public class ProjectConfigurationActivity extends SimpleFragmentActivity
     }
 
     @Override
-    protected Fragment createFragment() {
+    protected android.support.v4.app.Fragment createFragment() {
         return ProjectBaseConfigFragment.newInstance();
     }
 
@@ -81,7 +80,7 @@ public class ProjectConfigurationActivity extends SimpleFragmentActivity
 
     @Override
     public void addProject() {
-        FragmentManager manager = getFragmentManager();
+        android.support.v4.app.FragmentManager manager = getSupportFragmentManager();
         manager.beginTransaction().replace(R.id.fragmentContainer,
                 ProjectCreateConfirmationFragment.newInstance(mTempProject)).addToBackStack(null).commit();
     }

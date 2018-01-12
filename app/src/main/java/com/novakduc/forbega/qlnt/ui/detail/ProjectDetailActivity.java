@@ -1,7 +1,5 @@
 package com.novakduc.forbega.qlnt.ui.detail;
 
-import android.app.Fragment;
-
 import com.novakduc.baselibrary.SimpleFragmentActivity;
 
 /**
@@ -10,7 +8,7 @@ import com.novakduc.baselibrary.SimpleFragmentActivity;
 
 public class ProjectDetailActivity extends SimpleFragmentActivity {
     @Override
-    protected Fragment createFragment() {
+    protected android.support.v4.app.Fragment createFragment() {
         return new ProjectDetailFragment();
     }
 }

@@ -9,7 +9,6 @@ import com.novakduc.forbega.qlnt.data.database.Project;
 /**
  * Created by n.thanh on 9/20/2016.
  */
-
 public class QlntRepository {
     private static final String LOG_TAG = QlntRepository.class.getSimpleName();
     private static final Object LOCK = new Object();

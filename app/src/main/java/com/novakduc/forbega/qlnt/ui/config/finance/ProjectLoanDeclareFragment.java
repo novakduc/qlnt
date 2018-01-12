@@ -1,8 +1,6 @@
 package com.novakduc.forbega.qlnt.ui.config.finance;
 
 import android.app.Activity;
-import android.app.DialogFragment;
-import android.app.Fragment;
 import android.content.Intent;
 import android.content.res.TypedArray;
 import android.os.Bundle;
@@ -35,7 +33,7 @@ import java.util.Date;
  * Created by n.thanh on 10/21/2016.
  */
 
-public class ProjectLoanDeclareFragment extends Fragment {
+public class ProjectLoanDeclareFragment extends android.support.v4.app.Fragment {
     public static final String TEMP_LOAN = "com.novakduc.forbega.qlnt.tempLoan";
     public static final String RETURN_LOAN = "com.forbega.qlnt.temproject.loandeclare.returnloan";
     public static final String LOAN_TO_EDIT = "com.novakduc.forbega.qlnt.loanDeclare.loanId";
@@ -55,7 +53,7 @@ public class ProjectLoanDeclareFragment extends Fragment {
 
     public static ProjectLoanDeclareFragment newInstance(Loan loan) {
         Bundle bundle = new Bundle();
-        bundle.putParcelable(TEMP_LOAN, loan);
+        //bundle.putParcelable(TEMP_LOAN, loan);
         ProjectLoanDeclareFragment fragment = new ProjectLoanDeclareFragment();
         fragment.setArguments(bundle);
         return fragment;
@@ -236,7 +234,7 @@ public class ProjectLoanDeclareFragment extends Fragment {
                     mLoan.setInterestRate(mRate);
                     mLoan.setAmount(mAmount);
                 }
-                returnIntent.putExtra(RETURN_LOAN, mLoan);
+                //returnIntent.putExtra(RETURN_LOAN, mLoan);
                 getActivity().setResult(Activity.RESULT_OK, returnIntent);
                 getActivity().finish();
             }
@@ -288,9 +286,9 @@ public class ProjectLoanDeclareFragment extends Fragment {
         return super.onOptionsItemSelected(item);
     }
 
-    private void showDialog(DialogFragment fragment, int target) {
+    private void showDialog(android.support.v4.app.DialogFragment fragment, int target) {
         fragment.setTargetFragment(this, target);
-        fragment.show(getActivity().getFragmentManager(),
+        fragment.show(getActivity().getSupportFragmentManager(),
                 "dialog");
     }
 }

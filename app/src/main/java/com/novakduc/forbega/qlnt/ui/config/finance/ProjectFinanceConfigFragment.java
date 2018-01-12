@@ -26,7 +26,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.novakduc.forbega.qlnt.R;
-import com.novakduc.forbega.qlnt.data.database.CurrencyUnit;
 import com.novakduc.forbega.qlnt.data.database.Loan;
 import com.novakduc.forbega.qlnt.data.database.LoanList;
 import com.novakduc.forbega.qlnt.ui.config.UpdateListener;
@@ -54,7 +53,7 @@ public class ProjectFinanceConfigFragment extends Fragment implements LoanContai
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mLoanList = new LoanList<Loan>();
+        //mLoanList = new LoanList<Loan>();
         setHasOptionsMenu(true);
     }
 
@@ -187,8 +186,8 @@ public class ProjectFinanceConfigFragment extends Fragment implements LoanContai
         }
         mLoansAdapter.notifyDataSetChanged();
         if (mLoanList != null) {
-            mTotalLoanTextView.setText(String.valueOf(
-                    mLoanList.getTotalLoanAmount(CurrencyUnit.MIL_BASE)));
+            //mTotalLoanTextView.setText(String.valueOf(
+            //mLoanList.getTotalLoanAmount(CurrencyUnit.MIL_BASE)));
         }
     }
 

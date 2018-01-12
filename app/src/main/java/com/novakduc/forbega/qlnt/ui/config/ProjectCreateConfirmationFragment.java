@@ -1,8 +1,6 @@
 package com.novakduc.forbega.qlnt.ui.config;
 
 import android.app.Activity;
-import android.app.DialogFragment;
-import android.app.Fragment;
 import android.content.Intent;
 import android.content.res.TypedArray;
 import android.os.Bundle;
@@ -28,8 +26,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.novakduc.forbega.qlnt.R;
-import com.novakduc.forbega.qlnt.data.QlntRepository;
-import com.novakduc.forbega.qlnt.data.database.CurrencyUnit;
 import com.novakduc.forbega.qlnt.data.database.Loan;
 import com.novakduc.forbega.qlnt.data.database.LoanList;
 import com.novakduc.forbega.qlnt.data.database.Project;
@@ -46,7 +42,8 @@ import java.util.Calendar;
  * Created by n.thanh on 10/21/2016.
  */
 
-public class ProjectCreateConfirmationFragment extends Fragment implements LoanContainerListener {
+public class ProjectCreateConfirmationFragment extends android.support.v4.app.Fragment
+        implements LoanContainerListener {
     public static final String TEMP_PROJECT = "com.novakduc.forbega.qlnt.tempproject";
     RecyclerView mRecyclerView;
     LoansAdapter mLoansAdapter;
@@ -66,7 +63,7 @@ public class ProjectCreateConfirmationFragment extends Fragment implements LoanC
 
     public static ProjectCreateConfirmationFragment newInstance(Project tempProject) {
         Bundle bundle = new Bundle();
-        bundle.putParcelable(TEMP_PROJECT, tempProject);
+        //bundle.putParcelable(TEMP_PROJECT, tempProject);
         ProjectCreateConfirmationFragment fragment = new ProjectCreateConfirmationFragment();
         fragment.setArguments(bundle);
         return fragment;
@@ -251,7 +248,7 @@ public class ProjectCreateConfirmationFragment extends Fragment implements LoanC
         mLoansAdapter = new LoansAdapter(activity, loanList);
 
         mTotalLoanTextView = view.findViewById(R.id.totalLoan);
-        mTotalLoanTextView.setText(String.valueOf(loanList.getTotalLoanAmount(CurrencyUnit.MIL_BASE)));
+        mTotalLoanTextView.setText(String.valueOf(loanList.getTotalLoanAmount()));
 
         mRecyclerView = view.findViewById(R.id.loanList);
         LinearLayoutManager layoutManager = new LinearLayoutManager(activity);
@@ -491,9 +488,9 @@ public class ProjectCreateConfirmationFragment extends Fragment implements LoanC
         return view;
     }
 
-    private void showDialog(DialogFragment fragment, int target) {
+    private void showDialog(android.support.v4.app.DialogFragment fragment, int target) {
         fragment.setTargetFragment(this, target);
-        fragment.show(getActivity().getFragmentManager(),
+        fragment.show(getActivity().getSupportFragmentManager(),
                 "dialog");
     }
 
@@ -516,7 +513,7 @@ public class ProjectCreateConfirmationFragment extends Fragment implements LoanC
 
     private void nextAction() {
 
-        QlntRepository.getInstance(getActivity().getApplicationContext()).addProject(mTempProject);
+        //QlntRepository.getInstance(getActivity().getApplicationContext()).addProject(mTempProject);
         getActivity().finish();
     }
 
@@ -573,7 +570,7 @@ public class ProjectCreateConfirmationFragment extends Fragment implements LoanC
         mLoansAdapter.notifyDataSetChanged();
         if (mTempProject.getLoanList() != null) {
             mTotalLoanTextView.setText(String.valueOf(
-                    mTempProject.getLoanList().getTotalLoanAmount(CurrencyUnit.MIL_BASE)));
+                    mTempProject.getLoanList().getTotalLoanAmount()));
         }
     }
 
