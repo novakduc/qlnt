@@ -17,6 +17,7 @@
 package com.novakduc.forbega.qlnt.ultilities;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 
 import com.novakduc.baselibrary.AppExecutors;
 import com.novakduc.forbega.qlnt.data.QlntRepository;
@@ -47,8 +48,9 @@ public class InjectorUtils {
 //        return new DetailViewModelFactory(repository, date);
 //    }
 
+    @NonNull
     public static ProjectListViewModelFactory provideProjectListViewModelFactory(Context context) {
-        QlntRepository repository = provideRepository(context.getApplicationContext());
+        QlntRepository repository = InjectorUtils.provideRepository(context.getApplicationContext());
         return new ProjectListViewModelFactory(repository);
     }
 

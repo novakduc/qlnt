@@ -35,6 +35,10 @@ public class ProjectsRecyclerViewAdapter
         return mProjectList.get(position);
     }
 
+    public void swapList(List<Project> newList) {
+        mProjectList = newList;
+    }
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())

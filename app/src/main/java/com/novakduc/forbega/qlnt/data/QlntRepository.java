@@ -25,8 +25,35 @@ public class QlntRepository {
     public static synchronized QlntRepository getInstance(AppDao appDao, AppExecutors executors) {
         if (sInstance == null) {
             synchronized (LOCK) {
-                if (appDao == null) {
+                if (sInstance == null) {
                     sInstance = new QlntRepository(appDao, executors);
+                    //Test
+                    //Test should be removed
+//                    AppExecutors.getInstance().diskIO().execute(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            try {
+//
+//                                // Pretend this is the network loading data
+//                                Thread.sleep(4000);
+//                                Project pretendProject = new Project();
+//                                pretendProject.setName("sadjlkgj");
+//                                pretendProject.setAddress("sdlfjdfgdf");
+//                                pretendProject.setInvestmentAmount(2342905);
+//                                sInstance.addProject(pretendProject);
+//
+//                                Thread.sleep(2000);
+//                                pretendProject = new Project();
+//                                pretendProject.setName("sadjlkgj");
+//                                pretendProject.setAddress("sdlfjdfgdf");
+//                                pretendProject.setInvestmentAmount(2342905);
+//                                sInstance.addProject(pretendProject);
+//
+//                            } catch (InterruptedException e) {
+//                                e.printStackTrace();
+//                            }
+//                        }
+//                    });
                 }
             }
         }

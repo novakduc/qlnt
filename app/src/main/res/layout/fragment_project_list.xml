@@ -61,7 +61,7 @@
         android:layout_margin="@dimen/fab_margin"
         app:layout_anchor="@id/rv_project_list"
         app:layout_anchorGravity="bottom|right|end"
-        app:layout_behavior="com.novakduc.forbega.qlnt.list.ScrollAwareFABBehavior"
+        app:layout_behavior="com.novakduc.forbega.qlnt.ui.list.ScrollAwareFABBehavior"
         app:srcCompat="@drawable/ic_action_add"/>
 
 </android.support.design.widget.CoordinatorLayout>

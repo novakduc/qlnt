@@ -87,6 +87,15 @@ public class ProjectListFragment extends android.support.v4.app.Fragment {
                 .apply(RequestOptions.centerCropTransform())
                 .into(imageView);
 
+        mProjectsRecyclerViewAdapter = new ProjectsRecyclerViewAdapter(activity,
+                new ArrayList<Project>() {
+                });
+        RecyclerView recyclerView = view.findViewById(R.id.rv_project_list);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(activity);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setAdapter(mProjectsRecyclerViewAdapter);
+
         ProjectListViewModelFactory factory =
                 InjectorUtils.provideProjectListViewModelFactory(getActivity());
 
@@ -94,18 +103,13 @@ public class ProjectListFragment extends android.support.v4.app.Fragment {
         mViewModel.getProjects().observe(this, new Observer<Project[]>() {
             @Override
             public void onChanged(@Nullable Project[] projects) {
-                if (projects == null) {
-                    mProjectsRecyclerViewAdapter = new ProjectsRecyclerViewAdapter(activity,
-                            Arrays.asList(projects));
-                    RecyclerView recyclerView = view.findViewById(R.id.rv_project_list);
-                    LinearLayoutManager layoutManager = new LinearLayoutManager(activity);
-                    recyclerView.setLayoutManager(layoutManager);
-                    recyclerView.setHasFixedSize(true);
-                    recyclerView.setAdapter(mProjectsRecyclerViewAdapter);
+                if (projects != null) {
+                    mProjectsRecyclerViewAdapter.swapList(Arrays.asList(projects));
                 }
             }
         });
 
+        //Add project button
         FloatingActionButton fab = view.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
