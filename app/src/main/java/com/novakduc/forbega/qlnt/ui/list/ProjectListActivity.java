@@ -13,6 +13,6 @@ public class ProjectListActivity extends SimpleFragmentActivity
 
     @Override
     public void discardDialog(int result) {
-
+        // TODO: 1/15/2018 delete project
     }
 }

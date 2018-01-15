@@ -1,6 +1,5 @@
 package com.novakduc.forbega.qlnt.ui.list;
 
-import android.app.DialogFragment;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
@@ -155,7 +154,7 @@ public class ProjectListFragment extends android.support.v4.app.Fragment
         //dialog title in bundle
         bundle.putString(ConfirmationDialogFragment.MESSAGE,
                 getResources().getString(messageId));
-        DialogFragment dialogFragment = new ConfirmationDialogFragment();
+        android.support.v4.app.DialogFragment dialogFragment = new ConfirmationDialogFragment();
         dialogFragment.setArguments(bundle);
         dialogFragment.show(getActivity().getSupportFragmentManager(), "discardConfirm");
     }

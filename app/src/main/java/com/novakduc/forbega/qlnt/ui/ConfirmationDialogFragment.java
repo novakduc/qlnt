@@ -1,7 +1,6 @@
 package com.novakduc.forbega.qlnt.ui;
 
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -12,7 +11,7 @@ import com.novakduc.forbega.qlnt.R;
  * Created by n.thanh on 11/17/2016.
  */
 
-public class ConfirmationDialogFragment extends DialogFragment {
+public class ConfirmationDialogFragment extends android.support.v4.app.DialogFragment {
     public static final int RESULT_OK = 1001;
     public static final int RESULT_CANCEL = 1000;
     public static final java.lang.String MESSAGE = "com.novakduc.forbega.qlnt.confirmation_message";
