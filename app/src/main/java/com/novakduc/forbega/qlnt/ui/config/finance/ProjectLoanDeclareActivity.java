@@ -5,7 +5,7 @@ import android.os.Bundle;
 
 import com.novakduc.baselibrary.SimpleFragmentActivity;
 import com.novakduc.forbega.qlnt.R;
-import com.novakduc.forbega.qlnt.ui.config.ConfirmationDialogFragment;
+import com.novakduc.forbega.qlnt.ui.ConfirmationDialogFragment;
 
 public class ProjectLoanDeclareActivity extends SimpleFragmentActivity
         implements ConfirmationDialogFragment.ConfirmListener, LoanDeclareFragmentListener {

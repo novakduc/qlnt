@@ -11,6 +11,7 @@ import com.novakduc.forbega.qlnt.data.database.Loan;
 import com.novakduc.forbega.qlnt.data.database.LoanList;
 import com.novakduc.forbega.qlnt.data.database.Project;
 import com.novakduc.forbega.qlnt.data.database.UnitPrice;
+import com.novakduc.forbega.qlnt.ui.ConfirmationDialogFragment;
 import com.novakduc.forbega.qlnt.ui.config.base.ProjectBaseConfigFragment;
 
 public class ProjectConfigurationActivity extends SimpleFragmentActivity

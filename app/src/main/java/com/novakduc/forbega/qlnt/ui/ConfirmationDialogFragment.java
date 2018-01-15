@@ -1,4 +1,4 @@
-package com.novakduc.forbega.qlnt.ui.config;
+package com.novakduc.forbega.qlnt.ui;
 
 import android.app.Dialog;
 import android.app.DialogFragment;

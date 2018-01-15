@@ -1,5 +1,6 @@
 package com.novakduc.forbega.qlnt.ui.list;
 
+import android.app.DialogFragment;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
@@ -22,6 +23,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.novakduc.forbega.qlnt.R;
 import com.novakduc.forbega.qlnt.data.database.Project;
+import com.novakduc.forbega.qlnt.ui.ConfirmationDialogFragment;
 import com.novakduc.forbega.qlnt.ui.config.ProjectConfigurationActivity;
 import com.novakduc.forbega.qlnt.ultilities.InjectorUtils;
 
@@ -146,5 +148,15 @@ public class ProjectListFragment extends android.support.v4.app.Fragment
     @Override
     public void onEditAction(long projectId) {
         // TODO: 1/15/2018
+    }
+
+    public void discardConfirmation(int messageId) {
+        Bundle bundle = new Bundle();
+        //dialog title in bundle
+        bundle.putString(ConfirmationDialogFragment.MESSAGE,
+                getResources().getString(messageId));
+        DialogFragment dialogFragment = new ConfirmationDialogFragment();
+        dialogFragment.setArguments(bundle);
+        dialogFragment.show(getActivity().getSupportFragmentManager(), "discardConfirm");
     }
 }
