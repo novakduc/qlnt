@@ -42,11 +42,15 @@ public interface AppDao {
 
     //Get a project
     @Query("SELECT * FROM project WHERE projectId = :projectId")
-    LiveData<Project> getProject(long projectId);
+    LiveData<Project> getLiveDataProject(long projectId);
+
+    //Get a project
+    @Query("SELECT * FROM project WHERE projectId = :projectId")
+    Project getProject(long projectId);
 
     //Get all project
     @Query("SELECT * FROM project")
-    LiveData<Project[]> getAllProjects();
+    LiveData<List<Project>> getAllProjects();
 
     //Insert a project to database
     @Insert(onConflict = OnConflictStrategy.REPLACE)

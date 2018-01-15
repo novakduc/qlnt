@@ -89,10 +89,6 @@ public class Project implements Cloneable, ItemWithId {
         mRoomForRentList = list;
     }
 
-    public double getTotalIncome(CurrencyUnit unit) {
-        return Loan.round(((double) (getTotalIncome()) / unit.getUnit()), 3);
-    }
-
     public double getInvestment(CurrencyUnit unit) {
         return Loan.round((double) (investmentAmount) / unit.getUnit(), 3);
     }
@@ -146,21 +142,28 @@ public class Project implements Cloneable, ItemWithId {
     public Object clone() throws CloneNotSupportedException {
         Project project = (Project) super.clone();
         project.setProjectId(Calendar.getInstance().getTimeInMillis());
-        project.setUnitPrice((UnitPrice) mUnitPrice.clone());
+        if (mUnitPrice != null) {
+            project.setUnitPrice((UnitPrice) mUnitPrice.clone());
+        }
         //Clone loan list
-        LoanList<Loan> loanList = new LoanList<Loan>(project.getId());
-        for (Loan l :
-                mLoanList) {
-            loanList.add((Loan) l.clone());
+        if (mLoanList != null) {
+            LoanList<Loan> loanList = new LoanList<Loan>(project.getId());
+            for (Loan l :
+                    mLoanList) {
+                loanList.add((Loan) l.clone());
+            }
+            project.setLoanList(loanList);
         }
-        project.setLoanList(loanList);
         //Clone room list
-        RoomList<RoomForRent> roomForRents = new RoomList<RoomForRent>(project.getId());
-        for (RoomForRent roomForRent :
-                mRoomForRentList) {
-            roomForRents.add((RoomForRent) roomForRent.clone());
+        if (mRoomForRentList != null) {
+            RoomList<RoomForRent> roomForRents = new RoomList<RoomForRent>(project.getId());
+            for (RoomForRent roomForRent :
+                    mRoomForRentList) {
+                roomForRents.add((RoomForRent) roomForRent.clone());
+            }
+            project.setRoomForRentList(roomForRents);
         }
-        project.setRoomForRentList(roomForRents);
+
         return project;
     }
 

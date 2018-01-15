@@ -13,7 +13,7 @@ import com.novakduc.forbega.qlnt.data.QlntRepository;
 public class ProjectListViewModelFactory extends ViewModelProvider.NewInstanceFactory {
     private QlntRepository mRepository;
 
-    public ProjectListViewModelFactory(QlntRepository repository) {
+    public ProjectListViewModelFactory(final QlntRepository repository) {
         mRepository = repository;
     }
 

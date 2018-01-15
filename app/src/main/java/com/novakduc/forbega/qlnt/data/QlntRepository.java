@@ -1,10 +1,13 @@
 package com.novakduc.forbega.qlnt.data;
 
 import android.arch.lifecycle.LiveData;
+import android.util.Log;
 
 import com.novakduc.baselibrary.AppExecutors;
 import com.novakduc.forbega.qlnt.data.database.AppDao;
 import com.novakduc.forbega.qlnt.data.database.Project;
+
+import java.util.List;
 
 /**
  * Created by n.thanh on 9/20/2016.
@@ -27,33 +30,6 @@ public class QlntRepository {
             synchronized (LOCK) {
                 if (sInstance == null) {
                     sInstance = new QlntRepository(appDao, executors);
-                    //Test
-                    //Test should be removed
-//                    AppExecutors.getInstance().diskIO().execute(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            try {
-//
-//                                // Pretend this is the network loading data
-//                                Thread.sleep(4000);
-//                                Project pretendProject = new Project();
-//                                pretendProject.setName("sadjlkgj");
-//                                pretendProject.setAddress("sdlfjdfgdf");
-//                                pretendProject.setInvestmentAmount(2342905);
-//                                sInstance.addProject(pretendProject);
-//
-//                                Thread.sleep(2000);
-//                                pretendProject = new Project();
-//                                pretendProject.setName("sadjlkgj");
-//                                pretendProject.setAddress("sdlfjdfgdf");
-//                                pretendProject.setInvestmentAmount(2342905);
-//                                sInstance.addProject(pretendProject);
-//
-//                            } catch (InterruptedException e) {
-//                                e.printStackTrace();
-//                            }
-//                        }
-//                    });
                 }
             }
         }
@@ -69,10 +45,35 @@ public class QlntRepository {
     }
 
     public LiveData<Project> getProject(Long projectId) {
-        return mAppDao.getProject(projectId);
+        return mAppDao.getLiveDataProject(projectId);
     }
 
-    public LiveData<Project[]> getProjectList() {
+    public LiveData<List<Project>> getProjectList() {
         return mAppDao.getAllProjects();
+    }
+
+    public void deleteProject(final long projectId) {
+        mExecutors.diskIO().execute(new Runnable() {
+            @Override
+            public void run() {
+                Project project = mAppDao.getProject(projectId);
+                mAppDao.removeProject(project);
+            }
+        });
+    }
+
+    public void copyProject(final long projectId) {
+        mExecutors.diskIO().execute(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Project project = (Project) mAppDao.getProject(projectId).clone();
+                    mAppDao.insert(project);
+                } catch (CloneNotSupportedException e) {
+                    e.printStackTrace();
+                    Log.e(LOG_TAG, e.getLocalizedMessage());
+                }
+            }
+        });
     }
 }
