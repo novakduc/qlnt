@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.novakduc.forbega.qlnt.ultilities;
+package com.novakduc.forbega.qlnt.utilities;
 
 import android.content.Context;
 import android.support.annotation.NonNull;

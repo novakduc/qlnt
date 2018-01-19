@@ -34,6 +34,8 @@ public class Loan extends Observable implements Cloneable, ItemWithId, Parcelabl
     private long amount;
     private long loanDate;
     private double interestRate;
+    @Ignore
+    private ItemContainer<Loan> mItemContainer;
 
     //For Room only
     public Loan(long id, String name, long amount, long loanDate, double interestRate) {
@@ -117,29 +119,23 @@ public class Loan extends Observable implements Cloneable, ItemWithId, Parcelabl
         this.interestRate = interestRate;
     }
 
+    public void setItemContainer(ItemContainer<Loan> itemContainer) {
+        mItemContainer = itemContainer;
+    }
+
     //Tra no
     public void pay(long payAmount) {
-        this.amount = payAmount < this.amount ? this.amount - payAmount
-                : 0;
-        updateToObserver();
+        this.amount = payAmount < this.amount ? this.amount - payAmount : 0;
+        this.mItemContainer.update();
+    }
+
+    public void payAll() {
+        this.amount = 0;
+        this.mItemContainer.removeItem(this);
     }
 
     ///Below section is for Parcelable
     ////////////////////////////////
-
-    public void payAll() {
-        this.amount = 0;
-        updateToObserver();
-    }
-
-    private void updateToObserver() {
-        setChanged();
-        if (amount <= 0) {
-            notifyObservers(LoanList.DELETE);
-        } else {
-            notifyObservers(LoanList.TOTAL_AMOUNT_CHANGE);
-        }
-    }
 
     @Override
     public int describeContents() {

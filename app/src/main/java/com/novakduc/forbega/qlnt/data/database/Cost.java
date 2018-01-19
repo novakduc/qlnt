@@ -60,4 +60,5 @@ public class Cost implements ItemWithId{
     public long getId() {
         return date;
     }
+
 }

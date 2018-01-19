@@ -24,7 +24,7 @@ import com.novakduc.forbega.qlnt.R;
 import com.novakduc.forbega.qlnt.data.database.Project;
 import com.novakduc.forbega.qlnt.ui.ConfirmationDialogFragment;
 import com.novakduc.forbega.qlnt.ui.config.ProjectConfigurationActivity;
-import com.novakduc.forbega.qlnt.ultilities.InjectorUtils;
+import com.novakduc.forbega.qlnt.utilities.InjectorUtils;
 
 import java.util.ArrayList;
 import java.util.List;

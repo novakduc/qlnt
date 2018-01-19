@@ -3,18 +3,14 @@ package com.novakduc.forbega.qlnt.data.database;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
-import android.os.Parcelable;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
 /**
  * Created by n.thanh on 9/21/2016.
  */
 @Entity(tableName = "project")
-public class Project implements Cloneable, ItemWithId, Parcelable {
+public class Project implements Cloneable, ItemWithId {
 
     @PrimaryKey
     private long projectId;
@@ -51,14 +47,6 @@ public class Project implements Cloneable, ItemWithId, Parcelable {
         mLoanList = new LoanList<Loan>(projectId);
         mCostManager = new CostManager<Cost>(projectId);
         mRoomForRentList = new RoomList<RoomForRent>(projectId);
-    }
-
-    public static String calendarToString(long dateInMilis) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(dateInMilis);
-        Date date = calendar.getTime();
-            DateFormat format = SimpleDateFormat.getDateInstance();
-        return format.format(date);
     }
 
     public boolean createRoom(String name, double area, long charge) {

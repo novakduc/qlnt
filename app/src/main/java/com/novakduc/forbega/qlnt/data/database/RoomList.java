@@ -60,4 +60,8 @@ public class RoomList<E> extends MyArrayList<E> {
     public ArrayList getIdList() {
         return idList;
     }
+
+    ////Below is for Parcelable
+    ////////////////////////////////////
+
 }

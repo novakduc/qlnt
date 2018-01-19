@@ -61,4 +61,6 @@ public class CostManager<E> extends MyArrayList<E> {
         totalAmount = super.getTotalAmount();
         return b;
     }
+
+    
 }
