@@ -3,6 +3,8 @@ package com.novakduc.forbega.qlnt.data.database;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import java.util.Calendar;
 
@@ -10,8 +12,19 @@ import java.util.Calendar;
  * Created by n.thanh on 9/21/2016.
  */
 @Entity(tableName = "unit_price")
-public class UnitPrice implements Cloneable {
+public class UnitPrice implements Cloneable, Parcelable {
 
+    public static final Parcelable.Creator<UnitPrice> CREATOR = new Parcelable.Creator<UnitPrice>() {
+        @Override
+        public UnitPrice createFromParcel(Parcel source) {
+            return new UnitPrice(source);
+        }
+
+        @Override
+        public UnitPrice[] newArray(int size) {
+            return new UnitPrice[size];
+        }
+    };
     @PrimaryKey
     private long id;
     private long electricity;
@@ -38,6 +51,19 @@ public class UnitPrice implements Cloneable {
         this.id = Calendar.getInstance().getTimeInMillis();
     }
 
+    @Ignore
+    protected UnitPrice(Parcel in) {
+        this.id = in.readLong();
+        this.electricity = in.readLong();
+        this.water = in.readLong();
+        this.tv = in.readLong();
+        this.trashCollection = in.readLong();
+        this.internet = in.readLong();
+        this.security = in.readLong();
+    }
+
+    //Getter and setter section
+
     public long getId() {
         return id;
     }
@@ -60,8 +86,6 @@ public class UnitPrice implements Cloneable {
                 return -1;
         }
     }
-
-    //Getter and setter section
 
     public long getElectricity() {
         return electricity;
@@ -107,6 +131,9 @@ public class UnitPrice implements Cloneable {
         return security;
     }
 
+    //Below is for Parcelable
+    //////////////////////////////////////
+
     public void setSecurity(long security) {
         this.security = security;
     }
@@ -114,5 +141,21 @@ public class UnitPrice implements Cloneable {
     @Override
     protected Object clone() throws CloneNotSupportedException {
         return super.clone();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(this.id);
+        dest.writeLong(this.electricity);
+        dest.writeLong(this.water);
+        dest.writeLong(this.tv);
+        dest.writeLong(this.trashCollection);
+        dest.writeLong(this.internet);
+        dest.writeLong(this.security);
     }
 }

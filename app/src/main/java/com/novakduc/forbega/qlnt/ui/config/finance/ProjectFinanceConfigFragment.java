@@ -159,7 +159,6 @@ public class ProjectFinanceConfigFragment extends Fragment implements LoanContai
             mLayoutAmount.setError(getResources().getString(R.string.invesment_amount_error));
             mLayoutAmount.setErrorEnabled(true);
         }
-
     }
 
     @Override

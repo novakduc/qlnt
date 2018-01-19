@@ -36,10 +36,6 @@ public class QlntRepository {
         return sInstance;
     }
 
-    public void removeProject(Project project) {
-        mAppDao.removeProject(project);
-    }
-
     public void addProject(Project project) {
         mAppDao.insert(project);
     }
@@ -50,6 +46,10 @@ public class QlntRepository {
 
     public LiveData<List<Project>> getProjectList() {
         return mAppDao.getAllProjects();
+    }
+
+    public void deleteProject(Project project) {
+        mAppDao.removeProject(project);
     }
 
     public void deleteProject(final long projectId) {

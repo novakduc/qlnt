@@ -3,6 +3,7 @@ package com.novakduc.forbega.qlnt.data.database;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
+import android.os.Parcelable;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -13,7 +14,7 @@ import java.util.Date;
  * Created by n.thanh on 9/21/2016.
  */
 @Entity(tableName = "project")
-public class Project implements Cloneable, ItemWithId {
+public class Project implements Cloneable, ItemWithId, Parcelable {
 
     @PrimaryKey
     private long projectId;
@@ -247,4 +248,8 @@ public class Project implements Cloneable, ItemWithId {
     public long getAmount() {
         return this.investmentAmount;
     }
+
+    ////Below is for Parcelable
+    /////////////////////////////
+
 }
