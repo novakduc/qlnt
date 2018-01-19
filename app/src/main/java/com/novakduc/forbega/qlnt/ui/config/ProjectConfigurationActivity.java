@@ -1,6 +1,5 @@
 package com.novakduc.forbega.qlnt.ui.config;
 
-import android.app.DialogFragment;
 import android.app.FragmentManager;
 import android.os.Bundle;
 import android.util.Log;
@@ -49,9 +48,9 @@ public class ProjectConfigurationActivity extends SimpleFragmentActivity
         //dialog title in bundle
         bundle.putString(ConfirmationDialogFragment.MESSAGE,
                 getResources().getString(messageId));
-        DialogFragment dialogFragment = new ConfirmationDialogFragment();
+        android.support.v4.app.DialogFragment dialogFragment = new ConfirmationDialogFragment();
         dialogFragment.setArguments(bundle);
-        dialogFragment.show(getFragmentManager(), "discardConfirm");
+        dialogFragment.show(getSupportFragmentManager(), "discardConfirm");
     }
 
     @Override
@@ -87,7 +86,7 @@ public class ProjectConfigurationActivity extends SimpleFragmentActivity
     }
 
     @Override
-    public void discardDialog(int result) {
+    public void action(int result) {
         if (result == ConfirmationDialogFragment.RESULT_OK) {
             //user confirm to discard project creation.
             finish();

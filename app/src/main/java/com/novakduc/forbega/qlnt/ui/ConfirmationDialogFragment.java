@@ -32,19 +32,19 @@ public class ConfirmationDialogFragment extends android.support.v4.app.DialogFra
                 .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        callback.discardDialog(RESULT_OK);
+                        callback.action(RESULT_OK);
                     }
                 })
                 .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        callback.discardDialog(RESULT_CANCEL);
+                        callback.action(RESULT_CANCEL);
                     }
                 });
         return builder.create();
     }
 
     public interface ConfirmListener {
-        void discardDialog(int result);
+        void action(int result);
     }
 }

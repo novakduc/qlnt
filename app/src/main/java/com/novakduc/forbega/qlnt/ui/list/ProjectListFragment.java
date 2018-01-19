@@ -46,6 +46,7 @@ public class ProjectListFragment extends android.support.v4.app.Fragment
     private long mActiveProject = -1;
     private ProjectListFragmentViewModel mViewModel;
     private ArrayList<Project> mProjects;
+    private long mTempProjectId;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -127,6 +128,10 @@ public class ProjectListFragment extends android.support.v4.app.Fragment
         return view;
     }
 
+    public void deleteProject() {
+        mViewModel.deleteProject(mTempProjectId);
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -136,7 +141,14 @@ public class ProjectListFragment extends android.support.v4.app.Fragment
 
     @Override
     public void onDeleteAction(long projectId) {
-        mViewModel.deleteProject(projectId);
+        mTempProjectId = projectId;
+        Bundle bundle = new Bundle();
+        //dialog title in bundle
+        bundle.putString(ConfirmationDialogFragment.MESSAGE,
+                getResources().getString(R.string.delete_project_confirmataion));
+        android.support.v4.app.DialogFragment dialogFragment = new ConfirmationDialogFragment();
+        dialogFragment.setArguments(bundle);
+        dialogFragment.show(getActivity().getSupportFragmentManager(), "discardConfirm");
     }
 
     @Override
@@ -147,15 +159,5 @@ public class ProjectListFragment extends android.support.v4.app.Fragment
     @Override
     public void onEditAction(long projectId) {
         // TODO: 1/15/2018
-    }
-
-    public void discardConfirmation(int messageId) {
-        Bundle bundle = new Bundle();
-        //dialog title in bundle
-        bundle.putString(ConfirmationDialogFragment.MESSAGE,
-                getResources().getString(messageId));
-        android.support.v4.app.DialogFragment dialogFragment = new ConfirmationDialogFragment();
-        dialogFragment.setArguments(bundle);
-        dialogFragment.show(getActivity().getSupportFragmentManager(), "discardConfirm");
     }
 }
