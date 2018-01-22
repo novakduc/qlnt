@@ -47,8 +47,13 @@ public class UnitPrice implements Cloneable, Parcelable {
     }
 
     @Ignore
-    public UnitPrice() {
-        this.id = Calendar.getInstance().getTimeInMillis();
+    public UnitPrice(long projectId) {
+        this.id = projectId;
+    }
+
+    @Ignore
+    private UnitPrice() {
+        //Prevent init empty object
     }
 
     @Ignore
@@ -140,7 +145,9 @@ public class UnitPrice implements Cloneable, Parcelable {
 
     @Override
     protected Object clone() throws CloneNotSupportedException {
-        return super.clone();
+        UnitPrice unitPrice = (UnitPrice) super.clone();
+        unitPrice.id = Calendar.getInstance().getTimeInMillis();
+        return unitPrice;
     }
 
     @Override

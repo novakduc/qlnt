@@ -58,4 +58,49 @@ public interface AppDao {
 
     @Delete
     void removeProject(Project project);
+
+    @Delete
+    void removeUnitPrice(UnitPrice unitPrice);
+
+    @Delete
+    void removeLoan(Loan l);
+
+    @Delete
+    void removeLoanList(LoanList<Loan> loans);
+
+    @Delete
+    void removeRoomForRent(RoomForRent roomForRent);
+
+    @Delete
+    void removeRoomList(RoomList<RoomForRent> roomList);
+
+    //Get project unit price
+    @Query("SELECT * FROM unit_price WHERE id = :projectId")
+    UnitPrice getUnitPrice(long projectId);
+
+    //Get a project loan list
+    @Query("SELECT * FROM loan_list WHERE projectId = :projectId")
+    LoanList<Loan> getLoanList(long projectId);
+
+    //Get a project room list
+    @Query("SELECT * FROM room_list WHERE projectId = :projectId")
+    RoomList<RoomForRent> getRoomList(long projectId);
+
+    //Get a project room list
+    @Query("SELECT * FROM room WHERE id = :roomId")
+    RoomForRent getRoomById(long roomId);
+
+    //Get a project cost manager
+    @Query("SELECT * FROM cost_manager WHERE projectId = :projectId")
+    CostManager<Cost> getCostManager(long projectId);
+
+    //Get a project room list
+    @Query("SELECT * FROM cost WHERE id = :costId")
+    Cost getCostById(long costId);
+
+    @Delete
+    void removeCost(Cost cost);
+
+    @Delete
+    void removeCostManger(CostManager<Cost> costManager);
 }

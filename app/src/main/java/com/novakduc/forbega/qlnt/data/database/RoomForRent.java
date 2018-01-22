@@ -3,10 +3,7 @@ package com.novakduc.forbega.qlnt.data.database;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
-import android.os.Parcel;
-import android.os.Parcelable;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 
 /**
@@ -14,18 +11,7 @@ import java.util.Calendar;
  */
 
 @Entity(tableName = "room")
-public class RoomForRent implements Cloneable, ItemWithId, Parcelable {
-    public static final Parcelable.Creator<RoomForRent> CREATOR = new Parcelable.Creator<RoomForRent>() {
-        @Override
-        public RoomForRent createFromParcel(Parcel source) {
-            return new RoomForRent(source);
-        }
-
-        @Override
-        public RoomForRent[] newArray(int size) {
-            return new RoomForRent[size];
-        }
-    };
+public class RoomForRent implements Cloneable, ItemWithId {
     // TODO: 9/30/2016
     @PrimaryKey
     private long id;
@@ -34,7 +20,7 @@ public class RoomForRent implements Cloneable, ItemWithId, Parcelable {
     private long charge;
     private boolean available;
     @Ignore
-    private ArrayList<RoomService> roomServices;
+    private RoomServiceList<RoomService> roomServices;
 
     //For Room only
     public RoomForRent(long id, String name, double area, long charge, boolean available) {
@@ -52,18 +38,7 @@ public class RoomForRent implements Cloneable, ItemWithId, Parcelable {
         this.area = area;
         this.charge = charge;
         available = true;
-        roomServices = new ArrayList<RoomService>(5);
-    }
-
-    @Ignore //Ignore for room
-    protected RoomForRent(Parcel in) {
-        this.id = in.readLong();
-        this.name = in.readString();
-        this.area = in.readDouble();
-        this.charge = in.readLong();
-        this.available = in.readByte() != 0;
-        this.roomServices = new ArrayList<RoomService>();
-        in.readList(this.roomServices, RoomService.class.getClassLoader());
+        roomServices = new RoomServiceList<RoomService>(this.id);
     }
 
     @Override
@@ -80,11 +55,11 @@ public class RoomForRent implements Cloneable, ItemWithId, Parcelable {
         return charge;
     }
 
-    public ArrayList<RoomService> getRoomServices() {
+    public RoomServiceList<RoomService> getRoomServices() {
         return roomServices;
     }
 
-    public void setRoomServices(ArrayList<RoomService> roomServices) {
+    public void setRoomServices(RoomServiceList<RoomService> roomServices) {
         this.roomServices = roomServices;
     }
 
@@ -127,20 +102,5 @@ public class RoomForRent implements Cloneable, ItemWithId, Parcelable {
     protected Object clone() throws CloneNotSupportedException {
         // TODO: 9/30/2016 room clone
         return super.clone();
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeLong(this.id);
-        dest.writeString(this.name);
-        dest.writeDouble(this.area);
-        dest.writeLong(this.charge);
-        dest.writeByte(this.available ? (byte) 1 : (byte) 0);
-        dest.writeList(this.roomServices);
     }
 }

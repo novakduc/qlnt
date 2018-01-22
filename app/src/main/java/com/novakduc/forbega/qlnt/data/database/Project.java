@@ -83,8 +83,8 @@ public class Project implements Cloneable, ItemWithId {
     }
 
     //Add cost
-    public boolean addCost(long amount, CostType type, long date, boolean repeatable) {
-        return mCostManager.add(new Cost(amount, type, date, repeatable));
+    public boolean addCost(long amount, long date, CostType type, boolean repeatable) {
+        return mCostManager.add(new Cost(amount, date, type, repeatable));
     }
 
     //Add loan
