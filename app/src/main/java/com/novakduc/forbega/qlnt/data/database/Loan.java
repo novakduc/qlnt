@@ -8,7 +8,6 @@ import android.os.Parcelable;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.Calendar;
 import java.util.Observable;
 
 /**
@@ -28,7 +27,7 @@ public class Loan extends Observable implements Cloneable, ItemWithId, Parcelabl
             return new Loan[size];
         }
     };
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     private long id;
     private String name;
     private long amount;
@@ -48,7 +47,6 @@ public class Loan extends Observable implements Cloneable, ItemWithId, Parcelabl
 
     @Ignore
     public Loan(String name, long amount, long loanDate, double interestRate) {
-        id = Calendar.getInstance().getTimeInMillis();
         this.name = name;
         this.amount = amount;
         this.loanDate = loanDate;

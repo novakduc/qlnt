@@ -4,20 +4,18 @@ import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 
-import java.util.Calendar;
-
 /**
  * Created by n.thanh on 12/2/2016.
  */
 @Entity(tableName = "room_service")
 public class RoomService implements RoomServiceInterface {
-    @PrimaryKey
+    @Ignore
+    protected UnitPrice unitPrice;
+    @PrimaryKey(autoGenerate = true)
     private long id;
     private CostType type;
     private long oldIndex;
     private long newIndex;
-    @Ignore
-    protected UnitPrice unitPrice;
 
     //For Room only
     public RoomService(long id, CostType type, long oldIndex, long newIndex) {
@@ -29,7 +27,6 @@ public class RoomService implements RoomServiceInterface {
 
     @Ignore
     protected RoomService(CostType type, UnitPrice unitPrice) {
-        this.id = Calendar.getInstance().getTimeInMillis();
         this.type = type;
 
         this.unitPrice = unitPrice;
@@ -37,7 +34,6 @@ public class RoomService implements RoomServiceInterface {
 
     @Ignore
     protected RoomService(CostType type) {
-        this.id = Calendar.getInstance().getTimeInMillis();
         this.type = type;
     }
 

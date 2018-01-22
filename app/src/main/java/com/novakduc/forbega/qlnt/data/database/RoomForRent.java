@@ -4,8 +4,6 @@ import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 
-import java.util.Calendar;
-
 /**
  * Created by n.thanh on 9/30/2016.
  */
@@ -13,7 +11,7 @@ import java.util.Calendar;
 @Entity(tableName = "room")
 public class RoomForRent implements Cloneable, ItemWithId {
     // TODO: 9/30/2016
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     private long id;
     private String name;
     private double area;
@@ -33,7 +31,6 @@ public class RoomForRent implements Cloneable, ItemWithId {
 
     @Ignore
     public RoomForRent(String name, double area, long charge) {
-        this.id = Calendar.getInstance().getTimeInMillis();
         this.name = name;
         this.area = area;
         this.charge = charge;

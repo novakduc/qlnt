@@ -4,8 +4,6 @@ import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 
-import java.util.Calendar;
-
 /**
  * Created by n.thanh on 11/25/2016.
  */
@@ -14,7 +12,7 @@ import java.util.Calendar;
 public class Cost implements ItemWithId{
 
     private long amount;
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     private long id;
     private long date;
     private CostType type;
@@ -31,7 +29,6 @@ public class Cost implements ItemWithId{
 
     @Ignore
     public Cost(long amount, long date, CostType type, boolean repeatable) {
-        this.id = Calendar.getInstance().getTimeInMillis();
         this.amount = amount;
         this.date = date;
         this.type = type;

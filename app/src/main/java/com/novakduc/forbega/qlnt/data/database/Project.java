@@ -12,7 +12,7 @@ import java.util.Calendar;
 @Entity(tableName = "project")
 public class Project implements Cloneable, ItemWithId {
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     private long projectId;
     private String name;
     private String address;
@@ -43,7 +43,6 @@ public class Project implements Cloneable, ItemWithId {
 
     @Ignore
     public Project() {
-        projectId = Calendar.getInstance().getTimeInMillis();
         mLoanList = new LoanList<Loan>(projectId);
         mCostManager = new CostManager<Cost>(projectId);
         mRoomForRentList = new RoomList<RoomForRent>(projectId);
