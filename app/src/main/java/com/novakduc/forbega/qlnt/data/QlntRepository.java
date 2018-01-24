@@ -56,10 +56,6 @@ public class QlntRepository {
         return mAppDao.getAllProjects();
     }
 
-    public void deleteProject(Project project) {
-        mAppDao.removeProject(project);
-    }
-
     public void deleteProject(final long projectId) {
         mExecutors.diskIO().execute(new Runnable() {
             @Override
