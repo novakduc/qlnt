@@ -6,6 +6,7 @@ import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
+import android.arch.persistence.room.Update;
 
 import java.util.List;
 
@@ -54,7 +55,7 @@ public interface AppDao {
 
     //Insert a project to database
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insert(Project project);
+    long insert(Project project);
 
     @Delete
     void removeProject(Project project);
@@ -66,13 +67,13 @@ public interface AppDao {
     void removeLoan(Loan l);
 
     @Delete
-    void removeLoanList(LoanList<Loan> loans);
+    void removeLoanList(LoanList loans);
 
     @Delete
     void removeRoomForRent(RoomForRent roomForRent);
 
     @Delete
-    void removeRoomList(RoomList<RoomForRent> roomList);
+    void removeRoomList(RoomList roomList);
 
     //Get project unit price
     @Query("SELECT * FROM unit_price WHERE id = :projectId")
@@ -80,11 +81,11 @@ public interface AppDao {
 
     //Get a project loan list
     @Query("SELECT * FROM loan_list WHERE projectId = :projectId")
-    LoanList<Loan> getLoanList(long projectId);
+    LoanList getLoanList(long projectId);
 
     //Get a project room list
     @Query("SELECT * FROM room_list WHERE projectId = :projectId")
-    RoomList<RoomForRent> getRoomList(long projectId);
+    RoomList getRoomList(long projectId);
 
     //Get a project room list
     @Query("SELECT * FROM room WHERE id = :roomId")
@@ -92,7 +93,7 @@ public interface AppDao {
 
     //Get a project cost manager
     @Query("SELECT * FROM cost_manager WHERE projectId = :projectId")
-    CostManager<Cost> getCostManager(long projectId);
+    CostManager getCostManager(long projectId);
 
     //Get a project room list
     @Query("SELECT * FROM cost WHERE id = :costId")
@@ -102,5 +103,8 @@ public interface AppDao {
     void removeCost(Cost cost);
 
     @Delete
-    void removeCostManger(CostManager<Cost> costManager);
+    void removeCostManger(CostManager costManager);
+
+    @Update
+    void updateProject(Project project);
 }

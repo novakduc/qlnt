@@ -13,7 +13,6 @@ import android.widget.TextView;
 
 import com.novakduc.forbega.qlnt.R;
 import com.novakduc.forbega.qlnt.data.database.Project;
-import com.novakduc.forbega.qlnt.data.database.RoomForRent;
 import com.novakduc.forbega.qlnt.data.database.RoomList;
 
 import java.util.List;
@@ -61,7 +60,7 @@ public class ProjectsRecyclerViewAdapter
 
         float v = 0;
         String s = "0/0";
-        RoomList<RoomForRent> rooms = project.getRoomForRentList();
+        RoomList rooms = project.getRoomForRentList();
         if (rooms != null) {
             s = String.valueOf(project.getRoomForRentList().getNoOfProducingRoom()) + "/"
                     + String.valueOf(project.getRoomForRentList().size());
@@ -87,21 +86,22 @@ public class ProjectsRecyclerViewAdapter
             }
 
             holder.mRevenueProgressBar.setProgress(100);
+        } else {
+            int incomePercentage = Math.round(project.getTotalIncome() * 100 / investmentAmount);
+            holder.mIncomeProgressBar.setProgress(incomePercentage);
+            int deptPercentage = Math.round((totalLoanAmount * 100 / investmentAmount));
+            holder.mDeptProgressBar.setProgress(deptPercentage);
+            long totalCostAmount = 0;
+            if (project.getCostManager() != null) {
+                totalCostAmount = project.getCostManager().getTotalAmount();
+            }
+            int revenuePercentage = Math.round((totalLoanAmount - totalCostAmount) / investmentAmount);
+            holder.mRevenueProgressBar.setProgress(revenuePercentage);
         }
-        int incomePercentage = Math.round(project.getTotalIncome() * 100 / investmentAmount);
-        holder.mIncomeProgressBar.setProgress(incomePercentage);
 
         holder.mDeptTextView.setText(String.valueOf(totalLoanAmount));
-        int deptPercentage = Math.round((totalLoanAmount * 100 / investmentAmount));
-        holder.mDeptProgressBar.setProgress(deptPercentage);
 
         holder.mRevenueTextView.setText(String.valueOf(project.getTotalIncome()));
-        long totalCostAmount = 0;
-        if (project.getCostManager() != null) {
-            project.getCostManager().getTotalAmount();
-        }
-        int revenuePercentage = Math.round((totalLoanAmount - totalCostAmount) / investmentAmount);
-        holder.mRevenueProgressBar.setProgress(revenuePercentage);
 
         holder.mDeleteButton.setOnClickListener(new View.OnClickListener() {
             @Override

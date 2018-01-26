@@ -51,7 +51,7 @@ public class ProjectUnitPriceConfigFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (savedInstanceState == null) {
-            mUnitPrice = new UnitPrice();
+            //mUnitPrice = new UnitPrice();
         }
         setHasOptionsMenu(true);
         //mProject = (Project) getArguments().getParcelable(TEMP_PROJECT);

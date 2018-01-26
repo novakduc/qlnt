@@ -24,11 +24,11 @@ public class Project implements Cloneable, ItemWithId {
     @Ignore
     private UnitPrice mUnitPrice;
     @Ignore
-    private LoanList<Loan> mLoanList;
+    private LoanList mLoanList;
     @Ignore
-    private RoomList<RoomForRent> mRoomForRentList;
+    private RoomList mRoomForRentList;
     @Ignore
-    private CostManager<Cost> mCostManager;
+    private CostManager mCostManager;
 
     //For Room only
     public Project(long projectId, String name, String address, long investmentAmount,
@@ -42,10 +42,10 @@ public class Project implements Cloneable, ItemWithId {
     }
 
     @Ignore
-    public Project() {
-        mLoanList = new LoanList<Loan>(projectId);
-        mCostManager = new CostManager<Cost>(projectId);
-        mRoomForRentList = new RoomList<RoomForRent>(projectId);
+    public Project(String name, String address, int yearDuration) {
+        this.name = name;
+        this.address = address;
+        this.yearDuration = yearDuration;
     }
 
     public boolean createRoom(String name, double area, long charge) {
@@ -61,19 +61,19 @@ public class Project implements Cloneable, ItemWithId {
     }
 
 
-    public CostManager<Cost> getCostManager() {
+    public CostManager getCostManager() {
         return mCostManager;
     }
 
-    public void setCostManager(CostManager<Cost> pCostManager) {
+    public void setCostManager(CostManager pCostManager) {
         mCostManager = pCostManager;
     }
 
-    public RoomList<RoomForRent> getRoomForRentList() {
+    public RoomList getRoomForRentList() {
         return mRoomForRentList;
     }
 
-    private void setRoomForRentList(RoomList<RoomForRent> list) {
+    private void setRoomForRentList(RoomList list) {
         mRoomForRentList = list;
     }
 
@@ -135,7 +135,7 @@ public class Project implements Cloneable, ItemWithId {
         }
         //Clone loan list
         if (mLoanList != null) {
-            LoanList<Loan> loanList = new LoanList<Loan>(project.getId());
+            LoanList loanList = new LoanList(project.getId());
             for (Loan l :
                     mLoanList) {
                 loanList.add((Loan) l.clone());
@@ -144,7 +144,7 @@ public class Project implements Cloneable, ItemWithId {
         }
         //Clone room list
         if (mRoomForRentList != null) {
-            RoomList<RoomForRent> roomForRents = new RoomList<RoomForRent>(project.getId());
+            RoomList roomForRents = new RoomList(project.getId());
             for (RoomForRent roomForRent :
                     mRoomForRentList) {
                 roomForRents.add((RoomForRent) roomForRent.clone());
@@ -218,11 +218,11 @@ public class Project implements Cloneable, ItemWithId {
 
     //Parcel
 
-    public LoanList<Loan> getLoanList() {
+    public LoanList getLoanList() {
         return mLoanList;
     }
 
-    private void setLoanList(LoanList<Loan> loanList) {
+    public void setLoanList(LoanList loanList) {
         mLoanList = loanList;
     }
 

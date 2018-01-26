@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * Created by n.thanh on 11/28/2016.
  */
 @Entity(tableName = "cost_manager", indices = @Index(value = {"projectId"}, unique = true))
-public class CostManager<E> extends MyArrayList<E> {
+public class CostManager extends MyArrayList<Cost> {
 
     @PrimaryKey
     private long projectId;
@@ -56,7 +56,7 @@ public class CostManager<E> extends MyArrayList<E> {
     }
 
     @Override
-    public boolean add(E e) {
+    public boolean add(Cost e) {
         boolean b = super.add(e);
         totalAmount = super.getTotalAmount();
         return b;

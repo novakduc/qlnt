@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * Created by n.thanh on 3/29/2017.
  */
 @Entity(tableName = "loan_list", indices = @Index(value = {"projectId"}, unique = true))
-public class LoanList<E> extends MyArrayList<E> implements ItemContainer<E> {
+public class LoanList extends MyArrayList<Loan> implements ItemContainer<Loan> {
 
     @Ignore
     public static final int DELETE = 0;
@@ -61,7 +61,7 @@ public class LoanList<E> extends MyArrayList<E> implements ItemContainer<E> {
 
     public Loan getLoan(long loanId) {
         Loan loan;
-        for (E i :
+        for (Loan i :
                 this) {
             if (i instanceof Loan) {
                 loan = (Loan) i;
@@ -74,7 +74,7 @@ public class LoanList<E> extends MyArrayList<E> implements ItemContainer<E> {
     }
 
     @Override
-    public boolean add(E e) {
+    public boolean add(Loan e) {
         boolean b = super.add(e);
         ((Loan) e).setItemContainer((ItemContainer<Loan>) this);
         this.totalLoanAmount = super.getTotalAmount();
@@ -93,7 +93,7 @@ public class LoanList<E> extends MyArrayList<E> implements ItemContainer<E> {
     }
 
     @Override
-    public void removeItem(E e) {
+    public void removeItem(Loan e) {
         remove(e);
         this.totalLoanAmount = super.getTotalAmount();
     }

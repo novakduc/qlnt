@@ -1,6 +1,7 @@
 package com.novakduc.forbega.qlnt.data;
 
 import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.MutableLiveData;
 import android.util.Log;
 
 import com.novakduc.baselibrary.AppExecutors;
@@ -84,7 +85,8 @@ public class QlntRepository {
     }
 
     private void deleteLoanList(long projectId) {
-        LoanList<Loan> loans = mAppDao.getLoanList(projectId);
+        LoanList loans = mAppDao.getLoanList(projectId);
+        ;
         if (loans != null) {
             ArrayList<Long> idList = loans.getIdList();
             if (idList != null) {
@@ -101,7 +103,7 @@ public class QlntRepository {
     }
 
     private void deleteRoomList(long projectId) {
-        RoomList<RoomForRent> roomList = mAppDao.getRoomList(projectId);
+        RoomList roomList = mAppDao.getRoomList(projectId);
         if (roomList != null) {
             ArrayList<Long> roomIdList = roomList.getIdList();
             if (roomIdList != null) {
@@ -118,7 +120,7 @@ public class QlntRepository {
     }
 
     private void deleteCostManager(long projectId) {
-        CostManager<Cost> costManager = mAppDao.getCostManager(projectId);
+        CostManager costManager = mAppDao.getCostManager(projectId);
         if (costManager != null) {
             ArrayList<Long> costIdList = costManager.getIdList();
             if (costIdList != null) {
@@ -145,6 +147,28 @@ public class QlntRepository {
                     e.printStackTrace();
                     Log.e(LOG_TAG, e.getLocalizedMessage());
                 }
+            }
+        });
+    }
+
+    public LiveData<Project> createTempProject() {
+        final MutableLiveData<Project> projectMutableLiveData = new MutableLiveData<Project>();
+        final Project project = new Project("name", "address", -1);
+        mExecutors.diskIO().execute(new Runnable() {
+            @Override
+            public void run() {
+                project.setProjectId(mAppDao.insert(project));
+                projectMutableLiveData.postValue(project);
+            }
+        });
+        return projectMutableLiveData;
+    }
+
+    public void updateProject(final Project project) {
+        mExecutors.diskIO().execute(new Runnable() {
+            @Override
+            public void run() {
+                mAppDao.updateProject(project);
             }
         });
     }

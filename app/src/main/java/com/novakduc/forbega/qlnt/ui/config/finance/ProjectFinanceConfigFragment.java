@@ -37,23 +37,29 @@ import com.novakduc.forbega.qlnt.ui.config.unitprice.ProjectUnitPriceConfigFragm
 
 public class ProjectFinanceConfigFragment extends Fragment implements LoanContainerListener {
     public static final String TEMP_PROJECT = "com.novakduc.forbega.qlnt.tempproject";
-
+    private static final String LOG_TAG = ProjectFinanceConfigFragment.class.getSimpleName();
     RecyclerView mRecyclerView;
     LoansAdapter mLoansAdapter;
     TextView mTotalLoanTextView;
+    private long projectId;
     private long mAmount = -1;
     private TextInputLayout mLayoutAmount;
     private UpdateListener mCallBack;
-    private LoanList<Loan> mLoanList;
+    private LoanList mLoanList;
 
-    public static ProjectFinanceConfigFragment newInstance() {
+    public static ProjectFinanceConfigFragment newInstance(long projectId) {
+        Bundle bundle = new Bundle();
+        bundle.putLong(TEMP_PROJECT, projectId);
+        ProjectFinanceConfigFragment fragment = new ProjectFinanceConfigFragment();
+        fragment.setArguments(bundle);
         return new ProjectFinanceConfigFragment();
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //mLoanList = new LoanList<Loan>();
+        projectId = getArguments().getLong(TEMP_PROJECT);
+        mLoanList = new LoanList(projectId);
         setHasOptionsMenu(true);
     }
 

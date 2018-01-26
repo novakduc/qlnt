@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * Created by n.thanh on 3/29/2017.
  */
 @Entity(tableName = "room_list", indices = @Index(value = {"projectId"}, unique = true))
-public class RoomList<E> extends MyArrayList<E> {
+public class RoomList extends MyArrayList<RoomForRent> {
     @PrimaryKey
     private long projectId;
     private String idListGSonString;
@@ -43,7 +43,7 @@ public class RoomList<E> extends MyArrayList<E> {
     private int getNoOfAvailableRoom() {
         int availableCount = 0;
         RoomForRent roomForRent;
-        for (E i :
+        for (RoomForRent i :
                 this) {
             roomForRent = (RoomForRent) i;
             if (roomForRent.isAvailable()) availableCount++;

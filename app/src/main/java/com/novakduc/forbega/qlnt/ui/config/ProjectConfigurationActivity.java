@@ -22,7 +22,6 @@ public class ProjectConfigurationActivity extends SimpleFragmentActivity
         //this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         //this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
         super.onCreate(savedInstanceState);
-        mTempProject = new Project();
     }
 
     @Override
@@ -54,15 +53,7 @@ public class ProjectConfigurationActivity extends SimpleFragmentActivity
     }
 
     @Override
-    public void updateBase(String name, String address, int duration, long startDate) {
-        mTempProject.setName(name);
-        mTempProject.setAddress(address);
-        mTempProject.setDuration(duration);
-        mTempProject.setStartDate(startDate);
-    }
-
-    @Override
-    public void updateFinance(long investment, LoanList<Loan> loanLoanList) {
+    public void updateFinance(long investment, LoanList loanLoanList) {
         mTempProject.setInvestmentAmount(investment);
 
         mTempProject.getLoanList().clear();
