@@ -1,6 +1,7 @@
 package com.novakduc.forbega.qlnt.ui.list;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,11 +10,10 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.novakduc.forbega.qlnt.R;
-import com.novakduc.forbega.qlnt.data.database.CurrencyUnit;
 import com.novakduc.forbega.qlnt.data.database.Project;
+import com.novakduc.forbega.qlnt.data.database.RoomList;
 
 import java.util.List;
 
@@ -26,9 +26,12 @@ public class ProjectsRecyclerViewAdapter
 
     private List<Project> mProjectList;
     private Context mContext;
+    private ProjectListAdapterActionHandler mActionHandler;
 
-    public ProjectsRecyclerViewAdapter(Context context, List<Project> items) {
-        mProjectList = items;
+    public ProjectsRecyclerViewAdapter(@NonNull Context context,
+                                       ProjectListAdapterActionHandler actionHandler) {
+        mContext = context;
+        mActionHandler = actionHandler;
     }
 
     public Project getValueAt(int position) {
@@ -37,6 +40,7 @@ public class ProjectsRecyclerViewAdapter
 
     public void swapList(List<Project> newList) {
         mProjectList = newList;
+        notifyDataSetChanged();
     }
 
     @Override
@@ -54,76 +58,88 @@ public class ProjectsRecyclerViewAdapter
         holder.mDurationTextView.setText(String.valueOf(project.getStartYear()) + " - "
                 + String.valueOf(project.getEndYear()));
 
-        holder.mProduceRateTextView.setText(String.valueOf(
-                project.getRoomForRentList().getNoOfProducingRoom()) + "/"
-                + String.valueOf(project.getRoomForRentList().size()));
         float v = 0;
-        if (project.getRoomForRentList().size() != 0) {
-            v = project.getRoomForRentList().getNoOfProducingRoom() / project.getRoomForRentList().size();
+        String s = "0/0";
+        RoomList rooms = project.getRoomForRentList();
+        if (rooms != null) {
+            s = String.valueOf(project.getRoomForRentList().getNoOfProducingRoom()) + "/"
+                    + String.valueOf(project.getRoomForRentList().size());
+            if (project.getRoomForRentList().size() != 0) {
+                v = project.getRoomForRentList().getNoOfProducingRoom() / project.getRoomForRentList().size();
+            }
         }
+        holder.mProduceRateTextView.setText(s);
         holder.mRatingBar.setRating(v);
 
         long investmentAmount = project.getInvestmentAmount();
-        holder.mIncomeTextView.setText(String.valueOf(project.getTotalIncome(CurrencyUnit.MIL_BASE)));
+        long totalLoanAmount = 0;
+        if (project.getLoanList() != null) {
+            totalLoanAmount = project.getLoanList().getTotalLoanAmount();
+        }
+        holder.mIncomeTextView.setText(String.valueOf(project.getTotalIncome()));
         if (investmentAmount == 0) {
             holder.mIncomeProgressBar.setProgress(100);
-            if (project.getLoanList().getTotalLoanAmount() > 0) {
+            if (totalLoanAmount > 0) {
                 holder.mDeptProgressBar.setProgress(100);
             } else {
                 holder.mDeptProgressBar.setProgress(0);
             }
 
             holder.mRevenueProgressBar.setProgress(100);
+        } else {
+            int incomePercentage = Math.round(project.getTotalIncome() * 100 / investmentAmount);
+            holder.mIncomeProgressBar.setProgress(incomePercentage);
+            int deptPercentage = Math.round((totalLoanAmount * 100 / investmentAmount));
+            holder.mDeptProgressBar.setProgress(deptPercentage);
+            long totalCostAmount = 0;
+            if (project.getCostManager() != null) {
+                totalCostAmount = project.getCostManager().getTotalAmount();
+            }
+            int revenuePercentage = Math.round((totalLoanAmount - totalCostAmount) / investmentAmount);
+            holder.mRevenueProgressBar.setProgress(revenuePercentage);
         }
-        int incomePercentage = Math.round(project.getTotalIncome() * 100 / investmentAmount);
-        holder.mIncomeProgressBar.setProgress(incomePercentage);
 
-        holder.mDeptTextView.setText(String.valueOf(project.getLoanList()
-                .getTotalLoanAmount()));
-        int deptPercentage = Math.round((project.getLoanList().getTotalLoanAmount() * 100 / investmentAmount));
-        holder.mDeptProgressBar.setProgress(deptPercentage);
+        holder.mDeptTextView.setText(String.valueOf(totalLoanAmount));
 
-        holder.mRevenueTextView.setText(String.valueOf(project.getTotalIncome(CurrencyUnit.MIL_BASE)));
-        int revenuePercentage = Math.round(
-                (project.getLoanList().getTotalLoanAmount() - project.getCostManager().getTotalAmount())
-                        / investmentAmount);
-        holder.mRevenueProgressBar.setProgress(revenuePercentage);
+        holder.mRevenueTextView.setText(String.valueOf(project.getTotalIncome()));
 
         holder.mDeleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mProjectList.remove(project);
-                notifyDataSetChanged();
-                // TODO: 12/27/2017 weird behaviour after deleting project
+                mActionHandler.onDeleteAction(project.getId());
             }
         });
 
         holder.mCopyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
-                    Project cloneProject1 = (Project) project.clone();
-                    mProjectList.add(cloneProject1);
-                    notifyDataSetChanged();
-                } catch (CloneNotSupportedException pE) {
-                    Toast.makeText(mContext, mContext.getResources().getString(R.string.projectCopyError),
-                            Toast.LENGTH_SHORT).show();
-                }
+                mActionHandler.onCopyAction(project.getId());
             }
         });
 
         holder.mEditButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: 12/27/2017 Edit action
-
+                mActionHandler.onEditAction(project.getId());
             }
         });
     }
 
     @Override
     public int getItemCount() {
+        if (mProjectList == null) {
+            return 0;
+        }
         return mProjectList.size();
+    }
+
+    //Handler interface to process actions applied on project
+    public interface ProjectListAdapterActionHandler {
+        void onDeleteAction(long projectId);
+
+        void onCopyAction(long projectId);
+
+        void onEditAction(long projectId);
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

@@ -35,6 +35,7 @@ import com.novakduc.forbega.qlnt.ui.config.finance.LoansAdapter;
 import com.novakduc.forbega.qlnt.ui.config.finance.ProjectLoanDeclareActivity;
 import com.novakduc.forbega.qlnt.ui.config.finance.ProjectLoanDeclareFragment;
 import com.novakduc.forbega.qlnt.ui.detail.DatePickerFragment;
+import com.novakduc.forbega.qlnt.utilities.ConverterUtilities;
 
 import java.util.Calendar;
 
@@ -209,7 +210,7 @@ public class ProjectCreateConfirmationFragment extends android.support.v4.app.Fr
                     } else {
                         mLayoutDuration.setErrorEnabled(false);
                         mTempProject.setDuration(duration);
-                        mEditTextEndDate.setText(Project.calendarToString(mTempProject.getEndDate()));
+                        mEditTextEndDate.setText(ConverterUtilities.calendarToString(mTempProject.getEndDate()));
                     }
                 } catch (NumberFormatException e) {
                     mLayoutDuration.setError(getString(R.string.durationInputError));
@@ -219,7 +220,7 @@ public class ProjectCreateConfirmationFragment extends android.support.v4.app.Fr
         });
 
         mEditTextStartDate = view.findViewById(R.id.editTextStartDate);
-        mEditTextStartDate.setText(Project.calendarToString(mTempProject.getStartDate()));
+        mEditTextStartDate.setText(ConverterUtilities.calendarToString(mTempProject.getStartDate()));
         mEditTextStartDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -229,7 +230,7 @@ public class ProjectCreateConfirmationFragment extends android.support.v4.app.Fr
 
         mEditTextEndDate = view.findViewById(R.id.editTextEndDate);
         mEditTextEndDate.setFocusableInTouchMode(false);
-        mEditTextEndDate.setText(Project.calendarToString(mTempProject.getEndDate()));
+        mEditTextEndDate.setText(ConverterUtilities.calendarToString(mTempProject.getEndDate()));
 
         EditText editTextInvestmentAmount = view.findViewById(R.id.investmentAmount);
         editTextInvestmentAmount.setFocusableInTouchMode(false);
@@ -525,7 +526,7 @@ public class ProjectCreateConfirmationFragment extends android.support.v4.app.Fr
             if (resultCode != AppCompatActivity.RESULT_OK) return;
             Calendar tmpCalendar = (Calendar) data.getSerializableExtra(DatePickerFragment.PICKED_DATE);
             mTempProject.setStartDate(tmpCalendar.getTimeInMillis());
-            mEditTextStartDate.setText(Project.calendarToString(mTempProject.getStartDate()));
+            mEditTextStartDate.setText(ConverterUtilities.calendarToString(mTempProject.getStartDate()));
             TypedArray themeArray = getActivity().getTheme().obtainStyledAttributes(
                     new int[]{android.R.attr.editTextColor});
             try {
@@ -537,7 +538,7 @@ public class ProjectCreateConfirmationFragment extends android.support.v4.app.Fr
                 // Calling recycle() is important. Especially if you use alot of TypedArrays
                 themeArray.recycle();
             }
-            mEditTextEndDate.setText(Project.calendarToString(mTempProject.getEndDate()));
+            mEditTextEndDate.setText(ConverterUtilities.calendarToString(mTempProject.getEndDate()));
         } else {
             mEditTextEndDate.setText("");
         }

@@ -1,11 +1,10 @@
 package com.novakduc.forbega.qlnt.ui.config.finance;
 
-import android.app.DialogFragment;
 import android.os.Bundle;
 
 import com.novakduc.baselibrary.SimpleFragmentActivity;
 import com.novakduc.forbega.qlnt.R;
-import com.novakduc.forbega.qlnt.ui.config.ConfirmationDialogFragment;
+import com.novakduc.forbega.qlnt.ui.ConfirmationDialogFragment;
 
 public class ProjectLoanDeclareActivity extends SimpleFragmentActivity
         implements ConfirmationDialogFragment.ConfirmListener, LoanDeclareFragmentListener {
@@ -21,7 +20,7 @@ public class ProjectLoanDeclareActivity extends SimpleFragmentActivity
     }
 
     @Override
-    public void discardDialog(int result) {
+    public void action(int result) {
         if (result == ConfirmationDialogFragment.RESULT_OK) {
             //user confirm to discard project creation.
             finish();
@@ -40,8 +39,8 @@ public class ProjectLoanDeclareActivity extends SimpleFragmentActivity
         //dialog title in bundle
         bundle.putString(ConfirmationDialogFragment.MESSAGE,
                 getResources().getString(R.string.loanDiscardConfirm));
-        DialogFragment dialogFragment = new ConfirmationDialogFragment();
+        android.support.v4.app.DialogFragment dialogFragment = new ConfirmationDialogFragment();
         dialogFragment.setArguments(bundle);
-        dialogFragment.show(getFragmentManager(), "discardConfirm");
+        dialogFragment.show(getSupportFragmentManager(), "discardConfirm");
     }
 }

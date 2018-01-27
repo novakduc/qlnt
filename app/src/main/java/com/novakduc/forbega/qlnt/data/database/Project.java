@@ -4,10 +4,7 @@ import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
 /**
  * Created by n.thanh on 9/21/2016.
@@ -15,7 +12,7 @@ import java.util.Date;
 @Entity(tableName = "project")
 public class Project implements Cloneable, ItemWithId {
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     private long projectId;
     private String name;
     private String address;
@@ -27,11 +24,11 @@ public class Project implements Cloneable, ItemWithId {
     @Ignore
     private UnitPrice mUnitPrice;
     @Ignore
-    private LoanList<Loan> mLoanList;
+    private LoanList mLoanList;
     @Ignore
-    private RoomList<RoomForRent> mRoomForRentList;
+    private RoomList mRoomForRentList;
     @Ignore
-    private CostManager<Cost> mCostManager;
+    private CostManager mCostManager;
 
     //For Room only
     public Project(long projectId, String name, String address, long investmentAmount,
@@ -45,19 +42,10 @@ public class Project implements Cloneable, ItemWithId {
     }
 
     @Ignore
-    public Project() {
-        projectId = Calendar.getInstance().getTimeInMillis();
-        mLoanList = new LoanList<Loan>(projectId);
-        mCostManager = new CostManager<Cost>(projectId);
-        mRoomForRentList = new RoomList<RoomForRent>(projectId);
-    }
-
-    public static String calendarToString(long dateInMilis) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(dateInMilis);
-        Date date = calendar.getTime();
-            DateFormat format = SimpleDateFormat.getDateInstance();
-        return format.format(date);
+    public Project(String name, String address, int yearDuration) {
+        this.name = name;
+        this.address = address;
+        this.yearDuration = yearDuration;
     }
 
     public boolean createRoom(String name, double area, long charge) {
@@ -73,24 +61,20 @@ public class Project implements Cloneable, ItemWithId {
     }
 
 
-    public CostManager<Cost> getCostManager() {
+    public CostManager getCostManager() {
         return mCostManager;
     }
 
-    public void setCostManager(CostManager<Cost> pCostManager) {
+    public void setCostManager(CostManager pCostManager) {
         mCostManager = pCostManager;
     }
 
-    public RoomList<RoomForRent> getRoomForRentList() {
+    public RoomList getRoomForRentList() {
         return mRoomForRentList;
     }
 
-    private void setRoomForRentList(RoomList<RoomForRent> list) {
+    private void setRoomForRentList(RoomList list) {
         mRoomForRentList = list;
-    }
-
-    public double getTotalIncome(CurrencyUnit unit) {
-        return Loan.round(((double) (getTotalIncome()) / unit.getUnit()), 3);
     }
 
     public double getInvestment(CurrencyUnit unit) {
@@ -98,8 +82,8 @@ public class Project implements Cloneable, ItemWithId {
     }
 
     //Add cost
-    public boolean addCost(long amount, CostType type, long date, boolean repeatable) {
-        return mCostManager.add(new Cost(amount, type, date, repeatable));
+    public boolean addCost(long amount, long date, CostType type, boolean repeatable) {
+        return mCostManager.add(new Cost(amount, date, type, repeatable));
     }
 
     //Add loan
@@ -146,21 +130,28 @@ public class Project implements Cloneable, ItemWithId {
     public Object clone() throws CloneNotSupportedException {
         Project project = (Project) super.clone();
         project.setProjectId(Calendar.getInstance().getTimeInMillis());
-        project.setUnitPrice((UnitPrice) mUnitPrice.clone());
+        if (mUnitPrice != null) {
+            project.setUnitPrice((UnitPrice) mUnitPrice.clone());
+        }
         //Clone loan list
-        LoanList<Loan> loanList = new LoanList<Loan>(project.getId());
-        for (Loan l :
-                mLoanList) {
-            loanList.add((Loan) l.clone());
+        if (mLoanList != null) {
+            LoanList loanList = new LoanList(project.getId());
+            for (Loan l :
+                    mLoanList) {
+                loanList.add((Loan) l.clone());
+            }
+            project.setLoanList(loanList);
         }
-        project.setLoanList(loanList);
         //Clone room list
-        RoomList<RoomForRent> roomForRents = new RoomList<RoomForRent>(project.getId());
-        for (RoomForRent roomForRent :
-                mRoomForRentList) {
-            roomForRents.add((RoomForRent) roomForRent.clone());
+        if (mRoomForRentList != null) {
+            RoomList roomForRents = new RoomList(project.getId());
+            for (RoomForRent roomForRent :
+                    mRoomForRentList) {
+                roomForRents.add((RoomForRent) roomForRent.clone());
+            }
+            project.setRoomForRentList(roomForRents);
         }
-        project.setRoomForRentList(roomForRents);
+
         return project;
     }
 
@@ -227,11 +218,11 @@ public class Project implements Cloneable, ItemWithId {
 
     //Parcel
 
-    public LoanList<Loan> getLoanList() {
+    public LoanList getLoanList() {
         return mLoanList;
     }
 
-    private void setLoanList(LoanList<Loan> loanList) {
+    public void setLoanList(LoanList loanList) {
         mLoanList = loanList;
     }
 
@@ -244,4 +235,8 @@ public class Project implements Cloneable, ItemWithId {
     public long getAmount() {
         return this.investmentAmount;
     }
+
+    ////Below is for Parcelable
+    /////////////////////////////
+
 }

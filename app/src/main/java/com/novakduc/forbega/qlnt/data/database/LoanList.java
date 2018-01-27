@@ -6,25 +6,23 @@ import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
 
 import java.util.ArrayList;
-import java.util.Observable;
-import java.util.Observer;
 
 /**
  * Created by n.thanh on 3/29/2017.
  */
 @Entity(tableName = "loan_list", indices = @Index(value = {"projectId"}, unique = true))
-public class LoanList<E> extends MyArrayList<E> implements Observer {
+public class LoanList extends MyArrayList<Loan> implements ItemContainer<Loan> {
 
+    @Ignore
+    public static final int DELETE = 0;
+    @Ignore
+    public static final int TOTAL_AMOUNT_CHANGE = 1;
     @PrimaryKey
     private long projectId;
     private String idListGSonString;
     private long totalLoanAmount;
     @Ignore
     private ArrayList idList;
-    @Ignore
-    public static final int DELETE = 0;
-    @Ignore
-    public static final int TOTAL_AMOUNT_CHANGE = 1;
 
     //For Room only
     public LoanList(long projectId, String idListGSonString, long totalLoanAmount) {
@@ -63,7 +61,7 @@ public class LoanList<E> extends MyArrayList<E> implements Observer {
 
     public Loan getLoan(long loanId) {
         Loan loan;
-        for (E i :
+        for (Loan i :
                 this) {
             if (i instanceof Loan) {
                 loan = (Loan) i;
@@ -76,21 +74,9 @@ public class LoanList<E> extends MyArrayList<E> implements Observer {
     }
 
     @Override
-    public void update(Observable observable, Object o) {
-        int arg = (int) o;
-        if (arg == LoanList.TOTAL_AMOUNT_CHANGE) {
-            this.getTotalAmount();
-        }
-        if (arg == LoanList.DELETE) {
-            E e = (E) observable;
-            remove(e);
-            this.getTotalAmount();
-        }
-    }
-
-    @Override
-    public boolean add(E e) {
+    public boolean add(Loan e) {
         boolean b = super.add(e);
+        ((Loan) e).setItemContainer((ItemContainer<Loan>) this);
         this.totalLoanAmount = super.getTotalAmount();
         return b;
     }
@@ -99,5 +85,16 @@ public class LoanList<E> extends MyArrayList<E> implements Observer {
     public long getTotalAmount() {
         this.totalLoanAmount = super.getTotalAmount();
         return this.totalLoanAmount;
+    }
+
+    @Override
+    public void update() {
+        this.getTotalAmount();
+    }
+
+    @Override
+    public void removeItem(Loan e) {
+        remove(e);
+        this.totalLoanAmount = super.getTotalAmount();
     }
 }

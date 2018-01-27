@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.novakduc.forbega.qlnt.ultilities;
+package com.novakduc.forbega.qlnt.utilities;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -22,6 +22,7 @@ import android.support.annotation.NonNull;
 import com.novakduc.baselibrary.AppExecutors;
 import com.novakduc.forbega.qlnt.data.QlntRepository;
 import com.novakduc.forbega.qlnt.data.database.AppDatabase;
+import com.novakduc.forbega.qlnt.ui.config.base.ProjectBaseViewModelFactory;
 import com.novakduc.forbega.qlnt.ui.list.ProjectListViewModelFactory;
 
 /**
@@ -54,4 +55,9 @@ public class InjectorUtils {
         return new ProjectListViewModelFactory(repository);
     }
 
+    @NonNull
+    public static ProjectBaseViewModelFactory provideProjectBaseViewModelFactory(Context context) {
+        QlntRepository repository = InjectorUtils.provideRepository(context);
+        return new ProjectBaseViewModelFactory(repository);
+    }
 }

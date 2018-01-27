@@ -1,6 +1,8 @@
 package com.novakduc.forbega.qlnt.ui.config.base;
 
 import android.app.FragmentManager;
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.content.res.TypedArray;
 import android.os.Bundle;
@@ -12,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -27,6 +30,8 @@ import com.novakduc.forbega.qlnt.data.database.Project;
 import com.novakduc.forbega.qlnt.ui.config.UpdateListener;
 import com.novakduc.forbega.qlnt.ui.config.finance.ProjectFinanceConfigFragment;
 import com.novakduc.forbega.qlnt.ui.detail.DatePickerFragment;
+import com.novakduc.forbega.qlnt.utilities.ConverterUtilities;
+import com.novakduc.forbega.qlnt.utilities.InjectorUtils;
 
 import java.util.Calendar;
 
@@ -35,9 +40,9 @@ import java.util.Calendar;
  */
 
 public class ProjectBaseConfigFragment extends android.support.v4.app.Fragment {
-
     public static final String TEMP_PROJECT = "com.novakduc.forbega.qlnt.tempproject";
     public static final String FRAGMENT_TAG = "FINANCE_CONFIG_TAG";
+    private static final String LOG_TAG = ProjectBaseConfigFragment.class.getSimpleName();
     int mDuration = 10;
     private EditText mEditTextAddress;
     private EditText mEditTextName;
@@ -48,6 +53,8 @@ public class ProjectBaseConfigFragment extends android.support.v4.app.Fragment {
     private String mName, mAddress;
     private TextInputLayout mLayoutName, mLayoutAddress, mLayoutDuration;
     private UpdateListener mCallback;
+    private ProjectBaseFragmentViewModel mViewModel;
+    private Project mProject;
 
     public static ProjectBaseConfigFragment newInstance() {
         return new ProjectBaseConfigFragment();
@@ -67,6 +74,20 @@ public class ProjectBaseConfigFragment extends android.support.v4.app.Fragment {
 
         // finally change the color
         window.setStatusBarColor(getResources().getColor(R.color.primaryDarkColor));
+
+        ProjectBaseViewModelFactory factory =
+                InjectorUtils.provideProjectBaseViewModelFactory(getActivity());
+        mViewModel = ViewModelProviders.of(this, factory).get(ProjectBaseFragmentViewModel.class);
+        mViewModel.getTempProject().observe(this, new Observer<Project>() {
+            @Override
+            public void onChanged(@Nullable Project project) {
+                if (project != null) {
+                    //update views when project changes
+                    Log.d(LOG_TAG, "Project ID: " + String.valueOf(project.getId()));
+                    mProject = project;
+                }
+            }
+        });
     }
 
     @Nullable
@@ -160,7 +181,7 @@ public class ProjectBaseConfigFragment extends android.support.v4.app.Fragment {
         mEditTextStartDate = view.findViewById(R.id.editTextStartDate);
         Calendar tmp = Calendar.getInstance();
         mStartDate = tmp.getTimeInMillis();
-        mEditTextStartDate.setText(Project.calendarToString(mStartDate));
+        mEditTextStartDate.setText(ConverterUtilities.calendarToString(mStartDate));
         mEditTextStartDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -171,7 +192,7 @@ public class ProjectBaseConfigFragment extends android.support.v4.app.Fragment {
         Calendar endDate = Calendar.getInstance();
         endDate.setTimeInMillis(mStartDate);
         endDate.add(Calendar.YEAR, mDuration);
-        mEditTextEndDate.setText(Project.calendarToString(endDate.getTimeInMillis()));
+        mEditTextEndDate.setText(ConverterUtilities.calendarToString(endDate.getTimeInMillis()));
 
         mEditTextDuration = view.findViewById(R.id.editTextDuration);
         mEditTextDuration.setText(String.valueOf(mDuration));
@@ -198,7 +219,7 @@ public class ProjectBaseConfigFragment extends android.support.v4.app.Fragment {
                         Calendar endDate = Calendar.getInstance();
                         endDate.setTimeInMillis(mStartDate);
                         endDate.add(Calendar.YEAR, mDuration);
-                        mEditTextEndDate.setText(Project.calendarToString(endDate.getTimeInMillis()));
+                        mEditTextEndDate.setText(ConverterUtilities.calendarToString(endDate.getTimeInMillis()));
                     }
                 } catch (NumberFormatException e) {
                     mLayoutDuration.setError(getString(R.string.durationInputError));
@@ -225,7 +246,7 @@ public class ProjectBaseConfigFragment extends android.support.v4.app.Fragment {
             if (resultCode != AppCompatActivity.RESULT_OK) return;
             Calendar tmpCalendar = (Calendar) data.getSerializableExtra(DatePickerFragment.PICKED_DATE);
             mStartDate = tmpCalendar.getTimeInMillis();
-            mEditTextStartDate.setText(Project.calendarToString(mStartDate));
+            mEditTextStartDate.setText(ConverterUtilities.calendarToString(mStartDate));
             TypedArray themeArray = getActivity().getTheme().obtainStyledAttributes(
                     new int[]{android.R.attr.editTextColor});
             try {
@@ -240,7 +261,7 @@ public class ProjectBaseConfigFragment extends android.support.v4.app.Fragment {
             if (mDuration > 0 && mDuration <= 100) {
                 Calendar endDate = (Calendar) tmpCalendar.clone();
                 endDate.add(Calendar.YEAR, mDuration);
-                mEditTextEndDate.setText(Project.calendarToString(endDate.getTimeInMillis()));
+                mEditTextEndDate.setText(ConverterUtilities.calendarToString(endDate.getTimeInMillis()));
             } else {
                 mEditTextEndDate.setText("");
             }
@@ -289,10 +310,15 @@ public class ProjectBaseConfigFragment extends android.support.v4.app.Fragment {
             return;
         }
 
-        mCallback.updateBase(mName, mAddress, mDuration, mStartDate);
+        mProject.setName(mName);
+        mProject.setAddress(mAddress);
+        mProject.setDuration(mDuration);
+        mProject.setStartDate(mStartDate);
+        mViewModel.updateProject(mProject);
         FragmentManager manager = getActivity().getFragmentManager();
-        manager.beginTransaction().replace(R.id.fragmentContainer,
-                ProjectFinanceConfigFragment.newInstance(), FRAGMENT_TAG).addToBackStack(null).commit();
+        manager.beginTransaction().
+                replace(R.id.fragmentContainer, ProjectFinanceConfigFragment.
+                        newInstance(mProject.getId()), FRAGMENT_TAG).addToBackStack(null).commit();
     }
 
     @Override

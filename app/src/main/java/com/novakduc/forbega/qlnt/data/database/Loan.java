@@ -3,24 +3,38 @@ package com.novakduc.forbega.qlnt.data.database;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.Calendar;
 import java.util.Observable;
 
 /**
  * Created by n.thanh on 9/21/2016.
  */
 @Entity(tableName = "loan")
-public class Loan extends Observable implements Cloneable, ItemWithId {
+public class Loan extends Observable implements Cloneable, ItemWithId, Parcelable {
 
-    @PrimaryKey
+    public static final Parcelable.Creator<Loan> CREATOR = new Parcelable.Creator<Loan>() {
+        @Override
+        public Loan createFromParcel(Parcel source) {
+            return new Loan(source);
+        }
+
+        @Override
+        public Loan[] newArray(int size) {
+            return new Loan[size];
+        }
+    };
+    @PrimaryKey(autoGenerate = true)
     private long id;
     private String name;
     private long amount;
     private long loanDate;
     private double interestRate;
+    @Ignore
+    private ItemContainer<Loan> mItemContainer;
 
     //For Room only
     public Loan(long id, String name, long amount, long loanDate, double interestRate) {
@@ -33,11 +47,19 @@ public class Loan extends Observable implements Cloneable, ItemWithId {
 
     @Ignore
     public Loan(String name, long amount, long loanDate, double interestRate) {
-        id = Calendar.getInstance().getTimeInMillis();
         this.name = name;
         this.amount = amount;
         this.loanDate = loanDate;
         this.interestRate = interestRate;
+    }
+
+    @Ignore
+    protected Loan(Parcel in) {
+        this.id = in.readLong();
+        this.name = in.readString();
+        this.amount = in.readLong();
+        this.loanDate = in.readLong();
+        this.interestRate = in.readDouble();
     }
 
     public static double round(double value, int places) {
@@ -95,24 +117,35 @@ public class Loan extends Observable implements Cloneable, ItemWithId {
         this.interestRate = interestRate;
     }
 
+    public void setItemContainer(ItemContainer<Loan> itemContainer) {
+        mItemContainer = itemContainer;
+    }
+
     //Tra no
     public void pay(long payAmount) {
-        this.amount = payAmount < this.amount ? this.amount - payAmount
-                : 0;
-        updateToObserver();
+        this.amount = payAmount < this.amount ? this.amount - payAmount : 0;
+        this.mItemContainer.update();
     }
 
     public void payAll() {
         this.amount = 0;
-        updateToObserver();
+        this.mItemContainer.removeItem(this);
     }
 
-    private void updateToObserver() {
-        setChanged();
-        if (amount <= 0) {
-            notifyObservers(LoanList.DELETE);
-        } else {
-            notifyObservers(LoanList.TOTAL_AMOUNT_CHANGE);
-        }
+    ///Below section is for Parcelable
+    ////////////////////////////////
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(this.id);
+        dest.writeString(this.name);
+        dest.writeLong(this.amount);
+        dest.writeLong(this.loanDate);
+        dest.writeDouble(this.interestRate);
     }
 }

@@ -4,9 +4,6 @@ import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-
 /**
  * Created by n.thanh on 9/30/2016.
  */
@@ -14,14 +11,14 @@ import java.util.Calendar;
 @Entity(tableName = "room")
 public class RoomForRent implements Cloneable, ItemWithId {
     // TODO: 9/30/2016
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     private long id;
     private String name;
     private double area;
     private long charge;
     private boolean available;
     @Ignore
-    private ArrayList<RoomService> roomServices;
+    private RoomServiceList<RoomService> roomServices;
 
     //For Room only
     public RoomForRent(long id, String name, double area, long charge, boolean available) {
@@ -34,12 +31,11 @@ public class RoomForRent implements Cloneable, ItemWithId {
 
     @Ignore
     public RoomForRent(String name, double area, long charge) {
-        this.id = Calendar.getInstance().getTimeInMillis();
         this.name = name;
         this.area = area;
         this.charge = charge;
         available = true;
-        roomServices = new ArrayList<RoomService>(5);
+        roomServices = new RoomServiceList<RoomService>(this.id);
     }
 
     @Override
@@ -47,20 +43,20 @@ public class RoomForRent implements Cloneable, ItemWithId {
         return id;
     }
 
+    public void setId(long id) {
+        this.id = id;
+    }
+
     @Override
     public long getAmount() {
         return charge;
     }
 
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public ArrayList<RoomService> getRoomServices() {
+    public RoomServiceList<RoomService> getRoomServices() {
         return roomServices;
     }
 
-    public void setRoomServices(ArrayList<RoomService> roomServices) {
+    public void setRoomServices(RoomServiceList<RoomService> roomServices) {
         this.roomServices = roomServices;
     }
 
@@ -91,6 +87,9 @@ public class RoomForRent implements Cloneable, ItemWithId {
     public long getCharge() {
         return charge;
     }
+
+    //Below is for Parcelable
+    //////////////////////////////
 
     public void setCharge(long charge) {
         this.charge = charge;

@@ -1,10 +1,22 @@
 package com.novakduc.forbega.qlnt.data;
 
 import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.MutableLiveData;
+import android.util.Log;
 
 import com.novakduc.baselibrary.AppExecutors;
 import com.novakduc.forbega.qlnt.data.database.AppDao;
+import com.novakduc.forbega.qlnt.data.database.Cost;
+import com.novakduc.forbega.qlnt.data.database.CostManager;
+import com.novakduc.forbega.qlnt.data.database.Loan;
+import com.novakduc.forbega.qlnt.data.database.LoanList;
 import com.novakduc.forbega.qlnt.data.database.Project;
+import com.novakduc.forbega.qlnt.data.database.RoomForRent;
+import com.novakduc.forbega.qlnt.data.database.RoomList;
+import com.novakduc.forbega.qlnt.data.database.UnitPrice;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by n.thanh on 9/20/2016.
@@ -27,41 +39,10 @@ public class QlntRepository {
             synchronized (LOCK) {
                 if (sInstance == null) {
                     sInstance = new QlntRepository(appDao, executors);
-                    //Test
-                    //Test should be removed
-//                    AppExecutors.getInstance().diskIO().execute(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            try {
-//
-//                                // Pretend this is the network loading data
-//                                Thread.sleep(4000);
-//                                Project pretendProject = new Project();
-//                                pretendProject.setName("sadjlkgj");
-//                                pretendProject.setAddress("sdlfjdfgdf");
-//                                pretendProject.setInvestmentAmount(2342905);
-//                                sInstance.addProject(pretendProject);
-//
-//                                Thread.sleep(2000);
-//                                pretendProject = new Project();
-//                                pretendProject.setName("sadjlkgj");
-//                                pretendProject.setAddress("sdlfjdfgdf");
-//                                pretendProject.setInvestmentAmount(2342905);
-//                                sInstance.addProject(pretendProject);
-//
-//                            } catch (InterruptedException e) {
-//                                e.printStackTrace();
-//                            }
-//                        }
-//                    });
                 }
             }
         }
         return sInstance;
-    }
-
-    public void removeProject(Project project) {
-        mAppDao.removeProject(project);
     }
 
     public void addProject(Project project) {
@@ -69,10 +50,126 @@ public class QlntRepository {
     }
 
     public LiveData<Project> getProject(Long projectId) {
-        return mAppDao.getProject(projectId);
+        return mAppDao.getLiveDataProject(projectId);
     }
 
-    public LiveData<Project[]> getProjectList() {
+    public LiveData<List<Project>> getProjectList() {
         return mAppDao.getAllProjects();
+    }
+
+    public void deleteProject(final long projectId) {
+        mExecutors.diskIO().execute(new Runnable() {
+            @Override
+            public void run() {
+                UnitPrice unitPrice = mAppDao.getUnitPrice(projectId);
+                //Remove unit price data entity in project
+                if (unitPrice != null) {
+                    mAppDao.removeUnitPrice(unitPrice);
+                }
+                //remove loans entity in project
+                deleteLoanList(projectId);
+
+                //remove rooms entity in project
+                deleteRoomList(projectId);
+
+                //remove cost manager entity in project
+                deleteCostManager(projectId);
+
+                //remove project entity
+                Project project = mAppDao.getProject(projectId);
+                if (project != null) {
+                    mAppDao.removeProject(project);
+                }
+            }
+        });
+    }
+
+    private void deleteLoanList(long projectId) {
+        LoanList loans = mAppDao.getLoanList(projectId);
+        ;
+        if (loans != null) {
+            ArrayList<Long> idList = loans.getIdList();
+            if (idList != null) {
+                for (long loanId :
+                        idList) {
+                    Loan loan = mAppDao.getLoanById(loanId);
+                    if (loan != null) {
+                        mAppDao.removeLoan(loan);  //remove loan entity
+                    }
+                }
+            }
+            mAppDao.removeLoanList(loans);  //remove loan list entity
+        }
+    }
+
+    private void deleteRoomList(long projectId) {
+        RoomList roomList = mAppDao.getRoomList(projectId);
+        if (roomList != null) {
+            ArrayList<Long> roomIdList = roomList.getIdList();
+            if (roomIdList != null) {
+                for (long roomId :
+                        roomIdList) {
+                    RoomForRent roomForRent = mAppDao.getRoomById(roomId);
+                    if (roomForRent != null) {
+                        mAppDao.removeRoomForRent(roomForRent);  //remove loan entity
+                    }
+                }
+            }
+            mAppDao.removeRoomList(roomList);  //remove loan list entity
+        }
+    }
+
+    private void deleteCostManager(long projectId) {
+        CostManager costManager = mAppDao.getCostManager(projectId);
+        if (costManager != null) {
+            ArrayList<Long> costIdList = costManager.getIdList();
+            if (costIdList != null) {
+                for (long costId :
+                        costIdList) {
+                    Cost cost = mAppDao.getCostById(costId);
+                    if (cost != null) {
+                        mAppDao.removeCost(cost);  //remove loan entity
+                    }
+                }
+            }
+            mAppDao.removeCostManger(costManager);  //remove loan list entity
+        }
+    }
+
+    public void copyProject(final long projectId) {
+        mExecutors.diskIO().execute(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Project project = (Project) mAppDao.getProject(projectId).clone();
+                    mAppDao.insert(project);
+                } catch (CloneNotSupportedException e) {
+                    e.printStackTrace();
+                    Log.e(LOG_TAG, e.getLocalizedMessage());
+                }
+            }
+        });
+    }
+
+    public LiveData<Project> createTempProject() {
+        final MutableLiveData<Project> projectMutableLiveData = new MutableLiveData<Project>();
+        final Project project = new Project("name", "address", -1);
+        mExecutors.diskIO().execute(new Runnable() {
+            @Override
+            public void run() {
+                project.setProjectId(mAppDao.insert(project));
+                projectMutableLiveData.postValue(project);
+            }
+        });
+        return projectMutableLiveData;
+    }
+
+    public void updateProject(final Project project) {
+        mExecutors.diskIO().execute(new Runnable() {
+            @Override
+            public void run() {
+                mAppDao.updateProject(project);
+            }
+        });
     }
 }
