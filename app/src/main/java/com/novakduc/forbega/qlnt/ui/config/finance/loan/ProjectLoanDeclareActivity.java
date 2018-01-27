@@ -1,4 +1,4 @@
-package com.novakduc.forbega.qlnt.ui.config.finance;
+package com.novakduc.forbega.qlnt.ui.config.finance.loan;
 
 import android.os.Bundle;
 

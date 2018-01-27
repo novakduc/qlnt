@@ -20,9 +20,11 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 
 import com.novakduc.baselibrary.AppExecutors;
+import com.novakduc.forbega.qlnt.data.ProjectRepo;
 import com.novakduc.forbega.qlnt.data.QlntRepository;
 import com.novakduc.forbega.qlnt.data.database.AppDatabase;
 import com.novakduc.forbega.qlnt.ui.config.base.ProjectBaseViewModelFactory;
+import com.novakduc.forbega.qlnt.ui.config.finance.ProjectFinanceConfigViewModelFactory;
 import com.novakduc.forbega.qlnt.ui.list.ProjectListViewModelFactory;
 
 /**
@@ -38,6 +40,11 @@ public class InjectorUtils {
         return QlntRepository.getInstance(database.appDao(), executors);
     }
 
+    public static ProjectRepo provideProjectRepo(Context context, long projectId) {
+        AppDatabase database = AppDatabase.getInstance(context);
+        AppExecutors executors = AppExecutors.getInstance();
+        return ProjectRepo.getInstance(database.appDao(), executors, projectId);
+    }
 //    public static WeatherNetworkDataSource provideNetworkDataSource(Context context) {
 //        provideRepository(context);
 //        AppExecutors executors = AppExecutors.getInstance();
@@ -60,4 +67,12 @@ public class InjectorUtils {
         QlntRepository repository = InjectorUtils.provideRepository(context);
         return new ProjectBaseViewModelFactory(repository);
     }
+
+    @NonNull
+    public static ProjectFinanceConfigViewModelFactory provideProjectFinanceConfigViewModelFactory(
+            Context context, long projectId) {
+        ProjectRepo projectRepo = provideProjectRepo(context, projectId);
+        return new ProjectFinanceConfigViewModelFactory(projectRepo, projectId);
+    }
+
 }

@@ -64,7 +64,7 @@ public class LoanList extends MyArrayList<Loan> implements ItemContainer<Loan> {
         for (Loan i :
                 this) {
             if (i instanceof Loan) {
-                loan = (Loan) i;
+                loan = i;
                 if (loan.getId() == loanId) {
                     return loan;
                 }
@@ -76,7 +76,7 @@ public class LoanList extends MyArrayList<Loan> implements ItemContainer<Loan> {
     @Override
     public boolean add(Loan e) {
         boolean b = super.add(e);
-        ((Loan) e).setItemContainer((ItemContainer<Loan>) this);
+        e.setItemContainer(this);
         this.totalLoanAmount = super.getTotalAmount();
         return b;
     }

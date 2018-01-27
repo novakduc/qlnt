@@ -1,10 +1,7 @@
 package com.novakduc.forbega.qlnt.ui.config.finance;
 
 import android.annotation.SuppressLint;
-import android.app.Fragment;
 import android.content.Context;
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,11 +26,11 @@ public final class LoansAdapter extends RecyclerView.Adapter<LoansAdapter.ViewHo
     public static final int LOAN_EDIT_REQUEST_FROM_ADAPTER = 1121;
     private Context mContext;
     private List<Loan> mLoans;
-    private LoanContainerListener mContainerCallBack;
+    private LoanAdapterHandler mContainerCallBack;
 
-    public LoansAdapter(Context context, List<Loan> loanList) {
+    public LoansAdapter(Context context, LoanAdapterHandler containerCallBack) {
         mContext = context;
-        mLoans = loanList;
+        mContainerCallBack = containerCallBack;
     }
 
     @Override
@@ -58,26 +55,13 @@ public final class LoansAdapter extends RecyclerView.Adapter<LoansAdapter.ViewHo
         holder.mButtonDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mLoans.remove(loan);
-                notifyDataSetChanged();
-                AppCompatActivity activity = (AppCompatActivity) mContext;
-                Fragment fragment = activity.getFragmentManager().
-                        findFragmentById(R.id.fragmentContainer);
-                if (fragment instanceof LoanContainerListener) {
-                    mContainerCallBack = (LoanContainerListener) fragment;
-                    mContainerCallBack.loanDeleteUpdate();
-                }
+                mContainerCallBack.deleteLoan(loan.getId());
             }
         });
         holder.mButtonEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AppCompatActivity activity = (AppCompatActivity) mContext;
-                Intent intent = new Intent(activity, ProjectLoanDeclareActivity.class);
-                //intent.putExtra(ProjectLoanDeclareFragment.LOAN_TO_EDIT, loan);
-                Fragment fragment = activity.getFragmentManager().
-                        findFragmentById(R.id.fragmentContainer);
-                fragment.startActivityForResult(intent, LOAN_EDIT_REQUEST_FROM_ADAPTER);
+                mContainerCallBack.editLoan(loan.getId());
             }
         });
     }
@@ -85,6 +69,11 @@ public final class LoansAdapter extends RecyclerView.Adapter<LoansAdapter.ViewHo
     @Override
     public int getItemCount() {
         return mLoans.size();
+    }
+
+    public void swapList(List<Loan> newList) {
+        mLoans = newList;
+        notifyDataSetChanged();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

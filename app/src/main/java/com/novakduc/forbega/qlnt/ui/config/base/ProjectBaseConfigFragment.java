@@ -1,6 +1,5 @@
 package com.novakduc.forbega.qlnt.ui.config.base;
 
-import android.app.FragmentManager;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
@@ -315,7 +314,7 @@ public class ProjectBaseConfigFragment extends android.support.v4.app.Fragment {
         mProject.setDuration(mDuration);
         mProject.setStartDate(mStartDate);
         mViewModel.updateProject(mProject);
-        FragmentManager manager = getActivity().getFragmentManager();
+        android.support.v4.app.FragmentManager manager = getActivity().getSupportFragmentManager();
         manager.beginTransaction().
                 replace(R.id.fragmentContainer, ProjectFinanceConfigFragment.
                         newInstance(mProject.getId()), FRAGMENT_TAG).addToBackStack(null).commit();

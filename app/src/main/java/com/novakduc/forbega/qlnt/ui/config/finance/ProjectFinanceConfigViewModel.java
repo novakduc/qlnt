@@ -3,7 +3,7 @@ package com.novakduc.forbega.qlnt.ui.config.finance;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModel;
 
-import com.novakduc.forbega.qlnt.data.QlntRepository;
+import com.novakduc.forbega.qlnt.data.ProjectRepo;
 import com.novakduc.forbega.qlnt.data.database.Loan;
 import com.novakduc.forbega.qlnt.data.database.Project;
 
@@ -13,17 +13,15 @@ import java.util.List;
  * Created by Novak on 1/27/2018.
  */
 
-public class ProjectFinanceConfigFragmentViewModel extends ViewModel {
-    private QlntRepository mRepository;
+public class ProjectFinanceConfigViewModel extends ViewModel {
+    private ProjectRepo mProjectRepo;
     private LiveData<Project> mProjectLiveData;
     private LiveData<List<Loan>> mLoanListLiveData;
-    private long mProjectId;
 
-    public ProjectFinanceConfigFragmentViewModel(QlntRepository repository, long projectId) {
-        mRepository = repository;
-        mProjectId = projectId;
-        mProjectLiveData = repository.getProject(projectId);
-        mLoanListLiveData = repository.getLoanList(projectId);
+    public ProjectFinanceConfigViewModel(ProjectRepo projectRepo) {
+        mProjectRepo = projectRepo;
+        mProjectLiveData = projectRepo.getProject();
+        mLoanListLiveData = projectRepo.getLoanList();
     }
 
     public LiveData<Project> getProjectLiveData() {
@@ -32,5 +30,13 @@ public class ProjectFinanceConfigFragmentViewModel extends ViewModel {
 
     public LiveData<List<Loan>> getLoanListLiveData() {
         return mLoanListLiveData;
+    }
+
+    public void deleteLoan(long loanId) {
+        mProjectRepo.deleteLoan(loanId);
+    }
+
+    public void updateProject(Project project) {
+        mProjectRepo.updateProject(project);
     }
 }

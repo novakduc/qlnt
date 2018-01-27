@@ -62,5 +62,5 @@ public class CostManager extends MyArrayList<Cost> {
         return b;
     }
 
-    
+
 }

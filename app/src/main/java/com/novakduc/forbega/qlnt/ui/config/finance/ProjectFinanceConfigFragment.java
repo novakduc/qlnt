@@ -1,8 +1,9 @@
 package com.novakduc.forbega.qlnt.ui.config.finance;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.app.FragmentManager;
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -15,6 +16,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -28,14 +30,21 @@ import android.widget.TextView;
 import com.novakduc.forbega.qlnt.R;
 import com.novakduc.forbega.qlnt.data.database.Loan;
 import com.novakduc.forbega.qlnt.data.database.LoanList;
+import com.novakduc.forbega.qlnt.data.database.Project;
 import com.novakduc.forbega.qlnt.ui.config.UpdateListener;
+import com.novakduc.forbega.qlnt.ui.config.finance.loan.ProjectLoanDeclareActivity;
+import com.novakduc.forbega.qlnt.ui.config.finance.loan.ProjectLoanDeclareFragment;
 import com.novakduc.forbega.qlnt.ui.config.unitprice.ProjectUnitPriceConfigFragment;
+import com.novakduc.forbega.qlnt.utilities.InjectorUtils;
+
+import java.util.List;
 
 /**
  * Created by n.thanh on 10/21/2016.
  */
 
-public class ProjectFinanceConfigFragment extends Fragment implements LoanContainerListener {
+public class ProjectFinanceConfigFragment extends android.support.v4.app.Fragment
+        implements LoanAdapterHandler {
     public static final String TEMP_PROJECT = "com.novakduc.forbega.qlnt.tempproject";
     private static final String LOG_TAG = ProjectFinanceConfigFragment.class.getSimpleName();
     RecyclerView mRecyclerView;
@@ -46,13 +55,15 @@ public class ProjectFinanceConfigFragment extends Fragment implements LoanContai
     private TextInputLayout mLayoutAmount;
     private UpdateListener mCallBack;
     private LoanList mLoanList;
+    private ProjectFinanceConfigViewModel mViewModel;
+    private Project mProject;
 
     public static ProjectFinanceConfigFragment newInstance(long projectId) {
         Bundle bundle = new Bundle();
         bundle.putLong(TEMP_PROJECT, projectId);
         ProjectFinanceConfigFragment fragment = new ProjectFinanceConfigFragment();
         fragment.setArguments(bundle);
-        return new ProjectFinanceConfigFragment();
+        return fragment;
     }
 
     @Override
@@ -60,6 +71,20 @@ public class ProjectFinanceConfigFragment extends Fragment implements LoanContai
         super.onCreate(savedInstanceState);
         projectId = getArguments().getLong(TEMP_PROJECT);
         mLoanList = new LoanList(projectId);
+
+        ProjectFinanceConfigViewModelFactory factory =
+                InjectorUtils.provideProjectFinanceConfigViewModelFactory(getActivity(), projectId);
+
+        mViewModel = ViewModelProviders.of(this, factory).get(ProjectFinanceConfigViewModel.class);
+        mViewModel.getProjectLiveData().observe(this, new Observer<Project>() {
+            @Override
+            public void onChanged(@Nullable Project project) {
+                if (project != null) {
+                    Log.d(LOG_TAG, "Project investment amount: " + project.getInvestmentAmount());
+                    mProject = project;
+                }
+            }
+        });
         setHasOptionsMenu(true);
     }
 
@@ -133,8 +158,17 @@ public class ProjectFinanceConfigFragment extends Fragment implements LoanContai
         LinearLayoutManager layoutManager = new LinearLayoutManager(activity);
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setHasFixedSize(true);
-        mLoansAdapter = new LoansAdapter(activity, mLoanList);
+        mLoansAdapter = new LoansAdapter(getActivity(), this);
         mRecyclerView.setAdapter(mLoansAdapter);
+
+        mViewModel.getLoanListLiveData().observe(this, new Observer<List<Loan>>() {
+            @Override
+            public void onChanged(@Nullable List<Loan> loans) {
+                if (loans != null) {
+                    mLoansAdapter.swapList(loans);
+                }
+            }
+        });
         return view;
     }
 
@@ -157,7 +191,8 @@ public class ProjectFinanceConfigFragment extends Fragment implements LoanContai
 
     public void nextAction() {
         if (mAmount != -1) {
-            mCallBack.updateFinance(mAmount, mLoanList);
+            mProject.setInvestmentAmount(mAmount);
+            mViewModel.updateProject(mProject);
             FragmentManager manager = getActivity().getFragmentManager();
             manager.beginTransaction().replace(R.id.fragmentContainer,
                     ProjectUnitPriceConfigFragment.newInstance()).addToBackStack(null).commit();
@@ -197,7 +232,14 @@ public class ProjectFinanceConfigFragment extends Fragment implements LoanContai
     }
 
     @Override
-    public void loanDeleteUpdate() {
-        mTotalLoanTextView.setText(String.valueOf(mLoanList.getTotalLoanAmount()));
+    public void deleteLoan(long loanId) {
+        mViewModel.deleteLoan(loanId);
+    }
+
+    @Override
+    public void editLoan(long loanId) {
+        Intent intent = new Intent(getActivity(), ProjectLoanDeclareActivity.class);
+        //intent.putExtra(ProjectLoanDeclareFragment.LOAN_TO_EDIT, loan);
+        startActivityForResult(intent, LoansAdapter.LOAN_EDIT_REQUEST_FROM_ADAPTER);
     }
 }

@@ -49,9 +49,6 @@ public class QlntRepository {
         mAppDao.insert(project);
     }
 
-    public LiveData<Project> getProject(Long projectId) {
-        return mAppDao.getLiveDataProject(projectId);
-    }
 
     public LiveData<List<Project>> getProjectList() {
         return mAppDao.getAllProjects();
@@ -86,7 +83,6 @@ public class QlntRepository {
 
     private void deleteLoanList(long projectId) {
         LoanList loans = mAppDao.getLoanList(projectId);
-        ;
         if (loans != null) {
             ArrayList<Long> idList = loans.getIdList();
             if (idList != null) {

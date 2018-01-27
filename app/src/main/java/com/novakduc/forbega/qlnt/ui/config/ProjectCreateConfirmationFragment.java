@@ -30,10 +30,10 @@ import com.novakduc.forbega.qlnt.data.database.Loan;
 import com.novakduc.forbega.qlnt.data.database.LoanList;
 import com.novakduc.forbega.qlnt.data.database.Project;
 import com.novakduc.forbega.qlnt.data.database.UnitPrice;
-import com.novakduc.forbega.qlnt.ui.config.finance.LoanContainerListener;
+import com.novakduc.forbega.qlnt.ui.config.finance.LoanAdapterHandler;
 import com.novakduc.forbega.qlnt.ui.config.finance.LoansAdapter;
-import com.novakduc.forbega.qlnt.ui.config.finance.ProjectLoanDeclareActivity;
-import com.novakduc.forbega.qlnt.ui.config.finance.ProjectLoanDeclareFragment;
+import com.novakduc.forbega.qlnt.ui.config.finance.loan.ProjectLoanDeclareActivity;
+import com.novakduc.forbega.qlnt.ui.config.finance.loan.ProjectLoanDeclareFragment;
 import com.novakduc.forbega.qlnt.ui.detail.DatePickerFragment;
 import com.novakduc.forbega.qlnt.utilities.ConverterUtilities;
 
@@ -44,7 +44,7 @@ import java.util.Calendar;
  */
 
 public class ProjectCreateConfirmationFragment extends android.support.v4.app.Fragment
-        implements LoanContainerListener {
+        implements LoanAdapterHandler {
     public static final String TEMP_PROJECT = "com.novakduc.forbega.qlnt.tempproject";
     RecyclerView mRecyclerView;
     LoansAdapter mLoansAdapter;
