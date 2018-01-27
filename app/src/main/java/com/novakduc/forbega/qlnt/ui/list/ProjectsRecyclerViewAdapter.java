@@ -53,6 +53,7 @@ public class ProjectsRecyclerViewAdapter
         holder.mNameTextView.setText(project.getName());
         holder.mDurationTextView.setText(String.valueOf(project.getStartYear()) + " - "
                 + String.valueOf(project.getEndYear()));
+
         holder.mProduceRateTextView.setText(String.valueOf(
                 project.getRoomForRentList().getNoOfProducingRoom()) + "/"
                 + String.valueOf(project.getRoomForRentList().size()));
