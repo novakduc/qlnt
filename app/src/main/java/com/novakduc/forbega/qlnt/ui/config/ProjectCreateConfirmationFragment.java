@@ -246,7 +246,7 @@ public class ProjectCreateConfirmationFragment extends android.support.v4.app.Fr
         });
 
         LoanList loanList = mTempProject.getLoanList();
-        mLoansAdapter = new LoansAdapter(activity, loanList);
+        mLoansAdapter = new LoansAdapter(activity, this);
 
         mTotalLoanTextView = view.findViewById(R.id.totalLoan);
         mTotalLoanTextView.setText(String.valueOf(loanList.getTotalLoanAmount()));
@@ -576,7 +576,14 @@ public class ProjectCreateConfirmationFragment extends android.support.v4.app.Fr
     }
 
     @Override
-    public void loanDeleteUpdate() {
+    public void deleteLoan(long loanId) {
+        // TODO: 1/27/2018
         loanListUpdate();
+    }
+
+    @Override
+    public void editLoan(long loanId) {
+        //todo
+
     }
 }

@@ -68,6 +68,9 @@ public final class LoansAdapter extends RecyclerView.Adapter<LoansAdapter.ViewHo
 
     @Override
     public int getItemCount() {
+        if (mLoans == null) {
+            return 0;
+        }
         return mLoans.size();
     }
 

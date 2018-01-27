@@ -72,7 +72,7 @@ public class InjectorUtils {
     public static ProjectFinanceConfigViewModelFactory provideProjectFinanceConfigViewModelFactory(
             Context context, long projectId) {
         ProjectRepo projectRepo = provideProjectRepo(context, projectId);
-        return new ProjectFinanceConfigViewModelFactory(projectRepo, projectId);
+        return new ProjectFinanceConfigViewModelFactory(projectRepo);
     }
 
 }
