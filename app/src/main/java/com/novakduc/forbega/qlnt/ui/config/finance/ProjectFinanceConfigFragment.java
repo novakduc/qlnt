@@ -217,39 +217,30 @@ public class ProjectFinanceConfigFragment extends android.support.v4.app.Fragmen
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == LoansAdapter.LOAN_CREATION) {
             if (resultCode == Activity.RESULT_OK) {
-                Loan loan = data.getParcelableExtra(LoanDeclareFragment.RETURN_LOAN);
-                mLoanList.add(loan);
+                //Update loan list            }
             }
-        }
-        if (requestCode == LoansAdapter.LOAN_EDIT_REQUEST_FROM_ADAPTER) {
+            if (requestCode == LoansAdapter.LOAN_EDIT_REQUEST_FROM_ADAPTER) {
 
-            if (resultCode == Activity.RESULT_OK) {
-                Loan tempLoan = data.getParcelableExtra(LoanDeclareFragment.RETURN_LOAN);
-                Loan loan = mLoanList.getLoan(tempLoan.getId());
-                if (loan != null) {
-                    loan.setAmount(tempLoan.getAmount());
-                    loan.setInterestRate(tempLoan.getInterestRate());
-                    loan.setLoanDate(tempLoan.getLoanDate());
-                    loan.setName(tempLoan.getName());
+                if (resultCode == Activity.RESULT_OK) {
+                    //Update loan list
                 }
             }
+            mLoansAdapter.notifyDataSetChanged();
+            if (mLoanList != null) {
+                //mTotalLoanTextView.setText(String.valueOf(
+                //mLoanList.getTotalLoanAmount(CurrencyUnit.MIL_BASE)));
+            }
         }
-        mLoansAdapter.notifyDataSetChanged();
-        if (mLoanList != null) {
-            //mTotalLoanTextView.setText(String.valueOf(
-            //mLoanList.getTotalLoanAmount(CurrencyUnit.MIL_BASE)));
+
+        @Override
+        public void deleteLoan ( long loanId){
+            mViewModel.deleteLoan(loanId);
+        }
+
+        @Override
+        public void editLoan ( long loanId){
+            Intent intent = new Intent(getActivity(), LoanDeclareActivity.class);
+            intent.putExtra(LoanDeclareFragment.LOAN_TO_EDIT, loanId);
+            startActivityForResult(intent, LoansAdapter.LOAN_EDIT_REQUEST_FROM_ADAPTER);
         }
     }
-
-    @Override
-    public void deleteLoan(long loanId) {
-        mViewModel.deleteLoan(loanId);
-    }
-
-    @Override
-    public void editLoan(long loanId) {
-        Intent intent = new Intent(getActivity(), LoanDeclareActivity.class);
-        intent.putExtra(LoanDeclareFragment.LOAN_TO_EDIT, loanId);
-        startActivityForResult(intent, LoansAdapter.LOAN_EDIT_REQUEST_FROM_ADAPTER);
-    }
-}
