@@ -219,28 +219,24 @@ public class ProjectFinanceConfigFragment extends android.support.v4.app.Fragmen
             if (resultCode == Activity.RESULT_OK) {
                 //Update loan list            }
             }
-            if (requestCode == LoansAdapter.LOAN_EDIT_REQUEST_FROM_ADAPTER) {
-
-                if (resultCode == Activity.RESULT_OK) {
-                    //Update loan list
-                }
-            }
-            mLoansAdapter.notifyDataSetChanged();
-            if (mLoanList != null) {
-                //mTotalLoanTextView.setText(String.valueOf(
-                //mLoanList.getTotalLoanAmount(CurrencyUnit.MIL_BASE)));
-            }
         }
+        if (requestCode == LoansAdapter.LOAN_EDIT_REQUEST_FROM_ADAPTER) {
 
-        @Override
-        public void deleteLoan ( long loanId){
-            mViewModel.deleteLoan(loanId);
-        }
-
-        @Override
-        public void editLoan ( long loanId){
-            Intent intent = new Intent(getActivity(), LoanDeclareActivity.class);
-            intent.putExtra(LoanDeclareFragment.LOAN_TO_EDIT, loanId);
-            startActivityForResult(intent, LoansAdapter.LOAN_EDIT_REQUEST_FROM_ADAPTER);
+            if (resultCode == Activity.RESULT_OK) {
+                //Update loan list
+            }
         }
     }
+
+    @Override
+    public void deleteLoan(long loanId) {
+        mViewModel.deleteLoan(loanId);
+    }
+
+    @Override
+    public void editLoan(long loanId) {
+        Intent intent = new Intent(getActivity(), LoanDeclareActivity.class);
+        intent.putExtra(LoanDeclareFragment.LOAN_TO_EDIT, loanId);
+        startActivityForResult(intent, LoansAdapter.LOAN_EDIT_REQUEST_FROM_ADAPTER);
+    }
+}
