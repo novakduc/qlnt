@@ -217,13 +217,15 @@ public class ProjectFinanceConfigFragment extends android.support.v4.app.Fragmen
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == LoansAdapter.LOAN_CREATION) {
             if (resultCode == Activity.RESULT_OK) {
-                //Update loan list            }
+                //Update loan list
+                // TODO: 1/28/2018 update loan list
             }
         }
         if (requestCode == LoansAdapter.LOAN_EDIT_REQUEST_FROM_ADAPTER) {
 
             if (resultCode == Activity.RESULT_OK) {
                 //Update loan list
+                // TODO: 1/28/2018 update loan list
             }
         }
     }

@@ -54,7 +54,7 @@ public class ProjectRepo {
         return mAppDao.getLiveDataProject(mProjectId);
     }
 
-    public LiveData<List<Loan>> getLoanList() {
+    public MutableLiveData<List<Loan>> getLoanList() {
         final MutableLiveData<List<Loan>> liveData = new MutableLiveData<List<Loan>>();
         mExecutors.diskIO().execute(new Runnable() {
             @Override

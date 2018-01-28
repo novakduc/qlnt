@@ -1,6 +1,7 @@
 package com.novakduc.forbega.qlnt.ui.config.finance;
 
 import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 
 import com.novakduc.forbega.qlnt.data.ProjectRepo;
@@ -16,7 +17,7 @@ import java.util.List;
 public class ProjectFinanceConfigViewModel extends ViewModel {
     private ProjectRepo mProjectRepo;
     private LiveData<Project> mProjectLiveData;
-    private LiveData<List<Loan>> mLoanListLiveData;
+    private MutableLiveData<List<Loan>> mLoanListLiveData;
 
     public ProjectFinanceConfigViewModel(ProjectRepo projectRepo) {
         mProjectRepo = projectRepo;
