@@ -42,10 +42,14 @@ public class Project implements Cloneable, ItemWithId {
     }
 
     @Ignore
-    public Project(String name, String address, int yearDuration) {
+    private Project(String name, String address, int yearDuration) {
         this.name = name;
         this.address = address;
         this.yearDuration = yearDuration;
+    }
+
+    public static Project getInstance(String name, String address, int yearDuration) {
+        return new Project(name, address, yearDuration);
     }
 
     public boolean createRoom(String name, double area, long charge) {
@@ -229,6 +233,11 @@ public class Project implements Cloneable, ItemWithId {
     @Override
     public long getId() {
         return projectId;
+    }
+
+    @Override
+    public void setId(long id) {
+        this.projectId = id;
     }
 
     @Override

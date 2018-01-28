@@ -7,5 +7,7 @@ package com.novakduc.forbega.qlnt.data.database;
 public interface ItemWithId {
     long getId();
 
+    void setId(long id);
+
     long getAmount();
 }

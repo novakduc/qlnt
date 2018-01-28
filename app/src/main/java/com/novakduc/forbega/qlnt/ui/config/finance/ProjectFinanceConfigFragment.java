@@ -32,8 +32,8 @@ import com.novakduc.forbega.qlnt.data.database.Loan;
 import com.novakduc.forbega.qlnt.data.database.LoanList;
 import com.novakduc.forbega.qlnt.data.database.Project;
 import com.novakduc.forbega.qlnt.ui.config.UpdateListener;
-import com.novakduc.forbega.qlnt.ui.config.finance.loan.ProjectLoanDeclareActivity;
-import com.novakduc.forbega.qlnt.ui.config.finance.loan.ProjectLoanDeclareFragment;
+import com.novakduc.forbega.qlnt.ui.config.finance.loan.LoanDeclareActivity;
+import com.novakduc.forbega.qlnt.ui.config.finance.loan.LoanDeclareFragment;
 import com.novakduc.forbega.qlnt.ui.config.unitprice.ProjectUnitPriceConfigFragment;
 import com.novakduc.forbega.qlnt.utilities.InjectorUtils;
 
@@ -70,7 +70,6 @@ public class ProjectFinanceConfigFragment extends android.support.v4.app.Fragmen
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         projectId = getArguments().getLong(TEMP_PROJECT);
-        mLoanList = new LoanList(projectId);
 
         ProjectFinanceConfigViewModelFactory factory =
                 InjectorUtils.provideProjectFinanceConfigViewModelFactory(getActivity(), projectId);
@@ -85,12 +84,21 @@ public class ProjectFinanceConfigFragment extends android.support.v4.app.Fragmen
                 }
             }
         });
+
+        mViewModel.getLoanListLiveData().observe(this, new Observer<List<Loan>>() {
+            @Override
+            public void onChanged(@Nullable List<Loan> loans) {
+                if (loans != null) {
+                    mLoansAdapter.swapList(loans);
+                }
+            }
+        });
         setHasOptionsMenu(true);
     }
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_project_finance_config, container, false);
         Toolbar toolbar = view.findViewById(R.id.toolbar);
         toolbar.setTitle(R.string.financeConfigTitle);
@@ -141,7 +149,9 @@ public class ProjectFinanceConfigFragment extends android.support.v4.app.Fragmen
         addLoan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), ProjectLoanDeclareActivity.class);
+                Intent intent = new Intent(getActivity(), LoanDeclareActivity.class);
+                intent.putExtra(LoanDeclareFragment.TYPE_KEY, true);    //create new loan
+                intent.putExtra(LoanDeclareFragment.PROJECT_ID, projectId);
                 startActivityForResult(intent, LoansAdapter.LOAN_CREATION);
             }
         });
@@ -207,14 +217,14 @@ public class ProjectFinanceConfigFragment extends android.support.v4.app.Fragmen
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == LoansAdapter.LOAN_CREATION) {
             if (resultCode == Activity.RESULT_OK) {
-                Loan loan = data.getParcelableExtra(ProjectLoanDeclareFragment.RETURN_LOAN);
+                Loan loan = data.getParcelableExtra(LoanDeclareFragment.RETURN_LOAN);
                 mLoanList.add(loan);
             }
         }
         if (requestCode == LoansAdapter.LOAN_EDIT_REQUEST_FROM_ADAPTER) {
 
             if (resultCode == Activity.RESULT_OK) {
-                Loan tempLoan = data.getParcelableExtra(ProjectLoanDeclareFragment.RETURN_LOAN);
+                Loan tempLoan = data.getParcelableExtra(LoanDeclareFragment.RETURN_LOAN);
                 Loan loan = mLoanList.getLoan(tempLoan.getId());
                 if (loan != null) {
                     loan.setAmount(tempLoan.getAmount());
@@ -238,8 +248,8 @@ public class ProjectFinanceConfigFragment extends android.support.v4.app.Fragmen
 
     @Override
     public void editLoan(long loanId) {
-        Intent intent = new Intent(getActivity(), ProjectLoanDeclareActivity.class);
-        //intent.putExtra(ProjectLoanDeclareFragment.LOAN_TO_EDIT, loan);
+        Intent intent = new Intent(getActivity(), LoanDeclareActivity.class);
+        intent.putExtra(LoanDeclareFragment.LOAN_TO_EDIT, loanId);
         startActivityForResult(intent, LoansAdapter.LOAN_EDIT_REQUEST_FROM_ADAPTER);
     }
 }

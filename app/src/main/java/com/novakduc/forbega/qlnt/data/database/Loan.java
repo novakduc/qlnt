@@ -8,6 +8,7 @@ import android.os.Parcelable;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.Calendar;
 import java.util.Observable;
 
 /**
@@ -46,11 +47,9 @@ public class Loan extends Observable implements Cloneable, ItemWithId, Parcelabl
     }
 
     @Ignore
-    public Loan(String name, long amount, long loanDate, double interestRate) {
+    private Loan(String name) {
         this.name = name;
-        this.amount = amount;
-        this.loanDate = loanDate;
-        this.interestRate = interestRate;
+        this.loanDate = Calendar.getInstance().getTimeInMillis();
     }
 
     @Ignore
@@ -60,6 +59,10 @@ public class Loan extends Observable implements Cloneable, ItemWithId, Parcelabl
         this.amount = in.readLong();
         this.loanDate = in.readLong();
         this.interestRate = in.readDouble();
+    }
+
+    public static Loan getInstance(String bankName) {
+        return new Loan(bankName);
     }
 
     public static double round(double value, int places) {
@@ -75,7 +78,7 @@ public class Loan extends Observable implements Cloneable, ItemWithId, Parcelabl
         return id;
     }
 
-    private void setId(long id) {
+    public void setId(long id) {
         this.id = id;
     }
 

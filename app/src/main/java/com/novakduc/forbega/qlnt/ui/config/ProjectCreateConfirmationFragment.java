@@ -32,8 +32,8 @@ import com.novakduc.forbega.qlnt.data.database.Project;
 import com.novakduc.forbega.qlnt.data.database.UnitPrice;
 import com.novakduc.forbega.qlnt.ui.config.finance.LoanAdapterHandler;
 import com.novakduc.forbega.qlnt.ui.config.finance.LoansAdapter;
-import com.novakduc.forbega.qlnt.ui.config.finance.loan.ProjectLoanDeclareActivity;
-import com.novakduc.forbega.qlnt.ui.config.finance.loan.ProjectLoanDeclareFragment;
+import com.novakduc.forbega.qlnt.ui.config.finance.loan.LoanDeclareActivity;
+import com.novakduc.forbega.qlnt.ui.config.finance.loan.LoanDeclareFragment;
 import com.novakduc.forbega.qlnt.ui.detail.DatePickerFragment;
 import com.novakduc.forbega.qlnt.utilities.ConverterUtilities;
 
@@ -240,7 +240,7 @@ public class ProjectCreateConfirmationFragment extends android.support.v4.app.Fr
         buttonAddLoan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), ProjectLoanDeclareActivity.class);
+                Intent intent = new Intent(getActivity(), LoanDeclareActivity.class);
                 startActivityForResult(intent, LoansAdapter.LOAN_CREATION);
             }
         });
@@ -546,7 +546,7 @@ public class ProjectCreateConfirmationFragment extends android.support.v4.app.Fr
         //Receive loan data
         if (requestCode == LoansAdapter.LOAN_CREATION) {
             if (resultCode == Activity.RESULT_OK) {
-                Loan loan = data.getParcelableExtra(ProjectLoanDeclareFragment.RETURN_LOAN);
+                Loan loan = data.getParcelableExtra(LoanDeclareFragment.RETURN_LOAN);
                 mTempProject.getLoanList().add(loan);
                 loanListUpdate();
             }
@@ -554,7 +554,7 @@ public class ProjectCreateConfirmationFragment extends android.support.v4.app.Fr
         if (requestCode == LoansAdapter.LOAN_EDIT_REQUEST_FROM_ADAPTER) {
 
             if (resultCode == Activity.RESULT_OK) {
-                Loan tempLoan = data.getParcelableExtra(ProjectLoanDeclareFragment.RETURN_LOAN);
+                Loan tempLoan = data.getParcelableExtra(LoanDeclareFragment.RETURN_LOAN);
                 Loan loan = mTempProject.getLoanList().getLoan(tempLoan.getId());
                 if (loan != null) {
                     loan.setAmount(tempLoan.getAmount());

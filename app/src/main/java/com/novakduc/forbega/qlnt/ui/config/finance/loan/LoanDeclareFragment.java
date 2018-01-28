@@ -1,6 +1,8 @@
 package com.novakduc.forbega.qlnt.ui.config.finance.loan;
 
 import android.app.Activity;
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.content.res.TypedArray;
 import android.os.Bundle;
@@ -23,38 +25,45 @@ import android.widget.EditText;
 import com.novakduc.forbega.qlnt.R;
 import com.novakduc.forbega.qlnt.data.database.Loan;
 import com.novakduc.forbega.qlnt.ui.detail.DatePickerFragment;
+import com.novakduc.forbega.qlnt.utilities.ConverterUtilities;
+import com.novakduc.forbega.qlnt.utilities.InjectorUtils;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
 /**
  * Created by n.thanh on 10/21/2016.
  */
 
-public class ProjectLoanDeclareFragment extends android.support.v4.app.Fragment {
-    public static final String TEMP_LOAN = "com.novakduc.forbega.qlnt.tempLoan";
+public class LoanDeclareFragment extends android.support.v4.app.Fragment {
+    public static final String LOAN_ID_KEY = "com.novakduc.forbega.qlnt.tempLoan";
     public static final String RETURN_LOAN = "com.forbega.qlnt.temproject.loandeclare.returnloan";
     public static final String LOAN_TO_EDIT = "com.novakduc.forbega.qlnt.loanDeclare.loanId";
+    public static final int NEW_LOAN_FAKE_ID = -1;
+    public static final String TYPE_KEY = "com.novakduc.forbega.qlnt.new_or_edit";
+    public static final String PROJECT_ID = "com.novakduc.forbega.qlnt.projectId";
+    private static final String LOG_TAG = LoanDeclareFragment.class.getSimpleName();
     private String mBankName;
     private long mAmount = -1;
     private double mRate = 0;
     private long mLoanDate;
+    private long mLoanId;
     private Loan mLoan;
     private TextInputLayout mLayoutBank, mLayoutAmount, mLayoutRate, mLayoutDate;
     private EditText mEdtLoanDate;
     private LoanDeclareFragmentListener mCallBack;
+    private LoanDeclareFragmentViewModel mViewModel;
+    private EditText edtBankName, edtLoanAmount, edtRate;
+    private Boolean isNew;
 
-    public static ProjectLoanDeclareFragment newInstance() {
+    public static LoanDeclareFragment newInstance() {
 
-        return new ProjectLoanDeclareFragment();
+        return new LoanDeclareFragment();
     }
 
-    public static ProjectLoanDeclareFragment newInstance(Loan loan) {
+    public static LoanDeclareFragment newInstance(long loanId) {
         Bundle bundle = new Bundle();
-        //bundle.putParcelable(TEMP_LOAN, loan);
-        ProjectLoanDeclareFragment fragment = new ProjectLoanDeclareFragment();
+        bundle.putLong(LOAN_ID_KEY, loanId);
+        LoanDeclareFragment fragment = new LoanDeclareFragment();
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -62,9 +71,42 @@ public class ProjectLoanDeclareFragment extends android.support.v4.app.Fragment 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Intent intent = getActivity().getIntent();
-        mLoan = intent.getParcelableExtra(LOAN_TO_EDIT);
+        final Intent intent = getActivity().getIntent();
+        long projectId = intent.getLongExtra(PROJECT_ID, -1);
+
+        LoanDeclareViewModelFactory factory =
+                InjectorUtils.provideLoanDeclareViewModelFactory(getActivity(), projectId);
+
+        mViewModel = ViewModelProviders.of(this, factory).get(LoanDeclareFragmentViewModel.class);
+
+        isNew = intent.getBooleanExtra(TYPE_KEY, false);
+        if (!isNew) {
+            //Not create new loan, edit existed loan
+            mLoanId = intent.getLongExtra(LOAN_ID_KEY, -1);
+            if (mLoanId == -1) {
+                isNew = true;
+            }
+        }
+
         setHasOptionsMenu(true);
+    }
+
+    private void bindLoanToView(Loan loan) {
+        mLoan = loan;
+        mLoanId = mLoan.getId();
+        if (!isNew) {
+            mBankName = mLoan.getName();
+            edtBankName.setText(mBankName);
+
+            mAmount = mLoan.getAmount();
+            edtLoanAmount.setText(String.valueOf(mAmount));
+
+            mRate = mLoan.getInterestRate();
+            edtRate.setText(String.valueOf(mRate));
+        }
+        mLoanId = mLoan.getId();
+        mLoanDate = mLoan.getLoanDate();
+        mEdtLoanDate.setText(ConverterUtilities.calendarToString(mLoanDate));
     }
 
     @Nullable
@@ -88,11 +130,8 @@ public class ProjectLoanDeclareFragment extends android.support.v4.app.Fragment 
         mLayoutDate = view.findViewById(R.id.txtLayoutLoanDate);
         mLayoutRate = view.findViewById(R.id.txtLayoutRate);
         mLayoutAmount = view.findViewById(R.id.txtLayoutLoanAmount);
-        EditText edtBankName = view.findViewById(R.id.edtInputLoanBank);
-        if (mLoan != null) {
-            mBankName = mLoan.getName();
-            edtBankName.setText(mBankName);
-        }
+        edtBankName = view.findViewById(R.id.edtInputLoanBank);
+
         edtBankName.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -116,11 +155,8 @@ public class ProjectLoanDeclareFragment extends android.support.v4.app.Fragment 
             }
         });
 
-        EditText edtLoanAmount = view.findViewById(R.id.edtLoanAmount);
-        if (mLoan != null) {
-            mAmount = mLoan.getAmount();
-            edtLoanAmount.setText(String.valueOf(mAmount));
-        }
+        edtLoanAmount = view.findViewById(R.id.edtLoanAmount);
+
         edtLoanAmount.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -148,11 +184,8 @@ public class ProjectLoanDeclareFragment extends android.support.v4.app.Fragment 
             }
         });
 
-        EditText edtRate = view.findViewById(R.id.edtRate);
-        if (mLoan != null) {
-            mRate = mLoan.getInterestRate();
-            edtRate.setText(String.valueOf(mRate));
-        }
+        edtRate = view.findViewById(R.id.edtRate);
+
         edtRate.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -181,14 +214,6 @@ public class ProjectLoanDeclareFragment extends android.support.v4.app.Fragment 
         });
 
         mEdtLoanDate = view.findViewById(R.id.edtLoanDate);
-        Calendar tmp = Calendar.getInstance();
-        if (mLoan == null) {
-            mLoanDate = tmp.getTimeInMillis();
-        } else {
-            mLoanDate = mLoan.getLoanDate();
-            tmp.setTimeInMillis(mLoanDate);
-        }
-        mEdtLoanDate.setText(calendarToString(tmp));
 
         mEdtLoanDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -224,19 +249,40 @@ public class ProjectLoanDeclareFragment extends android.support.v4.app.Fragment 
                     return;
                 }
 
+                //Add loan to project
+                mLoan.setName(mBankName);
+                mLoan.setLoanDate(mLoanDate);
+                mLoan.setInterestRate(mRate);
+                mLoan.setAmount(mAmount);
+
+                mViewModel.updateLoan(mLoan);
+                if (isNew) {
+                    mViewModel.addLoan(mLoan);
+                }
                 //return valid loan
                 Intent returnIntent = new Intent();
-                if (mLoan == null) {
-                    mLoan = new Loan(mBankName, mAmount, mLoanDate, mRate);
-                } else {
-                    mLoan.setName(mBankName);
-                    mLoan.setLoanDate(mLoanDate);
-                    mLoan.setInterestRate(mRate);
-                    mLoan.setAmount(mAmount);
-                }
                 //returnIntent.putExtra(RETURN_LOAN, mLoan);
                 getActivity().setResult(Activity.RESULT_OK, returnIntent);
                 getActivity().finish();
+            }
+        });
+
+        if (isNew) {
+            mViewModel.getLoanLiveData().observe(this, new Observer<Loan>() {
+                @Override
+                public void onChanged(@Nullable Loan loan) {
+                    if (loan != null) {
+                        bindLoanToView(loan);
+                    }
+                }
+            });
+        }
+        mViewModel.getLoanLiveData(mLoanId).observe(this, new Observer<Loan>() {
+            @Override
+            public void onChanged(@Nullable Loan loan) {
+                if (loan != null) {
+                    bindLoanToView(loan);
+                }
             }
         });
 
@@ -250,7 +296,7 @@ public class ProjectLoanDeclareFragment extends android.support.v4.app.Fragment 
             if (resultCode != AppCompatActivity.RESULT_OK) return;
             Calendar tmpCalendar = (Calendar) data.getSerializableExtra(DatePickerFragment.PICKED_DATE);
             mLoanDate = tmpCalendar.getTimeInMillis();
-            mEdtLoanDate.setText(calendarToString(tmpCalendar));
+            mEdtLoanDate.setText(ConverterUtilities.calendarToString(tmpCalendar.getTimeInMillis()));
             TypedArray themeArray = getActivity().getTheme().obtainStyledAttributes(
                     new int[]{android.R.attr.editTextColor});
             try {
@@ -264,12 +310,6 @@ public class ProjectLoanDeclareFragment extends android.support.v4.app.Fragment 
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
-    }
-
-    private String calendarToString(Calendar calendar) {
-        Date date = calendar.getTime();
-        DateFormat format = SimpleDateFormat.getDateInstance();
-        return format.format(date);
     }
 
     @Override

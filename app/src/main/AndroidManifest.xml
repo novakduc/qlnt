@@ -25,7 +25,7 @@
             android:windowSoftInputMode="adjustResize">
         </activity>
         <activity
-            android:name=".ui.config.finance.loan.ProjectLoanDeclareActivity"
+            android:name=".ui.config.finance.loan.LoanDeclareActivity"
             android:label="@string/txtViewBaseTitile"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>

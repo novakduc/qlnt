@@ -149,10 +149,10 @@ public class QlntRepository {
 
     public LiveData<Project> createTempProject() {
         final MutableLiveData<Project> projectMutableLiveData = new MutableLiveData<Project>();
-        final Project project = new Project("name", "address", -1);
         mExecutors.diskIO().execute(new Runnable() {
             @Override
             public void run() {
+                Project project = Project.getInstance("name", "address", -1);
                 project.setProjectId(mAppDao.insert(project));
                 projectMutableLiveData.postValue(project);
             }

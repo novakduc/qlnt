@@ -25,6 +25,7 @@ import com.novakduc.forbega.qlnt.data.QlntRepository;
 import com.novakduc.forbega.qlnt.data.database.AppDatabase;
 import com.novakduc.forbega.qlnt.ui.config.base.ProjectBaseViewModelFactory;
 import com.novakduc.forbega.qlnt.ui.config.finance.ProjectFinanceConfigViewModelFactory;
+import com.novakduc.forbega.qlnt.ui.config.finance.loan.LoanDeclareViewModelFactory;
 import com.novakduc.forbega.qlnt.ui.list.ProjectListViewModelFactory;
 
 /**
@@ -75,4 +76,9 @@ public class InjectorUtils {
         return new ProjectFinanceConfigViewModelFactory(projectRepo);
     }
 
+    @NonNull
+    public static LoanDeclareViewModelFactory provideLoanDeclareViewModelFactory(Context context, long projectId) {
+        ProjectRepo projectRepo = provideProjectRepo(context, projectId);
+        return new LoanDeclareViewModelFactory(projectRepo);
+    }
 }

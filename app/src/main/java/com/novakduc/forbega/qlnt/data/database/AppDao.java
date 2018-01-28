@@ -41,6 +41,10 @@ public interface AppDao {
     @Query("SELECT * FROM loan WHERE id = :id")
     Loan getLoanById(long id);
 
+    //Get live data loan by id
+    @Query("SELECT * FROM loan WHERE id = :id")
+    LiveData<Loan> getLiveDataLoanById(long loanId);
+
     //Get a project
     @Query("SELECT * FROM project WHERE projectId = :projectId")
     LiveData<Project> getLiveDataProject(long projectId);
@@ -99,12 +103,31 @@ public interface AppDao {
     @Query("SELECT * FROM cost WHERE id = :costId")
     Cost getCostById(long costId);
 
+    //Delete cost
     @Delete
     void removeCost(Cost cost);
 
+    //Delete cost manager
     @Delete
     void removeCostManger(CostManager costManager);
 
+    //Update project
     @Update
     void updateProject(Project project);
+
+    //Insert a loan to database
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    long insert(Loan loan);
+
+    //Update loan
+    @Update
+    void updateLoan(Loan loan);
+
+    //Insert loan list to database
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void insert(LoanList loans);
+
+    //Update loan list
+    @Update
+    void updateLoanList(LoanList loans);
 }

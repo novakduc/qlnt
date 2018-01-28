@@ -101,6 +101,11 @@ public class RoomService implements RoomServiceInterface {
     }
 
     @Override
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    @Override
     public long getAmount() {
         return charge();
     }

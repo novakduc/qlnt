@@ -34,10 +34,14 @@ public class LoanList extends MyArrayList<Loan> implements ItemContainer<Loan> {
     }
 
     @Ignore
-    public LoanList(long projectId) {
+    private LoanList(long projectId) {
         super(3);
         this.projectId = projectId;
         idList = new ArrayList(3);
+    }
+
+    public static LoanList getInstance(long projectId) {
+        return new LoanList(projectId);
     }
 
     @Override

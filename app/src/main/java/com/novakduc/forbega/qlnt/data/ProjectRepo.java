@@ -93,4 +93,51 @@ public class ProjectRepo {
             }
         });
     }
+
+    public LiveData<Loan> createTempLoan() {
+        final MutableLiveData<Loan> loanMutableLiveData = new MutableLiveData<Loan>();
+        mExecutors.diskIO().execute(new Runnable() {
+            @Override
+            public void run() {
+                Loan loan = Loan.getInstance("name");
+                loan.setId(mAppDao.insert(loan));
+                loanMutableLiveData.postValue(loan);
+            }
+        });
+        return loanMutableLiveData;
+    }
+
+    public void updateLoan(final Loan loan) {
+        mExecutors.diskIO().execute(new Runnable() {
+            @Override
+            public void run() {
+                mAppDao.updateLoan(loan);
+            }
+        });
+    }
+
+    public void addLoan(final Loan loan) {
+        mExecutors.diskIO().execute(new Runnable() {
+            @Override
+            public void run() {
+                mAppDao.updateLoan(loan);
+                LoanList loans = mAppDao.getLoanList(mProjectId);
+                if (loans == null) {
+                    loans = LoanList.getInstance(mProjectId);
+                    mAppDao.insert(loans);
+                }
+                ArrayList<Long> loanIdList = loans.getIdList();
+                for (long l :
+                        loanIdList) {
+                    if (loan.getId() == l) return;  //Already on loan list, no need to add.
+                }
+                loans.add(loan);
+                mAppDao.updateLoanList(loans);
+            }
+        });
+    }
+
+    public LiveData<Loan> getLoan(long loanId) {
+        return mAppDao.getLiveDataLoanById(loanId);
+    }
 }
