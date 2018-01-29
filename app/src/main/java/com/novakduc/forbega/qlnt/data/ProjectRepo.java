@@ -54,23 +54,8 @@ public class ProjectRepo {
         return mAppDao.getLiveDataProject(mProjectId);
     }
 
-    public MutableLiveData<List<Loan>> getLoanList() {
-        final MutableLiveData<List<Loan>> liveData = new MutableLiveData<List<Loan>>();
-        mExecutors.diskIO().execute(new Runnable() {
-            @Override
-            public void run() {
-                LoanList loans = mAppDao.getLoanList(mProjectId);
-                if (loans != null) {
-                    ArrayList<Long> idList = loans.getIdList();
-                    for (long id :
-                            idList) {
-                        loans.add(mAppDao.getLoanById(mProjectId));
-                    }
-                    liveData.postValue(loans);
-                }
-            }
-        });
-        return liveData;
+    public LiveData<List<Loan>> getLoanList() {
+        return mAppDao.getAllLoanInProject(mProjectId);
     }
 
     public void deleteLoan(final long loanId) {
@@ -99,7 +84,7 @@ public class ProjectRepo {
         mExecutors.diskIO().execute(new Runnable() {
             @Override
             public void run() {
-                Loan loan = Loan.getInstance("name");
+                Loan loan = Loan.getInstance("name", mProjectId);
                 loan.setId(mAppDao.insert(loan));
                 loanMutableLiveData.postValue(loan);
             }
@@ -112,6 +97,7 @@ public class ProjectRepo {
             @Override
             public void run() {
                 mAppDao.updateLoan(loan);
+                // TODO: 1/29/2018 update loan amount if needed
             }
         });
     }

@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 2,
-    "identityHash": "b02a1ae253d1586dbbf1c4e0ed320e56",
+    "identityHash": "5f8c364c2fab84892f55834884bb57d0",
     "entities": [
       {
         "tableName": "cost",
@@ -91,7 +91,7 @@
       },
       {
         "tableName": "loan",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT, `amount` INTEGER NOT NULL, `loanDate` INTEGER NOT NULL, `interestRate` REAL NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT, `amount` INTEGER NOT NULL, `loanDate` INTEGER NOT NULL, `interestRate` REAL NOT NULL, `projectId` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
@@ -121,6 +121,12 @@
             "fieldPath": "interestRate",
             "columnName": "interestRate",
             "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "projectId",
+            "columnName": "projectId",
+            "affinity": "INTEGER",
             "notNull": true
           }
         ],
@@ -435,7 +441,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"b02a1ae253d1586dbbf1c4e0ed320e56\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"5f8c364c2fab84892f55834884bb57d0\")"
     ]
   }
 }

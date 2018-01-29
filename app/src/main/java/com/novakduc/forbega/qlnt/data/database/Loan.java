@@ -3,8 +3,6 @@ package com.novakduc.forbega.qlnt.data.database;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
-import android.os.Parcel;
-import android.os.Parcelable;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -15,54 +13,36 @@ import java.util.Observable;
  * Created by n.thanh on 9/21/2016.
  */
 @Entity(tableName = "loan")
-public class Loan extends Observable implements Cloneable, ItemWithId, Parcelable {
-
-    public static final Parcelable.Creator<Loan> CREATOR = new Parcelable.Creator<Loan>() {
-        @Override
-        public Loan createFromParcel(Parcel source) {
-            return new Loan(source);
-        }
-
-        @Override
-        public Loan[] newArray(int size) {
-            return new Loan[size];
-        }
-    };
+public class Loan extends Observable implements Cloneable, ItemWithId {
     @PrimaryKey(autoGenerate = true)
     private long id;
     private String name;
     private long amount;
     private long loanDate;
     private double interestRate;
+    private long projectId;
     @Ignore
     private ItemContainer<Loan> mItemContainer;
 
     //For Room only
-    public Loan(long id, String name, long amount, long loanDate, double interestRate) {
+    public Loan(long id, String name, long amount, long loanDate, double interestRate, long projectId) {
         this.id = id;
         this.name = name;
         this.amount = amount;
         this.loanDate = loanDate;
         this.interestRate = interestRate;
+        this.projectId = projectId;
     }
 
     @Ignore
-    private Loan(String name) {
+    private Loan(String name, long projectId) {
         this.name = name;
+        this.projectId = projectId;
         this.loanDate = Calendar.getInstance().getTimeInMillis();
     }
 
-    @Ignore
-    protected Loan(Parcel in) {
-        this.id = in.readLong();
-        this.name = in.readString();
-        this.amount = in.readLong();
-        this.loanDate = in.readLong();
-        this.interestRate = in.readDouble();
-    }
-
-    public static Loan getInstance(String bankName) {
-        return new Loan(bankName);
+    public static Loan getInstance(String bankName, long projectId) {
+        return new Loan(bankName, projectId);
     }
 
     public static double round(double value, int places) {
@@ -80,6 +60,10 @@ public class Loan extends Observable implements Cloneable, ItemWithId, Parcelabl
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public long getProjectId() {
+        return projectId;
     }
 
     @Override
@@ -133,22 +117,5 @@ public class Loan extends Observable implements Cloneable, ItemWithId, Parcelabl
     public void payAll() {
         this.amount = 0;
         this.mItemContainer.removeItem(this);
-    }
-
-    ///Below section is for Parcelable
-    ////////////////////////////////
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeLong(this.id);
-        dest.writeString(this.name);
-        dest.writeLong(this.amount);
-        dest.writeLong(this.loanDate);
-        dest.writeDouble(this.interestRate);
     }
 }

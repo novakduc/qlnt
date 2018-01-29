@@ -70,6 +70,7 @@ public class ProjectFinanceConfigFragment extends android.support.v4.app.Fragmen
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         projectId = getArguments().getLong(TEMP_PROJECT);
+        mLoanList = LoanList.getInstance(projectId);
 
         ProjectFinanceConfigViewModelFactory factory =
                 InjectorUtils.provideProjectFinanceConfigViewModelFactory(getActivity(), projectId);
@@ -85,14 +86,6 @@ public class ProjectFinanceConfigFragment extends android.support.v4.app.Fragmen
             }
         });
 
-        mViewModel.getLoanListLiveData().observe(this, new Observer<List<Loan>>() {
-            @Override
-            public void onChanged(@Nullable List<Loan> loans) {
-                if (loans != null) {
-                    mLoansAdapter.swapList(loans);
-                }
-            }
-        });
         setHasOptionsMenu(true);
     }
 
@@ -212,8 +205,6 @@ public class ProjectFinanceConfigFragment extends android.support.v4.app.Fragmen
         if (requestCode == LoansAdapter.LOAN_CREATION) {
             if (resultCode == Activity.RESULT_OK) {
                 //Update loan list
-                // TODO: 1/28/2018 update loan list
-                updateLoanList();
             }
         }
         if (requestCode == LoansAdapter.LOAN_EDIT_REQUEST_FROM_ADAPTER) {

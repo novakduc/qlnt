@@ -261,7 +261,7 @@ public class LoanDeclareFragment extends android.support.v4.app.Fragment {
                 }
                 //return valid loan
                 Intent returnIntent = new Intent();
-                //returnIntent.putExtra(RETURN_LOAN, mLoan);
+                //returnIntent.putExtra(RETURN_LOAN, mLoan.getId());
                 getActivity().setResult(Activity.RESULT_OK, returnIntent);
                 getActivity().finish();
             }
