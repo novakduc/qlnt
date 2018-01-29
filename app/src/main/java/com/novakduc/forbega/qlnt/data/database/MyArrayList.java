@@ -5,6 +5,7 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * Created by Nguyen Quoc Thanh on 1/5/2018.
@@ -43,6 +44,19 @@ public abstract class MyArrayList<E> extends ArrayList<E> implements ArrayListGs
             b = getIdList().add(itemWithId.getId());
         }
         return b && super.add(e);
+    }
+
+    @Override
+    public boolean addAll(Collection<? extends E> c) {
+        boolean b = true;
+        for (E e :
+                c) {
+            if (e instanceof ItemWithId) {
+                ItemWithId itemWithId = (ItemWithId) e;
+                b = b && getIdList().add(itemWithId.getId());
+            }
+        }
+        return b && super.addAll(c);
     }
 
     public long getTotalAmount() {
