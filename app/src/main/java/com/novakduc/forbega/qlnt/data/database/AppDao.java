@@ -42,7 +42,7 @@ public interface AppDao {
     Loan getLoanById(long id);
 
     //Get live data loan by id
-    @Query("SELECT * FROM loan WHERE id = :id")
+    @Query("SELECT * FROM loan WHERE id = :loanId")
     LiveData<Loan> getLiveDataLoanById(long loanId);
 
     //Get a project

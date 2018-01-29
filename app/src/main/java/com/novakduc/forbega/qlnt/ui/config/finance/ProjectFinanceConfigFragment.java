@@ -171,14 +171,8 @@ public class ProjectFinanceConfigFragment extends android.support.v4.app.Fragmen
         mLoansAdapter = new LoansAdapter(getActivity(), this);
         mRecyclerView.setAdapter(mLoansAdapter);
 
-        mViewModel.getLoanListLiveData().observe(this, new Observer<List<Loan>>() {
-            @Override
-            public void onChanged(@Nullable List<Loan> loans) {
-                if (loans != null) {
-                    mLoansAdapter.swapList(loans);
-                }
-            }
-        });
+        updateLoanList();
+
         return view;
     }
 
@@ -219,6 +213,7 @@ public class ProjectFinanceConfigFragment extends android.support.v4.app.Fragmen
             if (resultCode == Activity.RESULT_OK) {
                 //Update loan list
                 // TODO: 1/28/2018 update loan list
+                updateLoanList();
             }
         }
         if (requestCode == LoansAdapter.LOAN_EDIT_REQUEST_FROM_ADAPTER) {
@@ -228,6 +223,17 @@ public class ProjectFinanceConfigFragment extends android.support.v4.app.Fragmen
                 // TODO: 1/28/2018 update loan list
             }
         }
+    }
+
+    private void updateLoanList() {
+        mViewModel.getLoanListLiveData().observe(this, new Observer<List<Loan>>() {
+            @Override
+            public void onChanged(@Nullable List<Loan> loans) {
+                if (loans != null) {
+                    mLoansAdapter.swapList(loans);
+                }
+            }
+        });
     }
 
     @Override

@@ -139,7 +139,7 @@ public class Project implements Cloneable, ItemWithId {
         }
         //Clone loan list
         if (mLoanList != null) {
-            LoanList loanList = new LoanList(project.getId());
+            LoanList loanList = LoanList.getInstance(project.getId());
             for (Loan l :
                     mLoanList) {
                 loanList.add((Loan) l.clone());

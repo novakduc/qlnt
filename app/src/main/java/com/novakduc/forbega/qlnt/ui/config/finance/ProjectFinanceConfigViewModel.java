@@ -22,7 +22,6 @@ public class ProjectFinanceConfigViewModel extends ViewModel {
     public ProjectFinanceConfigViewModel(ProjectRepo projectRepo) {
         mProjectRepo = projectRepo;
         mProjectLiveData = projectRepo.getProject();
-        mLoanListLiveData = projectRepo.getLoanList();
     }
 
     public LiveData<Project> getProjectLiveData() {
@@ -30,6 +29,7 @@ public class ProjectFinanceConfigViewModel extends ViewModel {
     }
 
     public LiveData<List<Loan>> getLoanListLiveData() {
+        mLoanListLiveData = mProjectRepo.getLoanList();
         return mLoanListLiveData;
     }
 
