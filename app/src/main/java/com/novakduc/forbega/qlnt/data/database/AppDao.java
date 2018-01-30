@@ -84,8 +84,8 @@ public interface AppDao {
     UnitPrice getUnitPrice(long projectId);
 
     //Get a project loan list
-    @Query("SELECT * FROM loan_list WHERE projectId = :projectId")
-    LoanList getLoanList(long projectId);
+    @Query("SELECT * FROM loan WHERE projectId = :projectId")
+    List<Loan> getLoanList(long projectId);
 
     //Get a project room list
     @Query("SELECT * FROM room_list WHERE projectId = :projectId")
@@ -134,4 +134,8 @@ public interface AppDao {
     //Get all loan in project, return live data
     @Query("SELECT * FROM loan WHERE projectId = :projectId")
     LiveData<List<Loan>> getAllLoanInProject(long projectId);
+
+    //Get all invalid loan
+    @Query("SELECT * FROM loan WHERE amount = 0")
+    List<Loan> getInvalidLoans();
 }

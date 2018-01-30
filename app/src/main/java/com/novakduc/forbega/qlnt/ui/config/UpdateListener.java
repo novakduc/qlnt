@@ -1,6 +1,5 @@
 package com.novakduc.forbega.qlnt.ui.config;
 
-import com.novakduc.forbega.qlnt.data.database.LoanList;
 import com.novakduc.forbega.qlnt.data.database.UnitPrice;
 
 /**
@@ -9,8 +8,6 @@ import com.novakduc.forbega.qlnt.data.database.UnitPrice;
 
 public interface UpdateListener {
     void discardConfirmation(int messageId);
-
-    void updateFinance(long investment, LoanList loanLoanList);
 
     void updateUnitPrice(UnitPrice unitPrice);
 

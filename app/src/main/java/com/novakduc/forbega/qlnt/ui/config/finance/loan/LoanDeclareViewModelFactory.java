@@ -12,14 +12,16 @@ import com.novakduc.forbega.qlnt.data.ProjectRepo;
 
 public class LoanDeclareViewModelFactory extends ViewModelProvider.NewInstanceFactory {
     private ProjectRepo mProjectRepo;
+    private boolean isNew;
 
-    public LoanDeclareViewModelFactory(ProjectRepo projectRepo) {
+    public LoanDeclareViewModelFactory(ProjectRepo projectRepo, boolean isNew) {
         mProjectRepo = projectRepo;
+        this.isNew = isNew;
     }
 
     @NonNull
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-        return (T) new LoanDeclareFragmentViewModel(mProjectRepo);
+        return (T) new LoanDeclareFragmentViewModel(mProjectRepo, isNew);
     }
 }

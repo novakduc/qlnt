@@ -77,8 +77,9 @@ public class InjectorUtils {
     }
 
     @NonNull
-    public static LoanDeclareViewModelFactory provideLoanDeclareViewModelFactory(Context context, long projectId) {
+    public static LoanDeclareViewModelFactory provideLoanDeclareViewModelFactory(
+            Context context, long projectId, boolean isNew) {
         ProjectRepo projectRepo = provideProjectRepo(context, projectId);
-        return new LoanDeclareViewModelFactory(projectRepo);
+        return new LoanDeclareViewModelFactory(projectRepo, isNew);
     }
 }

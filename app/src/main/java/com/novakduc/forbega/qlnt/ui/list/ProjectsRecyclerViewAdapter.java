@@ -14,6 +14,8 @@ import android.widget.TextView;
 import com.novakduc.forbega.qlnt.R;
 import com.novakduc.forbega.qlnt.data.database.Project;
 import com.novakduc.forbega.qlnt.data.database.RoomList;
+import com.novakduc.forbega.qlnt.utilities.ConverterUtilities;
+import com.novakduc.forbega.qlnt.utilities.CurrencyUnit;
 
 import java.util.List;
 
@@ -99,9 +101,11 @@ public class ProjectsRecyclerViewAdapter
             holder.mRevenueProgressBar.setProgress(revenuePercentage);
         }
 
-        holder.mDeptTextView.setText(String.valueOf(totalLoanAmount));
+        holder.mDeptTextView.setText(String.valueOf(ConverterUtilities.currencyUnitConverter(
+                totalLoanAmount, CurrencyUnit.MIL_BASE, 3)));
 
-        holder.mRevenueTextView.setText(String.valueOf(project.getTotalIncome()));
+        holder.mRevenueTextView.setText(String.valueOf(ConverterUtilities.currencyUnitConverter(
+                project.getTotalIncome(), CurrencyUnit.MIL_BASE, 3)));
 
         holder.mDeleteButton.setOnClickListener(new View.OnClickListener() {
             @Override

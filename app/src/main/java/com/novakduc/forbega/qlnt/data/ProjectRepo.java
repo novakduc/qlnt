@@ -6,10 +6,8 @@ import android.arch.lifecycle.MutableLiveData;
 import com.novakduc.baselibrary.AppExecutors;
 import com.novakduc.forbega.qlnt.data.database.AppDao;
 import com.novakduc.forbega.qlnt.data.database.Loan;
-import com.novakduc.forbega.qlnt.data.database.LoanList;
 import com.novakduc.forbega.qlnt.data.database.Project;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -102,28 +100,31 @@ public class ProjectRepo {
         });
     }
 
-    public void addLoan(final Loan loan) {
+    public LiveData<Loan> getLoan(long loanId) {
+        return mAppDao.getLiveDataLoanById(loanId);
+    }
+
+    public void cleanLoanData() {
         mExecutors.diskIO().execute(new Runnable() {
             @Override
             public void run() {
-                mAppDao.updateLoan(loan);
-                LoanList loans = mAppDao.getLoanList(mProjectId);
-                if (loans == null) {
-                    loans = LoanList.getInstance(mProjectId);
-                    mAppDao.insert(loans);
+                List<Loan> loans = mAppDao.getInvalidLoans();
+                if (loans != null) {
+                    for (Loan l :
+                            loans) {
+                        mAppDao.removeLoan(l);
+                    }
                 }
-                ArrayList<Long> loanIdList = loans.getIdList();
-                for (long l :
-                        loanIdList) {
-                    if (loan.getId() == l) return;  //Already on loan list, no need to add.
-                }
-                loans.add(loan);
-                mAppDao.updateLoanList(loans);
             }
         });
     }
 
-    public LiveData<Loan> getLoan(long loanId) {
-        return mAppDao.getLiveDataLoanById(loanId);
+    public void addLoan(final Loan loan) {
+        mExecutors.diskIO().execute(new Runnable() {
+            @Override
+            public void run() {
+                mAppDao.insert(loan);
+            }
+        });
     }
 }

@@ -9,7 +9,6 @@ import com.novakduc.forbega.qlnt.data.database.AppDao;
 import com.novakduc.forbega.qlnt.data.database.Cost;
 import com.novakduc.forbega.qlnt.data.database.CostManager;
 import com.novakduc.forbega.qlnt.data.database.Loan;
-import com.novakduc.forbega.qlnt.data.database.LoanList;
 import com.novakduc.forbega.qlnt.data.database.Project;
 import com.novakduc.forbega.qlnt.data.database.RoomForRent;
 import com.novakduc.forbega.qlnt.data.database.RoomList;
@@ -82,19 +81,12 @@ public class QlntRepository {
     }
 
     private void deleteLoanList(long projectId) {
-        LoanList loans = mAppDao.getLoanList(projectId);
+        List<Loan> loans = mAppDao.getLoanList(projectId);
         if (loans != null) {
-            ArrayList<Long> idList = loans.getIdList();
-            if (idList != null) {
-                for (long loanId :
-                        idList) {
-                    Loan loan = mAppDao.getLoanById(loanId);
-                    if (loan != null) {
+            for (Loan loan :
+                    loans) {
                         mAppDao.removeLoan(loan);  //remove loan entity
-                    }
                 }
-            }
-            mAppDao.removeLoanList(loans);  //remove loan list entity
         }
     }
 

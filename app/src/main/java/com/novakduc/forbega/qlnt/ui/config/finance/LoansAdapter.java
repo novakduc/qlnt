@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import com.novakduc.forbega.qlnt.R;
 import com.novakduc.forbega.qlnt.data.database.Loan;
+import com.novakduc.forbega.qlnt.utilities.ConverterUtilities;
+import com.novakduc.forbega.qlnt.utilities.CurrencyUnit;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -50,7 +52,8 @@ public final class LoansAdapter extends RecyclerView.Adapter<LoansAdapter.ViewHo
         date.setTime(loan.getLoanDate());
         DateFormat format = SimpleDateFormat.getDateInstance();
         holder.mTextViewStartDate.setText(format.format(date));
-        holder.mTextViewLoanAmount.setText(String.valueOf(loan.getAmount()));
+        holder.mTextViewLoanAmount.setText(String.valueOf(ConverterUtilities.currencyUnitConverter(
+                loan.getAmount(), CurrencyUnit.MIL_BASE, 3)));
         holder.mTextViewInterestRate.setText(String.valueOf(loan.getInterestRate()));
         holder.mButtonDelete.setOnClickListener(new View.OnClickListener() {
             @Override

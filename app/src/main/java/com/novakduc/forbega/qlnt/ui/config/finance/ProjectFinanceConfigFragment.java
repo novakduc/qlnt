@@ -29,12 +29,13 @@ import android.widget.TextView;
 
 import com.novakduc.forbega.qlnt.R;
 import com.novakduc.forbega.qlnt.data.database.Loan;
-import com.novakduc.forbega.qlnt.data.database.LoanList;
 import com.novakduc.forbega.qlnt.data.database.Project;
 import com.novakduc.forbega.qlnt.ui.config.UpdateListener;
 import com.novakduc.forbega.qlnt.ui.config.finance.loan.LoanDeclareActivity;
 import com.novakduc.forbega.qlnt.ui.config.finance.loan.LoanDeclareFragment;
 import com.novakduc.forbega.qlnt.ui.config.unitprice.ProjectUnitPriceConfigFragment;
+import com.novakduc.forbega.qlnt.utilities.ConverterUtilities;
+import com.novakduc.forbega.qlnt.utilities.CurrencyUnit;
 import com.novakduc.forbega.qlnt.utilities.InjectorUtils;
 
 import java.util.List;
@@ -54,7 +55,7 @@ public class ProjectFinanceConfigFragment extends android.support.v4.app.Fragmen
     private long mAmount = -1;
     private TextInputLayout mLayoutAmount;
     private UpdateListener mCallBack;
-    private LoanList mLoanList;
+    //private LoanList mLoanList;
     private ProjectFinanceConfigViewModel mViewModel;
     private Project mProject;
 
@@ -70,7 +71,7 @@ public class ProjectFinanceConfigFragment extends android.support.v4.app.Fragmen
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         projectId = getArguments().getLong(TEMP_PROJECT);
-        mLoanList = LoanList.getInstance(projectId);
+        //mLoanList = LoanList.getInstance(projectId);
 
         ProjectFinanceConfigViewModelFactory factory =
                 InjectorUtils.provideProjectFinanceConfigViewModelFactory(getActivity(), projectId);
@@ -97,6 +98,8 @@ public class ProjectFinanceConfigFragment extends android.support.v4.app.Fragmen
         toolbar.setTitle(R.string.financeConfigTitle);
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         activity.setSupportActionBar(toolbar);
+
+        // TODO: 1/30/2018 when rotate, ui is not consistency
 
         final ActionBar actionBar = activity.getSupportActionBar();
         if (actionBar != null) {
@@ -221,6 +224,13 @@ public class ProjectFinanceConfigFragment extends android.support.v4.app.Fragmen
             @Override
             public void onChanged(@Nullable List<Loan> loans) {
                 if (loans != null) {
+                    long totalLoanAmount = 0;
+                    for (Loan l :
+                            loans) {
+                        totalLoanAmount += l.getAmount();
+                    }
+                    mTotalLoanTextView.setText(String.valueOf(ConverterUtilities.currencyUnitConverter(
+                            totalLoanAmount, CurrencyUnit.MIL_BASE, 3)));
                     mLoansAdapter.swapList(loans);
                 }
             }
@@ -235,6 +245,7 @@ public class ProjectFinanceConfigFragment extends android.support.v4.app.Fragmen
     @Override
     public void editLoan(long loanId) {
         Intent intent = new Intent(getActivity(), LoanDeclareActivity.class);
+        intent.putExtra(LoanDeclareFragment.PROJECT_ID, mProject.getId());
         intent.putExtra(LoanDeclareFragment.LOAN_TO_EDIT, loanId);
         startActivityForResult(intent, LoansAdapter.LOAN_EDIT_REQUEST_FROM_ADAPTER);
     }

@@ -81,10 +81,6 @@ public class Project implements Cloneable, ItemWithId {
         mRoomForRentList = list;
     }
 
-    public double getInvestment(CurrencyUnit unit) {
-        return Loan.round((double) (investmentAmount) / unit.getUnit(), 3);
-    }
-
     //Add cost
     public boolean addCost(long amount, long date, CostType type, boolean repeatable) {
         return mCostManager.add(new Cost(amount, date, type, repeatable));

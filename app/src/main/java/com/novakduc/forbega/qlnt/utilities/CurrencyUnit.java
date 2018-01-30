@@ -1,4 +1,4 @@
-package com.novakduc.forbega.qlnt.data.database;
+package com.novakduc.forbega.qlnt.utilities;
 
 /**
  * Created by Nguyen Quoc Thanh on 12/21/2017.

@@ -74,19 +74,19 @@ public class LoanDeclareFragment extends android.support.v4.app.Fragment {
         final Intent intent = getActivity().getIntent();
         long projectId = intent.getLongExtra(PROJECT_ID, -1);
 
-        LoanDeclareViewModelFactory factory =
-                InjectorUtils.provideLoanDeclareViewModelFactory(getActivity(), projectId);
-
-        mViewModel = ViewModelProviders.of(this, factory).get(LoanDeclareFragmentViewModel.class);
-
         isNew = intent.getBooleanExtra(TYPE_KEY, false);
         if (!isNew) {
             //Not create new loan, edit existed loan
-            mLoanId = intent.getLongExtra(LOAN_ID_KEY, -1);
+            mLoanId = intent.getLongExtra(LOAN_TO_EDIT, -1);
             if (mLoanId == -1) {
                 isNew = true;
             }
         }
+
+        LoanDeclareViewModelFactory factory =
+                InjectorUtils.provideLoanDeclareViewModelFactory(getActivity(), projectId, isNew);
+
+        mViewModel = ViewModelProviders.of(this, factory).get(LoanDeclareFragmentViewModel.class);
 
         setHasOptionsMenu(true);
     }

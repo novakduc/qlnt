@@ -13,12 +13,12 @@ import com.novakduc.forbega.qlnt.data.database.Loan;
 public class LoanDeclareFragmentViewModel extends ViewModel {
     private ProjectRepo mProjectRepo;
     private LiveData<Loan> mLoanLiveData;
-    private boolean isConfirmed;
+    private boolean isNew;
 
-    public LoanDeclareFragmentViewModel(ProjectRepo projectRepo) {
+    public LoanDeclareFragmentViewModel(ProjectRepo projectRepo, boolean isNew) {
         mProjectRepo = projectRepo;
         //mLoanLiveData = mProjectRepo.createTempLoan();
-        isConfirmed = false;
+        this.isNew = isNew;
     }
 
     public LiveData<Loan> getLoanLiveData() {
@@ -33,13 +33,13 @@ public class LoanDeclareFragmentViewModel extends ViewModel {
 
     public void updateLoan(Loan loan) {
         mProjectRepo.updateLoan(loan);
-        isConfirmed = true;
+        isNew = false;
     }
 
     @Override
     protected void onCleared() {
-        if (!isConfirmed) {
-            mProjectRepo.deleteLoan(mLoanLiveData.getValue().getId());
+        if (isNew) {
+            mProjectRepo.cleanLoanData();
         }
         super.onCleared();
     }

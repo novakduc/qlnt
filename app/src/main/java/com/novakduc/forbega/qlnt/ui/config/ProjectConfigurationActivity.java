@@ -6,16 +6,12 @@ import android.util.Log;
 
 import com.novakduc.baselibrary.SimpleFragmentActivity;
 import com.novakduc.forbega.qlnt.R;
-import com.novakduc.forbega.qlnt.data.database.Loan;
-import com.novakduc.forbega.qlnt.data.database.LoanList;
-import com.novakduc.forbega.qlnt.data.database.Project;
-import com.novakduc.forbega.qlnt.data.database.UnitPrice;
 import com.novakduc.forbega.qlnt.ui.ConfirmationDialogFragment;
 import com.novakduc.forbega.qlnt.ui.config.base.ProjectBaseConfigFragment;
 
 public class ProjectConfigurationActivity extends SimpleFragmentActivity
         implements UpdateListener, ConfirmationDialogFragment.ConfirmListener {
-    private Project mTempProject;
+    private long mTempProjectId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,27 +49,10 @@ public class ProjectConfigurationActivity extends SimpleFragmentActivity
     }
 
     @Override
-    public void updateFinance(long investment, LoanList loanLoanList) {
-        mTempProject.setInvestmentAmount(investment);
-
-        mTempProject.getLoanList().clear();
-
-        for (Loan loan :
-                loanLoanList) {
-            mTempProject.addLoan(loan);
-        }
-    }
-
-    @Override
-    public void updateUnitPrice(UnitPrice unitPrice) {
-        mTempProject.setUnitPrice(unitPrice);
-    }
-
-    @Override
     public void addProject() {
         android.support.v4.app.FragmentManager manager = getSupportFragmentManager();
         manager.beginTransaction().replace(R.id.fragmentContainer,
-                ProjectCreateConfirmationFragment.newInstance(mTempProject)).addToBackStack(null).commit();
+                ProjectCreateConfirmationFragment.newInstance(mTempProjectId)).addToBackStack(null).commit();
     }
 
     @Override
