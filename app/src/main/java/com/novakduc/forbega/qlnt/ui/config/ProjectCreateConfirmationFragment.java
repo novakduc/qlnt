@@ -78,7 +78,9 @@ public class ProjectCreateConfirmationFragment extends android.support.v4.app.Fr
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         long projectId = getArguments().getLong(TEMP_PROJECT_ID);
-        mTempUnitPrice = mTempProject.getUnitPrice();
+
+        // TODO: 1/30/2018 create view models
+
         setHasOptionsMenu(true);
     }
 
