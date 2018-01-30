@@ -138,4 +138,12 @@ public interface AppDao {
     //Get all invalid loan
     @Query("SELECT * FROM loan WHERE amount = 0")
     List<Loan> getInvalidLoans();
+
+    //Get project unit price, return live data
+    @Query("SELECT * FROM unit_price WHERE id = :projectId")
+    LiveData<UnitPrice> getUnitPriceLiveData(long projectId);
+
+    //Update unit price
+    @Update
+    void updateUnitPrice(UnitPrice unitPrice);
 }

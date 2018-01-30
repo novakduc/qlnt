@@ -45,7 +45,7 @@ import java.util.Calendar;
 
 public class ProjectCreateConfirmationFragment extends android.support.v4.app.Fragment
         implements LoanAdapterHandler {
-    public static final String TEMP_PROJECT = "com.novakduc.forbega.qlnt.tempproject";
+    public static final String TEMP_PROJECT_ID = "com.novakduc.forbega.qlnt.tempproject";
     RecyclerView mRecyclerView;
     LoansAdapter mLoansAdapter;
     TextView mTotalLoanTextView;
@@ -62,9 +62,9 @@ public class ProjectCreateConfirmationFragment extends android.support.v4.app.Fr
             mInternetLayout, mTvLayout;
     private UpdateListener mCallBack;
 
-    public static ProjectCreateConfirmationFragment newInstance(Project tempProject) {
+    public static ProjectCreateConfirmationFragment newInstance(long projectId) {
         Bundle bundle = new Bundle();
-        //bundle.putParcelable(TEMP_PROJECT, tempProject);
+        bundle.putLong(TEMP_PROJECT_ID, projectId);
         ProjectCreateConfirmationFragment fragment = new ProjectCreateConfirmationFragment();
         fragment.setArguments(bundle);
         return fragment;
@@ -77,7 +77,7 @@ public class ProjectCreateConfirmationFragment extends android.support.v4.app.Fr
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mTempProject = getArguments().getParcelable(TEMP_PROJECT);
+        long projectId = getArguments().getLong(TEMP_PROJECT_ID);
         mTempUnitPrice = mTempProject.getUnitPrice();
         setHasOptionsMenu(true);
     }

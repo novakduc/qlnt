@@ -74,6 +74,8 @@ public class ProjectBaseConfigFragment extends android.support.v4.app.Fragment {
         // finally change the color
         window.setStatusBarColor(getResources().getColor(R.color.primaryDarkColor));
 
+        mCallback = (UpdateListener) getActivity();
+
         ProjectBaseViewModelFactory factory =
                 InjectorUtils.provideProjectBaseViewModelFactory(getActivity());
         mViewModel = ViewModelProviders.of(this, factory).get(ProjectBaseFragmentViewModel.class);
@@ -84,6 +86,7 @@ public class ProjectBaseConfigFragment extends android.support.v4.app.Fragment {
                     //update views when project changes
                     Log.d(LOG_TAG, "Project ID: " + String.valueOf(project.getId()));
                     mProject = project;
+                    mCallback.updateProjectId(mProject.getId());
                 }
             }
         });
@@ -103,7 +106,7 @@ public class ProjectBaseConfigFragment extends android.support.v4.app.Fragment {
             actionBar.setHomeAsUpIndicator(R.drawable.ic_view_list);
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-        mCallback = (UpdateListener) getActivity();
+
         mLayoutName = view.findViewById(R.id.txtLayoutName);
         mEditTextName = view.findViewById(R.id.name);
         mEditTextName.addTextChangedListener(new TextWatcher() {

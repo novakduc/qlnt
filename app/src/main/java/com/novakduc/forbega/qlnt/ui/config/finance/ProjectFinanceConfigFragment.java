@@ -1,7 +1,6 @@
 package com.novakduc.forbega.qlnt.ui.config.finance;
 
 import android.app.Activity;
-import android.app.FragmentManager;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
@@ -193,9 +192,10 @@ public class ProjectFinanceConfigFragment extends android.support.v4.app.Fragmen
         if (mAmount != -1) {
             mProject.setInvestmentAmount(mAmount);
             mViewModel.updateProject(mProject);
-            FragmentManager manager = getActivity().getFragmentManager();
+            android.support.v4.app.FragmentManager manager = getActivity().getSupportFragmentManager();
             manager.beginTransaction().replace(R.id.fragmentContainer,
-                    ProjectUnitPriceConfigFragment.newInstance()).addToBackStack(null).commit();
+                    ProjectUnitPriceConfigFragment.newInstance(mProject.getProjectId()))
+                    .addToBackStack(null).commit();
         } else {
             mLayoutAmount.setError(getResources().getString(R.string.invesment_amount_error));
             mLayoutAmount.setErrorEnabled(true);

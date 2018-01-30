@@ -7,6 +7,7 @@ import com.novakduc.baselibrary.AppExecutors;
 import com.novakduc.forbega.qlnt.data.database.AppDao;
 import com.novakduc.forbega.qlnt.data.database.Loan;
 import com.novakduc.forbega.qlnt.data.database.Project;
+import com.novakduc.forbega.qlnt.data.database.UnitPrice;
 
 import java.util.List;
 
@@ -124,6 +125,19 @@ public class ProjectRepo {
             @Override
             public void run() {
                 mAppDao.insert(loan);
+            }
+        });
+    }
+
+    public LiveData<UnitPrice> getUnitPrice() {
+        return mAppDao.getUnitPriceLiveData(mProjectId);
+    }
+
+    public void updateUnitPrice(final UnitPrice unitPrice) {
+        mExecutors.diskIO().execute(new Runnable() {
+            @Override
+            public void run() {
+                mAppDao.updateUnitPrice(unitPrice);
             }
         });
     }

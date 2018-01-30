@@ -1,6 +1,7 @@
 package com.novakduc.forbega.qlnt.ui.config.unitprice;
 
-import android.app.Fragment;
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -19,25 +20,27 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 
 import com.novakduc.forbega.qlnt.R;
-import com.novakduc.forbega.qlnt.data.database.Project;
 import com.novakduc.forbega.qlnt.data.database.UnitPrice;
 import com.novakduc.forbega.qlnt.ui.config.UpdateListener;
+import com.novakduc.forbega.qlnt.utilities.InjectorUtils;
 
 /**
  * Created by n.thanh on 10/21/2016.
  */
 
-public class ProjectUnitPriceConfigFragment extends Fragment {
-    public static final String TEMP_PROJECT = "com.novakduc.forbega.qlnt.tempproject";
+public class ProjectUnitPriceConfigFragment extends android.support.v4.app.Fragment {
+    public static final String TEMP_PROJECT_ID = "com.novakduc.forbega.qlnt.tempproject";
 
     private TextInputLayout mElectricityLayout, mWaterLayout, mSecurityLayout, mTrashLayout,
             mInternetLayout, mTvLayout;
     private UpdateListener mCallBack;
+    private long mProjectId;
     private UnitPrice mUnitPrice;
+    private UnitPriceConfigFragmentViewModel mViewModel;
 
-    public static ProjectUnitPriceConfigFragment newInstance(Project tempProject) {
+    public static ProjectUnitPriceConfigFragment newInstance(long projectId) {
         Bundle bundle = new Bundle();
-        //bundle.putParcelable(TEMP_PROJECT, tempProject);
+        bundle.putLong(TEMP_PROJECT_ID, projectId);
         ProjectUnitPriceConfigFragment fragment = new ProjectUnitPriceConfigFragment();
         fragment.setArguments(bundle);
         return fragment;
@@ -54,7 +57,13 @@ public class ProjectUnitPriceConfigFragment extends Fragment {
             //mUnitPrice = new UnitPrice();
         }
         setHasOptionsMenu(true);
-        //mProject = (Project) getArguments().getParcelable(TEMP_PROJECT);
+        mProjectId = getArguments().getLong(TEMP_PROJECT_ID);
+        mCallBack = (UpdateListener) getActivity();
+
+        UnitPriceConfigViewModelFactory factory =
+                InjectorUtils.provideUnitPriceConfigViewModelFactory(getActivity(), mProjectId);
+
+        mViewModel = ViewModelProviders.of(this, factory).get(UnitPriceConfigFragmentViewModel.class);
     }
 
     @Nullable
@@ -62,7 +71,6 @@ public class ProjectUnitPriceConfigFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_project_unitprice_config, container, false);
 
-        mCallBack = (UpdateListener) getActivity();
         Toolbar toolbar = view.findViewById(R.id.toolbar);
         toolbar.setTitle(getResources().getString(R.string.unitPrice));
         AppCompatActivity activity = (AppCompatActivity) getActivity();
@@ -279,6 +287,15 @@ public class ProjectUnitPriceConfigFragment extends Fragment {
                 nextAction();   //to project creation confirmation
             }
         });
+
+        mViewModel.getUnitPriceLiveData().observe(this, new Observer<UnitPrice>() {
+            @Override
+            public void onChanged(@Nullable UnitPrice unitPrice) {
+                if (unitPrice != null) {
+                    mUnitPrice = unitPrice;
+                }
+            }
+        });
         return view;
     }
 
@@ -322,8 +339,7 @@ public class ProjectUnitPriceConfigFragment extends Fragment {
             return;
         }
 
-        // TODO: 12/19/2017 load project confirmation fragment in activity instead
-        mCallBack.updateUnitPrice(mUnitPrice);
+        mViewModel.updateUnitPrice(mUnitPrice);
         mCallBack.addProject();
     }
 

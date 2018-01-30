@@ -23,9 +23,11 @@ import com.novakduc.baselibrary.AppExecutors;
 import com.novakduc.forbega.qlnt.data.ProjectRepo;
 import com.novakduc.forbega.qlnt.data.QlntRepository;
 import com.novakduc.forbega.qlnt.data.database.AppDatabase;
+import com.novakduc.forbega.qlnt.ui.config.ProjectConfigViewModelFactory;
 import com.novakduc.forbega.qlnt.ui.config.base.ProjectBaseViewModelFactory;
 import com.novakduc.forbega.qlnt.ui.config.finance.ProjectFinanceConfigViewModelFactory;
 import com.novakduc.forbega.qlnt.ui.config.finance.loan.LoanDeclareViewModelFactory;
+import com.novakduc.forbega.qlnt.ui.config.unitprice.UnitPriceConfigViewModelFactory;
 import com.novakduc.forbega.qlnt.ui.list.ProjectListViewModelFactory;
 
 /**
@@ -81,5 +83,18 @@ public class InjectorUtils {
             Context context, long projectId, boolean isNew) {
         ProjectRepo projectRepo = provideProjectRepo(context, projectId);
         return new LoanDeclareViewModelFactory(projectRepo, isNew);
+    }
+
+    @NonNull
+    public static ProjectConfigViewModelFactory provideProjectConfigViewModelFactory(Context context) {
+        QlntRepository repository = provideRepository(context);
+        return new ProjectConfigViewModelFactory(repository);
+    }
+
+    @NonNull
+    public static UnitPriceConfigViewModelFactory provideUnitPriceConfigViewModelFactory(
+            Context context, long projectId) {
+        ProjectRepo projectRepo = provideProjectRepo(context, projectId);
+        return new UnitPriceConfigViewModelFactory(projectRepo);
     }
 }
