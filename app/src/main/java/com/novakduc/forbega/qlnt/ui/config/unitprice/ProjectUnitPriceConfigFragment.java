@@ -84,6 +84,10 @@ public class ProjectUnitPriceConfigFragment extends android.support.v4.app.Fragm
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
+        if (mUnitPrice == null) {
+            mUnitPrice = UnitPrice.getInstance(mProjectId);
+        }
+
         mElectricityLayout = view.findViewById(R.id.txtLayoutElectricity);
         mEditTextElecticity = view.findViewById(R.id.electricity);
 

@@ -146,4 +146,7 @@ public interface AppDao {
     //Update unit price
     @Update
     void updateUnitPrice(UnitPrice unitPrice);
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void insert(UnitPrice unitPrice);
 }

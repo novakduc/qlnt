@@ -59,6 +59,7 @@ public class ProjectCreateConfirmationFragment extends android.support.v4.app.Fr
     LoansAdapter mLoansAdapter;
     TextView mTotalLoanTextView;
     private Project mTempProject;
+    private long mProjectId;
     private UnitPrice mTempUnitPrice;
     private EditText mEditTextAddress;
     private EditText mEditTextName;
@@ -68,8 +69,12 @@ public class ProjectCreateConfirmationFragment extends android.support.v4.app.Fr
     private EditText mEditTextDuration;
     private boolean mError = false;
     private TextInputLayout mLayoutName, mLayoutAddress, mLayoutDuration;
+    private long mStartDate;
+    private String mName, mAddress;
+    private int mDuration = 10;
+    private long mAmount = -1;
     private TextInputLayout mElectricityLayout, mWaterLayout, mSecurityLayout, mTrashLayout,
-            mInternetLayout, mTvLayout;
+            mInternetLayout, mTvLayout, mLayoutAmount;
     private EditText mEditTextElecticity, mEditTextWater, mEditTextSecurity, mEditTextTrash,
             mEditTextInternet, mEditTextTv;
     private UpdateListener mCallBack;
@@ -92,13 +97,13 @@ public class ProjectCreateConfirmationFragment extends android.support.v4.app.Fr
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        long projectId = getArguments().getLong(TEMP_PROJECT_ID);
+        mProjectId = getArguments().getLong(TEMP_PROJECT_ID);
         mCallBack = (UpdateListener) getActivity();
 
         ProjectFinanceConfigViewModelFactory financeConfigViewModelFactory =
-                InjectorUtils.provideProjectFinanceConfigViewModelFactory(getActivity(), projectId);
+                InjectorUtils.provideProjectFinanceConfigViewModelFactory(getActivity(), mProjectId);
         UnitPriceConfigViewModelFactory unitPriceConfigViewModelFactory =
-                InjectorUtils.provideUnitPriceConfigViewModelFactory(getActivity(), projectId);
+                InjectorUtils.provideUnitPriceConfigViewModelFactory(getActivity(), mProjectId);
 
         mFinanceConfigViewModel = ViewModelProviders.of(this,
                 financeConfigViewModelFactory).get(ProjectFinanceConfigViewModel.class);
@@ -148,7 +153,7 @@ public class ProjectCreateConfirmationFragment extends android.support.v4.app.Fr
                 } else {
                     mError = false;
                     mLayoutName.setErrorEnabled(false);
-                    mTempProject.setName(editable.toString());
+                    mName = editable.toString();
                 }
             }
         });
@@ -191,7 +196,7 @@ public class ProjectCreateConfirmationFragment extends android.support.v4.app.Fr
                 } else {
                     mError = false;
                     mLayoutAddress.setErrorEnabled(false);
-                    mTempProject.setAddress(editable.toString());
+                    mAddress = editable.toString();
                 }
             }
         });
@@ -234,7 +239,7 @@ public class ProjectCreateConfirmationFragment extends android.support.v4.app.Fr
                         throw new NumberFormatException();
                     } else {
                         mLayoutDuration.setErrorEnabled(false);
-                        mTempProject.setDuration(duration);
+                        mDuration = duration;
                         mEditTextEndDate.setText(ConverterUtilities.calendarToString(mTempProject.getEndDate()));
                     }
                 } catch (NumberFormatException e) {
@@ -256,8 +261,37 @@ public class ProjectCreateConfirmationFragment extends android.support.v4.app.Fr
         mEditTextEndDate = view.findViewById(R.id.editTextEndDate);
         mEditTextEndDate.setFocusableInTouchMode(false);
 
+        mLayoutAmount = view.findViewById(R.id.txtLayoutInvestment);
         mEditTextInvestmentAmount = view.findViewById(R.id.investmentAmount);
         mEditTextInvestmentAmount.setFocusableInTouchMode(false);
+
+        mEditTextInvestmentAmount.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                try {
+                    mAmount = Long.valueOf(editable.toString());
+                    if (mAmount < 0) {
+                        throw new NumberFormatException();
+                    } else {
+                        mLayoutAmount.setErrorEnabled(false);
+                    }
+                } catch (NumberFormatException e) {
+                    mLayoutAmount.setError(getString(R.string.invesment_amount_error));
+                    mLayoutAmount.setErrorEnabled(true);
+                    mAmount = -1;
+                }
+            }
+        });
 
         Button buttonAddLoan = view.findViewById(R.id.btAddLoan);
         buttonAddLoan.setOnClickListener(new View.OnClickListener() {
@@ -278,6 +312,12 @@ public class ProjectCreateConfirmationFragment extends android.support.v4.app.Fr
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setAdapter(mLoansAdapter);
+
+        //Unit price section
+        //////////////////////////////////////////////////////////
+        if (mTempUnitPrice == null) {
+            mTempUnitPrice = UnitPrice.getInstance(mProjectId);
+        }
 
         mElectricityLayout = view.findViewById(R.id.txtLayoutElectricity);
         mEditTextElecticity = view.findViewById(R.id.electricity);
@@ -301,7 +341,7 @@ public class ProjectCreateConfirmationFragment extends android.support.v4.app.Fr
                     if (temp < 0) {
                         throw new NumberFormatException();
                     } else {
-                        mTempProject.getUnitPrice().setElectricity(temp);
+                        mTempUnitPrice.setElectricity(temp);
                         mElectricityLayout.setErrorEnabled(false);
                         mError = false;
                     }
@@ -334,7 +374,7 @@ public class ProjectCreateConfirmationFragment extends android.support.v4.app.Fr
                     if (temp < 0) {
                         throw new NumberFormatException();
                     } else {
-                        mTempProject.getUnitPrice().setWater(temp);
+                        mTempUnitPrice.setWater(temp);
                         mWaterLayout.setErrorEnabled(false);
                         mError = false;
                     }
@@ -367,7 +407,7 @@ public class ProjectCreateConfirmationFragment extends android.support.v4.app.Fr
                     if (temp < 0) {
                         throw new NumberFormatException();
                     } else {
-                        mTempProject.getUnitPrice().setInternet(temp);
+                        mTempUnitPrice.setInternet(temp);
                         mInternetLayout.setErrorEnabled(false);
                         mError = false;
                     }
@@ -401,7 +441,7 @@ public class ProjectCreateConfirmationFragment extends android.support.v4.app.Fr
                     if (temp < 0) {
                         throw new NumberFormatException();
                     } else {
-                        mTempProject.getUnitPrice().setSecurity(temp);
+                        mTempUnitPrice.setSecurity(temp);
                         mSecurityLayout.setErrorEnabled(false);
                         mError = false;
                     }
@@ -434,7 +474,7 @@ public class ProjectCreateConfirmationFragment extends android.support.v4.app.Fr
                     if (temp < 0) {
                         throw new NumberFormatException();
                     } else {
-                        mTempProject.getUnitPrice().setTrashCollection(temp);
+                        mTempUnitPrice.setTrashCollection(temp);
                         mTrashLayout.setErrorEnabled(false);
                         mError = false;
                     }
@@ -468,7 +508,7 @@ public class ProjectCreateConfirmationFragment extends android.support.v4.app.Fr
                     if (temp < 0) {
                         throw new NumberFormatException();
                     } else {
-                        mTempProject.getUnitPrice().setTv(temp);
+                        mTempUnitPrice.setTv(temp);
                         mTvLayout.setErrorEnabled(false);
                         mError = false;
                     }
@@ -529,14 +569,12 @@ public class ProjectCreateConfirmationFragment extends android.support.v4.app.Fr
     }
 
     private void bindUnitPriceToUi() {
-        mTempProject.setUnitPrice(mTempUnitPrice);
-
-        mEditTextElecticity.setText(String.valueOf(mTempProject.getUnitPrice().getElectricity()));
-        mEditTextWater.setText(String.valueOf(mTempProject.getUnitPrice().getWater()));
-        mEditTextInternet.setText(String.valueOf(mTempProject.getUnitPrice().getInternet()));
-        mEditTextSecurity.setText(String.valueOf(mTempProject.getUnitPrice().getSecurity()));
-        mEditTextTrash.setText(String.valueOf(mTempProject.getUnitPrice().getTrashCollection()));
-        mEditTextTv.setText(String.valueOf(mTempProject.getUnitPrice().getTv()));
+        mEditTextElecticity.setText(String.valueOf(mTempUnitPrice.getElectricity()));
+        mEditTextWater.setText(String.valueOf(mTempUnitPrice.getWater()));
+        mEditTextInternet.setText(String.valueOf(mTempUnitPrice.getInternet()));
+        mEditTextSecurity.setText(String.valueOf(mTempUnitPrice.getSecurity()));
+        mEditTextTrash.setText(String.valueOf(mTempUnitPrice.getTrashCollection()));
+        mEditTextTv.setText(String.valueOf(mTempUnitPrice.getTv()));
     }
 
     private void bindLoansToUi(LoanList loans) {

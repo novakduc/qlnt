@@ -130,6 +130,15 @@ public class ProjectRepo {
     }
 
     public LiveData<UnitPrice> getUnitPrice() {
+        mExecutors.diskIO().execute(new Runnable() {
+            @Override
+            public void run() {
+                UnitPrice unitPrice = mAppDao.getUnitPrice(mProjectId);
+                if (unitPrice == null) {
+                    mAppDao.insert(UnitPrice.getInstance(mProjectId));
+                }
+            }
+        });
         return mAppDao.getUnitPriceLiveData(mProjectId);
     }
 

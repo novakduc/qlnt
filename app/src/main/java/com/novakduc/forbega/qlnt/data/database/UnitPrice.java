@@ -3,8 +3,6 @@ package com.novakduc.forbega.qlnt.data.database;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
-import android.os.Parcel;
-import android.os.Parcelable;
 
 import java.util.Calendar;
 
@@ -12,19 +10,7 @@ import java.util.Calendar;
  * Created by n.thanh on 9/21/2016.
  */
 @Entity(tableName = "unit_price")
-public class UnitPrice implements Cloneable, Parcelable {
-
-    public static final Parcelable.Creator<UnitPrice> CREATOR = new Parcelable.Creator<UnitPrice>() {
-        @Override
-        public UnitPrice createFromParcel(Parcel source) {
-            return new UnitPrice(source);
-        }
-
-        @Override
-        public UnitPrice[] newArray(int size) {
-            return new UnitPrice[size];
-        }
-    };
+public class UnitPrice implements Cloneable {
     @PrimaryKey
     private long id;
     private long electricity;
@@ -47,7 +33,7 @@ public class UnitPrice implements Cloneable, Parcelable {
     }
 
     @Ignore
-    public UnitPrice(long projectId) {
+    private UnitPrice(long projectId) {
         this.id = projectId;
     }
 
@@ -56,15 +42,8 @@ public class UnitPrice implements Cloneable, Parcelable {
         //Prevent init empty object
     }
 
-    @Ignore
-    protected UnitPrice(Parcel in) {
-        this.id = in.readLong();
-        this.electricity = in.readLong();
-        this.water = in.readLong();
-        this.tv = in.readLong();
-        this.trashCollection = in.readLong();
-        this.internet = in.readLong();
-        this.security = in.readLong();
+    public static UnitPrice getInstance(long projectId) {
+        return new UnitPrice(projectId);
     }
 
     //Getter and setter section
@@ -148,21 +127,5 @@ public class UnitPrice implements Cloneable, Parcelable {
         UnitPrice unitPrice = (UnitPrice) super.clone();
         unitPrice.id = Calendar.getInstance().getTimeInMillis();
         return unitPrice;
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeLong(this.id);
-        dest.writeLong(this.electricity);
-        dest.writeLong(this.water);
-        dest.writeLong(this.tv);
-        dest.writeLong(this.trashCollection);
-        dest.writeLong(this.internet);
-        dest.writeLong(this.security);
     }
 }

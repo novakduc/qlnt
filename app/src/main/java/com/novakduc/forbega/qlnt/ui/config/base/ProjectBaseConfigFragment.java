@@ -42,7 +42,6 @@ public class ProjectBaseConfigFragment extends android.support.v4.app.Fragment {
     public static final String TEMP_PROJECT = "com.novakduc.forbega.qlnt.tempproject";
     public static final String FRAGMENT_TAG = "FINANCE_CONFIG_TAG";
     private static final String LOG_TAG = ProjectBaseConfigFragment.class.getSimpleName();
-    int mDuration = 10;
     private EditText mEditTextAddress;
     private EditText mEditTextName;
     private EditText mEditTextStartDate;
@@ -50,6 +49,7 @@ public class ProjectBaseConfigFragment extends android.support.v4.app.Fragment {
     private EditText mEditTextDuration;
     private long mStartDate;
     private String mName, mAddress;
+    private int mDuration = 10;
     private TextInputLayout mLayoutName, mLayoutAddress, mLayoutDuration;
     private UpdateListener mCallback;
     private ProjectBaseFragmentViewModel mViewModel;
