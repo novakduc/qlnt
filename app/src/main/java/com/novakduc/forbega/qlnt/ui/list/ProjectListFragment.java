@@ -24,6 +24,7 @@ import com.novakduc.forbega.qlnt.R;
 import com.novakduc.forbega.qlnt.data.database.Project;
 import com.novakduc.forbega.qlnt.ui.ConfirmationDialogFragment;
 import com.novakduc.forbega.qlnt.ui.config.ProjectConfigurationActivity;
+import com.novakduc.forbega.qlnt.ui.config.ProjectEditFragment;
 import com.novakduc.forbega.qlnt.utilities.InjectorUtils;
 
 import java.util.ArrayList;
@@ -158,6 +159,8 @@ public class ProjectListFragment extends android.support.v4.app.Fragment
 
     @Override
     public void onEditAction(long projectId) {
-        // TODO: 1/15/2018
+        Intent intent = new Intent();
+        intent.putExtra(ProjectEditFragment.TEMP_PROJECT_ID, projectId);
+        startActivity(intent);
     }
 }

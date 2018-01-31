@@ -69,4 +69,5 @@
     <string name="millionShort">mil</string>
     <string name="projectCopyError">Error on copying project</string>
     <string name="delete_project_confirmataion">Delete project?</string>
+    <string name="annouce_project_saving">Saving project</string>
 </resources>

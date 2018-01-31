@@ -7,9 +7,9 @@ package com.novakduc.forbega.qlnt.ui.config;
 public interface UpdateListener {
     void discardConfirmation(int messageId);
 
-    void addProject();
-
     void updateProjectId(long projectId);
 
     void finalCheck();
+
+    void saveProject();
 }

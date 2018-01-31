@@ -52,7 +52,7 @@ import java.util.List;
  * Created by n.thanh on 10/21/2016.
  */
 
-public class ProjectCreateConfirmationFragment extends android.support.v4.app.Fragment
+public class ProjectEditFragment extends android.support.v4.app.Fragment
         implements LoanAdapterHandler {
     public static final String TEMP_PROJECT_ID = "com.novakduc.forbega.qlnt.tempproject";
     RecyclerView mRecyclerView;
@@ -82,16 +82,16 @@ public class ProjectCreateConfirmationFragment extends android.support.v4.app.Fr
     private ProjectFinanceConfigViewModel mFinanceConfigViewModel;
     private UnitPriceConfigFragmentViewModel mUnitPriceConfigFragmentViewModel;
 
-    public static ProjectCreateConfirmationFragment newInstance(long projectId) {
+    public static ProjectEditFragment newInstance(long projectId) {
         Bundle bundle = new Bundle();
         bundle.putLong(TEMP_PROJECT_ID, projectId);
-        ProjectCreateConfirmationFragment fragment = new ProjectCreateConfirmationFragment();
+        ProjectEditFragment fragment = new ProjectEditFragment();
         fragment.setArguments(bundle);
         return fragment;
     }
 
-    public static ProjectCreateConfirmationFragment newInstance() {
-        return new ProjectCreateConfirmationFragment();
+    public static ProjectEditFragment newInstance() {
+        return new ProjectEditFragment();
     }
 
     @Override
@@ -262,6 +262,7 @@ public class ProjectCreateConfirmationFragment extends android.support.v4.app.Fr
         mEditTextEndDate.setFocusableInTouchMode(false);
 
         mLayoutAmount = view.findViewById(R.id.txtLayoutInvestment);
+        mLayoutAmount.setErrorEnabled(false);
         mEditTextInvestmentAmount = view.findViewById(R.id.investmentAmount);
         mEditTextInvestmentAmount.setFocusableInTouchMode(false);
 
@@ -619,8 +620,8 @@ public class ProjectCreateConfirmationFragment extends android.support.v4.app.Fr
     private void nextAction() {
         mFinanceConfigViewModel.updateProject(mTempProject);
         mUnitPriceConfigFragmentViewModel.updateUnitPrice(mTempUnitPrice);
-        mCallBack.addProject();
-        //QlntRepository.getInstance(getActivity().getApplicationContext()).addProject(mTempProject);
+        mCallBack.saveProject();
+        Toast.makeText(getActivity(), getString(R.string.annouce_project_saving), Toast.LENGTH_SHORT).show();
         getActivity().finish();
     }
 
