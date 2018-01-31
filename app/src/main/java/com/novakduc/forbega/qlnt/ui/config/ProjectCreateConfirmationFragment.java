@@ -1,6 +1,7 @@
 package com.novakduc.forbega.qlnt.ui.config;
 
 import android.app.Activity;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.content.res.TypedArray;
 import android.os.Bundle;
@@ -30,12 +31,19 @@ import com.novakduc.forbega.qlnt.data.database.Loan;
 import com.novakduc.forbega.qlnt.data.database.LoanList;
 import com.novakduc.forbega.qlnt.data.database.Project;
 import com.novakduc.forbega.qlnt.data.database.UnitPrice;
+import com.novakduc.forbega.qlnt.ui.config.base.ProjectBaseFragmentViewModel;
+import com.novakduc.forbega.qlnt.ui.config.base.ProjectBaseViewModelFactory;
 import com.novakduc.forbega.qlnt.ui.config.finance.LoanAdapterHandler;
 import com.novakduc.forbega.qlnt.ui.config.finance.LoansAdapter;
+import com.novakduc.forbega.qlnt.ui.config.finance.ProjectFinanceConfigViewModel;
+import com.novakduc.forbega.qlnt.ui.config.finance.ProjectFinanceConfigViewModelFactory;
 import com.novakduc.forbega.qlnt.ui.config.finance.loan.LoanDeclareActivity;
 import com.novakduc.forbega.qlnt.ui.config.finance.loan.LoanDeclareFragment;
+import com.novakduc.forbega.qlnt.ui.config.unitprice.UnitPriceConfigFragmentViewModel;
+import com.novakduc.forbega.qlnt.ui.config.unitprice.UnitPriceConfigViewModelFactory;
 import com.novakduc.forbega.qlnt.ui.detail.DatePickerFragment;
 import com.novakduc.forbega.qlnt.utilities.ConverterUtilities;
+import com.novakduc.forbega.qlnt.utilities.InjectorUtils;
 
 import java.util.Calendar;
 
@@ -62,6 +70,10 @@ public class ProjectCreateConfirmationFragment extends android.support.v4.app.Fr
             mInternetLayout, mTvLayout;
     private UpdateListener mCallBack;
 
+    private ProjectBaseFragmentViewModel mBaseFragmentViewModel;
+    private ProjectFinanceConfigViewModel mFinanceConfigViewModel;
+    private UnitPriceConfigFragmentViewModel mUnitPriceConfigFragmentViewModel;
+
     public static ProjectCreateConfirmationFragment newInstance(long projectId) {
         Bundle bundle = new Bundle();
         bundle.putLong(TEMP_PROJECT_ID, projectId);
@@ -79,7 +91,21 @@ public class ProjectCreateConfirmationFragment extends android.support.v4.app.Fr
         super.onCreate(savedInstanceState);
         long projectId = getArguments().getLong(TEMP_PROJECT_ID);
 
-        // TODO: 1/30/2018 create view models
+        ProjectBaseViewModelFactory baseViewModelFactory =
+                InjectorUtils.provideProjectBaseViewModelFactory(getActivity());
+        ProjectFinanceConfigViewModelFactory financeConfigViewModelFactory =
+                InjectorUtils.provideProjectFinanceConfigViewModelFactory(getActivity(), projectId);
+        UnitPriceConfigViewModelFactory unitPriceConfigViewModelFactory =
+                InjectorUtils.provideUnitPriceConfigViewModelFactory(getActivity(), projectId);
+
+        mBaseFragmentViewModel = ViewModelProviders.of(this,
+                baseViewModelFactory).get(ProjectBaseFragmentViewModel.class);
+
+        mFinanceConfigViewModel = ViewModelProviders.of(this,
+                financeConfigViewModelFactory).get(ProjectFinanceConfigViewModel.class);
+
+        mUnitPriceConfigFragmentViewModel = ViewModelProviders.of(this,
+                unitPriceConfigViewModelFactory).get(UnitPriceConfigFragmentViewModel.class);
 
         setHasOptionsMenu(true);
     }
