@@ -33,6 +33,8 @@ public class ProjectUnitPriceConfigFragment extends android.support.v4.app.Fragm
 
     private TextInputLayout mElectricityLayout, mWaterLayout, mSecurityLayout, mTrashLayout,
             mInternetLayout, mTvLayout;
+    private EditText mEditTextElecticity, mEditTextWater, mEditTextSecurity, mEditTextTrash,
+            mEditTextInternet, mEditTextTv;
     private UpdateListener mCallBack;
     private long mProjectId;
     private UnitPrice mUnitPrice;
@@ -83,10 +85,9 @@ public class ProjectUnitPriceConfigFragment extends android.support.v4.app.Fragm
         }
 
         mElectricityLayout = view.findViewById(R.id.txtLayoutElectricity);
-        EditText electricityEditText = view.findViewById(R.id.electricity);
-        electricityEditText.setText(String.valueOf(mUnitPrice.getElectricity()));
-        //editTextAmount.setText(String.valueOf(mAmount));
-        electricityEditText.addTextChangedListener(new TextWatcher() {
+        mEditTextElecticity = view.findViewById(R.id.electricity);
+
+        mEditTextElecticity.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -116,10 +117,9 @@ public class ProjectUnitPriceConfigFragment extends android.support.v4.app.Fragm
         });
 
         mWaterLayout = view.findViewById(R.id.txtLayoutWater);
-        EditText waterEditText = view.findViewById(R.id.water);
-        waterEditText.setText(String.valueOf(mUnitPrice.getWater()));
-        //editTextAmount.setText(String.valueOf(mAmount));
-        waterEditText.addTextChangedListener(new TextWatcher() {
+        mEditTextWater = view.findViewById(R.id.water);
+
+        mEditTextWater.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -149,10 +149,9 @@ public class ProjectUnitPriceConfigFragment extends android.support.v4.app.Fragm
         });
 
         mInternetLayout = view.findViewById(R.id.txtLayoutInternet);
-        EditText internetEditText = view.findViewById(R.id.internet);
-        internetEditText.setText(String.valueOf(mUnitPrice.getInternet()));
-        //editTextAmount.setText(String.valueOf(mAmount));
-        internetEditText.addTextChangedListener(new TextWatcher() {
+        mEditTextInternet = view.findViewById(R.id.internet);
+
+        mEditTextInternet.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -182,10 +181,9 @@ public class ProjectUnitPriceConfigFragment extends android.support.v4.app.Fragm
         });
 
         mSecurityLayout = view.findViewById(R.id.txtLayoutSecurity);
-        final EditText securityEditText = view.findViewById(R.id.security);
-        securityEditText.setText(String.valueOf(mUnitPrice.getSecurity()));
-        //editTextAmount.setText(String.valueOf(mAmount));
-        securityEditText.addTextChangedListener(new TextWatcher() {
+        mEditTextSecurity = view.findViewById(R.id.security);
+
+        mEditTextSecurity.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -215,10 +213,9 @@ public class ProjectUnitPriceConfigFragment extends android.support.v4.app.Fragm
         });
 
         mTrashLayout = view.findViewById(R.id.txtLayoutTrashCollection);
-        EditText trashEditText = view.findViewById(R.id.trashCollention);
-        trashEditText.setText(String.valueOf(mUnitPrice.getTrashCollection()));
-        //editTextAmount.setText(String.valueOf(mAmount));
-        trashEditText.addTextChangedListener(new TextWatcher() {
+        mEditTextTrash = view.findViewById(R.id.trashCollention);
+
+        mEditTextTrash.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -248,10 +245,9 @@ public class ProjectUnitPriceConfigFragment extends android.support.v4.app.Fragm
         });
 
         mTvLayout = view.findViewById(R.id.txtLayoutTv);
-        EditText tvEditText = view.findViewById(R.id.tv);
-        tvEditText.setText(String.valueOf(mUnitPrice.getTv()));
-        //editTextAmount.setText(String.valueOf(mAmount));
-        tvEditText.addTextChangedListener(new TextWatcher() {
+        mEditTextTv = view.findViewById(R.id.tv);
+
+        mEditTextTv.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -293,6 +289,7 @@ public class ProjectUnitPriceConfigFragment extends android.support.v4.app.Fragm
             public void onChanged(@Nullable UnitPrice unitPrice) {
                 if (unitPrice != null) {
                     mUnitPrice = unitPrice;
+                    bindUnitPriceToUi();
                 }
             }
         });
@@ -341,6 +338,15 @@ public class ProjectUnitPriceConfigFragment extends android.support.v4.app.Fragm
 
         mViewModel.updateUnitPrice(mUnitPrice);
         mCallBack.finalCheck();
+    }
+
+    private void bindUnitPriceToUi() {
+        mEditTextElecticity.setText(String.valueOf(mUnitPrice.getElectricity()));
+        mEditTextWater.setText(String.valueOf(mUnitPrice.getWater()));
+        mEditTextInternet.setText(String.valueOf(mUnitPrice.getInternet()));
+        mEditTextSecurity.setText(String.valueOf(mUnitPrice.getSecurity()));
+        mEditTextTrash.setText(String.valueOf(mUnitPrice.getTrashCollection()));
+        mEditTextTv.setText(String.valueOf(mUnitPrice.getTv()));
     }
 
     @Override
