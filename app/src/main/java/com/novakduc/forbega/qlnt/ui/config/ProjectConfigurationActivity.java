@@ -58,15 +58,20 @@ public class ProjectConfigurationActivity extends SimpleFragmentActivity
 
     @Override
     public void addProject() {
-        android.support.v4.app.FragmentManager manager = getSupportFragmentManager();
-        manager.beginTransaction().replace(R.id.fragmentContainer,
-                ProjectCreateConfirmationFragment.newInstance(mTempProjectId)).addToBackStack(null).commit();
+        mViewModel.addProject();
     }
 
     @Override
     public void updateProjectId(long projectId) {
         mTempProjectId = projectId;
         mViewModel.setProjectId(projectId);
+    }
+
+    @Override
+    public void finalCheck() {
+        android.support.v4.app.FragmentManager manager = getSupportFragmentManager();
+        manager.beginTransaction().replace(R.id.fragmentContainer,
+                ProjectCreateConfirmationFragment.newInstance(mTempProjectId)).addToBackStack(null).commit();
     }
 
     @Override

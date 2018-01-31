@@ -340,7 +340,7 @@ public class ProjectUnitPriceConfigFragment extends android.support.v4.app.Fragm
         }
 
         mViewModel.updateUnitPrice(mUnitPrice);
-        mCallBack.addProject();
+        mCallBack.finalCheck();
     }
 
     @Override

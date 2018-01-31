@@ -28,6 +28,7 @@ import android.widget.TextView;
 
 import com.novakduc.forbega.qlnt.R;
 import com.novakduc.forbega.qlnt.data.database.Loan;
+import com.novakduc.forbega.qlnt.data.database.LoanList;
 import com.novakduc.forbega.qlnt.data.database.Project;
 import com.novakduc.forbega.qlnt.ui.config.UpdateListener;
 import com.novakduc.forbega.qlnt.ui.config.finance.loan.LoanDeclareActivity;
@@ -224,13 +225,10 @@ public class ProjectFinanceConfigFragment extends android.support.v4.app.Fragmen
             @Override
             public void onChanged(@Nullable List<Loan> loans) {
                 if (loans != null) {
-                    long totalLoanAmount = 0;
-                    for (Loan l :
-                            loans) {
-                        totalLoanAmount += l.getAmount();
-                    }
+                    LoanList list = LoanList.getInstance(projectId);
+                    list.addAll(loans);
                     mTotalLoanTextView.setText(String.valueOf(ConverterUtilities.currencyUnitConverter(
-                            totalLoanAmount, CurrencyUnit.MIL_BASE, 3)));
+                            list.getTotalAmount(), CurrencyUnit.MIL_BASE, 3)));
                     mLoansAdapter.swapList(loans);
                 }
             }

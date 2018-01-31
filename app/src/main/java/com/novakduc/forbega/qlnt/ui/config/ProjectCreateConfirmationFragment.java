@@ -1,6 +1,7 @@
 package com.novakduc.forbega.qlnt.ui.config;
 
 import android.app.Activity;
+import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.content.res.TypedArray;
@@ -31,8 +32,6 @@ import com.novakduc.forbega.qlnt.data.database.Loan;
 import com.novakduc.forbega.qlnt.data.database.LoanList;
 import com.novakduc.forbega.qlnt.data.database.Project;
 import com.novakduc.forbega.qlnt.data.database.UnitPrice;
-import com.novakduc.forbega.qlnt.ui.config.base.ProjectBaseFragmentViewModel;
-import com.novakduc.forbega.qlnt.ui.config.base.ProjectBaseViewModelFactory;
 import com.novakduc.forbega.qlnt.ui.config.finance.LoanAdapterHandler;
 import com.novakduc.forbega.qlnt.ui.config.finance.LoansAdapter;
 import com.novakduc.forbega.qlnt.ui.config.finance.ProjectFinanceConfigViewModel;
@@ -43,9 +42,11 @@ import com.novakduc.forbega.qlnt.ui.config.unitprice.UnitPriceConfigFragmentView
 import com.novakduc.forbega.qlnt.ui.config.unitprice.UnitPriceConfigViewModelFactory;
 import com.novakduc.forbega.qlnt.ui.detail.DatePickerFragment;
 import com.novakduc.forbega.qlnt.utilities.ConverterUtilities;
+import com.novakduc.forbega.qlnt.utilities.CurrencyUnit;
 import com.novakduc.forbega.qlnt.utilities.InjectorUtils;
 
 import java.util.Calendar;
+import java.util.List;
 
 /**
  * Created by n.thanh on 10/21/2016.
@@ -61,6 +62,7 @@ public class ProjectCreateConfirmationFragment extends android.support.v4.app.Fr
     private UnitPrice mTempUnitPrice;
     private EditText mEditTextAddress;
     private EditText mEditTextName;
+    private EditText mEditTextInvestmentAmount;
     private EditText mEditTextStartDate;
     private EditText mEditTextEndDate;
     private EditText mEditTextDuration;
@@ -68,9 +70,10 @@ public class ProjectCreateConfirmationFragment extends android.support.v4.app.Fr
     private TextInputLayout mLayoutName, mLayoutAddress, mLayoutDuration;
     private TextInputLayout mElectricityLayout, mWaterLayout, mSecurityLayout, mTrashLayout,
             mInternetLayout, mTvLayout;
+    private EditText mEditTextElecticity, mEditTextWater, mEditTextSecurity, mEditTextTrash,
+            mEditTextInternet, mEditTextTv;
     private UpdateListener mCallBack;
 
-    private ProjectBaseFragmentViewModel mBaseFragmentViewModel;
     private ProjectFinanceConfigViewModel mFinanceConfigViewModel;
     private UnitPriceConfigFragmentViewModel mUnitPriceConfigFragmentViewModel;
 
@@ -90,16 +93,12 @@ public class ProjectCreateConfirmationFragment extends android.support.v4.app.Fr
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         long projectId = getArguments().getLong(TEMP_PROJECT_ID);
+        mCallBack = (UpdateListener) getActivity();
 
-        ProjectBaseViewModelFactory baseViewModelFactory =
-                InjectorUtils.provideProjectBaseViewModelFactory(getActivity());
         ProjectFinanceConfigViewModelFactory financeConfigViewModelFactory =
                 InjectorUtils.provideProjectFinanceConfigViewModelFactory(getActivity(), projectId);
         UnitPriceConfigViewModelFactory unitPriceConfigViewModelFactory =
                 InjectorUtils.provideUnitPriceConfigViewModelFactory(getActivity(), projectId);
-
-        mBaseFragmentViewModel = ViewModelProviders.of(this,
-                baseViewModelFactory).get(ProjectBaseFragmentViewModel.class);
 
         mFinanceConfigViewModel = ViewModelProviders.of(this,
                 financeConfigViewModelFactory).get(ProjectFinanceConfigViewModel.class);
@@ -115,7 +114,6 @@ public class ProjectCreateConfirmationFragment extends android.support.v4.app.Fr
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_project_confirmation, container, false);
 
-        mCallBack = (UpdateListener) getActivity();
         Toolbar toolbar = view.findViewById(R.id.toolbar);
         toolbar.setTitle(getResources().getString(R.string.project_create_confirm));
         final AppCompatActivity activity = (AppCompatActivity) getActivity();
@@ -129,7 +127,7 @@ public class ProjectCreateConfirmationFragment extends android.support.v4.app.Fr
 
         mLayoutName = view.findViewById(R.id.txtLayoutName);
         mEditTextName = view.findViewById(R.id.name);
-        mEditTextName.setText(mTempProject.getName());
+
         mEditTextName.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -213,10 +211,9 @@ public class ProjectCreateConfirmationFragment extends android.support.v4.app.Fr
 
             }
         });
-        mEditTextAddress.setText(mTempProject.getAddress());
 
         mEditTextDuration = view.findViewById(R.id.editTextDuration);
-        mEditTextDuration.setText(String.valueOf(mTempProject.getDuration()));
+
         mLayoutDuration = view.findViewById(R.id.txtLayoutDuration);
         mEditTextDuration.addTextChangedListener(new TextWatcher() {
             @Override
@@ -248,7 +245,7 @@ public class ProjectCreateConfirmationFragment extends android.support.v4.app.Fr
         });
 
         mEditTextStartDate = view.findViewById(R.id.editTextStartDate);
-        mEditTextStartDate.setText(ConverterUtilities.calendarToString(mTempProject.getStartDate()));
+
         mEditTextStartDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -258,11 +255,9 @@ public class ProjectCreateConfirmationFragment extends android.support.v4.app.Fr
 
         mEditTextEndDate = view.findViewById(R.id.editTextEndDate);
         mEditTextEndDate.setFocusableInTouchMode(false);
-        mEditTextEndDate.setText(ConverterUtilities.calendarToString(mTempProject.getEndDate()));
 
-        EditText editTextInvestmentAmount = view.findViewById(R.id.investmentAmount);
-        editTextInvestmentAmount.setFocusableInTouchMode(false);
-        editTextInvestmentAmount.setText(String.valueOf(mTempProject.getInvestmentAmount()));
+        mEditTextInvestmentAmount = view.findViewById(R.id.investmentAmount);
+        mEditTextInvestmentAmount.setFocusableInTouchMode(false);
 
         Button buttonAddLoan = view.findViewById(R.id.btAddLoan);
         buttonAddLoan.setOnClickListener(new View.OnClickListener() {
@@ -273,11 +268,9 @@ public class ProjectCreateConfirmationFragment extends android.support.v4.app.Fr
             }
         });
 
-        LoanList loanList = mTempProject.getLoanList();
         mLoansAdapter = new LoansAdapter(activity, this);
 
         mTotalLoanTextView = view.findViewById(R.id.totalLoan);
-        mTotalLoanTextView.setText(String.valueOf(loanList.getTotalLoanAmount()));
 
         mRecyclerView = view.findViewById(R.id.loanList);
         LinearLayoutManager layoutManager = new LinearLayoutManager(activity);
@@ -286,23 +279,11 @@ public class ProjectCreateConfirmationFragment extends android.support.v4.app.Fr
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setAdapter(mLoansAdapter);
 
-        /*
-        int loanCount = loanList.size();//mRecyclerView.getChildCount();
-        if (loanCount > 0) {
-            //View loanView = mRecyclerView.getChildAt(0);
-            int itemHeight = 250; //loanView.getLayoutParams().height;
-            ConstraintLayout financeLayout = (ConstraintLayout) view.findViewById(R.id.financeSection);
-            ViewGroup.LayoutParams layoutParams = financeLayout.getLayoutParams();
-            layoutParams.height = layoutParams.height + itemHeight * loanCount;
-            financeLayout.setLayoutParams(layoutParams);
-        }
-        */
-
         mElectricityLayout = view.findViewById(R.id.txtLayoutElectricity);
-        EditText electricityEditText = view.findViewById(R.id.electricity);
-        electricityEditText.setText(String.valueOf(mTempProject.getUnitPrice().getElectricity()));
+        mEditTextElecticity = view.findViewById(R.id.electricity);
+
         //editTextAmount.setText(String.valueOf(mAmount));
-        electricityEditText.addTextChangedListener(new TextWatcher() {
+        mEditTextElecticity.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -333,10 +314,9 @@ public class ProjectCreateConfirmationFragment extends android.support.v4.app.Fr
         });
 
         mWaterLayout = view.findViewById(R.id.txtLayoutWater);
-        EditText waterEditText = view.findViewById(R.id.water);
-        waterEditText.setText(String.valueOf(mTempProject.getUnitPrice().getWater()));
+        mEditTextWater = view.findViewById(R.id.water);
         //editTextAmount.setText(String.valueOf(mAmount));
-        waterEditText.addTextChangedListener(new TextWatcher() {
+        mEditTextWater.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -367,10 +347,9 @@ public class ProjectCreateConfirmationFragment extends android.support.v4.app.Fr
         });
 
         mInternetLayout = view.findViewById(R.id.txtLayoutInternet);
-        EditText internetEditText = view.findViewById(R.id.internet);
-        internetEditText.setText(String.valueOf(mTempProject.getUnitPrice().getInternet()));
+        mEditTextInternet = view.findViewById(R.id.internet);
         //editTextAmount.setText(String.valueOf(mAmount));
-        internetEditText.addTextChangedListener(new TextWatcher() {
+        mEditTextInternet.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -401,10 +380,10 @@ public class ProjectCreateConfirmationFragment extends android.support.v4.app.Fr
         });
 
         mSecurityLayout = view.findViewById(R.id.txtLayoutSecurity);
-        final EditText securityEditText = view.findViewById(R.id.security);
-        securityEditText.setText(String.valueOf(mTempProject.getUnitPrice().getSecurity()));
+        mEditTextSecurity = view.findViewById(R.id.security);
+
         //editTextAmount.setText(String.valueOf(mAmount));
-        securityEditText.addTextChangedListener(new TextWatcher() {
+        mEditTextSecurity.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -435,10 +414,9 @@ public class ProjectCreateConfirmationFragment extends android.support.v4.app.Fr
         });
 
         mTrashLayout = view.findViewById(R.id.txtLayoutTrashCollection);
-        EditText trashEditText = view.findViewById(R.id.trashCollention);
-        trashEditText.setText(String.valueOf(mTempProject.getUnitPrice().getTrashCollection()));
+        mEditTextTrash = view.findViewById(R.id.trashCollention);
         //editTextAmount.setText(String.valueOf(mAmount));
-        trashEditText.addTextChangedListener(new TextWatcher() {
+        mEditTextTrash.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -469,10 +447,10 @@ public class ProjectCreateConfirmationFragment extends android.support.v4.app.Fr
         });
 
         mTvLayout = view.findViewById(R.id.txtLayoutTv);
-        EditText tvEditText = view.findViewById(R.id.tv);
-        tvEditText.setText(String.valueOf(mTempProject.getUnitPrice().getTv()));
+        mEditTextTv = view.findViewById(R.id.tv);
+
         //editTextAmount.setText(String.valueOf(mAmount));
-        tvEditText.addTextChangedListener(new TextWatcher() {
+        mEditTextTv.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -514,7 +492,67 @@ public class ProjectCreateConfirmationFragment extends android.support.v4.app.Fr
                             Toast.LENGTH_SHORT).show();
             }
         });
+
+        //View model observe
+        mFinanceConfigViewModel.getProjectLiveData().observe(this, new Observer<Project>() {
+            @Override
+            public void onChanged(@Nullable Project project) {
+                if (project != null) {
+                    mTempProject = project;
+                    bindProjectToUI();
+                }
+            }
+        });
+
+        mFinanceConfigViewModel.getLoanListLiveData().observe(this, new Observer<List<Loan>>() {
+            @Override
+            public void onChanged(@Nullable List<Loan> loans) {
+                if (loans != null) {
+                    LoanList list = LoanList.getInstance(mTempProject.getId());
+                    list.addAll(loans);
+                    bindLoansToUi(list);
+                }
+            }
+        });
+
+        mUnitPriceConfigFragmentViewModel.getUnitPriceLiveData().observe(this, new Observer<UnitPrice>() {
+            @Override
+            public void onChanged(@Nullable UnitPrice unitPrice) {
+                if (unitPrice != null) {
+                    mTempUnitPrice = unitPrice;
+                    bindUnitPriceToUi();
+                }
+            }
+        });
+
         return view;
+    }
+
+    private void bindUnitPriceToUi() {
+        mTempProject.setUnitPrice(mTempUnitPrice);
+
+        mEditTextElecticity.setText(String.valueOf(mTempProject.getUnitPrice().getElectricity()));
+        mEditTextWater.setText(String.valueOf(mTempProject.getUnitPrice().getWater()));
+        mEditTextInternet.setText(String.valueOf(mTempProject.getUnitPrice().getInternet()));
+        mEditTextSecurity.setText(String.valueOf(mTempProject.getUnitPrice().getSecurity()));
+        mEditTextTrash.setText(String.valueOf(mTempProject.getUnitPrice().getTrashCollection()));
+        mEditTextTv.setText(String.valueOf(mTempProject.getUnitPrice().getTv()));
+    }
+
+    private void bindLoansToUi(LoanList loans) {
+        mTotalLoanTextView.setText(String.valueOf(ConverterUtilities.currencyUnitConverter(
+                loans.getTotalLoanAmount(), CurrencyUnit.MIL_BASE, 3)));
+        mLoansAdapter.swapList(loans);
+    }
+
+    private void bindProjectToUI() {
+        mEditTextName.setText(mTempProject.getName());
+        mEditTextAddress.setText(mTempProject.getAddress());
+        mEditTextDuration.setText(String.valueOf(mTempProject.getDuration()));
+        mEditTextStartDate.setText(ConverterUtilities.calendarToString(mTempProject.getStartDate()));
+        mEditTextEndDate.setText(ConverterUtilities.calendarToString(mTempProject.getEndDate()));
+        mEditTextInvestmentAmount.setText(String.valueOf(ConverterUtilities.currencyUnitConverter(
+                mTempProject.getInvestmentAmount(), CurrencyUnit.MIL_BASE, 3)));
     }
 
     private void showDialog(android.support.v4.app.DialogFragment fragment, int target) {
@@ -541,7 +579,9 @@ public class ProjectCreateConfirmationFragment extends android.support.v4.app.Fr
     }
 
     private void nextAction() {
-
+        mFinanceConfigViewModel.updateProject(mTempProject);
+        mUnitPriceConfigFragmentViewModel.updateUnitPrice(mTempUnitPrice);
+        mCallBack.addProject();
         //QlntRepository.getInstance(getActivity().getApplicationContext()).addProject(mTempProject);
         getActivity().finish();
     }
@@ -574,44 +614,26 @@ public class ProjectCreateConfirmationFragment extends android.support.v4.app.Fr
         //Receive loan data
         if (requestCode == LoansAdapter.LOAN_CREATION) {
             if (resultCode == Activity.RESULT_OK) {
-                Loan loan = data.getParcelableExtra(LoanDeclareFragment.RETURN_LOAN);
-                mTempProject.getLoanList().add(loan);
-                loanListUpdate();
+
             }
         }
         if (requestCode == LoansAdapter.LOAN_EDIT_REQUEST_FROM_ADAPTER) {
-
             if (resultCode == Activity.RESULT_OK) {
-                Loan tempLoan = data.getParcelableExtra(LoanDeclareFragment.RETURN_LOAN);
-                Loan loan = mTempProject.getLoanList().getLoan(tempLoan.getId());
-                if (loan != null) {
-                    loan.setAmount(tempLoan.getAmount());
-                    loan.setInterestRate(tempLoan.getInterestRate());
-                    loan.setLoanDate(tempLoan.getLoanDate());
-                    loan.setName(tempLoan.getName());
-                    loanListUpdate();
-                }
-            }
-        }
-    }
 
-    private void loanListUpdate() {
-        mLoansAdapter.notifyDataSetChanged();
-        if (mTempProject.getLoanList() != null) {
-            mTotalLoanTextView.setText(String.valueOf(
-                    mTempProject.getLoanList().getTotalLoanAmount()));
+            }
         }
     }
 
     @Override
     public void deleteLoan(long loanId) {
-        // TODO: 1/27/2018
-        loanListUpdate();
+        mFinanceConfigViewModel.deleteLoan(loanId);
     }
 
     @Override
     public void editLoan(long loanId) {
-        //todo
-
+        Intent intent = new Intent(getActivity(), LoanDeclareActivity.class);
+        intent.putExtra(LoanDeclareFragment.PROJECT_ID, mTempProject.getId());
+        intent.putExtra(LoanDeclareFragment.LOAN_TO_EDIT, loanId);
+        startActivityForResult(intent, LoansAdapter.LOAN_EDIT_REQUEST_FROM_ADAPTER);
     }
 }
