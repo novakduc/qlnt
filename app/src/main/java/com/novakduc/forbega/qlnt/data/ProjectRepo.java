@@ -39,12 +39,12 @@ public class ProjectRepo {
                     Log.d(LOG_TAG, "Create new product repo " + projectId);
                 } else {
                     sInstance.setProjectId(projectId);
-                    Log.d(LOG_TAG, "Change project id" + sInstance.getProjectId());
+                    Log.d(LOG_TAG, "Lock repo to project id" + sInstance.getProjectId());
                 }
             }
         } else {
             sInstance.setProjectId(projectId);
-            Log.d(LOG_TAG, "Change project id" + sInstance.getProjectId());
+            Log.d(LOG_TAG, "Lock repo to project id" + sInstance.getProjectId());
         }
         return sInstance;
     }
