@@ -240,7 +240,10 @@ public class ProjectEditFragment extends android.support.v4.app.Fragment
                     } else {
                         mLayoutDuration.setErrorEnabled(false);
                         mDuration = duration;
-                        mEditTextEndDate.setText(ConverterUtilities.calendarToString(mTempProject.getEndDate()));
+                        if (mTempProject != null) {
+                            mEditTextEndDate.setText(
+                                    ConverterUtilities.calendarToString(mTempProject.getEndDate()));
+                        }
                     }
                 } catch (NumberFormatException e) {
                     mLayoutDuration.setError(getString(R.string.durationInputError));
@@ -549,7 +552,7 @@ public class ProjectEditFragment extends android.support.v4.app.Fragment
             @Override
             public void onChanged(@Nullable List<Loan> loans) {
                 if (loans != null) {
-                    LoanList list = LoanList.getInstance(mTempProject.getId());
+                    LoanList list = LoanList.getInstance(mProjectId);
                     list.addAll(loans);
                     bindLoansToUi(list);
                 }
@@ -592,6 +595,7 @@ public class ProjectEditFragment extends android.support.v4.app.Fragment
         mEditTextEndDate.setText(ConverterUtilities.calendarToString(mTempProject.getEndDate()));
         mEditTextInvestmentAmount.setText(String.valueOf(ConverterUtilities.currencyUnitConverter(
                 mTempProject.getInvestmentAmount(), CurrencyUnit.MIL_BASE, 3)));
+        mLayoutAmount.setErrorEnabled(false);
     }
 
     private void showDialog(android.support.v4.app.DialogFragment fragment, int target) {

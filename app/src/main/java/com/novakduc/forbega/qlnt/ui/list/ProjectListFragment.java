@@ -23,6 +23,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.novakduc.forbega.qlnt.R;
 import com.novakduc.forbega.qlnt.data.database.Project;
 import com.novakduc.forbega.qlnt.ui.ConfirmationDialogFragment;
+import com.novakduc.forbega.qlnt.ui.config.EditProjectActivity;
 import com.novakduc.forbega.qlnt.ui.config.ProjectConfigurationActivity;
 import com.novakduc.forbega.qlnt.ui.config.ProjectEditFragment;
 import com.novakduc.forbega.qlnt.utilities.InjectorUtils;
@@ -122,7 +123,7 @@ public class ProjectListFragment extends android.support.v4.app.Fragment
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), ProjectConfigurationActivity.class);
-                startActivityForResult(intent, PROJECT_CONFIG_RESULT);
+                startActivity(intent);
             }
         });
 
@@ -134,19 +135,12 @@ public class ProjectListFragment extends android.support.v4.app.Fragment
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        // TODO: 4/19/2017 Update result from project configuration activity
-        mProjectsRecyclerViewAdapter.notifyDataSetChanged();
-    }
-
-    @Override
     public void onDeleteAction(long projectId) {
         mTempProjectId = projectId;
         Bundle bundle = new Bundle();
         //dialog title in bundle
         bundle.putString(ConfirmationDialogFragment.MESSAGE,
-                getResources().getString(R.string.delete_project_confirmataion));
+                getResources().getString(R.string.delete_project_confirmation));
         android.support.v4.app.DialogFragment dialogFragment = new ConfirmationDialogFragment();
         dialogFragment.setArguments(bundle);
         dialogFragment.show(getActivity().getSupportFragmentManager(), "discardConfirm");
@@ -159,7 +153,7 @@ public class ProjectListFragment extends android.support.v4.app.Fragment
 
     @Override
     public void onEditAction(long projectId) {
-        Intent intent = new Intent();
+        Intent intent = new Intent(getActivity(), EditProjectActivity.class);
         intent.putExtra(ProjectEditFragment.TEMP_PROJECT_ID, projectId);
         startActivity(intent);
     }
