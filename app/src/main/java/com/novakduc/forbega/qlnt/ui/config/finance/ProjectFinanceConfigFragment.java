@@ -71,6 +71,7 @@ public class ProjectFinanceConfigFragment extends android.support.v4.app.Fragmen
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         projectId = getArguments().getLong(TEMP_PROJECT);
+        Log.d(LOG_TAG, "Start fragment to config finance for project id: " + projectId);
         //mLoanList = LoanList.getInstance(projectId);
 
         ProjectFinanceConfigViewModelFactory factory =
@@ -98,8 +99,6 @@ public class ProjectFinanceConfigFragment extends android.support.v4.app.Fragmen
         toolbar.setTitle(R.string.financeConfigTitle);
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         activity.setSupportActionBar(toolbar);
-
-        // TODO: 1/30/2018 when rotate, ui is not consistency
 
         final ActionBar actionBar = activity.getSupportActionBar();
         if (actionBar != null) {
@@ -148,6 +147,9 @@ public class ProjectFinanceConfigFragment extends android.support.v4.app.Fragmen
                 Intent intent = new Intent(getActivity(), LoanDeclareActivity.class);
                 intent.putExtra(LoanDeclareFragment.TYPE_KEY, true);    //create new loan
                 intent.putExtra(LoanDeclareFragment.PROJECT_ID, projectId);
+
+                Log.d(LOG_TAG, "Create loan for project id: " + projectId);
+
                 startActivityForResult(intent, LoansAdapter.LOAN_CREATION);
             }
         });
@@ -227,6 +229,7 @@ public class ProjectFinanceConfigFragment extends android.support.v4.app.Fragmen
                 if (loans != null) {
                     LoanList list = LoanList.getInstance(projectId);
                     list.addAll(loans);
+
                     mTotalLoanTextView.setText(String.valueOf(ConverterUtilities.currencyUnitConverter(
                             list.getTotalAmount(), CurrencyUnit.MIL_BASE, 3)));
                     mLoansAdapter.swapList(loans);

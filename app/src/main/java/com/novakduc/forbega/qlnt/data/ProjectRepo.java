@@ -2,6 +2,7 @@ package com.novakduc.forbega.qlnt.data;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
+import android.util.Log;
 
 import com.novakduc.baselibrary.AppExecutors;
 import com.novakduc.forbega.qlnt.data.database.AppDao;
@@ -35,8 +36,15 @@ public class ProjectRepo {
             synchronized (LOCK) {
                 if (sInstance == null) {
                     sInstance = new ProjectRepo(appDao, executors, projectId);
+                    Log.d(LOG_TAG, "Create new product repo " + projectId);
+                } else {
+                    sInstance.setProjectId(projectId);
+                    Log.d(LOG_TAG, "Change project id" + sInstance.getProjectId());
                 }
             }
+        } else {
+            sInstance.setProjectId(projectId);
+            Log.d(LOG_TAG, "Change project id" + sInstance.getProjectId());
         }
         return sInstance;
     }

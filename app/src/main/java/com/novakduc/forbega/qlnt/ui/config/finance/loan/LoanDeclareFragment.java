@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -73,6 +74,8 @@ public class LoanDeclareFragment extends android.support.v4.app.Fragment {
         super.onCreate(savedInstanceState);
         final Intent intent = getActivity().getIntent();
         long projectId = intent.getLongExtra(PROJECT_ID, -1);
+
+        Log.d(LOG_TAG, "Start create loan for project id: " + projectId);
 
         isNew = intent.getBooleanExtra(TYPE_KEY, false);
         if (!isNew) {
@@ -254,6 +257,8 @@ public class LoanDeclareFragment extends android.support.v4.app.Fragment {
                 mLoan.setLoanDate(mLoanDate);
                 mLoan.setInterestRate(mRate);
                 mLoan.setAmount(mAmount);
+
+                Log.d(LOG_TAG, "Create loan with id: " + mLoan.getId() + " in project: " + mLoan.getProjectId());
 
                 mViewModel.updateLoan(mLoan);
                 if (isNew) {

@@ -101,4 +101,16 @@ public class LoanList extends MyArrayList<Loan> implements ItemContainer<Loan> {
         remove(e);
         this.totalLoanAmount = super.getTotalAmount();
     }
+
+    @Override
+    public String toString() {
+        String s = "[";
+        for (Loan l :
+                this) {
+            s = s + l.getId() + "/" + l.getProjectId() + ", ";
+        }
+        ;
+        s = s + "]";
+        return s;
+    }
 }

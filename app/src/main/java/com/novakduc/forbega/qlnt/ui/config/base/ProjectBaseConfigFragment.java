@@ -317,6 +317,8 @@ public class ProjectBaseConfigFragment extends android.support.v4.app.Fragment {
         mProject.setDuration(mDuration);
         mProject.setStartDate(mStartDate);
         mViewModel.updateProject(mProject);
+
+        Log.d(LOG_TAG, "Start finance config for project id: " + mProject.getId());
         android.support.v4.app.FragmentManager manager = getActivity().getSupportFragmentManager();
         manager.beginTransaction().
                 replace(R.id.fragmentContainer, ProjectFinanceConfigFragment.
