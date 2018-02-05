@@ -49,6 +49,7 @@ public class ProjectListFragment extends android.support.v4.app.Fragment
     private ProjectListFragmentViewModel mViewModel;
     private ArrayList<Project> mProjects;
     private long mTempProjectId;
+    private FloatingActionButton mFloatingActionButton;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -118,8 +119,8 @@ public class ProjectListFragment extends android.support.v4.app.Fragment
         recyclerView.setAdapter(mProjectsRecyclerViewAdapter);
 
         //Add project button
-        FloatingActionButton fab = view.findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        mFloatingActionButton = view.findViewById(R.id.fab);
+        mFloatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), ProjectConfigurationActivity.class);
@@ -132,6 +133,7 @@ public class ProjectListFragment extends android.support.v4.app.Fragment
 
     public void deleteProject() {
         mViewModel.deleteProject(mTempProjectId);
+        mFloatingActionButton.show();
     }
 
     @Override
