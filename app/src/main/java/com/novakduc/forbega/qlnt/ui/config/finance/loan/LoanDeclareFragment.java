@@ -151,8 +151,9 @@ public class LoanDeclareFragment extends android.support.v4.app.Fragment {
                 if (editable.length() == 0) {
                     mLayoutBank.setError(getString(R.string.invalidBankName));
                     mLayoutBank.setErrorEnabled(true);
+                    mBankName = null;
                 } else {
-                    mLayoutAmount.setErrorEnabled(false);
+                    mLayoutBank.setErrorEnabled(false);
                     mBankName = editable.toString();
                 }
             }
@@ -183,6 +184,7 @@ public class LoanDeclareFragment extends android.support.v4.app.Fragment {
                 } catch (NumberFormatException e) {
                     mLayoutAmount.setError(getString(R.string.invalidLoanAmount));
                     mLayoutAmount.setErrorEnabled(true);
+                    mAmount = -1;
                 }
             }
         });
@@ -245,6 +247,12 @@ public class LoanDeclareFragment extends android.support.v4.app.Fragment {
                 if (mAmount == -1) {
                     mLayoutAmount.setError(getString(R.string.invalidLoanAmount));
                     mLayoutAmount.setErrorEnabled(true);
+                    error = true;
+                }
+
+                if (mRate < 0 || mRate > 50) {
+                    mLayoutRate.setError(getString(R.string.rateInputError));
+                    mLayoutRate.setErrorEnabled(true);
                     error = true;
                 }
 

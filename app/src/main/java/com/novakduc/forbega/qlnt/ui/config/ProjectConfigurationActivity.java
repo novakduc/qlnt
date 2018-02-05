@@ -13,6 +13,8 @@ import com.novakduc.forbega.qlnt.utilities.InjectorUtils;
 
 public class ProjectConfigurationActivity extends SimpleFragmentActivity
         implements UpdateListener, ConfirmationDialogFragment.ConfirmListener {
+    public static final String TEMP_PROJECT_ID = "com.novakduc.forbega.qlnt.tempprojectId";
+    private static final String LOG_TAG = ProjectConfigurationActivity.class.getSimpleName();
     private long mTempProjectId;
     private ProjectConfigActivityViewModel mViewModel;
 
@@ -21,9 +23,16 @@ public class ProjectConfigurationActivity extends SimpleFragmentActivity
         //this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         //this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
 
+        if (savedInstanceState != null) {
+            mTempProjectId = savedInstanceState.getLong(TEMP_PROJECT_ID);
+        }
         ProjectConfigViewModelFactory factory = InjectorUtils.provideProjectConfigViewModelFactory(this);
 
         mViewModel = ViewModelProviders.of(this, factory).get(ProjectConfigActivityViewModel.class);
+
+        mViewModel.setProjectId(mTempProjectId);
+
+        Log.d(LOG_TAG, "Project id: " + mTempProjectId);
 
         super.onCreate(savedInstanceState);
     }
@@ -60,10 +69,13 @@ public class ProjectConfigurationActivity extends SimpleFragmentActivity
     public void updateProjectId(long projectId) {
         mTempProjectId = projectId;
         mViewModel.setProjectId(projectId);
+        Log.d(LOG_TAG, "Project id from view model: " + mViewModel.getProjectId());
     }
 
     @Override
     public void finalCheck() {
+        Log.d(LOG_TAG, "Project id before confirming: " + mTempProjectId);
+
         android.support.v4.app.FragmentManager manager = getSupportFragmentManager();
         manager.beginTransaction().replace(R.id.fragmentContainer,
                 ProjectEditFragment.newInstance(mTempProjectId)).addToBackStack(null).commit();
@@ -77,8 +89,15 @@ public class ProjectConfigurationActivity extends SimpleFragmentActivity
     @Override
     public void action(int result) {
         if (result == ConfirmationDialogFragment.RESULT_OK) {
-            //user confirm to discard project creation.
+            mViewModel.deleteProject(mTempProjectId);
             finish();
         }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putLong(TEMP_PROJECT_ID, mTempProjectId);
+        Log.d(LOG_TAG, "Save project ID: " + mTempProjectId);
+        super.onSaveInstanceState(outState);
     }
 }
