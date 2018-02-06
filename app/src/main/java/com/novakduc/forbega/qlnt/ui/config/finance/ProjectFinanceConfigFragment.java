@@ -219,8 +219,8 @@ public class ProjectFinanceConfigFragment extends android.support.v4.app.Fragmen
                     LoanList list = LoanList.getInstance(projectId);
                     list.addAll(loans);
 
-                    mTotalLoanTextView.setText(String.valueOf(ConverterUtilities.currencyUnitConverter(
-                            list.getTotalAmount(), CurrencyUnit.MIL_BASE, 3)));
+                    mTotalLoanTextView.setText(ConverterUtilities.currencyUnitConverterToString(
+                            list.getTotalAmount(), CurrencyUnit.MIL_BASE, 3));
                     mLoansAdapter.swapList(loans);
                 }
             }

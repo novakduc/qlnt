@@ -511,8 +511,8 @@ public class ProjectEditFragment extends android.support.v4.app.Fragment
     }
 
     private void bindLoansToUi(LoanList loans) {
-        mTotalLoanTextView.setText(String.valueOf(ConverterUtilities.currencyUnitConverter(
-                loans.getTotalLoanAmount(), CurrencyUnit.MIL_BASE, 3)));
+        mTotalLoanTextView.setText(ConverterUtilities.currencyUnitConverterToString(
+                loans.getTotalLoanAmount(), CurrencyUnit.MIL_BASE, 3));
         mLoansAdapter.swapList(loans);
     }
 
