@@ -68,7 +68,8 @@ public class ProjectsRecyclerViewAdapter
         holder.mProduceRateTextView.setText(s);
         holder.mRatingBar.setRating(v);
 
-        holder.mIncomeTextView.setText(String.valueOf(project.getIncome()));
+        holder.mIncomeTextView.setText(ConverterUtilities.currencyUnitConverterToString(
+                project.getIncome(), CurrencyUnit.MIL_BASE, 3));
         holder.mIncomeProgressBar.setMax(1000);
         holder.mIncomeProgressBar.setProgress(project.getIncomeProgress());
         holder.mDeptProgressBar.setMax(1000);
@@ -76,11 +77,11 @@ public class ProjectsRecyclerViewAdapter
         holder.mRevenueProgressBar.setMax(1000);
         holder.mRevenueProgressBar.setProgress(project.getRevenueProgress());
 
-        holder.mDeptTextView.setText(String.valueOf(ConverterUtilities.currencyUnitConverter(
-                project.getDebt(), CurrencyUnit.MIL_BASE, 3)));
+        holder.mDeptTextView.setText(ConverterUtilities.currencyUnitConverterToString(
+                project.getDebt(), CurrencyUnit.MIL_BASE, 3));
 
-        holder.mRevenueTextView.setText(String.valueOf(ConverterUtilities.currencyUnitConverter(
-                project.getIncome(), CurrencyUnit.MIL_BASE, 3)));
+        holder.mRevenueTextView.setText(ConverterUtilities.currencyUnitConverterToString(
+                project.getIncome(), CurrencyUnit.MIL_BASE, 3));
 
         holder.mDeleteButton.setOnClickListener(new View.OnClickListener() {
             @Override

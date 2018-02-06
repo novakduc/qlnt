@@ -3,6 +3,7 @@ package com.novakduc.forbega.qlnt.utilities;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -33,5 +34,10 @@ public class ConverterUtilities {
 
     public static double currencyUnitConverter(long value, CurrencyUnit unit, int decimalPlace) {
         return round(value * 1.0 / unit.getUnit(), decimalPlace);
+    }
+
+    public static String currencyUnitConverterToString(long value, CurrencyUnit unit, int decimalPlace) {
+        DecimalFormat decimalFormat = new DecimalFormat("#,###.##");
+        return decimalFormat.format(Double.valueOf(currencyUnitConverter(value, unit, decimalPlace)));
     }
 }

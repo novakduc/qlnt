@@ -111,7 +111,7 @@ public class ProjectFinanceConfigFragment extends android.support.v4.app.Fragmen
 
         editTextAmount.addTextChangedListener(new NumbericTextWatcher(editTextAmount) {
             @Override
-            public void execureAfterTextChanged(String value) {
+            public void executeAfterTextChanged(String value) {
                 try {
                     mAmount = Long.valueOf(value);
                     if (mAmount < 0) {

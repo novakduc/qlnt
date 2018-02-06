@@ -23,6 +23,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.novakduc.baselibrary.NumbericTextWatcher;
 import com.novakduc.forbega.qlnt.R;
 import com.novakduc.forbega.qlnt.data.database.Loan;
 import com.novakduc.forbega.qlnt.ui.detail.DatePickerFragment;
@@ -161,21 +162,11 @@ public class LoanDeclareFragment extends android.support.v4.app.Fragment {
 
         edtLoanAmount = view.findViewById(R.id.edtLoanAmount);
 
-        edtLoanAmount.addTextChangedListener(new TextWatcher() {
+        edtLoanAmount.addTextChangedListener(new NumbericTextWatcher(edtLoanAmount) {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
+            public void executeAfterTextChanged(String value) {
                 try {
-                    mAmount = Long.valueOf(editable.toString());
+                    mAmount = Long.valueOf(value);
                     if (mAmount <= 0) {
                         throw new NumberFormatException();
                     } else {

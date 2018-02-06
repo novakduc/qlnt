@@ -271,37 +271,9 @@ public class ProjectEditFragment extends android.support.v4.app.Fragment
 
         mEditTextInvestmentAmount.setFocusableInTouchMode(false);
 
-//        mEditTextInvestmentAmount.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-//
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-//
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable editable) {
-//                try {
-//                    mAmount = Long.valueOf(editable.toString());
-//                    if (mAmount < 0) {
-//                        throw new NumberFormatException();
-//                    } else {
-//                        mLayoutAmount.setErrorEnabled(false);
-//                    }
-//                } catch (NumberFormatException e) {
-//                    mLayoutAmount.setError(getString(R.string.invesment_amount_error));
-//                    mLayoutAmount.setErrorEnabled(true);
-//                    mAmount = -1;
-//                }
-//            }
-//        });
-
         mEditTextInvestmentAmount.addTextChangedListener(new NumbericTextWatcher(mEditTextInvestmentAmount) {
             @Override
-            public void execureAfterTextChanged(String value) {
+            public void executeAfterTextChanged(String value) {
                 try {
                     mAmount = Long.valueOf(value);
                     if (mAmount < 0) {
@@ -346,22 +318,11 @@ public class ProjectEditFragment extends android.support.v4.app.Fragment
         mElectricityLayout = view.findViewById(R.id.txtLayoutElectricity);
         mEditTextElecticity = view.findViewById(R.id.electricity);
 
-        //editTextAmount.setText(String.valueOf(mAmount));
-        mEditTextElecticity.addTextChangedListener(new TextWatcher() {
+        mEditTextElecticity.addTextChangedListener(new NumbericTextWatcher(mEditTextElecticity) {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
+            public void executeAfterTextChanged(String value) {
                 try {
-                    long temp = Long.valueOf(editable.toString());
+                    long temp = Long.valueOf(value);
                     if (temp < 0) {
                         throw new NumberFormatException();
                     } else {
@@ -379,22 +340,12 @@ public class ProjectEditFragment extends android.support.v4.app.Fragment
 
         mWaterLayout = view.findViewById(R.id.txtLayoutWater);
         mEditTextWater = view.findViewById(R.id.water);
-        //editTextAmount.setText(String.valueOf(mAmount));
-        mEditTextWater.addTextChangedListener(new TextWatcher() {
+
+        mEditTextWater.addTextChangedListener(new NumbericTextWatcher(mEditTextWater) {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
+            public void executeAfterTextChanged(String value) {
                 try {
-                    long temp = Long.valueOf(editable.toString());
+                    long temp = Long.valueOf(value);
                     if (temp < 0) {
                         throw new NumberFormatException();
                     } else {
@@ -412,22 +363,12 @@ public class ProjectEditFragment extends android.support.v4.app.Fragment
 
         mInternetLayout = view.findViewById(R.id.txtLayoutInternet);
         mEditTextInternet = view.findViewById(R.id.internet);
-        //editTextAmount.setText(String.valueOf(mAmount));
-        mEditTextInternet.addTextChangedListener(new TextWatcher() {
+
+        mEditTextInternet.addTextChangedListener(new NumbericTextWatcher(mEditTextInternet) {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
+            public void executeAfterTextChanged(String value) {
                 try {
-                    long temp = Long.valueOf(editable.toString());
+                    long temp = Long.valueOf(value);
                     if (temp < 0) {
                         throw new NumberFormatException();
                     } else {
@@ -446,22 +387,11 @@ public class ProjectEditFragment extends android.support.v4.app.Fragment
         mSecurityLayout = view.findViewById(R.id.txtLayoutSecurity);
         mEditTextSecurity = view.findViewById(R.id.security);
 
-        //editTextAmount.setText(String.valueOf(mAmount));
-        mEditTextSecurity.addTextChangedListener(new TextWatcher() {
+        mEditTextSecurity.addTextChangedListener(new NumbericTextWatcher(mEditTextSecurity) {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
+            public void executeAfterTextChanged(String value) {
                 try {
-                    long temp = Long.valueOf(editable.toString());
+                    long temp = Long.valueOf(value);
                     if (temp < 0) {
                         throw new NumberFormatException();
                     } else {
@@ -479,22 +409,12 @@ public class ProjectEditFragment extends android.support.v4.app.Fragment
 
         mTrashLayout = view.findViewById(R.id.txtLayoutTrashCollection);
         mEditTextTrash = view.findViewById(R.id.trashCollention);
-        //editTextAmount.setText(String.valueOf(mAmount));
-        mEditTextTrash.addTextChangedListener(new TextWatcher() {
+
+        mEditTextTrash.addTextChangedListener(new NumbericTextWatcher(mEditTextTrash) {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
+            public void executeAfterTextChanged(String value) {
                 try {
-                    long temp = Long.valueOf(editable.toString());
+                    long temp = Long.valueOf(value);
                     if (temp < 0) {
                         throw new NumberFormatException();
                     } else {
@@ -513,22 +433,11 @@ public class ProjectEditFragment extends android.support.v4.app.Fragment
         mTvLayout = view.findViewById(R.id.txtLayoutTv);
         mEditTextTv = view.findViewById(R.id.tv);
 
-        //editTextAmount.setText(String.valueOf(mAmount));
-        mEditTextTv.addTextChangedListener(new TextWatcher() {
+        mEditTextTv.addTextChangedListener(new NumbericTextWatcher(mEditTextTv) {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
+            public void executeAfterTextChanged(String value) {
                 try {
-                    long temp = Long.valueOf(editable.toString());
+                    long temp = Long.valueOf(value);
                     if (temp < 0) {
                         throw new NumberFormatException();
                     } else {

@@ -54,7 +54,7 @@ public abstract class NumbericTextWatcher implements TextWatcher {
                 et.setSelection(et.getText().length() - 1);
             }
 
-            execureAfterTextChanged(v);
+            executeAfterTextChanged(v);
         } catch (NumberFormatException nfe) {
             // do nothing?
         } catch (ParseException e) {
@@ -64,7 +64,7 @@ public abstract class NumbericTextWatcher implements TextWatcher {
     }
 
 
-    public abstract void execureAfterTextChanged(String value);
+    public abstract void executeAfterTextChanged(String value);
 
     @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {

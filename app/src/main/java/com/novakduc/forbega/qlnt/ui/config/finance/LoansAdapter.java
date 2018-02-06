@@ -52,8 +52,8 @@ public final class LoansAdapter extends RecyclerView.Adapter<LoansAdapter.ViewHo
         date.setTime(loan.getLoanDate());
         DateFormat format = SimpleDateFormat.getDateInstance();
         holder.mTextViewStartDate.setText(format.format(date));
-        holder.mTextViewLoanAmount.setText(String.valueOf(ConverterUtilities.currencyUnitConverter(
-                loan.getAmount(), CurrencyUnit.MIL_BASE, 3)));
+        holder.mTextViewLoanAmount.setText(ConverterUtilities.currencyUnitConverterToString(
+                loan.getAmount(), CurrencyUnit.MIL_BASE, 3));
         holder.mTextViewInterestRate.setText(String.valueOf(loan.getInterestRate()));
         holder.mButtonDelete.setOnClickListener(new View.OnClickListener() {
             @Override
