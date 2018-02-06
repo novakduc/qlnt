@@ -21,6 +21,8 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.novakduc.forbega.qlnt.R;
+import com.novakduc.forbega.qlnt.data.database.ListViewProjectItem;
+import com.novakduc.forbega.qlnt.data.database.LoanAmount;
 import com.novakduc.forbega.qlnt.data.database.Project;
 import com.novakduc.forbega.qlnt.ui.ConfirmationDialogFragment;
 import com.novakduc.forbega.qlnt.ui.config.EditProjectActivity;
@@ -63,14 +65,23 @@ public class ProjectListFragment extends android.support.v4.app.Fragment
                 InjectorUtils.provideProjectListViewModelFactory(getActivity());
 
         mViewModel = ViewModelProviders.of(this, factory).get(ProjectListFragmentViewModel.class);
-        mViewModel.getProjects().observe(this, new Observer<List<Project>>() {
+        mViewModel.getProjects().observe(this, new Observer<List<ListViewProjectItem>>() {
             @Override
-            public void onChanged(@Nullable List<Project> projects) {
+            public void onChanged(@Nullable List<ListViewProjectItem> projects) {
                 if (projects != null) {
                     if (mProjectsRecyclerViewAdapter != null) {
                         mProjectsRecyclerViewAdapter.swapList(projects);
                         Log.d(LOG_TAG, "Project list changed");
                     }
+                }
+            }
+        });
+
+        mViewModel.getLoanAmounts().observe(this, new Observer<List<LoanAmount>>() {
+            @Override
+            public void onChanged(@Nullable List<LoanAmount> loanAmounts) {
+                if (loanAmounts != null) {
+                    mProjectsRecyclerViewAdapter.updateLoanAmounts(loanAmounts);
                 }
             }
         });

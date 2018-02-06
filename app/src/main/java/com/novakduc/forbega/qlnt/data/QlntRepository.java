@@ -8,7 +8,9 @@ import com.novakduc.baselibrary.AppExecutors;
 import com.novakduc.forbega.qlnt.data.database.AppDao;
 import com.novakduc.forbega.qlnt.data.database.Cost;
 import com.novakduc.forbega.qlnt.data.database.CostManager;
+import com.novakduc.forbega.qlnt.data.database.ListViewProjectItem;
 import com.novakduc.forbega.qlnt.data.database.Loan;
+import com.novakduc.forbega.qlnt.data.database.LoanAmount;
 import com.novakduc.forbega.qlnt.data.database.Project;
 import com.novakduc.forbega.qlnt.data.database.RoomForRent;
 import com.novakduc.forbega.qlnt.data.database.RoomList;
@@ -49,7 +51,7 @@ public class QlntRepository {
     }
 
 
-    public LiveData<List<Project>> getProjectList() {
+    public LiveData<List<ListViewProjectItem>> getProjectList() {
         return mAppDao.getAllProjects();
     }
 
@@ -159,5 +161,9 @@ public class QlntRepository {
                 mAppDao.updateProject(project);
             }
         });
+    }
+
+    public LiveData<List<LoanAmount>> getAllLoanAmount() {
+        return mAppDao.getAllLoanAmount();
     }
 }

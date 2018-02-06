@@ -54,8 +54,8 @@ public interface AppDao {
     Project getProject(long projectId);
 
     //Get all project
-    @Query("SELECT * FROM project")
-    LiveData<List<Project>> getAllProjects();
+    @Query("SELECT projectId, name, investmentAmount, startDate, yearDuration FROM project")
+    LiveData<List<ListViewProjectItem>> getAllProjects();
 
     //Insert a project to database
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -149,4 +149,7 @@ public interface AppDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(UnitPrice unitPrice);
+
+    @Query("SELECT amount, projectId FROM loan")
+    LiveData<List<LoanAmount>> getAllLoanAmount();
 }

@@ -12,8 +12,8 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.novakduc.forbega.qlnt.R;
-import com.novakduc.forbega.qlnt.data.database.Project;
-import com.novakduc.forbega.qlnt.data.database.RoomList;
+import com.novakduc.forbega.qlnt.data.database.ListViewProjectItem;
+import com.novakduc.forbega.qlnt.data.database.LoanAmount;
 import com.novakduc.forbega.qlnt.utilities.ConverterUtilities;
 import com.novakduc.forbega.qlnt.utilities.CurrencyUnit;
 
@@ -26,7 +26,8 @@ import java.util.List;
 public class ProjectsRecyclerViewAdapter
         extends RecyclerView.Adapter<ProjectsRecyclerViewAdapter.ViewHolder> {
 
-    private List<Project> mProjectList;
+    private List<ListViewProjectItem> mProjectList;
+    private List<LoanAmount> mLoanAmounts;
     private Context mContext;
     private ProjectListAdapterActionHandler mActionHandler;
 
@@ -36,12 +37,13 @@ public class ProjectsRecyclerViewAdapter
         mActionHandler = actionHandler;
     }
 
-    public Project getValueAt(int position) {
+    public ListViewProjectItem getValueAt(int position) {
         return mProjectList.get(position);
     }
 
-    public void swapList(List<Project> newList) {
+    public void swapList(List<ListViewProjectItem> newList) {
         mProjectList = newList;
+        calculateTotalDept();
         notifyDataSetChanged();
     }
 
@@ -55,57 +57,30 @@ public class ProjectsRecyclerViewAdapter
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-        final Project project = mProjectList.get(position);
+        final ListViewProjectItem project = mProjectList.get(position);
         holder.mNameTextView.setText(project.getName());
         holder.mDurationTextView.setText(String.valueOf(project.getStartYear()) + " - "
                 + String.valueOf(project.getEndYear()));
 
-        float v = 0;
-        String s = "0/0";
-        RoomList rooms = project.getRoomForRentList();
-        if (rooms != null) {
-            s = String.valueOf(project.getRoomForRentList().getNoOfProducingRoom()) + "/"
-                    + String.valueOf(project.getRoomForRentList().size());
-            if (project.getRoomForRentList().size() != 0) {
-                v = project.getRoomForRentList().getNoOfProducingRoom() / project.getRoomForRentList().size();
-            }
-        }
+        float v = (float) project.getRate();
+        String s = project.getNoOfProducingRoom() + "/" + project.getNoOfRoom();
+
         holder.mProduceRateTextView.setText(s);
         holder.mRatingBar.setRating(v);
 
-        long investmentAmount = project.getInvestmentAmount();
-        long totalLoanAmount = 0;
-        if (project.getLoanList() != null) {
-            totalLoanAmount = project.getLoanList().getTotalLoanAmount();
-        }
-        holder.mIncomeTextView.setText(String.valueOf(project.getTotalIncome()));
-        if (investmentAmount == 0) {
-            holder.mIncomeProgressBar.setProgress(100);
-            if (totalLoanAmount > 0) {
-                holder.mDeptProgressBar.setProgress(100);
-            } else {
-                holder.mDeptProgressBar.setProgress(0);
-            }
-
-            holder.mRevenueProgressBar.setProgress(100);
-        } else {
-            int incomePercentage = Math.round(project.getTotalIncome() * 100 / investmentAmount);
-            holder.mIncomeProgressBar.setProgress(incomePercentage);
-            int deptPercentage = Math.round((totalLoanAmount * 100 / investmentAmount));
-            holder.mDeptProgressBar.setProgress(deptPercentage);
-            long totalCostAmount = 0;
-            if (project.getCostManager() != null) {
-                totalCostAmount = project.getCostManager().getTotalAmount();
-            }
-            int revenuePercentage = Math.round((totalLoanAmount - totalCostAmount) / investmentAmount);
-            holder.mRevenueProgressBar.setProgress(revenuePercentage);
-        }
+        holder.mIncomeTextView.setText(String.valueOf(project.getIncome()));
+        holder.mIncomeProgressBar.setMax(1000);
+        holder.mIncomeProgressBar.setProgress(project.getIncomeProgress());
+        holder.mDeptProgressBar.setMax(1000);
+        holder.mDeptProgressBar.setProgress(project.getDebtProgress());
+        holder.mRevenueProgressBar.setMax(1000);
+        holder.mRevenueProgressBar.setProgress(project.getRevenueProgress());
 
         holder.mDeptTextView.setText(String.valueOf(ConverterUtilities.currencyUnitConverter(
-                totalLoanAmount, CurrencyUnit.MIL_BASE, 3)));
+                project.getDebt(), CurrencyUnit.MIL_BASE, 3)));
 
         holder.mRevenueTextView.setText(String.valueOf(ConverterUtilities.currencyUnitConverter(
-                project.getTotalIncome(), CurrencyUnit.MIL_BASE, 3)));
+                project.getIncome(), CurrencyUnit.MIL_BASE, 3)));
 
         holder.mDeleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -135,6 +110,29 @@ public class ProjectsRecyclerViewAdapter
             return 0;
         }
         return mProjectList.size();
+    }
+
+    public void updateLoanAmounts(List<LoanAmount> loanAmounts) {
+        mLoanAmounts = loanAmounts;
+        calculateTotalDept();
+        notifyDataSetChanged();
+    }
+
+    private void calculateTotalDept() {
+        if (mProjectList != null) {
+            if (mLoanAmounts != null) {
+                for (ListViewProjectItem project :
+                        mProjectList) {
+                    long total = 0;
+                    for (LoanAmount loan :
+                            mLoanAmounts) {
+                        if (loan.getProjectId() == project.getId())
+                            total += loan.getAmount();
+                    }
+                    project.setDebt(total);
+                }
+            }
+        }
     }
 
     //Handler interface to process actions applied on project

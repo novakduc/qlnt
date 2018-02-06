@@ -593,8 +593,7 @@ public class ProjectEditFragment extends android.support.v4.app.Fragment
         mEditTextDuration.setText(String.valueOf(mTempProject.getDuration()));
         mEditTextStartDate.setText(ConverterUtilities.calendarToString(mTempProject.getStartDate()));
         mEditTextEndDate.setText(ConverterUtilities.calendarToString(mTempProject.getEndDate()));
-        mEditTextInvestmentAmount.setText(String.valueOf(ConverterUtilities.currencyUnitConverter(
-                mTempProject.getInvestmentAmount(), CurrencyUnit.MIL_BASE, 3)));
+        mEditTextInvestmentAmount.setText(String.valueOf(mTempProject.getInvestmentAmount()));
         mLayoutAmount.setErrorEnabled(false);
     }
 

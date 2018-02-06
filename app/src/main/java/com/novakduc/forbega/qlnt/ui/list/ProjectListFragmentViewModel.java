@@ -4,7 +4,8 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModel;
 
 import com.novakduc.forbega.qlnt.data.QlntRepository;
-import com.novakduc.forbega.qlnt.data.database.Project;
+import com.novakduc.forbega.qlnt.data.database.ListViewProjectItem;
+import com.novakduc.forbega.qlnt.data.database.LoanAmount;
 
 import java.util.List;
 
@@ -13,13 +14,15 @@ import java.util.List;
  */
 
 public class ProjectListFragmentViewModel extends ViewModel {
-    private LiveData<List<Project>> mProjects;
+    private LiveData<List<ListViewProjectItem>> mProjects;
+    private LiveData<List<LoanAmount>> mLoanAmounts;
     private QlntRepository mRepository;
 
 
     public ProjectListFragmentViewModel(final QlntRepository repository) {
         mRepository = repository;
         mProjects = repository.getProjectList();
+        mLoanAmounts = repository.getAllLoanAmount();
 //        //Test
 //        //Test should be removed
 //        AppExecutors.getInstance().diskIO().execute(new Runnable() {
@@ -52,8 +55,12 @@ public class ProjectListFragmentViewModel extends ViewModel {
 //        });
     }
 
-    public LiveData<List<Project>> getProjects() {
+    public LiveData<List<ListViewProjectItem>> getProjects() {
         return mProjects;
+    }
+
+    public LiveData<List<LoanAmount>> getLoanAmounts() {
+        return mLoanAmounts;
     }
 
     public void deleteProject(long projectId) {

@@ -6,6 +6,7 @@ import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * Created by n.thanh on 3/29/2017.
@@ -81,6 +82,13 @@ public class LoanList extends MyArrayList<Loan> implements ItemContainer<Loan> {
     public boolean add(Loan e) {
         boolean b = super.add(e);
         e.setItemContainer(this);
+        this.totalLoanAmount = super.getTotalAmount();
+        return b;
+    }
+
+    @Override
+    public boolean addAll(Collection<? extends Loan> c) {
+        boolean b = super.addAll(c);
         this.totalLoanAmount = super.getTotalAmount();
         return b;
     }
