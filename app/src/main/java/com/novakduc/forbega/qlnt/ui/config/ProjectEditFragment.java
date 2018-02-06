@@ -27,6 +27,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.novakduc.baselibrary.NumbericTextWatcher;
 import com.novakduc.forbega.qlnt.R;
 import com.novakduc.forbega.qlnt.data.database.Loan;
 import com.novakduc.forbega.qlnt.data.database.LoanList;
@@ -267,23 +268,42 @@ public class ProjectEditFragment extends android.support.v4.app.Fragment
         mLayoutAmount = view.findViewById(R.id.txtLayoutInvestment);
         mLayoutAmount.setErrorEnabled(false);
         mEditTextInvestmentAmount = view.findViewById(R.id.investmentAmount);
+
         mEditTextInvestmentAmount.setFocusableInTouchMode(false);
 
-        mEditTextInvestmentAmount.addTextChangedListener(new TextWatcher() {
+//        mEditTextInvestmentAmount.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+//
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+//
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable editable) {
+//                try {
+//                    mAmount = Long.valueOf(editable.toString());
+//                    if (mAmount < 0) {
+//                        throw new NumberFormatException();
+//                    } else {
+//                        mLayoutAmount.setErrorEnabled(false);
+//                    }
+//                } catch (NumberFormatException e) {
+//                    mLayoutAmount.setError(getString(R.string.invesment_amount_error));
+//                    mLayoutAmount.setErrorEnabled(true);
+//                    mAmount = -1;
+//                }
+//            }
+//        });
+
+        mEditTextInvestmentAmount.addTextChangedListener(new NumbericTextWatcher(mEditTextInvestmentAmount) {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
+            public void execureAfterTextChanged(String value) {
                 try {
-                    mAmount = Long.valueOf(editable.toString());
+                    mAmount = Long.valueOf(value);
                     if (mAmount < 0) {
                         throw new NumberFormatException();
                     } else {
@@ -593,7 +613,8 @@ public class ProjectEditFragment extends android.support.v4.app.Fragment
         mEditTextDuration.setText(String.valueOf(mTempProject.getDuration()));
         mEditTextStartDate.setText(ConverterUtilities.calendarToString(mTempProject.getStartDate()));
         mEditTextEndDate.setText(ConverterUtilities.calendarToString(mTempProject.getEndDate()));
-        mEditTextInvestmentAmount.setText(String.valueOf(mTempProject.getInvestmentAmount()));
+        String s = String.valueOf(mTempProject.getInvestmentAmount());
+        mEditTextInvestmentAmount.setText(s);
         mLayoutAmount.setErrorEnabled(false);
     }
 

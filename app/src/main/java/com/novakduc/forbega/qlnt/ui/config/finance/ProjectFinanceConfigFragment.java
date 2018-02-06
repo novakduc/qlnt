@@ -13,8 +13,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -26,6 +24,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.novakduc.baselibrary.NumbericTextWatcher;
 import com.novakduc.forbega.qlnt.R;
 import com.novakduc.forbega.qlnt.data.database.Loan;
 import com.novakduc.forbega.qlnt.data.database.LoanList;
@@ -109,22 +108,12 @@ public class ProjectFinanceConfigFragment extends android.support.v4.app.Fragmen
         mCallBack = (UpdateListener) getActivity();
         mLayoutAmount = view.findViewById(R.id.txtLayoutInvestment);
         final EditText editTextAmount = view.findViewById(R.id.investmentAmount);
-        //editTextAmount.setText(String.valueOf(mAmount));
-        editTextAmount.addTextChangedListener(new TextWatcher() {
+
+        editTextAmount.addTextChangedListener(new NumbericTextWatcher(editTextAmount) {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
+            public void execureAfterTextChanged(String value) {
                 try {
-                    mAmount = Long.valueOf(editable.toString());
+                    mAmount = Long.valueOf(value);
                     if (mAmount < 0) {
                         throw new NumberFormatException();
                     } else {
