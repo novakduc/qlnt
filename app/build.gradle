@@ -27,6 +27,11 @@ android {
         targetCompatibility 1.7
         sourceCompatibility 1.7
     }
+
+    //Use data binding
+    dataBinding{
+        enabled = true
+    }
 }
 
 //apply plugin: 'com.neenbedankt.android-apt'

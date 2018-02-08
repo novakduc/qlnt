@@ -33,6 +33,10 @@
             android:name=".ui.config.EditProjectActivity"
             android:label="@string/txtViewProjectEditTitle"
             android:theme="@style/AppTheme.NoActionBarNotTransparent"></activity>
+        <activity
+            android:name=".ui.detail.ProjectDetailActivity"
+            android:label="@string/txtProjectName"
+            android:theme="@style/AppTheme.NoActionBarNotTransparent"></activity>
     </application>
 
 </manifest>

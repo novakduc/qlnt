@@ -28,6 +28,7 @@ import com.novakduc.forbega.qlnt.ui.ConfirmationDialogFragment;
 import com.novakduc.forbega.qlnt.ui.config.EditProjectActivity;
 import com.novakduc.forbega.qlnt.ui.config.ProjectConfigurationActivity;
 import com.novakduc.forbega.qlnt.ui.config.ProjectEditFragment;
+import com.novakduc.forbega.qlnt.ui.detail.ProjectDetailActivity;
 import com.novakduc.forbega.qlnt.utilities.InjectorUtils;
 
 import java.util.ArrayList;
@@ -42,9 +43,9 @@ import static android.content.Context.MODE_PRIVATE;
 public class ProjectListFragment extends android.support.v4.app.Fragment
         implements ProjectsRecyclerViewAdapter.ProjectListAdapterActionHandler {
     public static final String PREF_QLNT = "com.novak.forbequ.qlnt";
+    public static final String ACTIVE_PROJECT_ID = "active_project_id";
     // TODO: 9/29/2016
     private static final String LOG_TAG = ProjectListFragment.class.getSimpleName();
-    private static final String ACTIVE_PROJECT_ID = "active_project_id";
     private static final int PROJECT_CONFIG_RESULT = 0;
     ProjectsRecyclerViewAdapter mProjectsRecyclerViewAdapter;
     private long mActiveProject = -1;
@@ -173,6 +174,9 @@ public class ProjectListFragment extends android.support.v4.app.Fragment
 
     @Override
     public void onItemClick(long id) {
-        Log.d(LOG_TAG, "Clicked project item with id: " + id);
+        Log.d(LOG_TAG, "Clicked on project item with id: " + id);
+        Intent intent = new Intent(getActivity(), ProjectDetailActivity.class);
+        intent.putExtra(ACTIVE_PROJECT_ID, mActiveProject);
+        startActivity(intent);
     }
 }

@@ -64,7 +64,7 @@
     <string name="invalid_input_error">invalid input</string>
     <string name="currentPageDiscard">Discard content on current page?</string>
     <string name="add_loan_bt">ADD LOAN</string>
-    <string name="project_create_confirm">Final Confirm</string>
+    <string name="project_create_confirm">Project Information</string>
     <string name="financeConfigFragmentTag">Finance Config Fragment Tag</string>
     <string name="millionShort">mil</string>
     <string name="projectCopyError">Error on copying project</string>
@@ -72,4 +72,5 @@
     <string name="annouce_project_saving">Saving project</string>
     <string name="txtViewProjectEditTitle">Project Information</string>
     <string name="announce_project_not_save">Discard saving project?</string>
+    <string name="txtProjectName">Product Name</string>
 </resources>
