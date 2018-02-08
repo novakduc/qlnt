@@ -4,8 +4,6 @@ import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 
-import java.util.Calendar;
-
 /**
  * Created by n.thanh on 9/21/2016.
  */
@@ -123,9 +121,12 @@ public class UnitPrice implements Cloneable {
     }
 
     @Override
-    protected Object clone() throws CloneNotSupportedException {
+    public Object clone() throws CloneNotSupportedException {
         UnitPrice unitPrice = (UnitPrice) super.clone();
-        unitPrice.id = Calendar.getInstance().getTimeInMillis();
         return unitPrice;
+    }
+
+    public void setProjectId(long newProjectId) {
+        id = newProjectId;
     }
 }

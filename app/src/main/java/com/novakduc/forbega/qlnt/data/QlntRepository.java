@@ -132,7 +132,40 @@ public class QlntRepository {
             public void run() {
                 try {
                     Project project = (Project) mAppDao.getProject(projectId).clone();
-                    mAppDao.insert(project);
+                    long newProjectId = mAppDao.insert(project);
+
+                    //Clone unitprice
+                    UnitPrice unitPrice = mAppDao.getUnitPrice(projectId);
+                    if (unitPrice != null) {
+                        UnitPrice newUnitPrice = (UnitPrice) unitPrice.clone();
+                        newUnitPrice.setProjectId(newProjectId);
+                        mAppDao.insert(newUnitPrice);
+                    }
+
+                    //Clone loan list
+                    List<Loan> loanList = mAppDao.getLoanList(projectId);
+                    if (loanList != null) {
+                        Loan tmpLoan;
+                        for (Loan l :
+                                loanList) {
+                            tmpLoan = (Loan) l.clone();
+                            tmpLoan.setProjectId(newProjectId);
+                            mAppDao.insert(tmpLoan);
+                        }
+                    }
+
+                    //Clone room for rent list
+                    List<RoomForRent> roomForRents = mAppDao.getRoomList(projectId);
+                    if (roomForRents != null) {
+                        RoomForRent tmpRoomForRent;
+                        for (RoomForRent r :
+                                roomForRents) {
+                            tmpRoomForRent = (RoomForRent) r.clone();
+                            tmpRoomForRent.setProjectId(newProjectId);
+                            mAppDao.insert(tmpRoomForRent);
+                        }
+                    }
+
                 } catch (CloneNotSupportedException e) {
                     e.printStackTrace();
                     Log.e(LOG_TAG, e.getLocalizedMessage());

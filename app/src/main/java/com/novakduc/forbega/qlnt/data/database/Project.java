@@ -52,10 +52,6 @@ public class Project implements Cloneable, ItemWithId {
         return new Project(name, address, yearDuration);
     }
 
-    public boolean createRoom(String name, double area, long charge) {
-        return mRoomForRentList.add(new RoomForRent(name, area, charge));
-    }
-
     @Override
     public String toString() {
         if (name == null) {
@@ -129,28 +125,28 @@ public class Project implements Cloneable, ItemWithId {
     @Override
     public Object clone() throws CloneNotSupportedException {
         Project project = (Project) super.clone();
-        project.setProjectId(Calendar.getInstance().getTimeInMillis());
-        if (mUnitPrice != null) {
-            project.setUnitPrice((UnitPrice) mUnitPrice.clone());
-        }
-        //Clone loan list
-        if (mLoanList != null) {
-            LoanList loanList = LoanList.getInstance(project.getId());
-            for (Loan l :
-                    mLoanList) {
-                loanList.add((Loan) l.clone());
-            }
-            project.setLoanList(loanList);
-        }
-        //Clone room list
-        if (mRoomForRentList != null) {
-            RoomList roomForRents = new RoomList(project.getId());
-            for (RoomForRent roomForRent :
-                    mRoomForRentList) {
-                roomForRents.add((RoomForRent) roomForRent.clone());
-            }
-            project.setRoomForRentList(roomForRents);
-        }
+        project.setProjectId(0);
+//        if (mUnitPrice != null) {
+//            project.setUnitPrice((UnitPrice) mUnitPrice.clone());
+//        }
+//        //Clone loan list
+//        if (mLoanList != null) {
+//            LoanList loanList = LoanList.getInstance(project.getId());
+//            for (Loan l :
+//                    mLoanList) {
+//                loanList.add((Loan) l.clone());
+//            }
+//            project.setLoanList(loanList);
+//        }
+//        //Clone room list
+//        if (mRoomForRentList != null) {
+//            RoomList roomForRents = new RoomList(project.getId());
+//            for (RoomForRent roomForRent :
+//                    mRoomForRentList) {
+//                roomForRents.add((RoomForRent) roomForRent.clone());
+//            }
+//            project.setRoomForRentList(roomForRents);
+//        }
 
         return project;
     }

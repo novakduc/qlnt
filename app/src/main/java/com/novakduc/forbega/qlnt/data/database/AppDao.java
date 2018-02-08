@@ -152,4 +152,7 @@ public interface AppDao {
 
     @Query("SELECT amount, projectId FROM loan")
     LiveData<List<LoanAmount>> getAllLoanAmount();
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    long insert(RoomForRent tmpRoomForRent);
 }

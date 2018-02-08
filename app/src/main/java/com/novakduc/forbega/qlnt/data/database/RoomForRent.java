@@ -17,25 +17,37 @@ public class RoomForRent implements Cloneable, ItemWithId {
     private double area;
     private long charge;
     private boolean available;
+    private long projectId;
     @Ignore
     private RoomServiceList<RoomService> roomServices;
 
     //For Room only
-    public RoomForRent(long id, String name, double area, long charge, boolean available) {
+    public RoomForRent(long id, String name, double area, long charge, boolean available, long projectId) {
         this.id = id;
         this.name = name;
         this.area = area;
         this.charge = charge;
         this.available = available;
+        this.projectId = projectId;
     }
 
     @Ignore
-    public RoomForRent(String name, double area, long charge) {
+    private RoomForRent(long projectId, String name, double area, long charge) {
+        this.projectId = projectId;
         this.name = name;
         this.area = area;
         this.charge = charge;
         available = true;
         roomServices = new RoomServiceList<RoomService>(this.id);
+    }
+
+    @Ignore
+    private RoomForRent(long projectId) {
+        this.projectId = projectId;
+    }
+
+    public RoomForRent getInstance(long projectId) {
+        return new RoomForRent(projectId);
     }
 
     @Override
@@ -96,8 +108,17 @@ public class RoomForRent implements Cloneable, ItemWithId {
     }
 
     @Override
-    protected Object clone() throws CloneNotSupportedException {
-        // TODO: 9/30/2016 room clone
-        return super.clone();
+    public Object clone() throws CloneNotSupportedException {
+        RoomForRent roomForRent = (RoomForRent) super.clone();
+        roomForRent.setId(0);
+        return roomForRent;
+    }
+
+    public long getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(long newProjectId) {
+        this.projectId = newProjectId;
     }
 }

@@ -269,7 +269,7 @@ public class ProjectEditFragment extends android.support.v4.app.Fragment
         mLayoutAmount.setErrorEnabled(false);
         mEditTextInvestmentAmount = view.findViewById(R.id.investmentAmount);
 
-        mEditTextInvestmentAmount.setFocusableInTouchMode(false);
+        //mEditTextInvestmentAmount.setFocusableInTouchMode(false);
 
         mEditTextInvestmentAmount.addTextChangedListener(new NumbericTextWatcher(mEditTextInvestmentAmount) {
             @Override
@@ -518,12 +518,17 @@ public class ProjectEditFragment extends android.support.v4.app.Fragment
 
     private void bindProjectToUI() {
         mEditTextName.setText(mTempProject.getName());
+        mName = mTempProject.getName();
         mEditTextAddress.setText(mTempProject.getAddress());
+        mAddress = mTempProject.getAddress();
         mEditTextDuration.setText(String.valueOf(mTempProject.getDuration()));
+        mDuration = mTempProject.getDuration();
         mEditTextStartDate.setText(ConverterUtilities.calendarToString(mTempProject.getStartDate()));
+        mStartDate = mTempProject.getStartDate();
         mEditTextEndDate.setText(ConverterUtilities.calendarToString(mTempProject.getEndDate()));
         String s = String.valueOf(mTempProject.getInvestmentAmount());
         mEditTextInvestmentAmount.setText(s);
+        mAmount = mTempProject.getInvestmentAmount();
         mLayoutAmount.setErrorEnabled(false);
     }
 
@@ -551,6 +556,10 @@ public class ProjectEditFragment extends android.support.v4.app.Fragment
     }
 
     private void nextAction() {
+        mTempProject.setName(mName);
+        mTempProject.setAddress(mAddress);
+        mTempProject.setDuration(mDuration);
+        mTempProject.setInvestmentAmount(mAmount);
         mFinanceConfigViewModel.updateProject(mTempProject);
         mUnitPriceConfigFragmentViewModel.updateUnitPrice(mTempUnitPrice);
         mCallBack.saveProject();

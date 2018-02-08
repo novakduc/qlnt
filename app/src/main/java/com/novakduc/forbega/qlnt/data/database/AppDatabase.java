@@ -12,7 +12,7 @@ import android.content.Context;
 
 @Database(entities = {Cost.class, CostManager.class, Loan.class, LoanList.class,
         Project.class, RoomForRent.class, RoomList.class, RoomService.class,
-        RoomServiceList.class, UnitPrice.class}, version = 3, exportSchema = true)
+        RoomServiceList.class, UnitPrice.class}, version = 4, exportSchema = true)
 @TypeConverters(CostTypeConverter.class)
 public abstract class AppDatabase extends RoomDatabase {
     private static final String DB_NAME = "com.novakduc.forbega.database";

@@ -56,9 +56,15 @@ public class Loan extends Observable implements Cloneable, ItemWithId {
         return projectId;
     }
 
+    public void setProjectId(long newProjectId) {
+        this.projectId = newProjectId;
+    }
+
     @Override
     public Object clone() throws CloneNotSupportedException {
-        return super.clone();
+        Loan loan = (Loan) super.clone();
+        loan.setId(0);
+        return loan;
     }
 
     //Getter setter
