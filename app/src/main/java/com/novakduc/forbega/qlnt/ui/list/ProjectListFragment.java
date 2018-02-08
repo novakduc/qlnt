@@ -170,4 +170,9 @@ public class ProjectListFragment extends android.support.v4.app.Fragment
         intent.putExtra(ProjectEditFragment.TEMP_PROJECT_ID, projectId);
         startActivity(intent);
     }
+
+    @Override
+    public void onItemClick(long id) {
+        Log.d(LOG_TAG, "Clicked project item with id: " + id);
+    }
 }

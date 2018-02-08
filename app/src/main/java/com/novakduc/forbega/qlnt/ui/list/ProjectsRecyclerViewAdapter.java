@@ -103,6 +103,13 @@ public class ProjectsRecyclerViewAdapter
                 mActionHandler.onEditAction(project.getId());
             }
         });
+
+        holder.mItemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mActionHandler.onItemClick(project.getId());
+            }
+        });
     }
 
     @Override
@@ -143,22 +150,23 @@ public class ProjectsRecyclerViewAdapter
         void onCopyAction(long projectId);
 
         void onEditAction(long projectId);
+
+        void onItemClick(long id);
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public final TextView mNameTextView;
-        public final TextView mDurationTextView;
-        public final TextView mProduceRateTextView;
-        public final RatingBar mRatingBar;
-        public final TextView mIncomeTextView;
-        public final ProgressBar mIncomeProgressBar;
-        public final TextView mDeptTextView;
-        public final ProgressBar mDeptProgressBar;
-        public final TextView mRevenueTextView;
-        public final ProgressBar mRevenueProgressBar;
-        public final Button mDeleteButton, mCopyButton, mEditButton;
-
-        public String mProjectName;
+        private final TextView mNameTextView;
+        private final TextView mDurationTextView;
+        private final TextView mProduceRateTextView;
+        private final RatingBar mRatingBar;
+        private final TextView mIncomeTextView;
+        private final ProgressBar mIncomeProgressBar;
+        private final TextView mDeptTextView;
+        private final ProgressBar mDeptProgressBar;
+        private final TextView mRevenueTextView;
+        private final ProgressBar mRevenueProgressBar;
+        private final Button mDeleteButton, mCopyButton, mEditButton;
+        private final View mItemView;
 
         public ViewHolder(View view) {
             super(view);
@@ -175,6 +183,7 @@ public class ProjectsRecyclerViewAdapter
             mDeleteButton = view.findViewById(R.id.btDelete);
             mEditButton = view.findViewById(R.id.btEdit);
             mCopyButton = view.findViewById(R.id.btCopy);
+            mItemView = view;
         }
 
         @Override
