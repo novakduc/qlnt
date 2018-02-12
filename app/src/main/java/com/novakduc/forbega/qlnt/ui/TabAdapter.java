@@ -4,6 +4,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import com.novakduc.forbega.qlnt.ui.list.ProjectListFragment;
+
 /**
  * Created by Novak on 9/25/2016.
  */
@@ -19,11 +21,12 @@ public class TabAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        /*
-        if (position == 0) {
-            return new ProjectListFragment();
+        switch (position) {
+            case 0:
+                return new ProjectListFragment();
+            case 1:
+                //return new ProjectDetailFragment();
         }
-        */
         TabPosition tabPosition = TabPosition.values()[position];
         return TabFragment.getInstance(tabPosition);
     }
