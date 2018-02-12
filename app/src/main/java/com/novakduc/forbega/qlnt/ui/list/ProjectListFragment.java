@@ -44,9 +44,7 @@ public class ProjectListFragment extends android.support.v4.app.Fragment
         implements ProjectsRecyclerViewAdapter.ProjectListAdapterActionHandler {
     public static final String PREF_QLNT = "com.novak.forbequ.qlnt";
     public static final String ACTIVE_PROJECT_ID = "active_project_id";
-    // TODO: 9/29/2016
     private static final String LOG_TAG = ProjectListFragment.class.getSimpleName();
-    private static final int PROJECT_CONFIG_RESULT = 0;
     ProjectsRecyclerViewAdapter mProjectsRecyclerViewAdapter;
     private long mActiveProject = -1;
     private ProjectListFragmentViewModel mViewModel;
