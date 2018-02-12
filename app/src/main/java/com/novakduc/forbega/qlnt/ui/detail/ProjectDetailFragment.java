@@ -93,7 +93,7 @@ public class ProjectDetailFragment extends android.support.v4.app.Fragment {
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         final ViewPager viewPager = view.findViewById(R.id.pager);
-        final TabAdapter tabAdapter = new TabAdapter(getFragmentManager(), numberOfPage);
+        final TabAdapter tabAdapter = new TabAdapter(getFragmentManager(), numberOfPage, mActiveProject);
         viewPager.setAdapter(tabAdapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(onTabSelectedListener(viewPager));

@@ -12,18 +12,19 @@ import com.novakduc.forbega.qlnt.ui.detail.item.ItemListFragment;
 
 public class TabAdapter extends FragmentPagerAdapter {
     private int numberOfPage;
+    private long mActivieProjectId;
 
-    public TabAdapter(FragmentManager fm, int numberOfPage) {
+    public TabAdapter(FragmentManager fm, int numberOfPage, long activeProjectId) {
         super(fm);
         this.numberOfPage = numberOfPage;
-
+        this.mActivieProjectId = activeProjectId;
     }
 
     @Override
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return new ItemListFragment();
+                return ItemListFragment.getInstance(mActivieProjectId);
             case 1:
                 //return new ProjectDetailFragment();
         }
