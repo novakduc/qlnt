@@ -1,6 +1,5 @@
 package com.novakduc.forbega.qlnt.ui.detail;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -17,7 +16,6 @@ import android.view.ViewGroup;
 
 import com.novakduc.forbega.qlnt.R;
 import com.novakduc.forbega.qlnt.ui.TabAdapter;
-import com.novakduc.forbega.qlnt.ui.list.ProjectListFragment;
 
 /**
  * Created by n.thanh on 10/12/2016.
@@ -27,17 +25,24 @@ public class ProjectDetailFragment extends android.support.v4.app.Fragment {
     public static final String PREF_QLNT = "com.novak.forbequ.qlnt";
     private static final String ACTIVE_PROJECT_ID = "active_project_id";
     private final int numberOfPage = 3;
-    private long mActiveProject = -1;
+    private long mActiveProjectId = -1;
     // TODO: 10/12/2016
 
+
+    public static ProjectDetailFragment newInstance(long activeProjectId) {
+        Bundle bundle = new Bundle();
+        bundle.putLong(ACTIVE_PROJECT_ID, activeProjectId);
+        ProjectDetailFragment fragment = new ProjectDetailFragment();
+        fragment.setArguments(bundle);
+        return fragment;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
 
-        mActiveProject = getActivity().getIntent().getLongExtra(
-                ProjectListFragment.ACTIVE_PROJECT_ID, -1);
+        mActiveProjectId = getArguments().getLong(ACTIVE_PROJECT_ID);
     }
 
     @Override
@@ -73,8 +78,8 @@ public class ProjectDetailFragment extends android.support.v4.app.Fragment {
         }
 
         //Load active project ID
-        SharedPreferences preferences = getActivity().getSharedPreferences(PREF_QLNT, 0);
-        mActiveProject = preferences.getLong(ACTIVE_PROJECT_ID, -1);
+//        SharedPreferences preferences = getActivity().getSharedPreferences(PREF_QLNT, 0);
+//        mActiveProjectId = preferences.getLong(ACTIVE_PROJECT_ID, -1);
 
         //Add tabs
         TabLayout tabLayout = view.findViewById(R.id.tab_layout);
@@ -93,7 +98,7 @@ public class ProjectDetailFragment extends android.support.v4.app.Fragment {
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         final ViewPager viewPager = view.findViewById(R.id.pager);
-        final TabAdapter tabAdapter = new TabAdapter(getFragmentManager(), numberOfPage, mActiveProject);
+        final TabAdapter tabAdapter = new TabAdapter(getFragmentManager(), numberOfPage, mActiveProjectId);
         viewPager.setAdapter(tabAdapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(onTabSelectedListener(viewPager));
