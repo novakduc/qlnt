@@ -1,4 +1,4 @@
-package com.novakduc.forbega.qlnt.ui.detail;
+package com.novakduc.forbega.qlnt.ui.config;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;

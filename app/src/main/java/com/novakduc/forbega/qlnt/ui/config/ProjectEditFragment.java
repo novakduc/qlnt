@@ -41,7 +41,6 @@ import com.novakduc.forbega.qlnt.ui.config.finance.loan.LoanDeclareActivity;
 import com.novakduc.forbega.qlnt.ui.config.finance.loan.LoanDeclareFragment;
 import com.novakduc.forbega.qlnt.ui.config.unitprice.UnitPriceConfigFragmentViewModel;
 import com.novakduc.forbega.qlnt.ui.config.unitprice.UnitPriceConfigViewModelFactory;
-import com.novakduc.forbega.qlnt.ui.detail.DatePickerFragment;
 import com.novakduc.forbega.qlnt.utilities.ConverterUtilities;
 import com.novakduc.forbega.qlnt.utilities.CurrencyUnit;
 import com.novakduc.forbega.qlnt.utilities.InjectorUtils;

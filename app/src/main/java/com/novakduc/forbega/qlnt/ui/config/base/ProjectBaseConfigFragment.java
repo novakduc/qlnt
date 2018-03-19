@@ -26,9 +26,9 @@ import android.widget.EditText;
 
 import com.novakduc.forbega.qlnt.R;
 import com.novakduc.forbega.qlnt.data.database.Project;
+import com.novakduc.forbega.qlnt.ui.config.DatePickerFragment;
 import com.novakduc.forbega.qlnt.ui.config.UpdateListener;
 import com.novakduc.forbega.qlnt.ui.config.finance.ProjectFinanceConfigFragment;
-import com.novakduc.forbega.qlnt.ui.detail.DatePickerFragment;
 import com.novakduc.forbega.qlnt.utilities.ConverterUtilities;
 import com.novakduc.forbega.qlnt.utilities.InjectorUtils;
 
