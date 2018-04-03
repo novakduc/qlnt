@@ -22,6 +22,7 @@ import com.novakduc.forbega.qlnt.R;
 
 public class ProjectDetailFragment extends android.support.v4.app.Fragment {
     public static final String PREF_QLNT = "com.novak.forbequ.qlnt";
+    private static final String LOG_TAG = ProjectDetailFragment.class.getSimpleName();
     private static final String ACTIVE_PROJECT_ID = "active_project_id";
     private final int numberOfPage = 3;
     private long mActiveProjectId = -1;

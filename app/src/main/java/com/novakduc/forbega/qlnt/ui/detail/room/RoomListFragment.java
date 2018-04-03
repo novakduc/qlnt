@@ -1,10 +1,10 @@
 package com.novakduc.forbega.qlnt.ui.detail.room;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,8 +15,6 @@ import com.novakduc.forbega.qlnt.data.database.Project;
 import com.novakduc.forbega.qlnt.ui.list.ProjectListFragmentViewModel;
 
 import java.util.ArrayList;
-
-import static android.content.Context.MODE_PRIVATE;
 
 /**
  * Created by n.thanh on 9/29/2016.
@@ -45,7 +43,13 @@ public class RoomListFragment extends android.support.v4.app.Fragment
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (savedInstanceState != null) {
+            // TODO: 4/3/2018 load active project id
+        } else {
+            mActiveProject = getArguments().getLong(ACTIVE_PROJECT_ID);
+        }
 
+        Log.d(LOG_TAG, String.valueOf(mActiveProject));
     }
 
     private void bindToUI(Project[] projects) {
@@ -57,10 +61,10 @@ public class RoomListFragment extends android.support.v4.app.Fragment
         super.onStop();
 
         //Save active project ID
-        SharedPreferences preferences = getActivity().getSharedPreferences(PREF_QLNT, MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putLong(ACTIVE_PROJECT_ID, mActiveProject);
-        editor.apply();
+//        SharedPreferences preferences = getActivity().getSharedPreferences(PREF_QLNT, MODE_PRIVATE);
+//        SharedPreferences.Editor editor = preferences.edit();
+//        editor.putLong(ACTIVE_PROJECT_ID, mActiveProject);
+//        editor.apply();
     }
 
     @Nullable
