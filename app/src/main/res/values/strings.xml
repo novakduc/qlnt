@@ -78,4 +78,11 @@
     <string name="btCheckOut">Check Out</string>
     <string name="inputRoomNameHint">room name</string>
     <string name="inputRoomRentalPriceHint">monthly rental fee vnd/month</string>
+    <string name="guestList">Guest</string>
+    <string name="add_guest_bt">Add Guest</string>
+    <string name="inputElectricInitIndexHint">Elec. initial index</string>
+    <string name="inputWaterInitIndexHint">Water initial index</string>
+    <string name="internet_label">internet</string>
+    <string name="TV_label">TV cable</string>
+    <string name="inputDepositHint">Deposit amount</string>
 </resources>
