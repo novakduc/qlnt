@@ -13,18 +13,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <LinearLayout
-            android:id="@+id/layoutDepositStartDate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:orientation="horizontal"
-            app:layout_constraintTop_toBottomOf="@id/appbarSection">
-
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/txtLayoutDeposit"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="5"
                 android:background="@color/windowBackgroundColor"
@@ -32,7 +23,8 @@
                 android:paddingBottom="@dimen/paddingBottom"
                 android:paddingEnd="@dimen/paddingEnd"
                 android:paddingStart="@dimen/paddingStart"
-                android:paddingTop="@dimen/paddingTop">
+                android:paddingTop="@dimen/paddingTop"
+                app:layout_constraintTop_toBottomOf="@id/appbarSection">
 
                 <android.support.design.widget.TextInputEditText
                     android:id="@+id/depositAmount"
@@ -42,6 +34,16 @@
                     android:hint="@string/inputDepositHint"
                     android:inputType="number" />
             </android.support.design.widget.TextInputLayout>
+
+        <LinearLayout
+            android:id="@+id/layoutBillDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/txtLayoutDeposit">
+
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/txtLayoutStartDate"
@@ -61,23 +63,11 @@
                     android:inputType="date" />
             </android.support.design.widget.TextInputLayout>
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/layoutBillDate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:orientation="horizontal"
-            app:layout_constraintTop_toBottomOf="@id/layoutDepositStartDate">
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
                 android:paddingStart="@dimen/paddingStart"
+                android:layout_gravity="center_vertical"
                 android:text="@string/billDate"
                 android:textSize="20sp" />
 
