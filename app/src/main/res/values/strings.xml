@@ -85,5 +85,5 @@
     <string name="internet_label">internet</string>
     <string name="TV_label">TV cable</string>
     <string name="inputDepositHint">Deposit amount</string>
-    <string name="billDate">Bill Date</string>
+    <string name="billDate">Bill Date: </string>
 </resources>

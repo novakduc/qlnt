@@ -64,13 +64,40 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/layoutBillDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/layoutDepositStartDate">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:paddingStart="@dimen/paddingStart"
+                android:text="@string/billDate"
+                android:textSize="20sp" />
+
+            <Spinner
+                android:id="@+id/spinnerBillDate"
+                android:layout_width="48dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:prompt="@string/billDate" />
+
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/layoutWaterElectric"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:orientation="horizontal"
-            app:layout_constraintTop_toBottomOf="@id/layoutDepositStartDate">
+            app:layout_constraintTop_toBottomOf="@id/layoutBillDate">
 
             <android.support.v7.widget.AppCompatImageView
                 android:id="@+id/electricalIcon"
@@ -141,7 +168,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_weight="2"
                 android:text="@string/internet_label"
-                android:textSize="16sp" />
+                android:textSize="20sp" />
 
             <CheckBox
                 android:id="@+id/checkBoxTv"
@@ -155,30 +182,14 @@
                 android:layout_gravity="center_vertical"
                 android:layout_weight="2"
                 android:text="@string/TV_label"
-                android:textSize="16sp" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_weight="2"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:text="@string/billDate"
-                android:textSize="16sp" />
-
-            <Spinner
-                android:id="@+id/spinnerBillDate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:prompt="@string/billDate" />
+                android:textSize="20sp" />
 
         </LinearLayout>
 
         <View
             android:id="@+id/divider"
             style="@style/Divider"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/layoutServices" />
 
         <LinearLayout
             android:id="@+id/layoutAddGuest"
