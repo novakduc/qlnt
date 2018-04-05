@@ -141,7 +141,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_weight="2"
                 android:text="@string/internet_label"
-                android:textSize="20sp" />
+                android:textSize="16sp" />
 
             <CheckBox
                 android:id="@+id/checkBoxTv"
@@ -155,7 +155,21 @@
                 android:layout_gravity="center_vertical"
                 android:layout_weight="2"
                 android:text="@string/TV_label"
-                android:textSize="20sp" />
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="@string/billDate"
+                android:textSize="16sp" />
+
+            <Spinner
+                android:id="@+id/spinnerBillDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:prompt="@string/billDate"></Spinner>
 
         </LinearLayout>
 
