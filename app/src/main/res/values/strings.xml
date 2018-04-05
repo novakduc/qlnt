@@ -74,4 +74,8 @@
     <string name="announce_project_not_save">Discard saving project?</string>
     <string name="txtProjectName">Product Name</string>
     <string name="no_room_announcement">There is no room. Click add room button.</string>
+    <string name="btBill">Bill</string>
+    <string name="btCheckOut">Check Out</string>
+    <string name="inputRoomNameHint">room name</string>
+    <string name="inputRoomRentalPriceHint">monthly rental fee vnd/month</string>
 </resources>
