@@ -15,7 +15,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.novakduc.forbega.qlnt.R;
-import com.novakduc.forbega.qlnt.ui.TabAdapter;
 
 /**
  * Created by n.thanh on 10/12/2016.
@@ -23,6 +22,7 @@ import com.novakduc.forbega.qlnt.ui.TabAdapter;
 
 public class ProjectDetailFragment extends android.support.v4.app.Fragment {
     public static final String PREF_QLNT = "com.novak.forbequ.qlnt";
+    private static final String LOG_TAG = ProjectDetailFragment.class.getSimpleName();
     private static final String ACTIVE_PROJECT_ID = "active_project_id";
     private final int numberOfPage = 3;
     private long mActiveProjectId = -1;
@@ -84,15 +84,18 @@ public class ProjectDetailFragment extends android.support.v4.app.Fragment {
         //Add tabs
         TabLayout tabLayout = view.findViewById(R.id.tab_layout);
         TabLayout.Tab tab1 = tabLayout.newTab();
-        tab1.setIcon(R.drawable.ic_view_list);
+        tab1.setText(R.string.page1_title);
+//        tab1.setIcon(R.drawable.ic_view_list);
         tabLayout.addTab(tab1);
 
         TabLayout.Tab tab2 = tabLayout.newTab();
-        tab2.setIcon(R.drawable.ic_calculator);
+        tab2.setText(R.string.page2_title);
+//        tab2.setIcon(R.drawable.ic_calculator);
         tabLayout.addTab(tab2);
 
         TabLayout.Tab tab3 = tabLayout.newTab();
-        tab3.setIcon(R.drawable.ic_currency_usd);
+        tab3.setText(R.string.page3_title);
+//        tab3.setIcon(R.drawable.ic_currency_usd);
         tabLayout.addTab(tab3);
 
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);

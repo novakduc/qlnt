@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="page1_title">Project Management</string>
-    <string name="page2_title">Information</string>
+    <string name="page1_title">Room</string>
+    <string name="page2_title">Finance</string>
     <string name="page3_title">Report</string>
     <string name="page4_title">Setting</string>
     <string name="project_deleted_confirm">Project has been deleted</string>

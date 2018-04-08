@@ -1,4 +1,4 @@
-package com.novakduc.forbega.qlnt.ui.detail.item;
+package com.novakduc.forbega.qlnt.ui.detail.room;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -23,15 +23,15 @@ import java.util.List;
  * Created by Nguyen Quoc Thanh on 1/12/2018.
  */
 
-public class ItemsRecyclerViewAdapter
-        extends RecyclerView.Adapter<ItemsRecyclerViewAdapter.ViewHolder> {
+public class RoomsRecyclerViewAdapter
+        extends RecyclerView.Adapter<RoomsRecyclerViewAdapter.ViewHolder> {
 
     private List<ListViewProjectItem> mProjectList;
     private List<LoanAmount> mLoanAmounts;
     private Context mContext;
     private ItemListAdapterActionHandler mActionHandler;
 
-    public ItemsRecyclerViewAdapter(@NonNull Context context,
+    public RoomsRecyclerViewAdapter(@NonNull Context context,
                                     ItemListAdapterActionHandler actionHandler) {
         mContext = context;
         mActionHandler = actionHandler;

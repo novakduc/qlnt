@@ -26,7 +26,7 @@ import android.widget.EditText;
 import com.novakduc.baselibrary.NumbericTextWatcher;
 import com.novakduc.forbega.qlnt.R;
 import com.novakduc.forbega.qlnt.data.database.Loan;
-import com.novakduc.forbega.qlnt.ui.detail.DatePickerFragment;
+import com.novakduc.forbega.qlnt.ui.config.DatePickerFragment;
 import com.novakduc.forbega.qlnt.utilities.ConverterUtilities;
 import com.novakduc.forbega.qlnt.utilities.InjectorUtils;
 

@@ -1,8 +1,10 @@
-package com.novakduc.forbega.qlnt.ui;
+package com.novakduc.forbega.qlnt.ui.detail;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+
+import com.novakduc.forbega.qlnt.ui.detail.room.RoomListFragment;
 
 /**
  * Created by Novak on 9/25/2016.
@@ -20,12 +22,12 @@ public class TabAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-//        switch (position) {
-//            case 0:
-//                return new ProjectDetailFragment();
-//            case 1:
-//                return ItemListFragment.getInstance(mActivieProjectId);
-//        }
+        switch (position) {
+            case 0:
+                return RoomListFragment.getInstance(mActivieProjectId);
+            case 1:
+                return RoomListFragment.getInstance(mActivieProjectId);
+        }
         TabPosition tabPosition = TabPosition.values()[position];
         return TabFragment.getInstance(tabPosition);
     }
