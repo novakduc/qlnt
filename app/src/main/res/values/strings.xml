@@ -100,4 +100,9 @@
     <string name="inputWaterNewIndexHint">water index</string>
     <string name="OldIndex">Old</string>
     <string name="subTotal">Sub total</string>
+    <string name="internetTittle">Internet</string>
+    <string name="consumableTitle">Consumed</string>
+    <string name="TVTittle">TV cable</string>
+    <string name="TrashTittle">Trash collection</string>
+    <string name="SecurityTittle">Security</string>
 </resources>

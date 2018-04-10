@@ -28,7 +28,6 @@
             android:id="@+id/layoutRoomCharge"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
@@ -84,19 +83,37 @@
             android:orientation="horizontal"
             app:layout_constraintTop_toBottomOf="@id/layoutRoomCharge">
 
-            <TextView
-                style="@style/TextAppearance.AppCompat.Title"
+            <LinearLayout
                 android:layout_width="0dp"
-                android:layout_weight="4"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:paddingStart="@dimen/paddingStart"
-                android:text="@string/indexTitle" />
+                android:layout_weight="4"
+                android:paddingEnd="8dp">
+
+                <TextView
+                    style="@style/TextAppearance.AppCompat.Title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:paddingStart="@dimen/paddingStart"
+                    android:text="2." />
+
+                <TextView
+                    style="@style/TextAppearance.AppCompat.Title"
+                    android:layout_width="0dp"
+                    android:layout_weight="4"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:paddingStart="@dimen/paddingStart"
+                    android:text="@string/consumableTitle" />
+
+            </LinearLayout>
 
             <TextView
                 style="@style/TextAppearance.AppCompat.Title"
                 android:layout_width="0dp"
                 android:layout_gravity="center_vertical"
+                android:gravity="center"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
                 android:paddingStart="@dimen/paddingStart"
@@ -107,6 +124,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
+                android:gravity="center"
                 android:layout_weight="3"
                 android:paddingStart="@dimen/paddingStart"
                 android:text="@string/waterTitle" />
@@ -132,18 +150,10 @@
 
                 <TextView
                     style="@style/TextAppearance.AppCompat.Subhead"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginStart="16dp"
-                    android:paddingStart="@dimen/paddingStart"
-                    android:text="@string/bullet" />
-
-                <TextView
-                    style="@style/TextAppearance.AppCompat.Subhead"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
+                    android:gravity="end"
                     android:layout_weight="1"
                     android:paddingStart="@dimen/paddingStart"
                     android:text="@string/newIndex" />
@@ -165,7 +175,7 @@
                 android:layout_marginEnd="4dp"
                 android:layout_marginStart="4dp"
                 android:layout_weight="3"
-                android:gravity="center_vertical"
+                android:gravity="center"
                 android:hint="@string/inputElectricalNewIndexHint"
                 android:inputType="number"
                 android:maxLength="10" />
@@ -178,7 +188,7 @@
                 android:layout_marginEnd="4dp"
                 android:layout_marginStart="4dp"
                 android:layout_weight="3"
-                android:gravity="center_vertical"
+                android:gravity="center"
                 android:hint="@string/inputWaterNewIndexHint"
                 android:inputType="number"
                 android:maxLength="10" />
@@ -204,18 +214,10 @@
 
                 <TextView
                     style="@style/TextAppearance.AppCompat.Subhead"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginStart="16dp"
-                    android:paddingStart="@dimen/paddingStart"
-                    android:text="@string/bullet" />
-
-                <TextView
-                    style="@style/TextAppearance.AppCompat.Subhead"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
+                    android:gravity="end"
                     android:layout_weight="1"
                     android:paddingStart="@dimen/paddingStart"
                     android:text="@string/OldIndex" />
@@ -237,7 +239,7 @@
                 android:layout_marginEnd="4dp"
                 android:layout_marginStart="4dp"
                 android:layout_weight="3"
-                android:gravity="center_vertical"
+                android:gravity="center"
                 android:maxLength="10"
                 android:text="9435" />
 
@@ -249,7 +251,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:layout_weight="3"
-                android:gravity="center_vertical"
+                android:gravity="center"
                 android:maxLength="10"
                 android:text="857" />
 
@@ -277,6 +279,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
+                    android:gravity="end"
                     android:layout_weight="1"
                     android:paddingStart="@dimen/paddingStart"
                     android:text="@string/unitPrice" />
@@ -298,7 +301,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:layout_weight="3"
-                android:gravity="center_vertical"
+                android:gravity="center"
                 android:maxLength="10"
                 android:text="9435" />
 
@@ -310,7 +313,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="4dp"
                 android:layout_marginStart="4dp"
-                android:gravity="center_vertical"
+                android:gravity="center"
                 android:maxLength="10"
                 android:text="857" />
 
@@ -342,17 +345,10 @@
 
                 <TextView
                     style="@style/TextAppearance.AppCompat.Title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:paddingStart="@dimen/paddingStart"
-                    android:text="2." />
-
-                <TextView
-                    style="@style/TextAppearance.AppCompat.Title"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
+                    android:gravity="end"
                     android:layout_weight="1"
                     android:paddingStart="@dimen/paddingStart"
                     android:text="@string/subTotal" />
@@ -371,7 +367,8 @@
                 style="@style/TextAppearance.AppCompat.Title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
+                android:layout_gravity="center"
+                android:gravity="center"
                 android:layout_marginEnd="4dp"
                 android:layout_marginStart="4dp"
                 android:layout_weight="3"
@@ -383,11 +380,176 @@
                 style="@style/TextAppearance.AppCompat.Title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
+                android:layout_gravity="center"
+                android:gravity="center"
                 android:layout_marginEnd="4dp"
                 android:layout_marginStart="4dp"
                 android:layout_weight="3"
                 android:text="231,857"
+                android:textColor="@color/secondaryColor" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layoutInternetCharge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/layoutSubTotal">
+
+            <TextView
+                style="@style/TextAppearance.AppCompat.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:paddingStart="@dimen/paddingStart"
+                android:text="3." />
+
+            <TextView
+                style="@style/TextAppearance.AppCompat.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:paddingStart="@dimen/paddingStart"
+                android:text="@string/internetTittle" />
+
+            <TextView
+                android:id="@+id/internetCharge"
+                style="@style/TextAppearance.AppCompat.Title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:paddingStart="@dimen/paddingStart"
+                android:text="23,452,100"
+                android:textColor="@color/secondaryColor" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layoutTVCharge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/layoutInternetCharge">
+
+            <TextView
+                style="@style/TextAppearance.AppCompat.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:paddingStart="@dimen/paddingStart"
+                android:text="4." />
+
+            <TextView
+                style="@style/TextAppearance.AppCompat.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:paddingStart="@dimen/paddingStart"
+                android:text="@string/TVTittle" />
+
+            <TextView
+                android:id="@+id/TVCharge"
+                style="@style/TextAppearance.AppCompat.Title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:paddingStart="@dimen/paddingStart"
+                android:text="23,452,100"
+                android:textColor="@color/secondaryColor" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layoutTrashCharge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/layoutTVCharge">
+
+            <TextView
+                style="@style/TextAppearance.AppCompat.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:paddingStart="@dimen/paddingStart"
+                android:text="5." />
+
+            <TextView
+                style="@style/TextAppearance.AppCompat.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:paddingStart="@dimen/paddingStart"
+                android:text="@string/TrashTittle" />
+
+            <TextView
+                android:id="@+id/trashCharge"
+                style="@style/TextAppearance.AppCompat.Title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:paddingStart="@dimen/paddingStart"
+                android:text="23,452,100"
+                android:textColor="@color/secondaryColor" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layoutSecurityCharge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/layoutTrashCharge">
+
+            <TextView
+                style="@style/TextAppearance.AppCompat.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:paddingStart="@dimen/paddingStart"
+                android:text="6." />
+
+            <TextView
+                style="@style/TextAppearance.AppCompat.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:paddingStart="@dimen/paddingStart"
+                android:text="@string/SecurityTittle" />
+
+            <TextView
+                android:id="@+id/securityCharge"
+                style="@style/TextAppearance.AppCompat.Title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:paddingStart="@dimen/paddingStart"
+                android:text="23,452,100"
                 android:textColor="@color/secondaryColor" />
 
         </LinearLayout>
