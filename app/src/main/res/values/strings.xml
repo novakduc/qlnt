@@ -89,4 +89,6 @@
     <string name="inputGuestNameHint">name</string>
     <string name="inputGuestId">id or passport No.</string>
     <string name="interestGuestPhoneHint">phone number</string>
+    <string name="roomChargeTitle">Room charge:</string>
+    <string name="currencyBaseUnit">VND</string>
 </resources>
