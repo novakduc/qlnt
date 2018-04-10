@@ -118,7 +118,7 @@
                     android:paddingEnd="16dp"
                     android:paddingStart="16dp"
                     android:paddingTop="6dp"
-                    android:src="@drawable/ic_phone_red_700_24dp" />
+                    android:src="@drawable/ic_message_red_700_24dp" />
 
                 <ImageButton
                     android:id="@+id/imageButtonCall"
@@ -130,7 +130,7 @@
                     android:paddingEnd="16dp"
                     android:paddingStart="16dp"
                     android:paddingTop="6dp"
-                    android:src="@drawable/ic_message_red_700_24dp" />
+                    android:src="@drawable/ic_call_red_700_24dp" />
             </LinearLayout>
 
 

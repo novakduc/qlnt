@@ -86,4 +86,7 @@
     <string name="TV_label">TV cable</string>
     <string name="inputDepositHint">Deposit amount</string>
     <string name="billDate">Bill Date: </string>
+    <string name="inputGuestNameHint">name</string>
+    <string name="inputGuestId">id or passport No.</string>
+    <string name="interestGuestPhoneHint">phone number</string>
 </resources>
