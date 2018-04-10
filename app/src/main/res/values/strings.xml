@@ -85,10 +85,19 @@
     <string name="internet_label">internet</string>
     <string name="TV_label">TV cable</string>
     <string name="inputDepositHint">Deposit amount</string>
-    <string name="billDate">Bill Date: </string>
+    <string name="billDate">Bill Date </string>
     <string name="inputGuestNameHint">name</string>
     <string name="inputGuestId">id or passport No.</string>
     <string name="interestGuestPhoneHint">phone number</string>
     <string name="roomChargeTitle">Room charge:</string>
     <string name="currencyBaseUnit">VND</string>
+    <string name="electricityTitle">Electricity</string>
+    <string name="indexTitle">Index</string>
+    <string name="waterTitle">Water</string>
+    <string name="newIndex">New</string>
+    <string name="bullet">-</string>
+    <string name="inputElectricalNewIndexHint">electrical index</string>
+    <string name="inputWaterNewIndexHint">water index</string>
+    <string name="OldIndex">Old</string>
+    <string name="subTotal">Sub total</string>
 </resources>

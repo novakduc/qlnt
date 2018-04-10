@@ -14,4 +14,8 @@
     <dimen name="paddingBottom">8dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="detail_backdrop_height">250dp</dimen>
+
+    <!--Text size-->
+    <dimen name="he">16dp</dimen>
+
 </resources>
