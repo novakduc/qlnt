@@ -105,4 +105,6 @@
     <string name="TVTittle">TV cable</string>
     <string name="TrashTittle">Trash collection</string>
     <string name="SecurityTittle">Security</string>
+    <string name="getPaid_button">Get Paid</string>
+    <string name="createBillGuide">Input new  electrical, water consumable index</string>
 </resources>

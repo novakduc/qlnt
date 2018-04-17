@@ -18,9 +18,7 @@
             android:id="@+id/layoutTotalCharge"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:padding="8dp"
             android:orientation="horizontal">
 
             <TextView
@@ -30,21 +28,37 @@
                 android:layout_gravity="center_vertical"
                 android:gravity="center"
                 android:paddingStart="@dimen/paddingStart"
+                android:layout_weight="1"
                 android:text="01-03 2018" />
 
             <TextView
                 android:id="@+id/totalCharge"
                 style="@style/TextAppearance.AppCompat.Display1"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_weight="2"
+                android:layout_weight="3"
                 android:gravity="center"
-                android:paddingStart="@dimen/paddingStart"
+                android:paddingEnd="4dp"
+                android:paddingStart="4dp"
                 android:text="23,452,100"
                 android:textColor="@color/secondaryColor" />
 
+            <Button
+                android:id="@+id/btGetPaid"
+                style="?android:borderlessButtonStyle"
+                android:layout_width="80dp"
+                android:layout_height="48dp"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                android:text="@string/getPaid_button"
+                android:textColor="@color/secondaryColor" />
+
         </LinearLayout>
+
+        <view
+            style="@style/Divider"
+            android:layout_marginTop="4dp" />
 
         <LinearLayout
             android:id="@+id/layoutRoomCharge"
@@ -52,7 +66,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="4dp"
             android:orientation="horizontal">
 
             <TextView
@@ -541,13 +555,16 @@
 
         </LinearLayout>
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/fab_margin"
-            app:layout_anchor="@id/layoutSecurityCharge"
-            app:layout_anchorGravity="bottom|center|end"
-            app:srcCompat="@drawable/ic_done_white_24dp" />
+        <TextView
+            android:id="@+id/txtGuideLine"
+            style="@style/TextAppearance.AppCompat.Body1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="8dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/createBillGuide"
+            android:textColor="@color/secondaryDarkColor" />
     </LinearLayout>
 </layout>
