@@ -70,7 +70,7 @@
             android:orientation="horizontal">
 
             <TextView
-                style="@style/TextAppearance.AppCompat.Title"
+                style="@style/TextAppearance.AppCompat.Subhead"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -78,7 +78,7 @@
                 android:text="1." />
 
             <TextView
-                style="@style/TextAppearance.AppCompat.Title"
+                style="@style/TextAppearance.AppCompat.Subhead"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -87,13 +87,14 @@
 
             <TextView
                 android:id="@+id/roomCharge"
-                style="@style/TextAppearance.AppCompat.Title"
+                style="@style/TextAppearance.AppCompat.Subhead"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
                 android:gravity="end"
                 android:paddingStart="@dimen/paddingStart"
+                android:paddingEnd="@dimen/paddingEnd"
                 android:text="23,452,100"
                 android:textColor="@color/secondaryColor" />
 
@@ -109,7 +110,7 @@
             android:orientation="horizontal">
 
             <TextView
-                style="@style/TextAppearance.AppCompat.Title"
+                style="@style/TextAppearance.AppCompat.Subhead"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -118,7 +119,7 @@
                 android:text="2." />
 
             <TextView
-                style="@style/TextAppearance.AppCompat.Title"
+                style="@style/TextAppearance.AppCompat.Subhead"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -130,7 +131,7 @@
                 android:text="@string/electricityTitle" />
 
             <TextView
-                style="@style/TextAppearance.AppCompat.Title"
+                style="@style/TextAppearance.AppCompat.Subhead"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -350,7 +351,7 @@
                 android:paddingEnd="8dp">
 
                 <TextView
-                    style="@style/TextAppearance.AppCompat.Title"
+                    style="@style/TextAppearance.AppCompat.Subhead"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -360,7 +361,7 @@
                     android:text="@string/subTotal" />
 
                 <TextView
-                    style="@style/TextAppearance.AppCompat.Title"
+                    style="@style/TextAppearance.AppCompat.Subhead"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -370,7 +371,7 @@
 
             <TextView
                 android:id="@+id/electricalCharge"
-                style="@style/TextAppearance.AppCompat.Title"
+                style="@style/TextAppearance.AppCompat.Subhead"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -383,7 +384,7 @@
 
             <TextView
                 android:id="@+id/waterCharge"
-                style="@style/TextAppearance.AppCompat.Title"
+                style="@style/TextAppearance.AppCompat.Subhead"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -407,7 +408,7 @@
             app:layout_constraintTop_toBottomOf="@id/layoutSubTotal">
 
             <TextView
-                style="@style/TextAppearance.AppCompat.Title"
+                style="@style/TextAppearance.AppCompat.Subhead"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -415,7 +416,7 @@
                 android:text="3." />
 
             <TextView
-                style="@style/TextAppearance.AppCompat.Title"
+                style="@style/TextAppearance.AppCompat.Subhead"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -424,13 +425,14 @@
 
             <TextView
                 android:id="@+id/internetCharge"
-                style="@style/TextAppearance.AppCompat.Title"
+                style="@style/TextAppearance.AppCompat.Subhead"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
                 android:gravity="end"
                 android:paddingStart="@dimen/paddingStart"
+                android:paddingEnd="@dimen/paddingEnd"
                 android:text="23,452,100"
                 android:textColor="@color/secondaryColor" />
 
@@ -446,7 +448,7 @@
             android:orientation="horizontal">
 
             <TextView
-                style="@style/TextAppearance.AppCompat.Title"
+                style="@style/TextAppearance.AppCompat.Subhead"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -454,7 +456,7 @@
                 android:text="4." />
 
             <TextView
-                style="@style/TextAppearance.AppCompat.Title"
+                style="@style/TextAppearance.AppCompat.Subhead"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -463,13 +465,14 @@
 
             <TextView
                 android:id="@+id/TVCharge"
-                style="@style/TextAppearance.AppCompat.Title"
+                style="@style/TextAppearance.AppCompat.Subhead"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
                 android:gravity="end"
                 android:paddingStart="@dimen/paddingStart"
+                android:paddingEnd="@dimen/paddingEnd"
                 android:text="23,452,100"
                 android:textColor="@color/secondaryColor" />
 
@@ -486,7 +489,7 @@
             app:layout_constraintTop_toBottomOf="@id/layoutTVCharge">
 
             <TextView
-                style="@style/TextAppearance.AppCompat.Title"
+                style="@style/TextAppearance.AppCompat.Subhead"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -494,7 +497,7 @@
                 android:text="5." />
 
             <TextView
-                style="@style/TextAppearance.AppCompat.Title"
+                style="@style/TextAppearance.AppCompat.Subhead"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -503,13 +506,14 @@
 
             <TextView
                 android:id="@+id/trashCharge"
-                style="@style/TextAppearance.AppCompat.Title"
+                style="@style/TextAppearance.AppCompat.Subhead"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
                 android:gravity="end"
                 android:paddingStart="@dimen/paddingStart"
+                android:paddingEnd="@dimen/paddingEnd"
                 android:text="23,452,100"
                 android:textColor="@color/secondaryColor" />
 
@@ -526,7 +530,7 @@
             app:layout_constraintTop_toBottomOf="@id/layoutTrashCharge">
 
             <TextView
-                style="@style/TextAppearance.AppCompat.Title"
+                style="@style/TextAppearance.AppCompat.Subhead"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -534,7 +538,7 @@
                 android:text="6." />
 
             <TextView
-                style="@style/TextAppearance.AppCompat.Title"
+                style="@style/TextAppearance.AppCompat.Subhead"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -543,14 +547,56 @@
 
             <TextView
                 android:id="@+id/securityCharge"
-                style="@style/TextAppearance.AppCompat.Title"
+                style="@style/TextAppearance.AppCompat.Subhead"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
                 android:gravity="end"
                 android:paddingStart="@dimen/paddingStart"
+                android:paddingEnd="@dimen/paddingEnd"
                 android:text="23,452,100"
+                android:textColor="@color/secondaryColor" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layoutOtherCharge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/layoutTrashCharge">
+
+            <TextView
+                style="@style/TextAppearance.AppCompat.Subhead"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:paddingStart="@dimen/paddingStart"
+                android:text="7." />
+
+            <TextView
+                style="@style/TextAppearance.AppCompat.Subhead"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:paddingStart="@dimen/paddingStart"
+                android:text="@string/otherTittle" />
+
+            <TextView
+                android:id="@+id/otherCharge"
+                style="@style/TextAppearance.AppCompat.Subhead"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:paddingEnd="@dimen/paddingEnd"
+                android:paddingStart="@dimen/paddingStart"
+                android:text="452,100"
                 android:textColor="@color/secondaryColor" />
 
         </LinearLayout>
