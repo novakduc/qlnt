@@ -103,10 +103,11 @@
     <string name="internetTittle">Internet</string>
     <string name="consumableTitle">Consumed</string>
     <string name="TVTittle">TV cable</string>
-    <string name="TrashTittle">Trash collection</string>
+    <string name="TrashTittle">Trash</string>
     <string name="SecurityTittle">Security</string>
     <string name="getPaid_button">Get Paid</string>
     <string name="createBillGuide">Input new  electrical, water consumable index</string>
     <string name="otherTittle">Other</string>
     <string name="todo_checkIn">Please check in asap</string>
+    <string name="checkOutDate">Check out date:</string>
 </resources>

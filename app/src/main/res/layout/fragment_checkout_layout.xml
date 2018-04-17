@@ -65,6 +65,36 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btGetPaid" />
 
+
+        <TextView
+            android:id="@+id/checkOutDateTittle"
+            style="@style/TextAppearance.AppCompat.Subhead"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:gravity="center"
+            android:paddingStart="@dimen/paddingStart"
+            android:text="@string/checkOutDate"
+            app:layout_constraintBottom_toBottomOf="@+id/checkOutDate"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/checkOutDate" />
+
+        <EditText
+            android:id="@+id/checkOutDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:inputType="date"
+            android:paddingEnd="4dp"
+            android:paddingStart="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/checkOutDateTittle"
+            app:layout_constraintTop_toBottomOf="@+id/view" />
+
+
         <TextView
             android:id="@+id/textView5"
             style="@style/TextAppearance.AppCompat.Subhead"
@@ -101,7 +131,7 @@
             android:text="23,452,100"
             android:textColor="@color/secondaryColor"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/view" />
+            app:layout_constraintTop_toBottomOf="@+id/checkOutDate" />
 
 
         <TextView
@@ -560,7 +590,7 @@
         <EditText
             android:id="@+id/otherCharge"
             style="@style/TextAppearance.AppCompat.Subhead"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
