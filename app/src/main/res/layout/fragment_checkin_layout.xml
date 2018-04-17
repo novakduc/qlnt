@@ -13,72 +13,76 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/txtLayoutDeposit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="5"
-                android:background="@color/windowBackgroundColor"
-                android:clipToPadding="false"
-                android:paddingBottom="@dimen/paddingBottom"
-                android:paddingEnd="@dimen/paddingEnd"
-                android:paddingStart="@dimen/paddingStart"
-                android:paddingTop="@dimen/paddingTop"
-                app:layout_constraintTop_toBottomOf="@id/appbarSection">
-
-                <android.support.design.widget.TextInputEditText
-                    android:id="@+id/depositAmount"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:elevation="8dp"
-                    android:hint="@string/inputDepositHint"
-                    android:inputType="number" />
-            </android.support.design.widget.TextInputLayout>
-
-        <LinearLayout
-            android:id="@+id/layoutBillDate"
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/txtLayoutDeposit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:orientation="horizontal"
+            android:layout_weight="5"
+            android:background="@color/windowBackgroundColor"
+            android:clipToPadding="false"
+            android:paddingBottom="@dimen/paddingBottom"
+            android:paddingEnd="@dimen/paddingEnd"
+            android:paddingStart="@dimen/paddingStart"
+            android:paddingTop="@dimen/paddingTop"
+            app:layout_constraintTop_toBottomOf="@id/appbarSection">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/depositAmount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:elevation="8dp"
+                android:hint="@string/inputDepositHint"
+                android:inputType="number" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/txtLayoutStartDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/layout_marginEnd"
+            android:layout_marginTop="@dimen/layout_marginTop"
+            android:layout_weight="5"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/txtLayoutDeposit">
 
-
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/txtLayoutStartDate"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/layout_marginEnd"
-                android:layout_marginTop="@dimen/layout_marginTop"
-                android:layout_weight="5">
-
-                <android.support.design.widget.TextInputEditText
-                    android:id="@+id/editTextStartDate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:focusableInTouchMode="false"
-                    android:hint="@string/startDate"
-                    android:inputType="date" />
-            </android.support.design.widget.TextInputLayout>
-
-            <TextView
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/editTextStartDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingStart="@dimen/paddingStart"
-                android:layout_gravity="center_vertical"
-                android:text="@string/billDate"
-                android:textSize="20sp" />
+                android:layout_marginStart="8dp"
+                android:ems="10"
+                android:focusableInTouchMode="false"
+                android:hint="@string/startDate"
+                android:inputType="date" />
+        </android.support.design.widget.TextInputLayout>
 
-            <Spinner
-                android:id="@+id/spinnerBillDate"
-                android:layout_width="48dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:prompt="@string/billDate" />
+        <TextView
+            android:id="@+id/billDateTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:paddingStart="@dimen/paddingStart"
+            android:text="@string/billDate"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@+id/txtLayoutStartDate"
+            app:layout_constraintStart_toStartOf="@+id/guideline4"
+            app:layout_constraintTop_toTopOf="@+id/txtLayoutStartDate" />
 
-        </LinearLayout>
+        <Spinner
+            android:id="@+id/spinnerBillDate"
+            android:layout_width="48dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:prompt="@string/billDate"
+            app:layout_constraintBottom_toBottomOf="@+id/billDateTitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/billDateTitle"
+            app:layout_constraintTop_toTopOf="@+id/billDateTitle" />
 
         <LinearLayout
             android:id="@+id/layoutWaterElectric"
@@ -87,7 +91,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:orientation="horizontal"
-            app:layout_constraintTop_toBottomOf="@id/layoutBillDate">
+            app:layout_constraintTop_toBottomOf="@id/billDateTitle">
 
             <android.support.v7.widget.AppCompatImageView
                 android:id="@+id/electricalIcon"
@@ -231,5 +235,27 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:srcCompat="@drawable/ic_done_white_24dp" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="20dp" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="213dp" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="215dp" />
+
     </android.support.constraint.ConstraintLayout>
 </layout>
