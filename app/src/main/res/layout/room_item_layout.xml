@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <android.support.v7.widget.CardView
+        style="@style/CardView.Light"
         android:layout_width="match_parent"
         android:layout_height="220dp"
-        android:background="@color/cardview_light_background"
         android:elevation="2dp"
         app:cardCornerRadius="4dp"
         app:cardUseCompatPadding="true">
@@ -75,6 +75,7 @@
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="54dp"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
                 android:paddingBottom="6dp"
                 android:paddingEnd="16dp"
                 android:paddingStart="16dp"
@@ -85,10 +86,12 @@
 
             <View
                 android:id="@+id/lineSeparate"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="1dp"
                 android:background="@android:color/darker_gray"
-                app:layout_constraintTop_toBottomOf="@id/textViewProjectProduceRate" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/guideline" />
 
             <LinearLayout
                 android:id="@+id/guessInfo"
@@ -140,7 +143,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
                 android:gravity="start"
                 android:text="Check usage indexes, send monthly bill"
                 android:textAlignment="center"
@@ -150,28 +152,35 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/guessInfo" />
 
-                <Button
-                    android:id="@+id/btCheckInOut"
-                    style="@style/Widget.AppCompat.Button.Borderless"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginStart="8dp"
-                    android:text="@string/btCheckOut"
-                    android:textColor="@color/secondaryColor"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/btBill" />
+            <Button
+                android:id="@+id/btCheckInOut"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:text="@string/btCheckOut"
+                android:textColor="@color/secondaryColor"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/btBill" />
 
-                <Button
-                    android:id="@+id/btBill"
-                    style="@style/Widget.AppCompat.Button.Borderless"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:text="@string/btBill"
-                    android:textColor="@color/secondaryColor"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" />
+            <Button
+                android:id="@+id/btBill"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@string/btBill"
+                android:textColor="@color/secondaryColor"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <android.support.constraint.Guideline
+                android:id="@+id/guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_begin="56dp" />
         </android.support.constraint.ConstraintLayout>
     </android.support.v7.widget.CardView>
 </layout>
