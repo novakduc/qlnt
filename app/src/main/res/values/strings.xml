@@ -110,4 +110,9 @@
     <string name="otherTittle">Other</string>
     <string name="todo_checkIn">Please check in asap</string>
     <string name="checkOutDate">Check out date:</string>
+    <string name="revenueTittle">Revenue</string>
+    <string name="txtIncomeTittle">Income</string>
+    <string name="txtDeptTittle">Dept</string>
+    <string name="costTitle">Cost</string>
+    <string name="recentActivity">Recent Activity</string>
 </resources>
