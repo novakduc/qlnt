@@ -59,11 +59,10 @@
 
 
         <view
-            android:id="@+id/view"
             style="@style/Divider"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btGetPaid" />
+            app:layout_constraintTop_toBottomOf="@+id/guideline10" />
 
 
         <TextView
@@ -92,7 +91,7 @@
             android:paddingStart="4dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/checkOutDateTittle"
-            app:layout_constraintTop_toBottomOf="@+id/view" />
+            app:layout_constraintTop_toBottomOf="@+id/guideline10" />
 
 
         <TextView
@@ -340,14 +339,13 @@
 
 
         <view
-            android:id="@+id/view2"
             style="@style/Divider"
             android:layout_marginEnd="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/waterUnitPrice" />
+            app:layout_constraintBottom_toBottomOf="@+id/guideline11" />
 
 
         <TextView
@@ -398,7 +396,7 @@
             android:textColor="@color/secondaryColor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline8"
-            app:layout_constraintTop_toBottomOf="@+id/view2" />
+            app:layout_constraintTop_toBottomOf="@+id/guideline11" />
 
 
         <TextView
@@ -642,6 +640,20 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.3" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="104dp" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="332dp" />
 
     </android.support.constraint.ConstraintLayout>
 </layout>

@@ -59,14 +59,13 @@
 
 
         <view
-            android:id="@+id/view"
             style="@style/Divider"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btGetPaid" />
 
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/itemNo1"
             style="@style/TextAppearance.AppCompat.Subhead"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -85,7 +84,7 @@
             android:paddingStart="@dimen/paddingStart"
             android:text="@string/roomChargeTitle"
             app:layout_constraintBottom_toBottomOf="@+id/roomCharge"
-            app:layout_constraintStart_toEndOf="@+id/textView5"
+            app:layout_constraintStart_toEndOf="@+id/itemNo1"
             app:layout_constraintTop_toTopOf="@+id/roomCharge" />
 
         <TextView
@@ -93,7 +92,7 @@
             style="@style/TextAppearance.AppCompat.Subhead"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="4dp"
+            android:layout_marginEnd="8dp"
             android:layout_marginTop="8dp"
             android:gravity="end"
             android:paddingEnd="@dimen/paddingEnd"
@@ -101,7 +100,7 @@
             android:text="23,452,100"
             android:textColor="@color/secondaryColor"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/view" />
+            app:layout_constraintTop_toTopOf="@+id/guideline5" />
 
 
         <TextView
@@ -310,14 +309,13 @@
 
 
         <view
-            android:id="@+id/view2"
             style="@style/Divider"
             android:layout_marginEnd="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/waterUnitPrice" />
+            app:layout_constraintBottom_toBottomOf="@id/guideline7" />
 
 
         <TextView
@@ -368,7 +366,7 @@
             android:textColor="@color/secondaryColor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline8"
-            app:layout_constraintTop_toBottomOf="@+id/view2" />
+            app:layout_constraintTop_toBottomOf="@+id/guideline7" />
 
 
         <TextView
@@ -612,6 +610,20 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.3" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="104dp" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="278dp" />
 
     </android.support.constraint.ConstraintLayout>
 </layout>
