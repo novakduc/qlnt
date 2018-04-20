@@ -14,6 +14,7 @@
     <color name="secondaryColor">#FF4081</color>    -->
     <color name="windowBackgroundColor">#FAFAFA</color>
     <color name="redColor">#D32F2F</color>
+    <color name="listBackground">#BDBDBD</color>
     <item name="visible" type="id"/>
     <item name="masked" type="id"/>
 </resources>
