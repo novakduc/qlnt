@@ -27,10 +27,10 @@
                     android:id="@+id/txtRevenue"
                     style="@style/TextAppearance.AppCompat.Subhead"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="4dp"
+                    android:layout_height="28dp"
+                    android:background="@color/primaryLightColor"
+                    android:gravity="center"
+                    android:textColor="@color/whiteColor"
                     android:text="@string/revenueTittle" />
 
                 <TextView
@@ -41,6 +41,7 @@
                     android:layout_marginEnd="8dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
+                    android:gravity="center"
                     android:text="1234234055"
                     android:textColor="@color/primaryLightColor" />
             </LinearLayout>
@@ -67,10 +68,10 @@
                     android:id="@+id/txtIncome"
                     style="@style/TextAppearance.AppCompat.Subhead"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="4dp"
+                    android:layout_height="28dp"
+                    android:background="@color/primaryLightColor"
+                    android:gravity="center"
+                    android:textColor="@color/whiteColor"
                     android:text="@string/txtIncomeTittle" />
 
                 <TextView
@@ -81,6 +82,7 @@
                     android:layout_marginEnd="8dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
+                    android:gravity="center"
                     android:text="1234234055"
                     android:textColor="@color/primaryLightColor" />
             </LinearLayout>
@@ -107,10 +109,10 @@
                     android:id="@+id/txtDept"
                     style="@style/TextAppearance.AppCompat.Subhead"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="4dp"
+                    android:layout_height="28dp"
+                    android:background="@color/redColor"
+                    android:gravity="center"
+                    android:textColor="@color/whiteColor"
                     android:text="@string/txtDeptTittle" />
 
                 <TextView
@@ -148,10 +150,10 @@
                     android:id="@+id/txtCost"
                     style="@style/TextAppearance.AppCompat.Subhead"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="4dp"
+                    android:layout_height="28dp"
+                    android:background="@color/redColor"
+                    android:gravity="center"
+                    android:textColor="@color/whiteColor"
                     android:text="@string/costTitle" />
 
                 <TextView
@@ -162,6 +164,7 @@
                     android:layout_marginEnd="8dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
+                    android:gravity="center"
                     android:text="1234234055"
                     android:textColor="@color/redColor" />
 
@@ -180,7 +183,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_begin="164dp" />
+            app:layout_constraintGuide_begin="168dp" />
 
         <android.support.v7.widget.CardView
             android:id="@+id/containerRecentActivity"
@@ -205,11 +208,10 @@
                     android:id="@+id/txtRecentActivity"
                     style="@style/TextAppearance.AppCompat.Subhead"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_height="28dp"
                     android:gravity="center"
+                    android:background="@color/primaryLightColor"
+                    android:textColor="@color/whiteColor"
                     android:text="@string/recentActivity" />
 
                 <android.support.v7.widget.RecyclerView
