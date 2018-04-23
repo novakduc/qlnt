@@ -115,4 +115,5 @@
     <string name="txtDeptTittle">Dept</string>
     <string name="costTitle">Cost</string>
     <string name="recentActivity">Recent Activity</string>
+    <string name="earn_description">Monthly payment</string>
 </resources>
