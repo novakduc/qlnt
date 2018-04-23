@@ -123,7 +123,7 @@
                     android:layout_marginEnd="8dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
-                    android:gravity="center_vertical"
+                    android:gravity="center"
                     android:text="1234234055"
                     android:textColor="@color/redColor" />
             </LinearLayout>
