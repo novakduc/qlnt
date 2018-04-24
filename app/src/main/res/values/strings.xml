@@ -116,4 +116,9 @@
     <string name="costTitle">Cost</string>
     <string name="recentActivity">Recent Activity</string>
     <string name="earn_description">Monthly payment</string>
+    <string name="timeTitle">Time</string>
+    <string name="allTittle">All</string>
+    <string name="fromTitle">From</string>
+    <string name="toTitle">to</string>
+    <string name="roomName">Room name</string>
 </resources>
