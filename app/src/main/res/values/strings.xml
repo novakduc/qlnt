@@ -121,4 +121,7 @@
     <string name="fromTitle">From</string>
     <string name="toTitle">to</string>
     <string name="roomName">Room name</string>
+    <string name="typeTitle">Type</string>
+    <string name="itemTitle">Item</string>
+    <string name="expenseTitle">Expense</string>
 </resources>

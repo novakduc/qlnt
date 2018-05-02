@@ -35,7 +35,8 @@
             android:text="---"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/guideline15"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintBottom_toBottomOf="@id/txtRoomName"
+            app:layout_constraintTop_toTopOf="@id/txtRoomName" />
 
         <TextView
             android:id="@+id/txtTwo"
@@ -57,7 +58,7 @@
             android:layout_marginTop="8dp"
             android:text="@string/timeTitle"
             app:layout_constraintStart_toStartOf="@+id/guideline16"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/txtRoomName" />
 
 
         <TextView
@@ -117,7 +118,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_begin="168dp" />
+            app:layout_constraintGuide_begin="38dp" />
 
         <EditText
             android:id="@+id/edtFromDate"
@@ -150,6 +151,72 @@
             app:layout_constraintStart_toEndOf="@+id/txtTo"
             app:layout_constraintTop_toTopOf="@+id/edtFromDate" />
 
+        <TextView
+            android:id="@+id/txtThree"
+            style="@style/TextAppearance.AppCompat.Subhead"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="3."
+            app:layout_constraintBottom_toBottomOf="@+id/txtType"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/txtType" />
+
+
+        <TextView
+            android:id="@+id/txtType"
+            style="@style/TextAppearance.AppCompat.Subhead"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/typeTitle"
+            app:layout_constraintStart_toStartOf="@+id/guideline16"
+            app:layout_constraintTop_toBottomOf="@id/edtFromDate" />
+
+        <TextView
+            android:id="@+id/txtItem"
+            style="@style/TextAppearance.AppCompat.Subhead"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/itemTitle"
+            app:layout_constraintEnd_toStartOf="@id/guideline15"
+            app:layout_constraintStart_toStartOf="@+id/guideline16"
+            app:layout_constraintTop_toBottomOf="@id/txtType" />
+
+        <TextView
+            android:id="@+id/txtExpense"
+            style="@style/TextAppearance.AppCompat.Subhead"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/expenseTitle"
+            app:layout_constraintEnd_toStartOf="@id/guideline12"
+            app:layout_constraintStart_toStartOf="@+id/guideline15"
+            app:layout_constraintTop_toBottomOf="@id/txtType" />
+
+        <TextView
+            android:id="@+id/txtRevenue"
+            style="@style/TextAppearance.AppCompat.Subhead"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/revenueTittle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline12"
+            app:layout_constraintTop_toBottomOf="@id/txtType" />
+
+        <TextView
+            android:id="@+id/txtElectricity"
+            style="@style/TextAppearance.AppCompat.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/electricityTitle"
+            app:layout_constraintBottom_toBottomOf="@id/cbxElectricalExpense"
+            app:layout_constraintEnd_toStartOf="@id/guideline15"
+            app:layout_constraintStart_toStartOf="@+id/guideline16"
+            app:layout_constraintTop_toTopOf="@id/cbxElectricalExpense" />
+
         <android.support.constraint.Guideline
             android:id="@+id/guideline15"
             android:layout_width="wrap_content"
@@ -163,6 +230,32 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_begin="24dp" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginEnd="8dp"
+            android:background="@android:color/darker_gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/guideline16"
+            app:layout_constraintTop_toBottomOf="@id/txtItem" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline17"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="164dp" />
+
+        <CheckBox
+            android:id="@+id/cbxElectricalExpense"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toStartOf="@id/guideline12"
+            app:layout_constraintStart_toStartOf="@id/guideline15"
+            app:layout_constraintTop_toTopOf="@+id/guideline17" />
+
 
     </android.support.constraint.ConstraintLayout>
 </layout>
