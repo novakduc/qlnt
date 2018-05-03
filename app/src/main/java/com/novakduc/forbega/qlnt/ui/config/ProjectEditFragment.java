@@ -16,6 +16,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -54,6 +55,7 @@ import java.util.List;
 
 public class ProjectEditFragment extends android.support.v4.app.Fragment
         implements LoanAdapterHandler {
+    private static final String LOG_TAG = ProjectEditFragment.class.getSimpleName();
     public static final String TEMP_PROJECT_ID = "com.novakduc.forbega.qlnt.tempproject";
     RecyclerView mRecyclerView;
     LoansAdapter mLoansAdapter;
@@ -293,6 +295,10 @@ public class ProjectEditFragment extends android.support.v4.app.Fragment
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), LoanDeclareActivity.class);
+                intent.putExtra(LoanDeclareFragment.TYPE_KEY, true);    //create new loan
+                intent.putExtra(LoanDeclareFragment.PROJECT_ID, mProjectId);
+
+                Log.d(LOG_TAG, "Create loan for project id: " + mProjectId);
                 startActivityForResult(intent, LoansAdapter.LOAN_CREATION);
             }
         });

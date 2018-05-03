@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 4,
-    "identityHash": "605a5c064d87d396c6dbfa0798b81fca",
+    "identityHash": "ab03abcdc4585b608104c8a3f2e30044",
     "entities": [
       {
         "tableName": "cost",
@@ -232,7 +232,7 @@
       },
       {
         "tableName": "room",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT, `area` REAL NOT NULL, `charge` INTEGER NOT NULL, `available` INTEGER NOT NULL, `projectId` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT, `charge` INTEGER NOT NULL, `available` INTEGER NOT NULL, `projectId` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
@@ -245,12 +245,6 @@
             "columnName": "name",
             "affinity": "TEXT",
             "notNull": false
-          },
-          {
-            "fieldPath": "area",
-            "columnName": "area",
-            "affinity": "REAL",
-            "notNull": true
           },
           {
             "fieldPath": "charge",
@@ -447,7 +441,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"605a5c064d87d396c6dbfa0798b81fca\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"ab03abcdc4585b608104c8a3f2e30044\")"
     ]
   }
 }

@@ -23,36 +23,6 @@ public class ProjectListFragmentViewModel extends ViewModel {
         mRepository = repository;
         mProjects = repository.getProjectList();
         mLoanAmounts = repository.getAllLoanAmount();
-//        //Test
-//        //Test should be removed
-//        AppExecutors.getInstance().diskIO().execute(new Runnable() {
-//            @Override
-//            public void run() {
-//                try {
-//
-//                    // Pretend this is the network loading data
-//                    Project pretendProject = new Project();
-//                    pretendProject.setName("sadjlkgj");
-//                    pretendProject.setAddress("sdlfjdfgdf");
-//                    pretendProject.setInvestmentAmount(2342905);
-//                    repository.addProject(pretendProject);
-//                    Thread.sleep(4000);
-//                    mProjects = repository.getProjectList();
-//
-//                    pretendProject = new Project();
-//                    pretendProject.setName("sadjagfdsdlkgj");
-//                    pretendProject.setAddress("sdleagdsffdgfjdfgdf");
-//                    pretendProject.setInvestmentAmount(23905);
-//                    repository.addProject(pretendProject);
-//
-//                    Thread.sleep(2000);
-//                    mProjects = repository.getProjectList();
-//
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        });
     }
 
     public LiveData<List<ListViewProjectItem>> getProjects() {
