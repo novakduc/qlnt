@@ -81,28 +81,30 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:gravity="start"
-            android:orientation="horizontal"
-            android:paddingEnd="0dp"
-            app:layout_constraintBottom_toBottomOf="@+id/edtFromDate"
+            android:orientation="vertical"
+            android:paddingBottom="8dp"
             app:layout_constraintEnd_toStartOf="@+id/guideline15"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/edtFromDate">
+            app:layout_constraintTop_toBottomOf="@+id/txtTime">
 
             <RadioButton
                 android:id="@+id/allRadioButton"
+                style="@style/TextAppearance.AppCompat.Body1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="3"
                 android:checked="true"
                 android:paddingEnd="8dp"
-                android:text="@string/allTittle" />
+                android:text="@string/lastMonthTittle" />
 
             <RadioButton
                 android:id="@+id/fromRadioButton"
+                style="@style/TextAppearance.AppCompat.Body1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="2"
                 android:text="@string/fromTitle" />
         </RadioGroup>
 
@@ -133,7 +135,7 @@
             android:maxLength="8"
             app:layout_constraintEnd_toStartOf="@+id/txtTo"
             app:layout_constraintStart_toStartOf="@+id/guideline15"
-            app:layout_constraintTop_toBottomOf="@+id/txtTime" />
+            app:layout_constraintBottom_toBottomOf="@id/timeRadioChoices" />
 
         <EditText
             android:id="@+id/edtToDate"
@@ -222,7 +224,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.4" />
+            app:layout_constraintGuide_percent="0.40" />
 
         <android.support.constraint.Guideline
             android:id="@+id/guideline16"
@@ -245,13 +247,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_begin="164dp" />
+            app:layout_constraintGuide_begin="200dp" />
 
         <CheckBox
             android:id="@+id/cbxElectricalExpense"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:checked="true"
             app:layout_constraintEnd_toStartOf="@id/guideline12"
             app:layout_constraintStart_toStartOf="@id/guideline15"
             app:layout_constraintTop_toTopOf="@+id/guideline17" />
@@ -260,11 +262,195 @@
             android:id="@+id/cbxElectricalRevenue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:checked="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/guideline12"
             app:layout_constraintTop_toTopOf="@+id/guideline17" />
 
+        <TextView
+            android:id="@+id/txtWater"
+            style="@style/TextAppearance.AppCompat.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/waterTitle"
+            app:layout_constraintBottom_toBottomOf="@id/cbxWaterExpense"
+            app:layout_constraintEnd_toStartOf="@id/guideline15"
+            app:layout_constraintStart_toStartOf="@+id/guideline16"
+            app:layout_constraintTop_toTopOf="@id/cbxWaterExpense" />
+
+        <CheckBox
+            android:id="@+id/cbxWaterExpense"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            app:layout_constraintEnd_toStartOf="@id/guideline12"
+            app:layout_constraintStart_toStartOf="@id/guideline15"
+            app:layout_constraintTop_toBottomOf="@+id/cbxElectricalExpense" />
+
+        <CheckBox
+            android:id="@+id/cbxWaterRevenue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/guideline12"
+            app:layout_constraintTop_toBottomOf="@+id/cbxElectricalExpense" />
+
+        <TextView
+            android:id="@+id/txtInternet"
+            style="@style/TextAppearance.AppCompat.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/internetTittle"
+            app:layout_constraintBottom_toBottomOf="@id/cbxInternetExpense"
+            app:layout_constraintEnd_toStartOf="@id/guideline15"
+            app:layout_constraintStart_toStartOf="@+id/guideline16"
+            app:layout_constraintTop_toTopOf="@id/cbxInternetExpense" />
+
+        <CheckBox
+            android:id="@+id/cbxInternetExpense"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            app:layout_constraintEnd_toStartOf="@id/guideline12"
+            app:layout_constraintStart_toStartOf="@id/guideline15"
+            app:layout_constraintTop_toBottomOf="@+id/cbxWaterExpense" />
+
+        <CheckBox
+            android:id="@+id/cbxInternetRevenue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/guideline12"
+            app:layout_constraintTop_toBottomOf="@+id/cbxWaterExpense" />
+
+        <TextView
+            android:id="@+id/txtTV"
+            style="@style/TextAppearance.AppCompat.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/TVTittle"
+            app:layout_constraintBottom_toBottomOf="@id/cbxTVExpense"
+            app:layout_constraintEnd_toStartOf="@id/guideline15"
+            app:layout_constraintStart_toStartOf="@+id/guideline16"
+            app:layout_constraintTop_toTopOf="@id/cbxTVExpense" />
+
+        <CheckBox
+            android:id="@+id/cbxTVExpense"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            app:layout_constraintEnd_toStartOf="@id/guideline12"
+            app:layout_constraintStart_toStartOf="@id/guideline15"
+            app:layout_constraintTop_toBottomOf="@+id/cbxInternetExpense" />
+
+        <CheckBox
+            android:id="@+id/cbxTVRevenue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/guideline12"
+            app:layout_constraintTop_toBottomOf="@+id/cbxInternetExpense" />
+
+        <TextView
+            android:id="@+id/txtTrashRemoval"
+            style="@style/TextAppearance.AppCompat.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/TrashTittle"
+            app:layout_constraintBottom_toBottomOf="@id/cbxTrashExpense"
+            app:layout_constraintEnd_toStartOf="@id/guideline15"
+            app:layout_constraintStart_toStartOf="@+id/guideline16"
+            app:layout_constraintTop_toTopOf="@id/cbxTrashExpense" />
+
+        <CheckBox
+            android:id="@+id/cbxTrashExpense"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            app:layout_constraintEnd_toStartOf="@id/guideline12"
+            app:layout_constraintStart_toStartOf="@id/guideline15"
+            app:layout_constraintTop_toBottomOf="@+id/cbxTVExpense" />
+
+        <CheckBox
+            android:id="@+id/cbxTrashRevenue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/guideline12"
+            app:layout_constraintTop_toBottomOf="@+id/cbxTVExpense" />
+
+        <TextView
+            android:id="@+id/txtSecurity"
+            style="@style/TextAppearance.AppCompat.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/SecurityTittle"
+            app:layout_constraintBottom_toBottomOf="@id/cbxSecurityExpense"
+            app:layout_constraintEnd_toStartOf="@id/guideline15"
+            app:layout_constraintStart_toStartOf="@+id/guideline16"
+            app:layout_constraintTop_toTopOf="@id/cbxSecurityExpense" />
+
+        <CheckBox
+            android:id="@+id/cbxSecurityExpense"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            app:layout_constraintEnd_toStartOf="@id/guideline12"
+            app:layout_constraintStart_toStartOf="@id/guideline15"
+            app:layout_constraintTop_toBottomOf="@+id/cbxTrashExpense" />
+
+        <CheckBox
+            android:id="@+id/cbxSecurityRevenue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/guideline12"
+            app:layout_constraintTop_toBottomOf="@+id/cbxTrashExpense" />
+
+        <TextView
+            android:id="@+id/txtOther"
+            style="@style/TextAppearance.AppCompat.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/otherTittle"
+            app:layout_constraintBottom_toBottomOf="@id/cbxOtherExpense"
+            app:layout_constraintEnd_toStartOf="@id/guideline15"
+            app:layout_constraintStart_toStartOf="@+id/guideline16"
+            app:layout_constraintTop_toTopOf="@id/cbxOtherExpense" />
+
+        <CheckBox
+            android:id="@+id/cbxOtherExpense"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            app:layout_constraintEnd_toStartOf="@id/guideline12"
+            app:layout_constraintStart_toStartOf="@id/guideline15"
+            app:layout_constraintTop_toBottomOf="@+id/cbxSecurityExpense" />
+
+        <CheckBox
+            android:id="@+id/cbxOtherRevenue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/guideline12"
+            app:layout_constraintTop_toBottomOf="@+id/cbxSecurityExpense" />
+
+        <Button
+            android:id="@+id/btExtract"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/btExtract"
+            android:textColor="@color/secondaryColor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cbxOtherExpense" />
 
     </android.support.constraint.ConstraintLayout>
 </layout>

@@ -124,4 +124,6 @@
     <string name="typeTitle">Type</string>
     <string name="itemTitle">Item</string>
     <string name="expenseTitle">Expense</string>
+    <string name="lastMonthTittle">Last month</string>
+    <string name="btExtract">Extract</string>
 </resources>
