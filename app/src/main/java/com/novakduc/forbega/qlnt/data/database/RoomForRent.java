@@ -14,7 +14,6 @@ public class RoomForRent implements Cloneable, ItemWithId {
     @PrimaryKey(autoGenerate = true)
     private long id;
     private String name;
-    private double area;
     private long charge;
     private boolean available;
     private long projectId;
@@ -22,20 +21,18 @@ public class RoomForRent implements Cloneable, ItemWithId {
     private RoomServiceList<RoomService> roomServices;
 
     //For Room only
-    public RoomForRent(long id, String name, double area, long charge, boolean available, long projectId) {
+    public RoomForRent(long id, String name, long charge, boolean available, long projectId) {
         this.id = id;
         this.name = name;
-        this.area = area;
         this.charge = charge;
         this.available = available;
         this.projectId = projectId;
     }
 
     @Ignore
-    private RoomForRent(long projectId, String name, double area, long charge) {
+    private RoomForRent(long projectId, String name, long charge) {
         this.projectId = projectId;
         this.name = name;
-        this.area = area;
         this.charge = charge;
         available = true;
         roomServices = new RoomServiceList<RoomService>(this.id);
@@ -86,14 +83,6 @@ public class RoomForRent implements Cloneable, ItemWithId {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public double getArea() {
-        return area;
-    }
-
-    public void setArea(double area) {
-        this.area = area;
     }
 
     public long getCharge() {
