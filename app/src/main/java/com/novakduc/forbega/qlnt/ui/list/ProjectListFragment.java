@@ -54,10 +54,6 @@ public class ProjectListFragment extends android.support.v4.app.Fragment
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //Load active project ID
-        SharedPreferences preferences = getActivity().getSharedPreferences(PREF_QLNT, 0);
-        Long id = preferences.getLong(ACTIVE_PROJECT_ID, -1);
-
         ProjectListViewModelFactory factory =
                 InjectorUtils.provideProjectListViewModelFactory(getActivity());
 

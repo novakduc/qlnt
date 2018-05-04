@@ -10,15 +10,12 @@ import android.arch.persistence.room.PrimaryKey;
 
 @Entity(tableName = "room")
 public class RoomForRent implements Cloneable, ItemWithId {
-    // TODO: 9/30/2016
     @PrimaryKey(autoGenerate = true)
     private long id;
     private String name;
     private long charge;
     private boolean available;
     private long projectId;
-    @Ignore
-    private RoomServiceList<RoomService> roomServices;
 
     //For Room only
     public RoomForRent(long id, String name, long charge, boolean available, long projectId) {
@@ -35,16 +32,10 @@ public class RoomForRent implements Cloneable, ItemWithId {
         this.name = name;
         this.charge = charge;
         available = true;
-        roomServices = new RoomServiceList<RoomService>(this.id);
     }
 
-    @Ignore
-    private RoomForRent(long projectId) {
-        this.projectId = projectId;
-    }
-
-    public RoomForRent getInstance(long projectId) {
-        return new RoomForRent(projectId);
+    public RoomForRent getInstance(long projectId, String name, long charge) {
+        return new RoomForRent(projectId, name, charge);
     }
 
     @Override
@@ -59,14 +50,6 @@ public class RoomForRent implements Cloneable, ItemWithId {
     @Override
     public long getAmount() {
         return charge;
-    }
-
-    public RoomServiceList<RoomService> getRoomServices() {
-        return roomServices;
-    }
-
-    public void setRoomServices(RoomServiceList<RoomService> roomServices) {
-        this.roomServices = roomServices;
     }
 
     public boolean isAvailable() {
@@ -89,9 +72,6 @@ public class RoomForRent implements Cloneable, ItemWithId {
         return charge;
     }
 
-    //Below is for Parcelable
-    //////////////////////////////
-
     public void setCharge(long charge) {
         this.charge = charge;
     }
@@ -99,7 +79,7 @@ public class RoomForRent implements Cloneable, ItemWithId {
     @Override
     public Object clone() throws CloneNotSupportedException {
         RoomForRent roomForRent = (RoomForRent) super.clone();
-        roomForRent.setId(0);
+        roomForRent.setId(-1);
         return roomForRent;
     }
 

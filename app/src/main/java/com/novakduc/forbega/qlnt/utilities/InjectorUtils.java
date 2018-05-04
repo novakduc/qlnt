@@ -28,6 +28,7 @@ import com.novakduc.forbega.qlnt.ui.config.base.ProjectBaseViewModelFactory;
 import com.novakduc.forbega.qlnt.ui.config.finance.ProjectFinanceConfigViewModelFactory;
 import com.novakduc.forbega.qlnt.ui.config.finance.loan.LoanDeclareViewModelFactory;
 import com.novakduc.forbega.qlnt.ui.config.unitprice.UnitPriceConfigViewModelFactory;
+import com.novakduc.forbega.qlnt.ui.detail.room.RoomListViewModelFactory;
 import com.novakduc.forbega.qlnt.ui.list.ProjectListViewModelFactory;
 
 /**
@@ -96,5 +97,10 @@ public class InjectorUtils {
             Context context, long projectId) {
         ProjectRepo projectRepo = provideProjectRepo(context, projectId);
         return new UnitPriceConfigViewModelFactory(projectRepo);
+    }
+
+    public static RoomListViewModelFactory provideRoomListViewModelFactory(Context context, long projectId) {
+        ProjectRepo projectRepo = provideProjectRepo(context, projectId);
+        return new RoomListViewModelFactory(projectRepo);
     }
 }

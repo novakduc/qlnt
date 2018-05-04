@@ -8,7 +8,7 @@ import java.util.Calendar;
 /**
  * Created by Nguyen Quoc Thanh on 2/6/2018.
  */
-///This is brief info of project for list view
+///This is brief info of project for list view, no address information
 public class ListViewProjectItem {
     @ColumnInfo(name = "projectId")
     private long projectId;

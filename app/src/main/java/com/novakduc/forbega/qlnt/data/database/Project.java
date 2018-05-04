@@ -19,16 +19,6 @@ public class Project implements Cloneable, ItemWithId {
     private long investmentAmount;
     private long startDate;
     private int yearDuration;
-    @Ignore
-    private long totalIncome;
-    @Ignore
-    private UnitPrice mUnitPrice;
-    @Ignore
-    private LoanList mLoanList;
-    @Ignore
-    private RoomList mRoomForRentList;
-    @Ignore
-    private CostManager mCostManager;
 
     //For Room only
     public Project(long projectId, String name, String address, long investmentAmount,
@@ -60,50 +50,11 @@ public class Project implements Cloneable, ItemWithId {
         return name;
     }
 
-
-    public CostManager getCostManager() {
-        return mCostManager;
-    }
-
-    public void setCostManager(CostManager pCostManager) {
-        mCostManager = pCostManager;
-    }
-
-    public RoomList getRoomForRentList() {
-        return mRoomForRentList;
-    }
-
-    private void setRoomForRentList(RoomList list) {
-        mRoomForRentList = list;
-    }
-
-    //Add cost
-    public boolean addCost(long amount, long date, CostType type, boolean repeatable) {
-        return mCostManager.add(new Cost(amount, date, type, repeatable));
-    }
-
-    //Add loan
-    public Boolean addLoan(Loan loan) {
-        return mLoanList.add(loan);
-    }
-
     public long getEndDate() {
         Calendar endDate = Calendar.getInstance();
         endDate.setTimeInMillis(startDate);
         endDate.add(Calendar.YEAR, yearDuration);
         return endDate.getTimeInMillis();
-    }
-
-    public int getStartYear() {
-        Calendar tmp = Calendar.getInstance();
-        tmp.setTimeInMillis(startDate);
-        return tmp.get(Calendar.YEAR);
-    }
-
-    public int getEndYear() {
-        Calendar tmp = Calendar.getInstance();
-        tmp.setTimeInMillis(getEndDate());
-        return tmp.get(Calendar.YEAR);
     }
 
     public void setProjectId(long projectId) {
@@ -118,35 +69,10 @@ public class Project implements Cloneable, ItemWithId {
         return yearDuration;
     }
 
-    public void setYearDuration(int yearDuration) {
-        this.yearDuration = yearDuration;
-    }
-
     @Override
     public Object clone() throws CloneNotSupportedException {
         Project project = (Project) super.clone();
-        project.setProjectId(0);
-//        if (mUnitPrice != null) {
-//            project.setUnitPrice((UnitPrice) mUnitPrice.clone());
-//        }
-//        //Clone loan list
-//        if (mLoanList != null) {
-//            LoanList loanList = LoanList.getInstance(project.getId());
-//            for (Loan l :
-//                    mLoanList) {
-//                loanList.add((Loan) l.clone());
-//            }
-//            project.setLoanList(loanList);
-//        }
-//        //Clone room list
-//        if (mRoomForRentList != null) {
-//            RoomList roomForRents = new RoomList(project.getId());
-//            for (RoomForRent roomForRent :
-//                    mRoomForRentList) {
-//                roomForRents.add((RoomForRent) roomForRent.clone());
-//            }
-//            project.setRoomForRentList(roomForRents);
-//        }
+        project.setProjectId(-1);
 
         return project;
     }
@@ -184,10 +110,6 @@ public class Project implements Cloneable, ItemWithId {
         this.investmentAmount = investmentAmount;
     }
 
-    public long getTotalIncome() {
-        return totalIncome;
-    }
-
     public long getStartDate() {
         return startDate;
     }
@@ -204,23 +126,7 @@ public class Project implements Cloneable, ItemWithId {
         this.yearDuration = yearDuration;
     }
 
-    public UnitPrice getUnitPrice() {
-        return mUnitPrice;
-    }
-
-    public void setUnitPrice(UnitPrice unitPrice) {
-        mUnitPrice = unitPrice;
-    }
-
     //Parcel
-
-    public LoanList getLoanList() {
-        return mLoanList;
-    }
-
-    public void setLoanList(LoanList loanList) {
-        mLoanList = loanList;
-    }
 
     @Override
     public long getId() {
@@ -236,8 +142,4 @@ public class Project implements Cloneable, ItemWithId {
     public long getAmount() {
         return this.investmentAmount;
     }
-
-    ////Below is for Parcelable
-    /////////////////////////////
-
 }

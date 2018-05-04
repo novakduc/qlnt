@@ -11,8 +11,8 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.novakduc.forbega.qlnt.R;
-import com.novakduc.forbega.qlnt.data.database.Project;
-import com.novakduc.forbega.qlnt.ui.list.ProjectListFragmentViewModel;
+import com.novakduc.forbega.qlnt.data.database.RoomForRent;
+import com.novakduc.forbega.qlnt.utilities.InjectorUtils;
 
 import java.util.ArrayList;
 
@@ -25,12 +25,12 @@ public class RoomListFragment extends android.support.v4.app.Fragment
     public static final String PREF_QLNT = "com.novak.forbequ.qlnt";
     public static final String ACTIVE_PROJECT_ID = "active_project_id";
     private static final String LOG_TAG = RoomListFragment.class.getSimpleName();
-    private RoomsRecyclerViewAdapter mProjectsRecyclerViewAdapter;
+    private RoomsRecyclerViewAdapter mRoomsRecyclerViewAdapter;
     private long mActiveProject = -1;
-    private ProjectListFragmentViewModel mViewModel;
-    private ArrayList<Project> mProjects;
-    private long mTempProjectId;
+    private RoomListFragmentViewModel mViewModel;
+    private ArrayList<RoomForRent> mRoomForRents;
     private FloatingActionButton mFloatingActionButton;
+    private long mTempRoomId;
 
     public static RoomListFragment getInstance(@NonNull long activeId) {
         Bundle bundle = new Bundle();
@@ -50,9 +50,13 @@ public class RoomListFragment extends android.support.v4.app.Fragment
         }
 
         Log.d(LOG_TAG, String.valueOf(mActiveProject));
+
+        RoomListViewModelFactory factory =
+                InjectorUtils.provideRoomListViewModelFactory(getActivity(), mActiveProject);
     }
 
-    private void bindToUI(Project[] projects) {
+    private void bindToUI(RoomForRent[] roomForRents) {
+        // TODO: 5/4/2018 bind to UI
 
     }
 
@@ -84,13 +88,13 @@ public class RoomListFragment extends android.support.v4.app.Fragment
         return view;
     }
 
-    public void deleteProject() {
-        mViewModel.deleteProject(mTempProjectId);
+    public void deleteRoom() {
+        mViewModel.deleteRoom(mTempRoomId);
         mFloatingActionButton.show();
     }
 
     @Override
-    public void onDeleteAction(long projectId) {
+    public void onDeleteAction(long roomId) {
 //        mTempProjectId = projectId;
 //        Bundle bundle = new Bundle();
 //        //dialog title in bundle
@@ -102,12 +106,12 @@ public class RoomListFragment extends android.support.v4.app.Fragment
     }
 
     @Override
-    public void onCopyAction(long projectId) {
-        mViewModel.copyProject(projectId);
+    public void onCopyAction(long roomId) {
+        mViewModel.copyRoom(roomId);
     }
 
     @Override
-    public void onEditAction(long projectId) {
+    public void onEditAction(long roomId) {
 //        Intent intent = new Intent(getActivity(), EditProjectActivity.class);
 //        intent.putExtra(ProjectEditFragment.TEMP_PROJECT_ID, projectId);
 //        startActivity(intent);

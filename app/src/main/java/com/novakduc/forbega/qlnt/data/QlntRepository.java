@@ -46,11 +46,6 @@ public class QlntRepository {
         return sInstance;
     }
 
-    public void addProject(Project project) {
-        mAppDao.insert(project);
-    }
-
-
     public LiveData<List<ListViewProjectItem>> getProjectList() {
         return mAppDao.getAllProjects();
     }

@@ -4,14 +4,18 @@ import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
 import android.support.annotation.NonNull;
 
-public class RoomListViewModelFactory extends ViewModelProvider.NewInstanceFactory {
+import com.novakduc.forbega.qlnt.data.ProjectRepo;
 
-    public RoomListViewModelFactory() {
+public class RoomListViewModelFactory extends ViewModelProvider.NewInstanceFactory {
+    private ProjectRepo mProjectRepo;
+
+    public RoomListViewModelFactory(ProjectRepo projectRepo) {
+        mProjectRepo = projectRepo;
     }
 
     @NonNull
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-        return (T) new RoomListFragmentViewModel();
+        return (T) new RoomListFragmentViewModel(mProjectRepo);
     }
 }
