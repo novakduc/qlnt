@@ -126,4 +126,5 @@
     <string name="expenseTitle">Expense</string>
     <string name="lastMonthTittle">Last month</string>
     <string name="btExtract">Extract</string>
+    <string name="keyContact">key contact</string>
 </resources>

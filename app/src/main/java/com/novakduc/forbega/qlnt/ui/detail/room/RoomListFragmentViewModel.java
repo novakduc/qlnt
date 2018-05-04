@@ -4,13 +4,15 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModel;
 
 import com.novakduc.forbega.qlnt.data.ProjectRepo;
+import com.novakduc.forbega.qlnt.data.database.GuestForRoomItemView;
+import com.novakduc.forbega.qlnt.data.database.ListViewRoomItem;
 
 import java.util.List;
 
 public class RoomListFragmentViewModel extends ViewModel {
     private ProjectRepo mProjectRepo;
     private LiveData<List<ListViewRoomItem>> mRoomListLiveData;
-    private LiveData<GuestNameOnly> mContactPoint;
+    private LiveData<GuestForRoomItemView> mContactPoint;
 
     public RoomListFragmentViewModel(ProjectRepo projectRepo) {
         mProjectRepo = projectRepo;

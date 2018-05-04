@@ -11,19 +11,22 @@ import java.util.Observable;
  */
 @Entity(tableName = "guess")
 public class Guest extends Observable implements Cloneable {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     private long id;
     private String name;
     private String phoneNumber;
     private String guestId;
+    private boolean keyContact;
     private long roomId;
 
     //For Room only
-    public Guest(long id, String name, String phoneNumber, String guestId, long roomId) {
+    public Guest(long id, String name, String phoneNumber, String guestId,
+                 Boolean keyContact, long roomId) {
         this.id = id;
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.guestId = guestId;
+        this.keyContact = keyContact;
         this.roomId = roomId;
     }
 
@@ -32,6 +35,7 @@ public class Guest extends Observable implements Cloneable {
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.guestId = guestId;
+        this.keyContact = false;
         this.roomId = roomId;
     }
 

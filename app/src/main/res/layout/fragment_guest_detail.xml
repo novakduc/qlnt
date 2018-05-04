@@ -1,134 +1,162 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <android.support.design.widget.CoordinatorLayout
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/coordinatorLayout4"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true">
 
-        <LinearLayout
+
+        <include
+            android:id="@+id/appbarSection"
+            layout="@layout/fragment_app_bar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <android.support.design.widget.AppBarLayout
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:theme="@style/AppTheme.AppBarOverlay">
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/txtLayoutName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/appbarSection">
 
-                <android.support.v7.widget.Toolbar
-                    android:id="@+id/toolbar"
-                    android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    android:background="?attr/colorPrimary"
-                    android:gravity="center_vertical" />
-            </android.support.design.widget.AppBarLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/txtLayoutName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp">
-
-                <android.support.design.widget.TextInputEditText
-                    android:id="@+id/edtInputGuestName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/inputGuestNameHint"
-                    android:inputType="textCapSentences" />
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/txtLayoutGuestId"
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/edtInputGuestName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:layout_marginStart="16dp">
+                android:hint="@string/inputGuestNameHint"
+                android:inputType="textCapSentences" />
+        </android.support.design.widget.TextInputLayout>
 
-                <android.support.design.widget.TextInputEditText
-                    android:id="@+id/edtGuestId"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/inputGuestId" />
-            </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/txtLayoutGuestId"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline18"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtLayoutName">
 
-            <LinearLayout
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/edtGuestId"
                 android:layout_width="match_parent"
-                android:layout_height="88dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginStart="16dp"
-                android:orientation="horizontal">
+                android:layout_height="wrap_content"
+                android:hint="@string/inputGuestId" />
+        </android.support.design.widget.TextInputLayout>
 
-                <android.support.design.widget.TextInputLayout
-                    android:id="@+id/txtLayoutPhone"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginEnd="8dp"
-                    android:layout_weight="20">
 
-                    <android.support.design.widget.TextInputEditText
-                        android:id="@+id/edtPhone"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:ems="6"
-                        android:hint="@string/interestGuestPhoneHint"
-                        android:inputType="phone"
-                        android:maxLength="15" />
-                </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/txtLayoutPhone"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toStartOf="@+id/imageButtonMessage"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtLayoutGuestId">
 
-                <ImageButton
-                    android:id="@+id/imageButtonMessage"
-                    style="@style/Widget.AppCompat.Button.Borderless"
-                    android:layout_width="54dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:paddingBottom="6dp"
-                    android:paddingEnd="16dp"
-                    android:paddingStart="16dp"
-                    android:paddingTop="6dp"
-                    android:src="@drawable/ic_message_red_700_24dp" />
-
-                <ImageButton
-                    android:id="@+id/imageButtonCall"
-                    style="@style/Widget.AppCompat.Button.Borderless"
-                    android:layout_width="54dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginStart="8dp"
-                    android:paddingBottom="6dp"
-                    android:paddingEnd="16dp"
-                    android:paddingStart="16dp"
-                    android:paddingTop="6dp"
-                    android:src="@drawable/ic_call_red_700_24dp" />
-
-            </LinearLayout>
-
-            <LinearLayout
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/edtPhone"
                 android:layout_width="match_parent"
-                android:layout_height="52dp"
-                android:layout_marginBottom="16dp"
-                android:gravity="center_horizontal|bottom">
+                android:layout_height="wrap_content"
+                android:ems="6"
+                android:hint="@string/interestGuestPhoneHint"
+                android:inputType="phone"
+                android:maxLength="15" />
+        </android.support.design.widget.TextInputLayout>
 
-                <Button
-                    android:id="@+id/btCancel"
-                    style="?android:borderlessButtonStyle"
-                    android:layout_width="80dp"
-                    android:layout_height="48dp"
-                    android:layout_marginEnd="8dp"
-                    android:text="@string/cancel_button"
-                    android:textColor="@color/secondaryColor" />
+        <ImageButton
+            android:id="@+id/imageButtonMessage"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:paddingBottom="6dp"
+            android:paddingEnd="16dp"
+            android:paddingStart="16dp"
+            android:paddingTop="6dp"
+            android:src="@drawable/ic_message_red_700_24dp"
+            app:layout_constraintBottom_toBottomOf="@+id/txtLayoutPhone"
+            app:layout_constraintEnd_toStartOf="@+id/imageButtonCall"
+            app:layout_constraintTop_toTopOf="@+id/txtLayoutPhone" />
 
-                <Button
-                    android:id="@+id/btConfirm"
-                    style="?android:borderlessButtonStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="48dp"
-                    android:layout_marginEnd="8dp"
-                    android:text="@string/confirm_button"
-                    android:textColor="@color/secondaryColor" />
-            </LinearLayout>
-        </LinearLayout>
-    </android.support.design.widget.CoordinatorLayout>
+        <ImageButton
+            android:id="@+id/imageButtonCall"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:paddingBottom="6dp"
+            android:paddingEnd="16dp"
+            android:paddingStart="16dp"
+            android:paddingTop="6dp"
+            android:src="@drawable/ic_call_red_700_24dp"
+            app:layout_constraintBottom_toBottomOf="@+id/imageButtonMessage"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imageButtonMessage" />
+
+
+        <Button
+            android:id="@+id/btCancel"
+            style="?android:borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/cancel_button"
+            android:textColor="@color/secondaryColor"
+            app:layout_constraintEnd_toStartOf="@+id/guideline19"
+            app:layout_constraintTop_toBottomOf="@+id/txtLayoutPhone" />
+
+        <Button
+            android:id="@+id/btConfirm"
+            style="?android:borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/confirm_button"
+            android:textColor="@color/secondaryColor"
+            app:layout_constraintStart_toStartOf="@+id/guideline19"
+            app:layout_constraintTop_toBottomOf="@+id/txtLayoutPhone" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline18"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.6" />
+
+        <CheckBox
+            android:id="@+id/cbxKeyContact"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:text="@string/keyContact"
+            app:layout_constraintBottom_toBottomOf="@+id/txtLayoutGuestId"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline18"
+            app:layout_constraintTop_toTopOf="@+id/txtLayoutGuestId" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline19"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+
+
+    </android.support.constraint.ConstraintLayout>
 </layout>

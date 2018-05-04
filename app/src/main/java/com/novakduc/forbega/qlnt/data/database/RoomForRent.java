@@ -14,15 +14,15 @@ public class RoomForRent implements Cloneable, ItemWithId {
     private long id;
     private String name;
     private long charge;
-    private boolean available;
+    private RoomStatus status;
     private long projectId;
 
     //For Room only
-    public RoomForRent(long id, String name, long charge, boolean available, long projectId) {
+    public RoomForRent(long id, String name, long charge, RoomStatus status, long projectId) {
         this.id = id;
         this.name = name;
         this.charge = charge;
-        this.available = available;
+        this.status = status;
         this.projectId = projectId;
     }
 
@@ -31,7 +31,7 @@ public class RoomForRent implements Cloneable, ItemWithId {
         this.projectId = projectId;
         this.name = name;
         this.charge = charge;
-        available = true;
+        status = RoomStatus.AVAILABLE;
     }
 
     public RoomForRent getInstance(long projectId, String name, long charge) {
@@ -52,12 +52,12 @@ public class RoomForRent implements Cloneable, ItemWithId {
         return charge;
     }
 
-    public boolean isAvailable() {
-        return available;
+    public RoomStatus getStatus() {
+        return status;
     }
 
-    public void setAvailable(boolean mAvailable) {
-        this.available = mAvailable;
+    public void setStatus(RoomStatus status) {
+        this.status = status;
     }
 
     public String getName() {
