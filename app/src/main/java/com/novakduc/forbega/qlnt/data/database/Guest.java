@@ -9,7 +9,7 @@ import java.util.Observable;
 /**
  * Created by n.thanh on 9/21/2016.
  */
-@Entity(tableName = "guess")
+@Entity(tableName = "guest")
 public class Guest extends Observable implements Cloneable {
     @PrimaryKey(autoGenerate = true)
     private long id;
@@ -18,29 +18,33 @@ public class Guest extends Observable implements Cloneable {
     private String guestId;
     private boolean keyContact;
     private long roomId;
+    private long projectId;
 
     //For Room only
     public Guest(long id, String name, String phoneNumber, String guestId,
-                 Boolean keyContact, long roomId) {
+                 Boolean keyContact, long roomId, long projectId) {
         this.id = id;
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.guestId = guestId;
         this.keyContact = keyContact;
         this.roomId = roomId;
+        this.projectId = projectId;
     }
 
     @Ignore
-    private Guest(String name, String guestId, String phoneNumber, long roomId) {
+    private Guest(String name, String guestId, String phoneNumber, long roomId, long projectId) {
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.guestId = guestId;
         this.keyContact = false;
         this.roomId = roomId;
+        this.projectId = projectId;
     }
 
-    public static Guest getInstance(String name, String guestId, String phoneNumber, long roomId) {
-        return new Guest(name, guestId, phoneNumber, roomId);
+    public static Guest getInstance(String name, String guestId, String phoneNumber,
+                                    long roomId, long projectId) {
+        return new Guest(name, guestId, phoneNumber, roomId, projectId);
     }
 
     public long getId() {
@@ -89,5 +93,17 @@ public class Guest extends Observable implements Cloneable {
 
     public void setRoomId(long roomId) {
         this.roomId = roomId;
+    }
+
+    public boolean isKeyContact() {
+        return keyContact;
+    }
+
+    public void setKeyContact(boolean keyContact) {
+        this.keyContact = keyContact;
+    }
+
+    public long getProjectId() {
+        return projectId;
     }
 }

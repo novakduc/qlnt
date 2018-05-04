@@ -88,8 +88,8 @@ public interface AppDao {
     List<Loan> getLoanList(long projectId);
 
     //Get a project room list
-    @Query("SELECT * FROM room_list WHERE projectId = :projectId")
-    RoomList getRoomList(long projectId);
+    @Query("SELECT id, name, status FROM room WHERE projectId = :projectId")
+    LiveData<List<ListViewRoomItem>> getRoomList(long projectId);
 
     //Get a project room list
     @Query("SELECT * FROM room WHERE id = :roomId")
@@ -155,4 +155,7 @@ public interface AppDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     long insert(RoomForRent tmpRoomForRent);
+
+    @Query("SELECT name, phoneNumber, roomId FROM guest WHERE projectId = :projectId")
+    LiveData<GuestForRoomItemView> getAllKeyContact(long projectId);
 }

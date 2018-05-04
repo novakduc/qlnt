@@ -11,11 +11,14 @@ public class GuestForRoomItemView {
     private String name;
     @ColumnInfo(name = "phoneNumber")
     private String phoneNumber;
+    @ColumnInfo(name = "roomId")
+    private long roomId;
 
     //For Room only
-    public GuestForRoomItemView(String name, String phoneNumber) {
+    public GuestForRoomItemView(String name, String phoneNumber, long roomId) {
         this.name = name;
         this.phoneNumber = phoneNumber;
+        this.roomId = roomId;
     }
 
     //Getter setter
@@ -25,5 +28,9 @@ public class GuestForRoomItemView {
 
     public String getPhoneNumber() {
         return phoneNumber;
+    }
+
+    public long getRoomId() {
+        return roomId;
     }
 }

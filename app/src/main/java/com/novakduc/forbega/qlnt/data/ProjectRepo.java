@@ -6,6 +6,8 @@ import android.util.Log;
 
 import com.novakduc.baselibrary.AppExecutors;
 import com.novakduc.forbega.qlnt.data.database.AppDao;
+import com.novakduc.forbega.qlnt.data.database.GuestForRoomItemView;
+import com.novakduc.forbega.qlnt.data.database.ListViewRoomItem;
 import com.novakduc.forbega.qlnt.data.database.Loan;
 import com.novakduc.forbega.qlnt.data.database.Project;
 import com.novakduc.forbega.qlnt.data.database.UnitPrice;
@@ -157,5 +159,13 @@ public class ProjectRepo {
                 mAppDao.updateUnitPrice(unitPrice);
             }
         });
+    }
+
+    public LiveData<List<ListViewRoomItem>> getRoomList() {
+        return mAppDao.getRoomList(mProjectId);
+    }
+
+    public LiveData<GuestForRoomItemView> getAllKeyContact() {
+        return mAppDao.getAllKeyContact(mProjectId);
     }
 }

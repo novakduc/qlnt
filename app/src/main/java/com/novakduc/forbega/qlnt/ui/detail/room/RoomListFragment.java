@@ -1,20 +1,26 @@
 package com.novakduc.forbega.qlnt.ui.detail.room;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.novakduc.forbega.qlnt.R;
+import com.novakduc.forbega.qlnt.data.database.ListViewRoomItem;
 import com.novakduc.forbega.qlnt.data.database.RoomForRent;
 import com.novakduc.forbega.qlnt.utilities.InjectorUtils;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by n.thanh on 9/29/2016.
@@ -53,6 +59,8 @@ public class RoomListFragment extends android.support.v4.app.Fragment
 
         RoomListViewModelFactory factory =
                 InjectorUtils.provideRoomListViewModelFactory(getActivity(), mActiveProject);
+
+        mViewModel = ViewModelProviders.of(this, factory).get(RoomListFragmentViewModel.class);
     }
 
     private void bindToUI(RoomForRent[] roomForRents) {
@@ -75,8 +83,26 @@ public class RoomListFragment extends android.support.v4.app.Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_room_list_tab, container, false);
-        Toast.makeText(getActivity(), String.valueOf(mActiveProject), Toast.LENGTH_SHORT).show();
-        //Add project button
+        //Toast.makeText(getActivity(), String.valueOf(mActiveProject), Toast.LENGTH_SHORT).show();
+
+        final AppCompatActivity activity = (AppCompatActivity) getActivity();
+
+        mRoomsRecyclerViewAdapter = new RoomsRecyclerViewAdapter(activity, this);
+        RecyclerView recyclerView = view.findViewById(R.id.rv_item_list);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(activity);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setAdapter(mRoomsRecyclerViewAdapter);
+
+        //Observe view model
+        mViewModel.getRoomListLiveData().observe(this, new Observer<List<ListViewRoomItem>>() {
+            @Override
+            public void onChanged(@Nullable List<ListViewRoomItem> listViewRoomItems) {
+                mRoomsRecyclerViewAdapter.swapList(listViewRoomItems);
+            }
+        });
+
+        //Add room button
         mFloatingActionButton = view.findViewById(R.id.fab);
         mFloatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
