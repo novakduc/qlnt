@@ -46,7 +46,7 @@ public class RoomList extends MyArrayList<RoomForRent> {
         for (RoomForRent i :
                 this) {
             roomForRent = i;
-            if (roomForRent.isAvailable()) availableCount++;
+            if (roomForRent.getStatus() == RoomStatus.AVAILABLE) availableCount++;
         }
         return availableCount;
     }

@@ -89,7 +89,11 @@ public interface AppDao {
 
     //Get a project room list
     @Query("SELECT id, name, status FROM room WHERE projectId = :projectId")
-    LiveData<List<ListViewRoomItem>> getRoomList(long projectId);
+    LiveData<List<ListViewRoomItem>> getListViewRoomItems(long projectId);
+
+    //Get a project room list
+    @Query("SELECT * FROM room_list WHERE projectId = :projectId")
+    RoomList getRoomList(long projectId);
 
     //Get a project room list
     @Query("SELECT * FROM room WHERE id = :roomId")
@@ -157,5 +161,5 @@ public interface AppDao {
     long insert(RoomForRent tmpRoomForRent);
 
     @Query("SELECT name, phoneNumber, roomId FROM guest WHERE projectId = :projectId")
-    LiveData<GuestForRoomItemView> getAllKeyContact(long projectId);
+    LiveData<List<GuestForRoomItemView>> getAllKeyContact(long projectId);
 }

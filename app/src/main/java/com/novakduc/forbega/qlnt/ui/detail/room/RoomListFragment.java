@@ -2,10 +2,10 @@ package com.novakduc.forbega.qlnt.ui.detail.room;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,11 +15,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.novakduc.forbega.qlnt.R;
+import com.novakduc.forbega.qlnt.data.database.GuestForRoomItemView;
 import com.novakduc.forbega.qlnt.data.database.ListViewRoomItem;
 import com.novakduc.forbega.qlnt.data.database.RoomForRent;
+import com.novakduc.forbega.qlnt.databinding.FragmentRoomListTabBinding;
 import com.novakduc.forbega.qlnt.utilities.InjectorUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -34,9 +35,8 @@ public class RoomListFragment extends android.support.v4.app.Fragment
     private RoomsRecyclerViewAdapter mRoomsRecyclerViewAdapter;
     private long mActiveProject = -1;
     private RoomListFragmentViewModel mViewModel;
-    private ArrayList<RoomForRent> mRoomForRents;
-    private FloatingActionButton mFloatingActionButton;
     private long mTempRoomId;
+    private FragmentRoomListTabBinding mDataBinding;
 
     public static RoomListFragment getInstance(@NonNull long activeId) {
         Bundle bundle = new Bundle();
@@ -63,11 +63,6 @@ public class RoomListFragment extends android.support.v4.app.Fragment
         mViewModel = ViewModelProviders.of(this, factory).get(RoomListFragmentViewModel.class);
     }
 
-    private void bindToUI(RoomForRent[] roomForRents) {
-        // TODO: 5/4/2018 bind to UI
-
-    }
-
     @Override
     public void onStop() {
         super.onStop();
@@ -83,13 +78,18 @@ public class RoomListFragment extends android.support.v4.app.Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        final View view = inflater.inflate(R.layout.fragment_room_list_tab, container, false);
+        //Data binding
+        mDataBinding = DataBindingUtil.inflate(inflater,
+                R.layout.fragment_room_list_tab, container, false);
+
+        final View view = mDataBinding.getRoot();
+
         //Toast.makeText(getActivity(), String.valueOf(mActiveProject), Toast.LENGTH_SHORT).show();
 
         final AppCompatActivity activity = (AppCompatActivity) getActivity();
 
         mRoomsRecyclerViewAdapter = new RoomsRecyclerViewAdapter(activity, this);
-        RecyclerView recyclerView = view.findViewById(R.id.rv_item_list);
+        RecyclerView recyclerView = mDataBinding.rvItemList;
         LinearLayoutManager layoutManager = new LinearLayoutManager(activity);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
@@ -103,12 +103,19 @@ public class RoomListFragment extends android.support.v4.app.Fragment
             }
         });
 
+        mViewModel.getKeyContacts().observe(this, new Observer<List<GuestForRoomItemView>>() {
+            @Override
+            public void onChanged(@Nullable List<GuestForRoomItemView> guestForRoomItemViews) {
+                mRoomsRecyclerViewAdapter.updateKeyContacts(guestForRoomItemViews);
+                // TODO: 5/5/2018 utilizing RoomList class
+            }
+        });
+
         //Add room button
-        mFloatingActionButton = view.findViewById(R.id.fab);
-        mFloatingActionButton.setOnClickListener(new View.OnClickListener() {
+        mDataBinding.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO: 3/19/2018 add room
+                // TODO: 5/5/2018 add new room
             }
         });
 
@@ -117,7 +124,7 @@ public class RoomListFragment extends android.support.v4.app.Fragment
 
     public void deleteRoom() {
         mViewModel.deleteRoom(mTempRoomId);
-        mFloatingActionButton.show();
+        mDataBinding.fab.show();
     }
 
     @Override

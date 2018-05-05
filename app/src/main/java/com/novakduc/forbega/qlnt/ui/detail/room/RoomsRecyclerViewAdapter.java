@@ -37,7 +37,7 @@ public class RoomsRecyclerViewAdapter
 
     public void swapList(List<ListViewRoomItem> newList) {
         mRoomList = newList;
-        notifyDataSetChanged();
+        updateItems();
     }
 
     @Override
@@ -59,6 +59,26 @@ public class RoomsRecyclerViewAdapter
             return 0;
         }
         return mRoomList.size();
+    }
+
+    public void updateKeyContacts(List<GuestForRoomItemView> guestForRoomItemViews) {
+        mKeyContactList = guestForRoomItemViews;
+        updateItems();
+    }
+
+    private void updateItems() {
+        if (mKeyContactList != null && mRoomList != null) {
+            for (ListViewRoomItem roomItem :
+                    mRoomList) {
+                for (GuestForRoomItemView keyContact :
+                        mKeyContactList) {
+                    if (roomItem.getId() == keyContact.getRoomId()) {
+                        roomItem.setKeyContact(keyContact);
+                    }
+                }
+            }
+        }
+        notifyDataSetChanged();
     }
 
     //Handler interface to process actions applied on project

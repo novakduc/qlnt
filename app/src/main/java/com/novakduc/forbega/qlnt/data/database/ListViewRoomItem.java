@@ -1,6 +1,7 @@
 package com.novakduc.forbega.qlnt.data.database;
 
 import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Ignore;
 
 /**
  * Created by n.thanh on 9/30/2016.
@@ -13,6 +14,9 @@ public class ListViewRoomItem {
     private String name;
     @ColumnInfo(name = "status")
     private RoomStatus status;
+
+    @Ignore
+    private GuestForRoomItemView keyContact;
 
     //For Room only
     public ListViewRoomItem(long id, String name, RoomStatus status) {
@@ -31,5 +35,13 @@ public class ListViewRoomItem {
 
     public String getName() {
         return name;
+    }
+
+    public GuestForRoomItemView getKeyContact() {
+        return keyContact;
+    }
+
+    public void setKeyContact(GuestForRoomItemView keyContact) {
+        this.keyContact = keyContact;
     }
 }

@@ -12,20 +12,20 @@ import java.util.List;
 public class RoomListFragmentViewModel extends ViewModel {
     private ProjectRepo mProjectRepo;
     private LiveData<List<ListViewRoomItem>> mRoomListLiveData;
-    private LiveData<GuestForRoomItemView> mKeyContact;
+    private LiveData<List<GuestForRoomItemView>> mKeyContacts;
 
     public RoomListFragmentViewModel(ProjectRepo projectRepo) {
         mProjectRepo = projectRepo;
-        mRoomListLiveData = mProjectRepo.getRoomList();
-        mKeyContact = mProjectRepo.getAllKeyContact();
+        mRoomListLiveData = mProjectRepo.getListViewRoomItems();
+        mKeyContacts = mProjectRepo.getAllKeyContact();
     }
 
     public LiveData<List<ListViewRoomItem>> getRoomListLiveData() {
         return mRoomListLiveData;
     }
 
-    public LiveData<GuestForRoomItemView> getKeyContact() {
-        return mKeyContact;
+    public LiveData<List<GuestForRoomItemView>> getKeyContacts() {
+        return mKeyContacts;
     }
 
     public void deleteRoom(long tempRoomId) {

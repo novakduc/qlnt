@@ -161,11 +161,11 @@ public class ProjectRepo {
         });
     }
 
-    public LiveData<List<ListViewRoomItem>> getRoomList() {
-        return mAppDao.getRoomList(mProjectId);
+    public LiveData<List<ListViewRoomItem>> getListViewRoomItems() {
+        return mAppDao.getListViewRoomItems(mProjectId);
     }
 
-    public LiveData<GuestForRoomItemView> getAllKeyContact() {
+    public LiveData<List<GuestForRoomItemView>> getAllKeyContact() {
         return mAppDao.getAllKeyContact(mProjectId);
     }
 }
