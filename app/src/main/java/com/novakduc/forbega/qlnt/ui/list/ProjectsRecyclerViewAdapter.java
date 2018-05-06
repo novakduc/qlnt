@@ -50,7 +50,7 @@ public class ProjectsRecyclerViewAdapter
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.project_item_layout, parent, false);
+                .inflate(R.layout.project_item, parent, false);
 
         return new ViewHolder(view);
     }

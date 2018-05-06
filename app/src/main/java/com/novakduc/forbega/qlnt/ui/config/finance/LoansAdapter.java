@@ -39,7 +39,7 @@ public final class LoansAdapter extends RecyclerView.Adapter<LoansAdapter.ViewHo
 
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View loanView = inflater.inflate(R.layout.loan_item_layout, parent, false);
+        View loanView = inflater.inflate(R.layout.loan_item, parent, false);
         ViewHolder viewHolder = new ViewHolder(loanView);
         return viewHolder;
     }

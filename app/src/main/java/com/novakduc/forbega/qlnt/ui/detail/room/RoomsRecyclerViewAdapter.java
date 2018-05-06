@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import com.novakduc.forbega.qlnt.R;
 import com.novakduc.forbega.qlnt.data.database.GuestForRoomItemView;
 import com.novakduc.forbega.qlnt.data.database.ListViewRoomItem;
-import com.novakduc.forbega.qlnt.databinding.RoomItemLayoutBinding;
+import com.novakduc.forbega.qlnt.databinding.RecycleViewRoomItemBinding;
 
 import java.util.List;
 
@@ -44,8 +44,8 @@ public class RoomsRecyclerViewAdapter
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        RoomItemLayoutBinding binding =
-                RoomItemLayoutBinding.inflate(inflater, parent, false);
+        RecycleViewRoomItemBinding binding =
+                RecycleViewRoomItemBinding.inflate(inflater, parent, false);
 
         return new ViewHolder(binding);
     }
@@ -71,6 +71,7 @@ public class RoomsRecyclerViewAdapter
                 holder.mBinding.textViewToDo.setText(
                         mContext.getResources().getString(R.string.todo_checkIn));
         }
+
 
         // TODO: 5/6/2018
     }
@@ -115,9 +116,9 @@ public class RoomsRecyclerViewAdapter
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        private RoomItemLayoutBinding mBinding;
+        private RecycleViewRoomItemBinding mBinding;
 
-        public ViewHolder(RoomItemLayoutBinding binding) {
+        public ViewHolder(RecycleViewRoomItemBinding binding) {
             super(binding.getRoot());
             mBinding = binding;
         }
