@@ -4,12 +4,12 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import com.novakduc.forbega.qlnt.R;
 import com.novakduc.forbega.qlnt.data.database.GuestForRoomItemView;
 import com.novakduc.forbega.qlnt.data.database.ListViewRoomItem;
+import com.novakduc.forbega.qlnt.databinding.RoomItemLayoutBinding;
 
 import java.util.List;
 
@@ -42,15 +42,37 @@ public class RoomsRecyclerViewAdapter
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.project_item_layout, parent, false);
 
-        return new ViewHolder(view);
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        RoomItemLayoutBinding binding =
+                RoomItemLayoutBinding.inflate(inflater, parent, false);
+
+        return new ViewHolder(binding);
     }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         final ListViewRoomItem roomItem = mRoomList.get(position);
+        holder.mBinding.textViewRoomName.setText(roomItem.getName());
+        switch (roomItem.getStatus()) {
+            case NORMAL:
+                holder.mBinding.textViewToDo.setText(
+                        mContext.getResources().getString(R.string.todo_relax));
+                break;
+            case WAITING_FOR_BILL:
+                holder.mBinding.textViewToDo.setText(
+                        mContext.getResources().getString(R.string.todo_billing));
+                break;
+            case WAITING_FOR_PAYMENT:
+                holder.mBinding.textViewToDo.setText(
+                        mContext.getResources().getString(R.string.todo_get_payment));
+                break;
+            case AVAILABLE:
+                holder.mBinding.textViewToDo.setText(
+                        mContext.getResources().getString(R.string.todo_checkIn));
+        }
+
+        // TODO: 5/6/2018
     }
 
     @Override
@@ -93,9 +115,11 @@ public class RoomsRecyclerViewAdapter
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
+        private RoomItemLayoutBinding mBinding;
 
-        public ViewHolder(View view) {
-            super(view);
+        public ViewHolder(RoomItemLayoutBinding binding) {
+            super(binding.getRoot());
+            mBinding = binding;
         }
     }
 }

@@ -127,4 +127,7 @@
     <string name="lastMonthTittle">Last month</string>
     <string name="btExtract">Extract</string>
     <string name="keyContact">key contact</string>
+    <string name="todo_relax">Everything is fine. Just relax</string>
+    <string name="todo_billing">Checking indexes and issuing bill</string>
+    <string name="todo_get_payment">Plesae collect payment</string>
 </resources>
