@@ -24,14 +24,12 @@
                 style="@style/TextAppearance.AppCompat.Headline"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
                 android:gravity="center_vertical"
                 android:maxLength="20"
                 android:maxLines="1"
                 android:text="Room 1"
-                app:layout_constraintEnd_toStartOf="@+id/guideline14"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"/>
 
 
             <ImageButton

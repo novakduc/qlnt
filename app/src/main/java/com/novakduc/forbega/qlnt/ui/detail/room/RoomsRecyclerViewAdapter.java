@@ -4,11 +4,13 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.novakduc.forbega.qlnt.R;
 import com.novakduc.forbega.qlnt.data.database.GuestForRoomItemView;
 import com.novakduc.forbega.qlnt.data.database.ListViewRoomItem;
+import com.novakduc.forbega.qlnt.data.database.RoomStatus;
 import com.novakduc.forbega.qlnt.databinding.RecycleViewRoomItemBinding;
 
 import java.util.List;
@@ -56,24 +58,79 @@ public class RoomsRecyclerViewAdapter
         holder.mBinding.textViewRoomName.setText(roomItem.getName());
         switch (roomItem.getStatus()) {
             case NORMAL:
-                holder.mBinding.textViewToDo.setText(
-                        mContext.getResources().getString(R.string.todo_relax));
+                holder.mBinding.textViewToDo.setText(R.string.todo_relax);
                 break;
             case WAITING_FOR_BILL:
-                holder.mBinding.textViewToDo.setText(
-                        mContext.getResources().getString(R.string.todo_billing));
+                holder.mBinding.textViewToDo.setText(R.string.todo_billing);
                 break;
             case WAITING_FOR_PAYMENT:
-                holder.mBinding.textViewToDo.setText(
-                        mContext.getResources().getString(R.string.todo_get_payment));
+                holder.mBinding.textViewToDo.setText(R.string.todo_get_payment);
                 break;
             case AVAILABLE:
-                holder.mBinding.textViewToDo.setText(
-                        mContext.getResources().getString(R.string.todo_checkIn));
+                holder.mBinding.textViewToDo.setText(R.string.todo_checkIn);
+                holder.mBinding.btBill.setEnabled(false);
+                holder.mBinding.btCheckInOut.setText(R.string.btCheckIn);
+                holder.mBinding.btCheckInOut.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        // TODO: 5/7/2018 go to check in activity
+                    }
+                });
         }
 
+        if (roomItem.getStatus() != RoomStatus.AVAILABLE) {
+            holder.mBinding.btBill.setEnabled(true);
+            holder.mBinding.btBill.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    // TODO: 5/7/2018 go to bill activity
+                }
+            });
+            holder.mBinding.btCheckInOut.setText(R.string.btCheckOut);
+            holder.mBinding.btCheckInOut.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    // TODO: 5/7/2018 go to check out activity
+                }
+            });
+        }
 
-        // TODO: 5/6/2018
+        GuestForRoomItemView keyContact = roomItem.getKeyContact();
+        if (keyContact != null) {
+            holder.mBinding.textViewGuestName.setText(keyContact.getName());
+            holder.mBinding.imageButtonCall.setEnabled(true);
+            holder.mBinding.imageButtonCall.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    // TODO: 5/7/2018 call guest
+                }
+            });
+            holder.mBinding.imageButtonMessage.setEnabled(true);
+            holder.mBinding.imageButtonMessage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    // TODO: 5/7/2018 send message to guest
+                }
+            });
+        } else {
+            holder.mBinding.textViewGuestName.setText(R.string.no_guest);
+            holder.mBinding.imageButtonCall.setEnabled(false);
+            holder.mBinding.imageButtonMessage.setEnabled(false);
+        }
+        //delete button
+        holder.mBinding.ibtDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mActionHandler.onDeleteAction(roomItem.getId());
+            }
+        });
+        //edit action
+        holder.mBinding.ibtEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mActionHandler.onEditAction(roomItem.getId());
+            }
+        });
     }
 
     @Override
@@ -106,11 +163,11 @@ public class RoomsRecyclerViewAdapter
 
     //Handler interface to process actions applied on project
     public interface ItemListAdapterActionHandler {
-        void onDeleteAction(long projectId);
+        void onDeleteAction(long id);
 
-        void onCopyAction(long projectId);
+        void onCopyAction(long id);
 
-        void onEditAction(long projectId);
+        void onEditAction(long id);
 
         void onItemClick(long id);
     }
