@@ -158,4 +158,10 @@ public interface AppDao {
 
     @Query("SELECT name, phoneNumber, roomId FROM guest WHERE projectId = :projectId")
     LiveData<List<GuestForRoomItemView>> getAllKeyContact(long projectId);
+
+    @Query("SELECT * FROM guest WHERE roomId = :roomId")
+    List<Guest> getGuestsByRoom(long roomId);
+
+    @Delete
+    void removeGuest(Guest guest);
 }

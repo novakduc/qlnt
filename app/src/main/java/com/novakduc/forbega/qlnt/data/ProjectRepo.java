@@ -6,6 +6,7 @@ import android.util.Log;
 
 import com.novakduc.baselibrary.AppExecutors;
 import com.novakduc.forbega.qlnt.data.database.AppDao;
+import com.novakduc.forbega.qlnt.data.database.Guest;
 import com.novakduc.forbega.qlnt.data.database.GuestForRoomItemView;
 import com.novakduc.forbega.qlnt.data.database.ListViewRoomItem;
 import com.novakduc.forbega.qlnt.data.database.Loan;
@@ -169,12 +170,20 @@ public class ProjectRepo {
         return mAppDao.getAllKeyContact(mProjectId);
     }
 
-    public void deleteRoom(long roomId) {
+    public void deleteRoom(final long roomId) {
         mExecutors.diskIO().execute(new Runnable() {
             @Override
             public void run() {
-                // TODO: 5/8/2018 delete roomForRent item by id
                 //Delete guest
+                List<Guest> guests = mAppDao.getGuestsByRoom(roomId);
+                if (guests != null) {
+                    for (Guest guest :
+                            guests) {
+                        mAppDao.removeGuest(guest);
+                    }
+                }
+                // TODO: 5/8/2018
+
             }
         });
     }
