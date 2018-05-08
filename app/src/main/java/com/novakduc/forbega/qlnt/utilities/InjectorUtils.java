@@ -29,6 +29,7 @@ import com.novakduc.forbega.qlnt.ui.config.finance.ProjectFinanceConfigViewModel
 import com.novakduc.forbega.qlnt.ui.config.finance.loan.LoanDeclareViewModelFactory;
 import com.novakduc.forbega.qlnt.ui.config.unitprice.UnitPriceConfigViewModelFactory;
 import com.novakduc.forbega.qlnt.ui.detail.room.RoomListViewModelFactory;
+import com.novakduc.forbega.qlnt.ui.detail.room.add_room.AddRoomViewModelFactory;
 import com.novakduc.forbega.qlnt.ui.list.ProjectListViewModelFactory;
 
 /**
@@ -99,8 +100,15 @@ public class InjectorUtils {
         return new UnitPriceConfigViewModelFactory(projectRepo);
     }
 
+    @NonNull
     public static RoomListViewModelFactory provideRoomListViewModelFactory(Context context, long projectId) {
         ProjectRepo projectRepo = provideProjectRepo(context, projectId);
         return new RoomListViewModelFactory(projectRepo);
+    }
+
+    @NonNull
+    public static AddRoomViewModelFactory provideAddRoomViewModelFactory(Context context, long projectId) {
+        ProjectRepo projectRepo = provideProjectRepo(context, projectId);
+        return new AddRoomViewModelFactory(projectRepo);
     }
 }

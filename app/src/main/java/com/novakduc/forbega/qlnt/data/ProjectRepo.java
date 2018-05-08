@@ -11,6 +11,7 @@ import com.novakduc.forbega.qlnt.data.database.GuestForRoomItemView;
 import com.novakduc.forbega.qlnt.data.database.ListViewRoomItem;
 import com.novakduc.forbega.qlnt.data.database.Loan;
 import com.novakduc.forbega.qlnt.data.database.Project;
+import com.novakduc.forbega.qlnt.data.database.RoomForRent;
 import com.novakduc.forbega.qlnt.data.database.UnitPrice;
 
 import java.util.List;
@@ -186,5 +187,18 @@ public class ProjectRepo {
 
             }
         });
+    }
+
+    public LiveData<RoomForRent> createTempRoom() {
+        final MutableLiveData<RoomForRent> roomForRentMutableLiveData = new MutableLiveData<RoomForRent>();
+        mExecutors.diskIO().execute(new Runnable() {
+            @Override
+            public void run() {
+                RoomForRent roomForRent = RoomForRent.getInstance(mProjectId, "", -1);
+                roomForRent.setId(mAppDao.insert(roomForRent));
+                roomForRentMutableLiveData.postValue(roomForRent);
+            }
+        });
+        return roomForRentMutableLiveData;
     }
 }

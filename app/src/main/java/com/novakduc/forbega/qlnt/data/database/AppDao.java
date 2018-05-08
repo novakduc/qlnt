@@ -123,14 +123,6 @@ public interface AppDao {
     @Update
     void updateLoan(Loan loan);
 
-    //Insert loan list to database
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insert(LoanList loans);
-
-    //Update loan list
-    @Update
-    void updateLoanList(LoanList loans);
-
     //Get all loan in project, return live data
     @Query("SELECT * FROM loan WHERE projectId = :projectId")
     LiveData<List<Loan>> getAllLoanInProject(long projectId);

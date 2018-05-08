@@ -34,7 +34,7 @@ public class RoomForRent implements Cloneable, ItemWithId {
         status = RoomStatus.AVAILABLE;
     }
 
-    public RoomForRent getInstance(long projectId, String name, long charge) {
+    public static RoomForRent getInstance(long projectId, String name, long charge) {
         return new RoomForRent(projectId, name, charge);
     }
 

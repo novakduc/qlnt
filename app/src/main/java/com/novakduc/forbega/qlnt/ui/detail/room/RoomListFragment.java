@@ -2,6 +2,7 @@ package com.novakduc.forbega.qlnt.ui.detail.room;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -19,6 +20,7 @@ import com.novakduc.forbega.qlnt.data.database.GuestForRoomItemView;
 import com.novakduc.forbega.qlnt.data.database.ListViewRoomItem;
 import com.novakduc.forbega.qlnt.databinding.FragmentRoomListTabBinding;
 import com.novakduc.forbega.qlnt.ui.ConfirmationDialogFragment;
+import com.novakduc.forbega.qlnt.ui.detail.room.add_room.AddRoomActivity;
 import com.novakduc.forbega.qlnt.utilities.InjectorUtils;
 import com.novakduc.forbega.qlnt.utilities.ItemListAdapterActionHandler;
 
@@ -30,7 +32,6 @@ import java.util.List;
 
 public class RoomListFragment extends android.support.v4.app.Fragment
         implements ItemListAdapterActionHandler {
-    public static final String PREF_QLNT = "com.novak.forbequ.qlnt";
     public static final String ACTIVE_PROJECT_ID = "active_project_id";
     private static final String LOG_TAG = RoomListFragment.class.getSimpleName();
     private RoomsRecyclerViewAdapter mRoomsRecyclerViewAdapter;
@@ -77,7 +78,7 @@ public class RoomListFragment extends android.support.v4.app.Fragment
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         //Data binding
         mDataBinding = DataBindingUtil.inflate(inflater,
@@ -107,8 +108,14 @@ public class RoomListFragment extends android.support.v4.app.Fragment
         mViewModel.getKeyContacts().observe(this, new Observer<List<GuestForRoomItemView>>() {
             @Override
             public void onChanged(@Nullable List<GuestForRoomItemView> guestForRoomItemViews) {
-                mRoomsRecyclerViewAdapter.updateKeyContacts(guestForRoomItemViews);
-                // TODO: 5/5/2018 utilizing RoomList class
+                if (guestForRoomItemViews != null) {
+                    mRoomsRecyclerViewAdapter.updateKeyContacts(guestForRoomItemViews);
+                    mDataBinding.textViewNoRoom.setEnabled(false);
+                    // TODO: 5/5/2018 utilizing RoomList class
+                } else {
+                    mDataBinding.textViewNoRoom.setEnabled(true);
+                }
+
             }
         });
 
@@ -116,7 +123,9 @@ public class RoomListFragment extends android.support.v4.app.Fragment
         mDataBinding.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO: 5/5/2018 add new room
+                Intent intent = new Intent(getActivity(), AddRoomActivity.class);
+                intent.putExtra(RoomListFragment.ACTIVE_PROJECT_ID, mActiveProject);
+                startActivity(intent);
             }
         });
 
