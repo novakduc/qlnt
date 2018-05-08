@@ -30,6 +30,7 @@ import com.novakduc.forbega.qlnt.ui.config.ProjectConfigurationActivity;
 import com.novakduc.forbega.qlnt.ui.config.ProjectEditFragment;
 import com.novakduc.forbega.qlnt.ui.detail.ProjectDetailActivity;
 import com.novakduc.forbega.qlnt.utilities.InjectorUtils;
+import com.novakduc.forbega.qlnt.utilities.ItemListAdapterActionHandler;
 
 import java.util.List;
 
@@ -40,11 +41,11 @@ import static android.content.Context.MODE_PRIVATE;
  */
 
 public class ProjectListFragment extends android.support.v4.app.Fragment
-        implements ProjectsRecyclerViewAdapter.ProjectListAdapterActionHandler {
+        implements ItemListAdapterActionHandler {
     public static final String PREF_QLNT = "com.novak.forbequ.qlnt";
     public static final String ACTIVE_PROJECT_ID = "active_project_id";
     private static final String LOG_TAG = ProjectListFragment.class.getSimpleName();
-    ProjectsRecyclerViewAdapter mProjectsRecyclerViewAdapter;
+    private ProjectsRecyclerViewAdapter mProjectsRecyclerViewAdapter;
     private long mActiveProjectId = -1;
     private ProjectListFragmentViewModel mViewModel;
     private long mTempProjectId;

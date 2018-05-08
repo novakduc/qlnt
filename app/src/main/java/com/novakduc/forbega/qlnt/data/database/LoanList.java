@@ -23,7 +23,7 @@ public class LoanList extends MyArrayList<Loan> implements ItemContainer<Loan> {
     private String idListGSonString;
     private long totalLoanAmount;
     @Ignore
-    private ArrayList idList;
+    private ArrayList<Long> idList;
 
     //For Room only
     public LoanList(long projectId, String idListGSonString, long totalLoanAmount) {
@@ -51,7 +51,7 @@ public class LoanList extends MyArrayList<Loan> implements ItemContainer<Loan> {
     }
 
     @Override
-    public ArrayList getIdList() {
+    public ArrayList<Long> getIdList() {
         return this.idList;
     }
 

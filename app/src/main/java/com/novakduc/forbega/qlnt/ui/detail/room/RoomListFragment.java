@@ -18,6 +18,7 @@ import com.novakduc.forbega.qlnt.R;
 import com.novakduc.forbega.qlnt.data.database.GuestForRoomItemView;
 import com.novakduc.forbega.qlnt.data.database.ListViewRoomItem;
 import com.novakduc.forbega.qlnt.databinding.FragmentRoomListTabBinding;
+import com.novakduc.forbega.qlnt.ui.ConfirmationDialogFragment;
 import com.novakduc.forbega.qlnt.utilities.InjectorUtils;
 import com.novakduc.forbega.qlnt.utilities.ItemListAdapterActionHandler;
 
@@ -129,14 +130,14 @@ public class RoomListFragment extends android.support.v4.app.Fragment
 
     @Override
     public void onDeleteAction(long roomId) {
-//        mTempProjectId = projectId;
-//        Bundle bundle = new Bundle();
-//        //dialog title in bundle
-//        bundle.putString(ConfirmationDialogFragment.MESSAGE,
-//                getResources().getString(R.string.delete_project_confirmation));
-//        android.support.v4.app.DialogFragment dialogFragment = new ConfirmationDialogFragment();
-//        dialogFragment.setArguments(bundle);
-//        dialogFragment.show(getActivity().getSupportFragmentManager(), "discardConfirm");
+        mTempRoomId = roomId;
+        Bundle bundle = new Bundle();
+        //dialog title in bundle
+        bundle.putString(ConfirmationDialogFragment.MESSAGE,
+                getResources().getString(R.string.delete_room_confirmation));
+        android.support.v4.app.DialogFragment dialogFragment = new ConfirmationDialogFragment();
+        dialogFragment.setArguments(bundle);
+        dialogFragment.show(getActivity().getSupportFragmentManager(), "discardConfirm");
     }
 
     @Override

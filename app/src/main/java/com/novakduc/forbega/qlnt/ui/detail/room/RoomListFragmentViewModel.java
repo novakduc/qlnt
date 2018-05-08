@@ -28,8 +28,8 @@ public class RoomListFragmentViewModel extends ViewModel {
         return mKeyContacts;
     }
 
-    public void deleteRoom(long tempRoomId) {
-
+    public void deleteRoom(long roomId) {
+        mProjectRepo.deleteRoom(roomId);
     }
 
     public void copyRoom(long roomId) {

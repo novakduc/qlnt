@@ -33,10 +33,6 @@ public interface AppDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(Cost cost);
 
-    //Get all loan in project
-    @Query("SELECT * FROM loan")
-    List<Loan> getAllLoan();
-
     //Get a loan
     @Query("SELECT * FROM loan WHERE id = :id")
     Loan getLoanById(long id);
@@ -83,7 +79,7 @@ public interface AppDao {
     @Query("SELECT * FROM unit_price WHERE id = :projectId")
     UnitPrice getUnitPrice(long projectId);
 
-    //Get a project loan list
+    //Get a project loan_list
     @Query("SELECT * FROM loan WHERE projectId = :projectId")
     List<Loan> getLoanList(long projectId);
 

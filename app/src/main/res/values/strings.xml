@@ -132,4 +132,5 @@
     <string name="todo_get_payment">Plesae collect payment</string>
     <string name="btCheckIn">Check In</string>
     <string name="no_guest">No guest, room available</string>
+    <string name="delete_room_confirmation">Delete room?</string>
 </resources>

@@ -16,6 +16,7 @@ import com.novakduc.forbega.qlnt.data.database.ListViewProjectItem;
 import com.novakduc.forbega.qlnt.data.database.LoanAmount;
 import com.novakduc.forbega.qlnt.utilities.ConverterUtilities;
 import com.novakduc.forbega.qlnt.utilities.CurrencyUnit;
+import com.novakduc.forbega.qlnt.utilities.ItemListAdapterActionHandler;
 
 import java.util.List;
 
@@ -29,10 +30,10 @@ public class ProjectsRecyclerViewAdapter
     private List<ListViewProjectItem> mProjectList;
     private List<LoanAmount> mLoanAmounts;
     private Context mContext;
-    private ProjectListAdapterActionHandler mActionHandler;
+    private ItemListAdapterActionHandler mActionHandler;
 
     public ProjectsRecyclerViewAdapter(@NonNull Context context,
-                                       ProjectListAdapterActionHandler actionHandler) {
+                                       ItemListAdapterActionHandler actionHandler) {
         mContext = context;
         mActionHandler = actionHandler;
     }
@@ -141,17 +142,6 @@ public class ProjectsRecyclerViewAdapter
                 }
             }
         }
-    }
-
-    //Handler interface to process actions applied on project
-    public interface ProjectListAdapterActionHandler {
-        void onDeleteAction(long projectId);
-
-        void onCopyAction(long projectId);
-
-        void onEditAction(long projectId);
-
-        void onItemClick(long id);
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

@@ -168,4 +168,14 @@ public class ProjectRepo {
     public LiveData<List<GuestForRoomItemView>> getAllKeyContact() {
         return mAppDao.getAllKeyContact(mProjectId);
     }
+
+    public void deleteRoom(long roomId) {
+        mExecutors.diskIO().execute(new Runnable() {
+            @Override
+            public void run() {
+                // TODO: 5/8/2018 delete roomForRent item by id
+                //Delete guest
+            }
+        });
+    }
 }

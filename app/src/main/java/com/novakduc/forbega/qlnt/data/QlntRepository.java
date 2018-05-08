@@ -82,9 +82,12 @@ public class QlntRepository {
         if (loans != null) {
             for (Loan loan :
                     loans) {
+                if (loan != null) {
                         mAppDao.removeLoan(loan);  //remove loan entity
                 }
+            }
         }
+
     }
 
     private void deleteRoomList(long projectId) {
