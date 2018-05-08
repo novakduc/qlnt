@@ -17,9 +17,9 @@ import android.view.ViewGroup;
 import com.novakduc.forbega.qlnt.R;
 import com.novakduc.forbega.qlnt.data.database.GuestForRoomItemView;
 import com.novakduc.forbega.qlnt.data.database.ListViewRoomItem;
-import com.novakduc.forbega.qlnt.data.database.RoomForRent;
 import com.novakduc.forbega.qlnt.databinding.FragmentRoomListTabBinding;
 import com.novakduc.forbega.qlnt.utilities.InjectorUtils;
+import com.novakduc.forbega.qlnt.utilities.ItemListAdapterActionHandler;
 
 import java.util.List;
 
@@ -28,7 +28,7 @@ import java.util.List;
  */
 
 public class RoomListFragment extends android.support.v4.app.Fragment
-        implements RoomsRecyclerViewAdapter.ItemListAdapterActionHandler {
+        implements ItemListAdapterActionHandler {
     public static final String PREF_QLNT = "com.novak.forbequ.qlnt";
     public static final String ACTIVE_PROJECT_ID = "active_project_id";
     private static final String LOG_TAG = RoomListFragment.class.getSimpleName();

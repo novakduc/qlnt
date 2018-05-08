@@ -12,6 +12,7 @@ import com.novakduc.forbega.qlnt.data.database.GuestForRoomItemView;
 import com.novakduc.forbega.qlnt.data.database.ListViewRoomItem;
 import com.novakduc.forbega.qlnt.data.database.RoomStatus;
 import com.novakduc.forbega.qlnt.databinding.RecycleViewRoomItemBinding;
+import com.novakduc.forbega.qlnt.utilities.ItemListAdapterActionHandler;
 
 import java.util.List;
 
@@ -159,17 +160,6 @@ public class RoomsRecyclerViewAdapter
             }
         }
         notifyDataSetChanged();
-    }
-
-    //Handler interface to process actions applied on project
-    public interface ItemListAdapterActionHandler {
-        void onDeleteAction(long id);
-
-        void onCopyAction(long id);
-
-        void onEditAction(long id);
-
-        void onItemClick(long id);
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
