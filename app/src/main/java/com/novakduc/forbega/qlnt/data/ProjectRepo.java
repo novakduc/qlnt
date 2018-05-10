@@ -206,7 +206,12 @@ public class ProjectRepo {
         return roomForRentMutableLiveData;
     }
 
-    public void updateRoomForRent(RoomForRent roomForRent) {
-        mAppDao.updateRoomForRent(roomForRent);
+    public void updateRoomForRent(final RoomForRent roomForRent) {
+        mExecutors.diskIO().execute(new Runnable() {
+            @Override
+            public void run() {
+                mAppDao.updateRoomForRent(roomForRent);
+            }
+        });
     }
 }

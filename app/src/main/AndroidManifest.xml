@@ -32,11 +32,15 @@
         <activity
             android:name=".ui.config.EditProjectActivity"
             android:label="@string/txtViewProjectEditTitle"
-            android:theme="@style/AppTheme.NoActionBarNotTransparent"></activity>
+            android:theme="@style/AppTheme.NoActionBarNotTransparent" />
         <activity
             android:name=".ui.detail.ProjectDetailActivity"
             android:label="@string/txtProjectName"
-            android:theme="@style/AppTheme.NoActionBarNotTransparent"></activity>
+            android:theme="@style/AppTheme.NoActionBarNotTransparent" />
+        <activity
+            android:name=".ui.detail.room.add_room.AddRoomActivity"
+            android:label="@string/titleAddRoom"
+            android:theme="@style/AppTheme.NoActionBarNotTransparent" />
     </application>
 
 </manifest>
