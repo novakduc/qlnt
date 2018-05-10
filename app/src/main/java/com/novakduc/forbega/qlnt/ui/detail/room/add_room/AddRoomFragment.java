@@ -75,7 +75,7 @@ public class AddRoomFragment extends Fragment {
                 }
             }
         });
-        mBinding.troomPrice.addTextChangedListener(new NumbericTextWatcher(mBinding.troomPrice) {
+        mBinding.txtRoomPrice.addTextChangedListener(new NumbericTextWatcher(mBinding.txtRoomPrice) {
             @Override
             public void executeAfterTextChanged(String value) {
                 try {
