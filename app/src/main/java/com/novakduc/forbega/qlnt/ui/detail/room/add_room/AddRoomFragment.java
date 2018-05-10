@@ -2,12 +2,21 @@ package com.novakduc.forbega.qlnt.ui.detail.room.add_room;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
+import com.novakduc.baselibrary.NumbericTextWatcher;
+import com.novakduc.forbega.qlnt.R;
 import com.novakduc.forbega.qlnt.data.database.RoomForRent;
+import com.novakduc.forbega.qlnt.databinding.FragmentAddRoomBinding;
 import com.novakduc.forbega.qlnt.utilities.InjectorUtils;
 
 public class AddRoomFragment extends Fragment {
@@ -15,6 +24,8 @@ public class AddRoomFragment extends Fragment {
     private static final String LOG_TAG = AddRoomFragment.class.getSimpleName();
     private long mProjectId;
     private AddRoomViewModel mViewModel;
+    private RoomForRent mRoomForRent;
+    private FragmentAddRoomBinding mBinding;
 
     public static AddRoomFragment getInstance(@NonNull long projectId) {
         Bundle bundle = new Bundle();
@@ -33,13 +44,74 @@ public class AddRoomFragment extends Fragment {
                 InjectorUtils.provideAddRoomViewModelFactory(getActivity(), mProjectId);
 
         mViewModel = ViewModelProviders.of(this, factory).get(AddRoomViewModel.class);
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        mBinding = DataBindingUtil.inflate(inflater,
+                R.layout.fragment_add_room, container, false);
+        View view = mBinding.getRoot();
+
+        mBinding.txtRoomName.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (editable.length() == 0) {
+                    mBinding.txtLayoutName.setError(getString(R.string.invalidName));
+                    mBinding.txtLayoutName.setErrorEnabled(true);
+                } else {
+                    mBinding.txtLayoutName.setErrorEnabled(false);
+                    mRoomForRent.setName(editable.toString());
+                }
+            }
+        });
+        mBinding.troomPrice.addTextChangedListener(new NumbericTextWatcher(mBinding.troomPrice) {
+            @Override
+            public void executeAfterTextChanged(String value) {
+                try {
+                    long amount;
+                    amount = Long.valueOf(value);
+                    if (amount < 0) {
+                        throw new NumberFormatException();
+                    } else {
+                        mBinding.txtLayoutPrice.setErrorEnabled(false);
+                    }
+                } catch (NumberFormatException e) {
+                    mBinding.txtLayoutPrice.setError(getString(R.string.invesment_amount_error));
+                    mBinding.txtLayoutPrice.setErrorEnabled(true);
+                    mRoomForRent.setCharge(-1);
+                }
+            }
+        });
+
+        mBinding.fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mViewModel.addRoom(mRoomForRent);
+                getActivity().finish();
+            }
+        });
+
         mViewModel.getRoomForRentLiveData().observe(this, new Observer<RoomForRent>() {
             @Override
             public void onChanged(@Nullable RoomForRent roomForRent) {
                 if (roomForRent != null) {
-                    // TODO: 5/8/2018 get room id
+                    mRoomForRent = roomForRent;
+                    mViewModel.setRoomId(mRoomForRent.getId());
                 }
             }
         });
+
+        return view;
     }
 }

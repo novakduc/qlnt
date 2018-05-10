@@ -185,6 +185,10 @@ public class ProjectRepo {
                 }
                 // TODO: 5/8/2018
 
+                RoomForRent roomForRent = mAppDao.getRoomById(roomId);
+                if (roomForRent != null) {
+                    mAppDao.removeRoomForRent(roomForRent);
+                }
             }
         });
     }
@@ -200,5 +204,9 @@ public class ProjectRepo {
             }
         });
         return roomForRentMutableLiveData;
+    }
+
+    public void updateRoomForRent(RoomForRent roomForRent) {
+        mAppDao.updateRoomForRent(roomForRent);
     }
 }

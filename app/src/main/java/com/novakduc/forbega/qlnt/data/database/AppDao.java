@@ -156,4 +156,7 @@ public interface AppDao {
 
     @Delete
     void removeGuest(Guest guest);
+
+    @Update
+    void updateRoomForRent(RoomForRent roomForRent);
 }
