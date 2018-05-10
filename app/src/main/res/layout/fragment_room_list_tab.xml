@@ -19,6 +19,7 @@
         </android.support.v7.widget.RecyclerView>
 
         <TextView
+            style="@style/Base.TextAppearance.AppCompat.Body1"
             android:id="@+id/textViewNoRoom"
             android:layout_width="match_parent"
             android:layout_height="42dp"

@@ -6,23 +6,19 @@
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/txtLayoutInvestment"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@color/windowBackgroundColor"
-        android:clipToPadding="false"
-        android:paddingBottom="@dimen/paddingBottom"
-        android:paddingEnd="@dimen/paddingEnd"
-        android:paddingStart="@dimen/paddingStart"
-        android:paddingTop="@dimen/paddingTop"
+        android:layout_marginEnd="@dimen/layout_marginEnd"
+        android:layout_marginStart="@dimen/layout_marginStart"
+        android:layout_marginTop="@dimen/layout_marginTop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/appbar">
+        app:layout_constraintTop_toTopOf="parent">
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/investmentAmount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:elevation="8dp"
             android:hint="@string/inputProjectInvestmentHint"
             android:inputType="number"/>
     </android.support.design.widget.TextInputLayout>

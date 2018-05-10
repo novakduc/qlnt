@@ -27,6 +27,7 @@
 
 
                 <TextView
+                    style="@style/Base.TextAppearance.AppCompat.Headline"
                     android:id="@+id/textViewProjectName"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -37,10 +38,10 @@
                     android:paddingEnd="16dp"
                     android:paddingStart="16dp"
                     android:paddingTop="8dp"
-                    android:text="ABCD"
-                    android:textSize="24sp"/>
+                    android:text="ABCD"/>
 
                 <TextView
+                    style="@style/Base.TextAppearance.AppCompat.Body1"
                     android:id="@+id/textViewProjectDuration"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -50,8 +51,7 @@
                     android:paddingEnd="16dp"
                     android:paddingStart="16dp"
                     android:paddingTop="16dp"
-                    android:text="2015 - 2025"
-                    android:textSize="14sp"/>
+                    android:text="2015 - 2025"/>
             </LinearLayout>
 
             <RatingBar
@@ -65,6 +65,7 @@
                 android:rating="4.4"/>
 
             <TextView
+                style="@style/Base.TextAppearance.AppCompat.Body1"
                 android:id="@+id/textViewProjectProduceRate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -74,8 +75,7 @@
                 android:maxLines="1"
                 android:paddingEnd="8dp"
                 android:paddingStart="8dp"
-                android:text="8/9"
-                android:textSize="14sp"/>
+                android:text="8/9"/>
 
             <View
                 android:id="@+id/lineSeparate"
@@ -92,17 +92,18 @@
                         android:layout_width="match_parent"
                         android:layout_height="32dp"
                         android:layout_below="@id/lineSeparate"
-                        android:layout_marginTop="16dp">
+                        android:layout_marginTop="8dp">
                         <TextView
+                            style="@style/Base.TextAppearance.AppCompat.Subhead"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="40"
                             android:gravity="end"
                             android:paddingEnd="8dp"
                             android:paddingStart="16dp"
-                            android:text="@string/txtViewIncomeTitle"
-                            android:textSize="20sp"/>
+                            android:text="@string/txtViewIncomeTitle"/>
                         <TextView
+                            style="@style/Base.TextAppearance.AppCompat.Subhead"
                             android:id="@+id/txtViewTotalIncome"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -110,15 +111,14 @@
                             android:gravity="end"
                             android:maxLength="8"
                             android:paddingEnd="@dimen/paddingEnd"
-                            android:text="4000.00"
-                            android:textSize="20sp"/>
+                            android:text="4000.00"/>
                         <TextView
+                            style="@style/Base.TextAppearance.AppCompat.Subhead"
                             android:id="@+id/txtViewTotalIncomeUnit"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:paddingEnd="8dp"
-                            android:text="@string/millionShort"
-                            android:textSize="20sp"/>
+                            android:text="@string/millionShort"/>
 
                         <ProgressBar
                             android:id="@+id/progressBarIncome"
@@ -140,15 +140,16 @@
                         android:layout_height="32dp"
                         android:layout_below="@id/incomeLayout">
                         <TextView
+                            style="@style/Base.TextAppearance.AppCompat.Subhead"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="40"
                             android:gravity="end"
                             android:paddingEnd="8dp"
                             android:paddingStart="16dp"
-                            android:text="@string/txtViewDeptTitle"
-                            android:textSize="20sp"/>
+                            android:text="@string/txtViewDeptTitle"/>
                         <TextView
+                            style="@style/Base.TextAppearance.AppCompat.Subhead"
                             android:id="@+id/txtViewDept"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -156,16 +157,15 @@
                             android:gravity="end"
                             android:maxLength="8"
                             android:paddingEnd="8dp"
-                            android:text="4000.00"
-                            android:textSize="20sp"/>
+                            android:text="4000.00"/>
 
                         <TextView
+                            style="@style/Base.TextAppearance.AppCompat.Subhead"
                             android:id="@+id/txtViewDeptUnit"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:paddingEnd="8dp"
-                            android:text="@string/millionShort"
-                            android:textSize="20sp"/>
+                            android:text="@string/millionShort"/>
 
                         <ProgressBar
                             android:id="@+id/progressBarDept"
@@ -188,16 +188,17 @@
                 android:layout_below="@id/deptLayout">
 
                 <TextView
+                    style="@style/Base.TextAppearance.AppCompat.Subhead"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="40"
                     android:gravity="end"
                     android:paddingEnd="8dp"
                     android:paddingStart="16dp"
-                    android:text="@string/txtViewRevenueTitle"
-                    android:textSize="20sp"/>
+                    android:text="@string/txtViewRevenueTitle"/>
 
                 <TextView
+                    style="@style/Base.TextAppearance.AppCompat.Subhead"
                     android:id="@+id/txtViewRevenue"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -205,16 +206,15 @@
                     android:gravity="end"
                     android:maxLength="8"
                     android:paddingEnd="8dp"
-                    android:text="4000.000"
-                    android:textSize="20sp"/>
+                    android:text="4000.000"/>
 
                 <TextView
+                    style="@style/Base.TextAppearance.AppCompat.Subhead"
                     android:id="@+id/txtViewRevenueUnit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingEnd="8dp"
-                    android:text="@string/millionShort"
-                    android:textSize="20sp"/>
+                    android:text="@string/millionShort"/>
 
                 <ProgressBar
                     android:id="@+id/progressBarRevenue"

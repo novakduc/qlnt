@@ -101,7 +101,14 @@ public class RoomListFragment extends android.support.v4.app.Fragment
         mViewModel.getRoomListLiveData().observe(this, new Observer<List<ListViewRoomItem>>() {
             @Override
             public void onChanged(@Nullable List<ListViewRoomItem> listViewRoomItems) {
-                mRoomsRecyclerViewAdapter.swapList(listViewRoomItems);
+                if (listViewRoomItems != null) {
+                    mRoomsRecyclerViewAdapter.swapList(listViewRoomItems);
+                    if (listViewRoomItems.isEmpty()) {
+                        mDataBinding.textViewNoRoom.setVisibility(View.VISIBLE);
+                    } else
+                        mDataBinding.textViewNoRoom.setVisibility(View.INVISIBLE);
+                }
+
             }
         });
 
@@ -110,10 +117,6 @@ public class RoomListFragment extends android.support.v4.app.Fragment
             public void onChanged(@Nullable List<GuestForRoomItemView> guestForRoomItemViews) {
                 if (guestForRoomItemViews != null) {
                     mRoomsRecyclerViewAdapter.updateKeyContacts(guestForRoomItemViews);
-                    mDataBinding.textViewNoRoom.setEnabled(false);
-                    // TODO: 5/5/2018 utilizing RoomList class
-                } else {
-                    mDataBinding.textViewNoRoom.setEnabled(true);
                 }
 
             }

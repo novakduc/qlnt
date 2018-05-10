@@ -17,6 +17,7 @@
             android:layout_height="match_parent">
 
             <TextView
+                style="@style/Base.TextAppearance.AppCompat.Headline"
                 android:id="@+id/textViewBankName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -26,10 +27,10 @@
                 android:paddingEnd="@dimen/paddingEnd"
                 android:paddingStart="@dimen/paddingStart"
                 android:paddingTop="@dimen/paddingTop"
-                android:text="Banker"
-                android:textSize="24sp"/>
+                android:text="Banker"/>
 
             <TextView
+                style="@style/Base.TextAppearance.AppCompat.Body1"
                 android:id="@+id/textViewStartDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -40,8 +41,7 @@
                 android:paddingEnd="16dp"
                 android:paddingStart="16dp"
                 android:paddingTop="8dp"
-                android:text="01/11/2015"
-                android:textSize="14sp"/>
+                android:text="01/11/2015"/>
 
             <ImageButton
                 android:id="@+id/btEdit"
@@ -81,25 +81,26 @@
                 android:layout_marginTop="16dp">
 
                 <TextView
+                    style="@style/Base.TextAppearance.AppCompat.Subhead"
                     android:id="@+id/txtViewLoanAmount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:maxLength="7"
                     android:paddingStart="16dp"
-                    android:text="4000.00"
-                    android:textSize="20sp"/>
+                    android:text="4000.00"/>
 
                 <TextView
+                    style="@style/Base.TextAppearance.AppCompat.Subhead"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
                     android:layout_weight="1"
                     android:gravity="start"
                     android:paddingStart="8dp"
-                    android:text="@string/currencyUnit"
-                    android:textSize="20sp"/>
+                    android:text="@string/currencyUnit"/>
 
                 <TextView
+                    style="@style/Base.TextAppearance.AppCompat.Subhead"
                     android:id="@+id/interestRate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -109,15 +110,14 @@
                     android:gravity="end"
                     android:paddingEnd="8dp"
                     android:paddingStart="16dp"
-                    android:text="5.0"
-                    android:textSize="20sp"/>
+                    android:text="5.0"/>
 
                 <TextView
+                    style="@style/Base.TextAppearance.AppCompat.Subhead"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingEnd="16dp"
-                    android:text="@string/interestRateUnit"
-                    android:textSize="20sp"/>
+                    android:text="@string/interestRateUnit"/>
             </LinearLayout>
         </RelativeLayout>
     </android.support.v7.widget.CardView>
