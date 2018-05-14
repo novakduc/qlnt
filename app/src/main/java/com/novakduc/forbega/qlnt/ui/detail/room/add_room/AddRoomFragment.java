@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -89,6 +90,7 @@ public class AddRoomFragment extends Fragment {
                     mBinding.txtLayoutPrice.setError(getString(R.string.invesment_amount_error));
                     mBinding.txtLayoutPrice.setErrorEnabled(true);
                     mRoomForRent.setCharge(-1);
+                    Log.d(LOG_TAG, "Error value format: " + value);
                 }
             }
         });
