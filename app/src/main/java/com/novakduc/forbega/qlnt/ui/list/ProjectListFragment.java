@@ -155,7 +155,7 @@ public class ProjectListFragment extends android.support.v4.app.Fragment
 
     @Override
     public void onCopyAction(long projectId) {
-        mViewModel.copyProject(projectId);
+        //mViewModel.copyProject(projectId);
     }
 
     @Override

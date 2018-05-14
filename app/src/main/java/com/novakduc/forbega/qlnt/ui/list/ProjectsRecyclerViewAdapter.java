@@ -91,13 +91,6 @@ public class ProjectsRecyclerViewAdapter
             }
         });
 
-        holder.mCopyButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mActionHandler.onCopyAction(project.getId());
-            }
-        });
-
         holder.mEditButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -155,7 +148,7 @@ public class ProjectsRecyclerViewAdapter
         private final ProgressBar mDeptProgressBar;
         private final TextView mRevenueTextView;
         private final ProgressBar mRevenueProgressBar;
-        private final Button mDeleteButton, mCopyButton, mEditButton;
+        private final Button mDeleteButton, mEditButton;
         private final View mItemView;
 
         public ViewHolder(View view) {
@@ -172,7 +165,6 @@ public class ProjectsRecyclerViewAdapter
             mRevenueProgressBar = view.findViewById(R.id.progressBarRevenue);
             mDeleteButton = view.findViewById(R.id.btDelete);
             mEditButton = view.findViewById(R.id.btEdit);
-            mCopyButton = view.findViewById(R.id.btCopy);
             mItemView = view;
         }
 

@@ -36,8 +36,4 @@ public class ProjectListFragmentViewModel extends ViewModel {
     public void deleteProject(long projectId) {
         mRepository.deleteProject(projectId);
     }
-
-    public void copyProject(long projectId) {
-        mRepository.copyProject(projectId);
-    }
 }
