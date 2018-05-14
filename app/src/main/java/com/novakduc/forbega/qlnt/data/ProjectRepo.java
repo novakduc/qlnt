@@ -214,4 +214,8 @@ public class ProjectRepo {
             }
         });
     }
+
+    public LiveData<RoomForRent> getLiveDataRoomById(long roomId) {
+        return mAppDao.getLiveDataRoomById(roomId);
+    }
 }

@@ -1,4 +1,4 @@
-package com.novakduc.forbega.qlnt.ui.detail.room.add_room;
+package com.novakduc.forbega.qlnt.ui.detail.room.edit_room;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
@@ -19,30 +19,31 @@ import com.novakduc.forbega.qlnt.data.database.RoomForRent;
 import com.novakduc.forbega.qlnt.databinding.FragmentAddRoomBinding;
 import com.novakduc.forbega.qlnt.utilities.InjectorUtils;
 
-public class AddRoomFragment extends Fragment {
-    public static final String ACTIVE_PROJECT_ID = "active_project_id";
-    private static final String LOG_TAG = AddRoomFragment.class.getSimpleName();
-    private AddRoomViewModel mViewModel;
+public class EditRoomFragment extends Fragment {
+    public static final String ROOM_ID = EditRoomFragment.class.getName() + ".roomId";
+    private static final String LOG_TAG = EditRoomFragment.class.getSimpleName();
+    private EditRoomViewModel mViewModel;
     private RoomForRent mRoomForRent;
+    private long mRoomId;
     private FragmentAddRoomBinding mBinding;
 
-    public static AddRoomFragment getInstance(@NonNull long projectId) {
+    public static EditRoomFragment getInstance(@NonNull long roomId) {
         Bundle bundle = new Bundle();
-        bundle.putLong(ACTIVE_PROJECT_ID, projectId);
-        AddRoomFragment addRoomFragment = new AddRoomFragment();
-        addRoomFragment.setArguments(bundle);
-        return addRoomFragment;
+        bundle.putLong(ROOM_ID, roomId);
+        EditRoomFragment editRoomFragment = new EditRoomFragment();
+        editRoomFragment.setArguments(bundle);
+        return editRoomFragment;
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        long projectId = getArguments().getLong(ACTIVE_PROJECT_ID);
+        mRoomId = getArguments().getLong(ROOM_ID);
 
-        AddRoomViewModelFactory factory =
-                InjectorUtils.provideAddRoomViewModelFactory(getActivity(), projectId);
+        EditRoomViewModelFactory factory =
+                InjectorUtils.provideEditRoomViewModelFactory(getActivity(), mRoomId);
 
-        mViewModel = ViewModelProviders.of(this, factory).get(AddRoomViewModel.class);
+        mViewModel = ViewModelProviders.of(this, factory).get(EditRoomViewModel.class);
     }
 
     @Nullable
@@ -96,7 +97,7 @@ public class AddRoomFragment extends Fragment {
         mBinding.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mViewModel.addRoom(mRoomForRent);
+                mViewModel.updateRoom(mRoomForRent);
                 getActivity().finish();
             }
         });
@@ -106,7 +107,8 @@ public class AddRoomFragment extends Fragment {
             public void onChanged(@Nullable RoomForRent roomForRent) {
                 if (roomForRent != null) {
                     mRoomForRent = roomForRent;
-                    mViewModel.setRoomId(mRoomForRent.getId());
+                    mBinding.txtRoomName.setText(mRoomForRent.getName());
+                    mBinding.txtRoomPrice.setText(String.valueOf(mRoomForRent.getCharge()));
                 }
             }
         });

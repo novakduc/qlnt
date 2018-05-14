@@ -91,7 +91,7 @@
 
                 <ImageButton
                     android:id="@+id/imageButtonMessage"
-                    style="@style/Widget.AppCompat.Button.Borderless"
+                    style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
                     android:layout_width="54dp"
                     android:layout_height="wrap_content"
                     android:paddingBottom="6dp"
@@ -102,7 +102,7 @@
 
                 <ImageButton
                     android:id="@+id/imageButtonCall"
-                    style="@style/Widget.AppCompat.Button.Borderless"
+                    style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
                     android:layout_width="54dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -129,25 +129,23 @@
                 app:layout_constraintTop_toBottomOf="@+id/textViewRoomName" />
 
             <Button
+                style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
                 android:id="@+id/btCheckInOut"
-                style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:text="@string/btCheckOut"
-                android:textColor="@color/secondaryColor"
                 app:layout_constraintTop_toBottomOf="@id/guessInfo"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/guideline14" />
 
             <Button
                 android:id="@+id/btBill"
-                style="@style/Widget.AppCompat.Button.Borderless"
+                style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:text="@string/btBill"
-                android:textColor="@color/secondaryColor"
                 app:layout_constraintTop_toBottomOf="@id/guessInfo"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

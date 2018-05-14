@@ -22,6 +22,7 @@ import android.support.annotation.NonNull;
 import com.novakduc.baselibrary.AppExecutors;
 import com.novakduc.forbega.qlnt.data.ProjectRepo;
 import com.novakduc.forbega.qlnt.data.QlntRepository;
+import com.novakduc.forbega.qlnt.data.RoomForRentRepo;
 import com.novakduc.forbega.qlnt.data.database.AppDatabase;
 import com.novakduc.forbega.qlnt.ui.config.ProjectConfigViewModelFactory;
 import com.novakduc.forbega.qlnt.ui.config.base.ProjectBaseViewModelFactory;
@@ -30,6 +31,7 @@ import com.novakduc.forbega.qlnt.ui.config.finance.loan.LoanDeclareViewModelFact
 import com.novakduc.forbega.qlnt.ui.config.unitprice.UnitPriceConfigViewModelFactory;
 import com.novakduc.forbega.qlnt.ui.detail.room.RoomListViewModelFactory;
 import com.novakduc.forbega.qlnt.ui.detail.room.add_room.AddRoomViewModelFactory;
+import com.novakduc.forbega.qlnt.ui.detail.room.edit_room.EditRoomViewModelFactory;
 import com.novakduc.forbega.qlnt.ui.list.ProjectListViewModelFactory;
 
 /**
@@ -49,6 +51,12 @@ public class InjectorUtils {
         AppDatabase database = AppDatabase.getInstance(context);
         AppExecutors executors = AppExecutors.getInstance();
         return ProjectRepo.getInstance(database.appDao(), executors, projectId);
+    }
+
+    private static RoomForRentRepo provideRoomForRentRepo(Context context, long roomId) {
+        AppDatabase database = AppDatabase.getInstance(context);
+        AppExecutors executors = AppExecutors.getInstance();
+        return RoomForRentRepo.getInstance(database.appDao(), executors, roomId);
     }
 //    public static WeatherNetworkDataSource provideNetworkDataSource(Context context) {
 //        provideRepository(context);
@@ -110,5 +118,10 @@ public class InjectorUtils {
     public static AddRoomViewModelFactory provideAddRoomViewModelFactory(Context context, long projectId) {
         ProjectRepo projectRepo = provideProjectRepo(context, projectId);
         return new AddRoomViewModelFactory(projectRepo);
+    }
+
+    public static EditRoomViewModelFactory provideEditRoomViewModelFactory(Context context, long roomId) {
+        RoomForRentRepo roomForRentRepo = provideRoomForRentRepo(context, roomId);
+        return new EditRoomViewModelFactory(roomForRentRepo);
     }
 }

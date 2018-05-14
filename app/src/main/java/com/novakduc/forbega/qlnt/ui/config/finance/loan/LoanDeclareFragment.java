@@ -280,15 +280,16 @@ public class LoanDeclareFragment extends android.support.v4.app.Fragment {
                     }
                 }
             });
-        }
-        mViewModel.getLoanLiveData(mLoanId).observe(this, new Observer<Loan>() {
-            @Override
-            public void onChanged(@Nullable Loan loan) {
-                if (loan != null) {
-                    bindLoanToView(loan);
+        } else {
+            mViewModel.getLoanLiveData(mLoanId).observe(this, new Observer<Loan>() {
+                @Override
+                public void onChanged(@Nullable Loan loan) {
+                    if (loan != null) {
+                        bindLoanToView(loan);
+                    }
                 }
-            }
-        });
+            });
+        }
 
         return view;
     }

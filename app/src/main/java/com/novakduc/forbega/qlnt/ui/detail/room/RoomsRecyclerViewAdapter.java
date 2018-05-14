@@ -100,6 +100,7 @@ public class RoomsRecyclerViewAdapter
         if (keyContact != null) {
             holder.mBinding.textViewGuestName.setText(keyContact.getName());
             holder.mBinding.imageButtonCall.setEnabled(true);
+            holder.mBinding.imageButtonCall.setImageAlpha(255);
             holder.mBinding.imageButtonCall.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -107,6 +108,7 @@ public class RoomsRecyclerViewAdapter
                 }
             });
             holder.mBinding.imageButtonMessage.setEnabled(true);
+            holder.mBinding.imageButtonMessage.setImageAlpha(255);
             holder.mBinding.imageButtonMessage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -116,7 +118,9 @@ public class RoomsRecyclerViewAdapter
         } else {
             holder.mBinding.textViewGuestName.setText(R.string.no_guest);
             holder.mBinding.imageButtonCall.setEnabled(false);
+            holder.mBinding.imageButtonCall.setImageAlpha(30);
             holder.mBinding.imageButtonMessage.setEnabled(false);
+            holder.mBinding.imageButtonMessage.setImageAlpha(30);
         }
         //delete button
         holder.mBinding.ibtDelete.setOnClickListener(new View.OnClickListener() {

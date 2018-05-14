@@ -21,6 +21,8 @@ import com.novakduc.forbega.qlnt.data.database.ListViewRoomItem;
 import com.novakduc.forbega.qlnt.databinding.FragmentRoomListTabBinding;
 import com.novakduc.forbega.qlnt.ui.ConfirmationDialogFragment;
 import com.novakduc.forbega.qlnt.ui.detail.room.add_room.AddRoomActivity;
+import com.novakduc.forbega.qlnt.ui.detail.room.edit_room.EditRoomActivity;
+import com.novakduc.forbega.qlnt.ui.detail.room.edit_room.EditRoomFragment;
 import com.novakduc.forbega.qlnt.utilities.InjectorUtils;
 import com.novakduc.forbega.qlnt.utilities.ItemListAdapterActionHandler;
 
@@ -159,9 +161,9 @@ public class RoomListFragment extends android.support.v4.app.Fragment
 
     @Override
     public void onEditAction(long roomId) {
-//        Intent intent = new Intent(getActivity(), EditProjectActivity.class);
-//        intent.putExtra(ProjectEditFragment.TEMP_PROJECT_ID, projectId);
-//        startActivity(intent);
+        Intent intent = new Intent(getActivity(), EditRoomActivity.class);
+        intent.putExtra(EditRoomFragment.ROOM_ID, roomId);
+        startActivity(intent);
     }
 
     @Override

@@ -41,6 +41,10 @@
             android:name=".ui.detail.room.add_room.AddRoomActivity"
             android:label="@string/titleAddRoom"
             android:theme="@style/AppTheme.NoActionBarNotTransparent" />
+        <activity
+            android:name=".ui.detail.room.edit_room.EditRoomActivity"
+            android:label="@string/titleAddRoom"
+            android:theme="@style/AppTheme.NoActionBarNotTransparent" />
     </application>
 
 </manifest>

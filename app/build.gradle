@@ -37,6 +37,7 @@ android {
 //apply plugin: 'com.neenbedankt.android-apt'
 
 dependencies {
+    //implementation 'com.google.android.material:material:1.0.0-alpha1'
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.google.firebase:firebase-core:15.0.2'
     implementation 'com.google.firebase:firebase-firestore:16.0.0'

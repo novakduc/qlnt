@@ -67,9 +67,6 @@ public interface AppDao {
     void removeLoan(Loan l);
 
     @Delete
-    void removeLoanList(LoanList loans);
-
-    @Delete
     void removeRoomForRent(RoomForRent roomForRent);
 
     @Delete
@@ -91,7 +88,7 @@ public interface AppDao {
     @Query("SELECT * FROM room_list WHERE projectId = :projectId")
     RoomList getRoomList(long projectId);
 
-    //Get a project room list
+    //Get room by id
     @Query("SELECT * FROM room WHERE id = :roomId")
     RoomForRent getRoomById(long roomId);
 
@@ -159,4 +156,7 @@ public interface AppDao {
 
     @Update
     void updateRoomForRent(RoomForRent roomForRent);
+
+    @Query("SELECT * FROM room WHERE id = :roomId")
+    LiveData<RoomForRent> getLiveDataRoomById(long roomId);
 }
