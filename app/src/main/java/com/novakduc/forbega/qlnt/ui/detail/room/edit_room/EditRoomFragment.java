@@ -84,6 +84,7 @@ public class EditRoomFragment extends Fragment {
                     if (amount < 0) {
                         throw new NumberFormatException();
                     } else {
+                        mRoomForRent.setCharge(amount);
                         mBinding.txtLayoutPrice.setErrorEnabled(false);
                     }
                 } catch (NumberFormatException e) {
