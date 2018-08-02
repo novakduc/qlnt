@@ -17,16 +17,24 @@ public class Project implements Cloneable, ItemWithId {
     private String name;
     private String address;
     private long investmentAmount;
+    private long income;
+    private long dept;
+    private long revenue;
+    private long cost;
     private long startDate;
     private int yearDuration;
 
     //For Room only
-    public Project(long projectId, String name, String address, long investmentAmount,
-                   long startDate, int yearDuration) {
+    public Project(long projectId, String name, String address, long investmentAmount, long income,
+                   long dept, long revenue, long cost, long startDate, int yearDuration) {
         this.projectId = projectId;
         this.name = name;
         this.address = address;
         this.investmentAmount = investmentAmount;
+        this.income = income;
+        this.dept = dept;
+        this.revenue = revenue;
+        this.cost = cost;
         this.startDate = startDate;
         this.yearDuration = yearDuration;
     }
