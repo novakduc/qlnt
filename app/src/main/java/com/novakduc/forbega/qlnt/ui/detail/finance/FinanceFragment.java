@@ -20,7 +20,6 @@ import com.novakduc.forbega.qlnt.data.query.room_list_tab.GuestForRoomItemView;
 import com.novakduc.forbega.qlnt.data.query.room_list_tab.ListViewRoomItem;
 import com.novakduc.forbega.qlnt.databinding.FragmentRoomListTabBinding;
 import com.novakduc.forbega.qlnt.ui.ConfirmationDialogFragment;
-import com.novakduc.forbega.qlnt.ui.detail.room.RoomListFragmentViewModel;
 import com.novakduc.forbega.qlnt.ui.detail.room.RoomsRecyclerViewAdapter;
 import com.novakduc.forbega.qlnt.ui.detail.room.add_room.AddRoomActivity;
 import com.novakduc.forbega.qlnt.ui.detail.room.edit_room.EditRoomActivity;
@@ -40,7 +39,7 @@ public class FinanceFragment extends android.support.v4.app.Fragment
     private static final String LOG_TAG = FinanceFragment.class.getSimpleName();
     private RoomsRecyclerViewAdapter mRoomsRecyclerViewAdapter;
     private long mActiveProject = -1;
-    private RoomListFragmentViewModel mViewModel;
+    private FinanceFragmentViewModel mViewModel;
     private long mTempRoomId;
     private FragmentRoomListTabBinding mDataBinding;
 
