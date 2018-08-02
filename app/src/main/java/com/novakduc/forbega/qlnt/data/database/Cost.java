@@ -17,22 +17,25 @@ public class Cost implements ItemWithId{
     private long date;
     private CostType type;
     private boolean repeatable;
+    private long projectId;
 
     //For room only
-    public Cost(long id, long amount, CostType type, long date, boolean repeatable) {
+    public Cost(long id, long amount, CostType type, long date, boolean repeatable, long projectId) {
         this.amount = amount;
         this.id = id;
         this.type = type;
         this.date = date;
         this.repeatable = repeatable;
+        this.projectId = projectId;
     }
 
     @Ignore
-    public Cost(long amount, long date, CostType type, boolean repeatable) {
+    public Cost(long amount, long date, CostType type, boolean repeatable, long projectId) {
         this.amount = amount;
         this.date = date;
         this.type = type;
         this.repeatable = repeatable;
+        this.projectId = projectId;
     }
 
     public long getDate() {
@@ -78,4 +81,7 @@ public class Cost implements ItemWithId{
         this.id = id;
     }
 
+    public long getProjectId() {
+        return projectId;
+    }
 }

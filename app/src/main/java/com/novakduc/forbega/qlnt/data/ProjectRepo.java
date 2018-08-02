@@ -7,12 +7,14 @@ import android.util.Log;
 import com.novakduc.baselibrary.AppExecutors;
 import com.novakduc.forbega.qlnt.data.database.AppDao;
 import com.novakduc.forbega.qlnt.data.database.Guest;
-import com.novakduc.forbega.qlnt.data.database.GuestForRoomItemView;
-import com.novakduc.forbega.qlnt.data.database.ListViewRoomItem;
 import com.novakduc.forbega.qlnt.data.database.Loan;
 import com.novakduc.forbega.qlnt.data.database.Project;
 import com.novakduc.forbega.qlnt.data.database.RoomForRent;
 import com.novakduc.forbega.qlnt.data.database.UnitPrice;
+import com.novakduc.forbega.qlnt.data.query.finance_tab.CostAmount;
+import com.novakduc.forbega.qlnt.data.query.finance_tab.LoanAmountFinanceTabView;
+import com.novakduc.forbega.qlnt.data.query.room_list_tab.GuestForRoomItemView;
+import com.novakduc.forbega.qlnt.data.query.room_list_tab.ListViewRoomItem;
 
 import java.util.List;
 
@@ -217,5 +219,14 @@ public class ProjectRepo {
 
     public LiveData<RoomForRent> getLiveDataRoomById(long roomId) {
         return mAppDao.getLiveDataRoomById(roomId);
+    }
+
+    public LiveData<List<LoanAmountFinanceTabView>> getAllLoanAmount() {
+
+        return mAppDao.getAllLoanAmount(mProjectId);
+    }
+
+    public LiveData<List<CostAmount>> getAllCostAmount() {
+        return mAppDao.getAllCostAmount(mProjectId);
     }
 }

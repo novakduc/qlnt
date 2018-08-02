@@ -7,13 +7,13 @@ import com.novakduc.baselibrary.AppExecutors;
 import com.novakduc.forbega.qlnt.data.database.AppDao;
 import com.novakduc.forbega.qlnt.data.database.Cost;
 import com.novakduc.forbega.qlnt.data.database.CostManager;
-import com.novakduc.forbega.qlnt.data.database.ListViewProjectItem;
 import com.novakduc.forbega.qlnt.data.database.Loan;
-import com.novakduc.forbega.qlnt.data.database.LoanAmount;
 import com.novakduc.forbega.qlnt.data.database.Project;
 import com.novakduc.forbega.qlnt.data.database.RoomForRent;
 import com.novakduc.forbega.qlnt.data.database.RoomList;
 import com.novakduc.forbega.qlnt.data.database.UnitPrice;
+import com.novakduc.forbega.qlnt.data.query.project_list.ListViewProjectItem;
+import com.novakduc.forbega.qlnt.data.query.project_list.LoanAmount;
 
 import java.util.ArrayList;
 import java.util.List;

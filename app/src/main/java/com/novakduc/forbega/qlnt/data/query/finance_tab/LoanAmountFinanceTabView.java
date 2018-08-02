@@ -1,4 +1,4 @@
-package com.novakduc.forbega.qlnt.data.database;
+package com.novakduc.forbega.qlnt.data.query.finance_tab;
 
 import android.arch.persistence.room.ColumnInfo;
 
@@ -6,23 +6,16 @@ import android.arch.persistence.room.ColumnInfo;
  * Created by Nguyen Quoc Thanh on 2/6/2018.
  */
 //This is brief version of loan for list view
-public class LoanAmount {
+public class LoanAmountFinanceTabView {
     @ColumnInfo(name = "amount")
     private long amount;
-    @ColumnInfo(name = "projectId")
-    private long projectId;
 
     //For room only
-    public LoanAmount(long amount, long projectId) {
+    public LoanAmountFinanceTabView(long amount) {
         this.amount = amount;
-        this.projectId = projectId;
     }
 
     public long getAmount() {
         return amount;
-    }
-
-    public long getProjectId() {
-        return projectId;
     }
 }

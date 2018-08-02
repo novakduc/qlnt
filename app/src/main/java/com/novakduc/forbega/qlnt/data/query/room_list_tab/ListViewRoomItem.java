@@ -1,7 +1,9 @@
-package com.novakduc.forbega.qlnt.data.database;
+package com.novakduc.forbega.qlnt.data.query.room_list_tab;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Ignore;
+
+import com.novakduc.forbega.qlnt.data.database.RoomStatus;
 
 /**
  * Created by n.thanh on 9/30/2016.

@@ -4,8 +4,8 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModel;
 
 import com.novakduc.forbega.qlnt.data.ProjectRepo;
-import com.novakduc.forbega.qlnt.data.database.GuestForRoomItemView;
-import com.novakduc.forbega.qlnt.data.database.ListViewRoomItem;
+import com.novakduc.forbega.qlnt.data.query.room_list_tab.GuestForRoomItemView;
+import com.novakduc.forbega.qlnt.data.query.room_list_tab.ListViewRoomItem;
 
 import java.util.List;
 

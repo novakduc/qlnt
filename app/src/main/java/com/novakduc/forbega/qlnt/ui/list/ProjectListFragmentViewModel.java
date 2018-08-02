@@ -4,8 +4,8 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModel;
 
 import com.novakduc.forbega.qlnt.data.QlntRepository;
-import com.novakduc.forbega.qlnt.data.database.ListViewProjectItem;
-import com.novakduc.forbega.qlnt.data.database.LoanAmount;
+import com.novakduc.forbega.qlnt.data.query.project_list.ListViewProjectItem;
+import com.novakduc.forbega.qlnt.data.query.project_list.LoanAmount;
 
 import java.util.List;
 

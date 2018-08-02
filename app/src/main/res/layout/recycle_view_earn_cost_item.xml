@@ -31,7 +31,6 @@
                 android:text="23489312"
                 android:textColor="@color/primaryColor"
                 app:layout_constraintBottom_toTopOf="@+id/lineSeparate"
-                app:layout_constraintEnd_toStartOf="@+id/guideline14"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 

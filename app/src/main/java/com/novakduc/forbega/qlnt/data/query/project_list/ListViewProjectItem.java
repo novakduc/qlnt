@@ -1,4 +1,4 @@
-package com.novakduc.forbega.qlnt.data.database;
+package com.novakduc.forbega.qlnt.data.query.project_list;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Ignore;
