@@ -21,7 +21,6 @@ import com.novakduc.forbega.qlnt.data.database.ListViewRoomItem;
 import com.novakduc.forbega.qlnt.databinding.FragmentRoomListTabBinding;
 import com.novakduc.forbega.qlnt.ui.ConfirmationDialogFragment;
 import com.novakduc.forbega.qlnt.ui.detail.room.RoomListFragmentViewModel;
-import com.novakduc.forbega.qlnt.ui.detail.room.RoomListViewModelFactory;
 import com.novakduc.forbega.qlnt.ui.detail.room.RoomsRecyclerViewAdapter;
 import com.novakduc.forbega.qlnt.ui.detail.room.add_room.AddRoomActivity;
 import com.novakduc.forbega.qlnt.ui.detail.room.edit_room.EditRoomActivity;
@@ -48,9 +47,9 @@ public class FinanceFragment extends android.support.v4.app.Fragment
     public static FinanceFragment getInstance(@NonNull long activeId) {
         Bundle bundle = new Bundle();
         bundle.putLong(ACTIVE_PROJECT_ID, activeId);
-        FinanceFragment roomListFragment = new FinanceFragment();
-        roomListFragment.setArguments(bundle);
-        return roomListFragment;
+        FinanceFragment financeFragment = new FinanceFragment();
+        financeFragment.setArguments(bundle);
+        return financeFragment;
     }
 
     @Override
@@ -64,10 +63,10 @@ public class FinanceFragment extends android.support.v4.app.Fragment
 
         Log.d(LOG_TAG, String.valueOf(mActiveProject));
 
-        RoomListViewModelFactory factory =
-                InjectorUtils.provideRoomListViewModelFactory(getActivity(), mActiveProject);
+        FinanceViewModelFactory factory =
+                InjectorUtils.provideFinanceViewModelFactory(getActivity(), mActiveProject);
 
-        mViewModel = ViewModelProviders.of(this, factory).get(RoomListFragmentViewModel.class);
+        mViewModel = ViewModelProviders.of(this, factory).get(FinanceFragmentViewModel.class);
     }
 
     @Override
