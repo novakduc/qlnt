@@ -39,6 +39,8 @@ public class Project implements Cloneable, ItemWithId {
         this.yearDuration = yearDuration;
     }
 
+    // TODO: 02/08/2018 process income, revenue, dept and cost
+
     @Ignore
     private Project(String name, String address, int yearDuration) {
         this.name = name;
