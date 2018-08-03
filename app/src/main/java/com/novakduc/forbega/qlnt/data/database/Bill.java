@@ -22,11 +22,12 @@ public class Bill implements ItemWithId {
     private long otherCharge;
     private boolean isPaid;
     private long paymentDate;
+    private long amount;
 
     //For room only
     public Bill(long id, long projectId, long roomId, long roomCharge, long electricalCharge,
                 long waterCharge, long tvCharge, long trashCollectionCharge, long internetCharge,
-                long securityCharge, long otherCharge, boolean isPaid, long paymentDate) {
+                long securityCharge, long otherCharge, boolean isPaid, long paymentDate, long amount) {
         this.id = id;
         this.projectId = projectId;
         this.roomId = roomId;
@@ -40,6 +41,7 @@ public class Bill implements ItemWithId {
         this.otherCharge = otherCharge;
         this.isPaid = isPaid;
         this.paymentDate = paymentDate;
+        this.amount = amount;
     }
 
     @Ignore
@@ -73,6 +75,7 @@ public class Bill implements ItemWithId {
 
     public void setRoomCharge(long roomCharge) {
         this.roomCharge = roomCharge;
+        updateAmount();
     }
 
     public long getElectricalCharge() {
@@ -81,6 +84,7 @@ public class Bill implements ItemWithId {
 
     public void setElectricalCharge(long electricalCharge) {
         this.electricalCharge = electricalCharge;
+        updateAmount();
     }
 
     public long getWaterCharge() {
@@ -89,6 +93,7 @@ public class Bill implements ItemWithId {
 
     public void setWaterCharge(long waterCharge) {
         this.waterCharge = waterCharge;
+        updateAmount();
     }
 
     public long getTvCharge() {
@@ -97,6 +102,7 @@ public class Bill implements ItemWithId {
 
     public void setTvCharge(long tvCharge) {
         this.tvCharge = tvCharge;
+        updateAmount();
     }
 
     public long getTrashCollectionCharge() {
@@ -105,6 +111,7 @@ public class Bill implements ItemWithId {
 
     public void setTrashCollectionCharge(long trashCollectionCharge) {
         this.trashCollectionCharge = trashCollectionCharge;
+        updateAmount();
     }
 
     public long getInternetCharge() {
@@ -113,6 +120,7 @@ public class Bill implements ItemWithId {
 
     public void setInternetCharge(long internetCharge) {
         this.internetCharge = internetCharge;
+        updateAmount();
     }
 
     public long getSecurityCharge() {
@@ -121,6 +129,7 @@ public class Bill implements ItemWithId {
 
     public void setSecurityCharge(long securityCharge) {
         this.securityCharge = securityCharge;
+        updateAmount();
     }
 
     public long getOtherCharge() {
@@ -129,6 +138,7 @@ public class Bill implements ItemWithId {
 
     public void setOtherCharge(long otherCharge) {
         this.otherCharge = otherCharge;
+        updateAmount();
     }
 
     public boolean isPaid() {
@@ -137,6 +147,7 @@ public class Bill implements ItemWithId {
 
     public void setPaid(boolean paid) {
         isPaid = paid;
+        updateAmount();
     }
 
     public long getPaymentDate() {
@@ -145,6 +156,7 @@ public class Bill implements ItemWithId {
 
     public void setPaymentDate(long paymentDate) {
         this.paymentDate = paymentDate;
+        updateAmount();
     }
 
     @Override
@@ -157,9 +169,13 @@ public class Bill implements ItemWithId {
 
     }
 
+    private void updateAmount() {
+        this.amount = electricalCharge + internetCharge + otherCharge + roomCharge + securityCharge
+                + trashCollectionCharge + tvCharge + waterCharge;
+    }
+
     @Override
     public long getAmount() {
-        return electricalCharge + internetCharge + otherCharge + roomCharge + securityCharge
-                + trashCollectionCharge + tvCharge + waterCharge;
+        return amount;
     }
 }

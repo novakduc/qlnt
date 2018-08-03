@@ -488,6 +488,11 @@ public class ProjectEditFragment extends android.support.v4.app.Fragment
                 if (loans != null) {
                     LoanList list = LoanList.getInstance(mProjectId);
                     list.addAll(loans);
+
+                    if (mTempProject != null) {
+                        mTempProject.setDept(list.getTotalLoanAmount());
+                        mFinanceConfigViewModel.updateProject(mTempProject);
+                    }
                     bindLoansToUi(list);
                 }
             }

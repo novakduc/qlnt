@@ -17,23 +17,22 @@ public class Project implements Cloneable, ItemWithId {
     private String name;
     private String address;
     private long investmentAmount;
-    private long income;
-    private long dept;
     private long revenue;
+    private long dept;
     private long cost;
     private long startDate;
     private int yearDuration;
 
     //For Room only
-    public Project(long projectId, String name, String address, long investmentAmount, long income,
-                   long dept, long revenue, long cost, long startDate, int yearDuration) {
+
+    public Project(long projectId, String name, String address, long investmentAmount, long revenue,
+                   long dept, long cost, long startDate, int yearDuration) {
         this.projectId = projectId;
         this.name = name;
         this.address = address;
         this.investmentAmount = investmentAmount;
-        this.income = income;
-        this.dept = dept;
         this.revenue = revenue;
+        this.dept = dept;
         this.cost = cost;
         this.startDate = startDate;
         this.yearDuration = yearDuration;
@@ -134,6 +133,34 @@ public class Project implements Cloneable, ItemWithId {
 
     public void setDuration(int yearDuration) {
         this.yearDuration = yearDuration;
+    }
+
+    public long getRevenue() {
+        return revenue;
+    }
+
+    public void setRevenue(long revenue) {
+        this.revenue = revenue;
+    }
+
+    public long getDept() {
+        return dept;
+    }
+
+    public void setDept(long dept) {
+        this.dept = dept;
+    }
+
+    public long gerIncome() {
+        return getRevenue() - getCost();
+    }
+
+    public long getCost() {
+        return cost;
+    }
+
+    public void setCost(long cost) {
+        this.cost = cost;
     }
 
     //Parcel
