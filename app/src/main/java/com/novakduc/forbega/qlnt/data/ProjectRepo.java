@@ -11,9 +11,13 @@ import com.novakduc.forbega.qlnt.data.database.Loan;
 import com.novakduc.forbega.qlnt.data.database.Project;
 import com.novakduc.forbega.qlnt.data.database.RoomForRent;
 import com.novakduc.forbega.qlnt.data.database.UnitPrice;
+import com.novakduc.forbega.qlnt.data.query.finance_tab.BillRecentItem;
+import com.novakduc.forbega.qlnt.data.query.finance_tab.CostRecentItem;
+import com.novakduc.forbega.qlnt.data.query.finance_tab.ProjectFinanceTab;
 import com.novakduc.forbega.qlnt.data.query.room_list_tab.GuestForRoomItemView;
 import com.novakduc.forbega.qlnt.data.query.room_list_tab.ListViewRoomItem;
 
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -217,5 +221,23 @@ public class ProjectRepo {
 
     public LiveData<RoomForRent> getLiveDataRoomById(long roomId) {
         return mAppDao.getLiveDataRoomById(roomId);
+    }
+
+    public LiveData<ProjectFinanceTab> getProjectFinanceInfo() {
+        return mAppDao.getProjectFinanceInfo(mProjectId);
+    }
+
+    public LiveData<List<BillRecentItem>> getRecentBills() {
+        Calendar tmp = Calendar.getInstance();
+        tmp.add(Calendar.MONTH, -1);
+        long timeFrame = tmp.getTimeInMillis();
+        return mAppDao.getRecentBills(timeFrame);
+    }
+
+    public LiveData<List<CostRecentItem>> getRecentCosts() {
+        Calendar tmp = Calendar.getInstance();
+        tmp.add(Calendar.MONTH, -1);
+        long timeFrame = tmp.getTimeInMillis();
+        return mAppDao.getRecentCosts(timeFrame);
     }
 }
