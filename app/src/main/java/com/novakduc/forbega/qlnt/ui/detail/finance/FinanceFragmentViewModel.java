@@ -15,10 +15,12 @@ public class FinanceFragmentViewModel extends ViewModel {
     private LiveData<ProjectFinanceTab> mProjectFinanceInfo;
     private LiveData<List<BillRecentItem>> mRecentBills;
     private LiveData<List<CostRecentItem>> mRecentCost;
+    private LiveData<List> mRecentItem;
 
     public FinanceFragmentViewModel(ProjectRepo projectRepo) {
         mProjectRepo = projectRepo;
         mProjectFinanceInfo = mProjectRepo.getProjectFinanceInfo();
+        mRecentItem = mProjectRepo.getRecentFinanceItem();
         mRecentBills = mProjectRepo.getRecentBills();
         mRecentCost = mProjectRepo.getRecentCosts();
     }
