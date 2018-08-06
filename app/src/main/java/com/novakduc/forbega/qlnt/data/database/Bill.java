@@ -23,11 +23,13 @@ public class Bill implements ItemWithId {
     private boolean isPaid;
     private long paymentDate;
     private long amount;
+    private String description;
 
     //For room only
     public Bill(long id, long projectId, long roomId, long roomCharge, long electricalCharge,
                 long waterCharge, long tvCharge, long trashCollectionCharge, long internetCharge,
-                long securityCharge, long otherCharge, boolean isPaid, long paymentDate, long amount) {
+                long securityCharge, long otherCharge, boolean isPaid, long paymentDate, long amount,
+                String description) {
         this.id = id;
         this.projectId = projectId;
         this.roomId = roomId;
@@ -42,6 +44,7 @@ public class Bill implements ItemWithId {
         this.isPaid = isPaid;
         this.paymentDate = paymentDate;
         this.amount = amount;
+        this.description = description;
     }
 
     @Ignore
@@ -159,9 +162,17 @@ public class Bill implements ItemWithId {
         updateAmount();
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     @Override
     public long getId() {
-        return 0;
+        return this.id;
     }
 
     @Override
