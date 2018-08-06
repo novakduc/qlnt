@@ -11,8 +11,6 @@ import com.novakduc.forbega.qlnt.data.database.Loan;
 import com.novakduc.forbega.qlnt.data.database.Project;
 import com.novakduc.forbega.qlnt.data.database.RoomForRent;
 import com.novakduc.forbega.qlnt.data.database.UnitPrice;
-import com.novakduc.forbega.qlnt.data.query.finance_tab.CostAmount;
-import com.novakduc.forbega.qlnt.data.query.finance_tab.LoanAmountFinanceTabView;
 import com.novakduc.forbega.qlnt.data.query.room_list_tab.GuestForRoomItemView;
 import com.novakduc.forbega.qlnt.data.query.room_list_tab.ListViewRoomItem;
 
@@ -185,7 +183,7 @@ public class ProjectRepo {
                         mAppDao.removeGuest(guest);
                     }
                 }
-                // TODO: 5/8/2018
+                // TODO: 5/8/2018 delete other thing belong to room
 
                 RoomForRent roomForRent = mAppDao.getRoomById(roomId);
                 if (roomForRent != null) {
@@ -219,14 +217,5 @@ public class ProjectRepo {
 
     public LiveData<RoomForRent> getLiveDataRoomById(long roomId) {
         return mAppDao.getLiveDataRoomById(roomId);
-    }
-
-    public LiveData<List<LoanAmountFinanceTabView>> getAllLoanAmount() {
-
-        return mAppDao.getAllLoanAmount(mProjectId);
-    }
-
-    public LiveData<List<CostAmount>> getAllCostAmount() {
-        return mAppDao.getAllCostAmount(mProjectId);
     }
 }

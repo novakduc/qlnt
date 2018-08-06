@@ -8,8 +8,6 @@ import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
 
-import com.novakduc.forbega.qlnt.data.query.finance_tab.CostAmount;
-import com.novakduc.forbega.qlnt.data.query.finance_tab.LoanAmountFinanceTabView;
 import com.novakduc.forbega.qlnt.data.query.project_list.ListViewProjectItem;
 import com.novakduc.forbega.qlnt.data.query.project_list.LoanAmount;
 import com.novakduc.forbega.qlnt.data.query.room_list_tab.GuestForRoomItemView;
@@ -166,10 +164,4 @@ public interface AppDao {
 
     @Query("SELECT * FROM room WHERE id = :roomId")
     LiveData<RoomForRent> getLiveDataRoomById(long roomId);
-
-    @Query("SELECT amount FROM loan WHERE projectId = :mProjectId")
-    LiveData<List<LoanAmountFinanceTabView>> getAllLoanAmount(long mProjectId);
-
-    @Query("SELECT amount FROM cost WHERE projectId = :mProjectId")
-    LiveData<List<CostAmount>> getAllCostAmount(long mProjectId);
 }
