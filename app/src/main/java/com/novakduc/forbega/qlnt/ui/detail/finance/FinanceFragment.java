@@ -1,33 +1,17 @@
 package com.novakduc.forbega.qlnt.ui.detail.finance;
 
-import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
-import android.content.Intent;
-import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.novakduc.forbega.qlnt.R;
-import com.novakduc.forbega.qlnt.data.query.room_list_tab.GuestForRoomItemView;
-import com.novakduc.forbega.qlnt.data.query.room_list_tab.ListViewRoomItem;
-import com.novakduc.forbega.qlnt.databinding.FragmentRoomListTabBinding;
-import com.novakduc.forbega.qlnt.ui.ConfirmationDialogFragment;
 import com.novakduc.forbega.qlnt.ui.detail.room.RoomsRecyclerViewAdapter;
-import com.novakduc.forbega.qlnt.ui.detail.room.add_room.AddRoomActivity;
-import com.novakduc.forbega.qlnt.ui.detail.room.edit_room.EditRoomActivity;
-import com.novakduc.forbega.qlnt.ui.detail.room.edit_room.EditRoomFragment;
 import com.novakduc.forbega.qlnt.utilities.InjectorUtils;
 import com.novakduc.forbega.qlnt.utilities.ItemListAdapterActionHandler;
-
-import java.util.List;
 
 /**
  * Created by n.thanh on 9/29/2016.
@@ -40,8 +24,6 @@ public class FinanceFragment extends android.support.v4.app.Fragment
     private RoomsRecyclerViewAdapter mRoomsRecyclerViewAdapter;
     private long mActiveProject = -1;
     private FinanceFragmentViewModel mViewModel;
-    private long mTempRoomId;
-    private FragmentRoomListTabBinding mDataBinding;
 
     public static FinanceFragment getInstance(@NonNull long activeId) {
         Bundle bundle = new Bundle();
@@ -72,11 +54,6 @@ public class FinanceFragment extends android.support.v4.app.Fragment
     public void onStop() {
         super.onStop();
 
-        //Save active project ID
-//        SharedPreferences preferences = getActivity().getSharedPreferences(PREF_QLNT, MODE_PRIVATE);
-//        SharedPreferences.Editor editor = preferences.edit();
-//        editor.putLong(ACTIVE_PROJECT_ID, mActiveProject);
-//        editor.apply();
     }
 
     @Nullable
@@ -84,94 +61,31 @@ public class FinanceFragment extends android.support.v4.app.Fragment
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         //Data binding
-        mDataBinding = DataBindingUtil.inflate(inflater,
-                R.layout.fragment_room_list_tab, container, false);
+//        mDataBinding = DataBindingUtil.inflate(inflater,
+//                R.layout.fragment_finance_tab, container, false);
 
-        final View view = mDataBinding.getRoot();
-
-        //Toast.makeText(getActivity(), String.valueOf(mActiveProject), Toast.LENGTH_SHORT).show();
-
-        final AppCompatActivity activity = (AppCompatActivity) getActivity();
-
-        mRoomsRecyclerViewAdapter = new RoomsRecyclerViewAdapter(activity, this);
-        RecyclerView recyclerView = mDataBinding.rvItemList;
-        LinearLayoutManager layoutManager = new LinearLayoutManager(activity);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setAdapter(mRoomsRecyclerViewAdapter);
-
-        //Observe view model
-        mViewModel.getRoomListLiveData().observe(this, new Observer<List<ListViewRoomItem>>() {
-            @Override
-            public void onChanged(@Nullable List<ListViewRoomItem> listViewRoomItems) {
-                if (listViewRoomItems != null) {
-                    mRoomsRecyclerViewAdapter.swapList(listViewRoomItems);
-                    if (listViewRoomItems.isEmpty()) {
-                        mDataBinding.textViewNoRoom.setVisibility(View.VISIBLE);
-                    } else
-                        mDataBinding.textViewNoRoom.setVisibility(View.INVISIBLE);
-                }
-
-            }
-        });
-
-        mViewModel.getKeyContacts().observe(this, new Observer<List<GuestForRoomItemView>>() {
-            @Override
-            public void onChanged(@Nullable List<GuestForRoomItemView> guestForRoomItemViews) {
-                if (guestForRoomItemViews != null) {
-                    mRoomsRecyclerViewAdapter.updateKeyContacts(guestForRoomItemViews);
-                }
-
-            }
-        });
-
-        //Add room button
-        mDataBinding.fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), AddRoomActivity.class);
-                intent.putExtra(FinanceFragment.ACTIVE_PROJECT_ID, mActiveProject);
-                startActivity(intent);
-            }
-        });
+        final View view = null; //mDataBinding.getRoot();
 
         return view;
     }
 
-    public void deleteRoom() {
-        mViewModel.deleteRoom(mTempRoomId);
-        mDataBinding.fab.show();
-    }
-
     @Override
     public void onDeleteAction(long roomId) {
-        mTempRoomId = roomId;
-        Bundle bundle = new Bundle();
-        //dialog title in bundle
-        bundle.putString(ConfirmationDialogFragment.MESSAGE,
-                getResources().getString(R.string.delete_room_confirmation));
-        android.support.v4.app.DialogFragment dialogFragment = new ConfirmationDialogFragment();
-        dialogFragment.setArguments(bundle);
-        dialogFragment.show(getActivity().getSupportFragmentManager(), "discardConfirm");
+
     }
 
     @Override
     public void onCopyAction(long roomId) {
-        mViewModel.copyRoom(roomId);
+
     }
 
     @Override
     public void onEditAction(long roomId) {
-        Intent intent = new Intent(getActivity(), EditRoomActivity.class);
-        intent.putExtra(EditRoomFragment.ROOM_ID, roomId);
-        startActivity(intent);
+
     }
 
     @Override
     public void onItemClick(long id) {
-//        Log.d(LOG_TAG, "Clicked on project item with id: " + id);
-//        Intent intent = new Intent(getActivity(), ProjectDetailActivity.class);
-//        intent.putExtra(ACTIVE_PROJECT_ID, mActiveProject);
-//        startActivity(intent);
+
     }
 }
