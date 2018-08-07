@@ -236,6 +236,7 @@ public class ProjectRepo {
                 List recentBills = mAppDao.getRecentBills(timeFrame);
                 List recentCosts = mAppDao.getRecentCosts(timeFrame);
                 // TODO: 8/6/2018 arrange item by time
+
             }
         });
         return recentFinanceItem;
