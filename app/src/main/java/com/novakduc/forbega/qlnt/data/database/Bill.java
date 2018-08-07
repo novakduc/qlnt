@@ -20,7 +20,7 @@ public class Bill implements ItemWithId {
     private long internetCharge;
     private long securityCharge;
     private long otherCharge;
-    private boolean isPaid;
+    private int isPaid;
     private long paymentDate;
     private long amount;
     private String description;
@@ -28,7 +28,7 @@ public class Bill implements ItemWithId {
     //For room only
     public Bill(long id, long projectId, long roomId, long roomCharge, long electricalCharge,
                 long waterCharge, long tvCharge, long trashCollectionCharge, long internetCharge,
-                long securityCharge, long otherCharge, boolean isPaid, long paymentDate, long amount,
+                long securityCharge, long otherCharge, int isPaid, long paymentDate, long amount,
                 String description) {
         this.id = id;
         this.projectId = projectId;
@@ -51,7 +51,7 @@ public class Bill implements ItemWithId {
     public Bill(long projectId, long roomId) {
         this.projectId = projectId;
         this.roomId = roomId;
-        this.isPaid = false;
+        this.isPaid = 0;
         this.paymentDate = -1;
         this.id = Calendar.getInstance().getTimeInMillis();
     }
@@ -145,12 +145,11 @@ public class Bill implements ItemWithId {
     }
 
     public boolean isPaid() {
-        return isPaid;
+        return isPaid != 0;
     }
 
     public void setPaid(boolean paid) {
-        isPaid = paid;
-        updateAmount();
+        isPaid = paid ? 1 : 0;
     }
 
     public long getPaymentDate() {
@@ -159,7 +158,6 @@ public class Bill implements ItemWithId {
 
     public void setPaymentDate(long paymentDate) {
         this.paymentDate = paymentDate;
-        updateAmount();
     }
 
     public String getDescription() {

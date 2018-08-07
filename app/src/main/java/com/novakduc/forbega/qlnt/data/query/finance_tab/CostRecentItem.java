@@ -34,4 +34,8 @@ public class CostRecentItem {
     public long getAmount() {
         return amount;
     }
+
+    public static CostRecentItem getInstance() {
+        return new CostRecentItem(0, 0, CostType.OTHERS);
+    }
 }

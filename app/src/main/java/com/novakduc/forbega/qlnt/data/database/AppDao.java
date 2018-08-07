@@ -171,7 +171,7 @@ public interface AppDao {
     @Query("SELECT revenue, dept, cost FROM project WHERE projectId = :mProjectId")
     LiveData<ProjectFinanceTab> getProjectFinanceInfo(long mProjectId);
 
-    @Query("SELECT * FROM bill WHERE paymentDate > :timeFrame")
+    @Query("SELECT * FROM bill WHERE paymentDate > :timeFrame AND isPaid > 0")
     List<BillRecentItem> getRecentBills(long timeFrame);
 
     @Query("SELECT * FROM cost WHERE date > :timeFrame")

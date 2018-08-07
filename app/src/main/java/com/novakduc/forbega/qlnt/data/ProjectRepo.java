@@ -11,10 +11,13 @@ import com.novakduc.forbega.qlnt.data.database.Loan;
 import com.novakduc.forbega.qlnt.data.database.Project;
 import com.novakduc.forbega.qlnt.data.database.RoomForRent;
 import com.novakduc.forbega.qlnt.data.database.UnitPrice;
+import com.novakduc.forbega.qlnt.data.query.finance_tab.BillRecentItem;
+import com.novakduc.forbega.qlnt.data.query.finance_tab.CostRecentItem;
 import com.novakduc.forbega.qlnt.data.query.finance_tab.ProjectFinanceTab;
 import com.novakduc.forbega.qlnt.data.query.room_list_tab.GuestForRoomItemView;
 import com.novakduc.forbega.qlnt.data.query.room_list_tab.ListViewRoomItem;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -225,17 +228,71 @@ public class ProjectRepo {
         return mAppDao.getProjectFinanceInfo(mProjectId);
     }
 
-    public LiveData<List> getRecentFinanceItem() {
+    public LiveData<List> getRecentFinanceItem(final int withinNoOfMonth) {
         final MutableLiveData<List> recentFinanceItem = new MutableLiveData<>();
         mExecutors.diskIO().execute(new Runnable() {
             @Override
             public void run() {
                 Calendar tmp = Calendar.getInstance();
-                tmp.add(Calendar.MONTH, -1);
+                tmp.add(Calendar.MONTH, -withinNoOfMonth);
                 long timeFrame = tmp.getTimeInMillis();
-                List recentBills = mAppDao.getRecentBills(timeFrame);
-                List recentCosts = mAppDao.getRecentCosts(timeFrame);
-                // TODO: 8/6/2018 arrange item by time
+                List<BillRecentItem> recentBills = mAppDao.getRecentBills(timeFrame);
+                List<CostRecentItem> recentCosts = mAppDao.getRecentCosts(timeFrame);
+
+                List recentItem = new ArrayList(10);
+                BillRecentItem lastBill = BillRecentItem.getInstance();
+                CostRecentItem lastCost = CostRecentItem.getInstance();
+                long lastBillDate, lastCostDate;
+
+                int nb, nc;
+                if (recentBills != null) {
+                    nb = recentBills.size();
+                } else nb = 0;
+                if (recentCosts != null) {
+                    nc = recentCosts.size();
+                } else nc = 0;
+
+                for (int i = 0; i < nb + nc; i++) {
+                    lastBillDate = -1;
+                    lastCostDate = -1;
+                    if (recentBills.size() > 0) {
+                        lastBill = recentBills.get(0);
+                        for (BillRecentItem b :
+                                recentBills) {
+                            if (b.getPaymentDate() > lastBill.getPaymentDate()) {
+                                lastBill = b;
+                                lastBillDate = lastBill.getPaymentDate();
+                            }
+                        }
+                    }
+
+                    if (recentCosts.size() > 0) {
+                        lastCost = recentCosts.get(0);
+                        for (CostRecentItem c :
+                                recentCosts) {
+                            if (c.getDate() > lastCost.getDate()) {
+                                lastCost = c;
+                                lastCostDate = c.getDate();
+                            }
+                        }
+                    }
+
+                    if (lastBillDate > lastCostDate) {
+                        if (lastBillDate != -1) {
+                            recentItem.add(lastBill);
+                            recentBills.remove(lastBill);
+                        }
+                    } else {
+                        if (lastCostDate != -1) {
+                            recentItem.add(lastCost);
+                            recentCosts.remove(lastCost);
+                        }
+                    }
+                }
+
+                if (recentItem != null) {
+                    recentFinanceItem.postValue(recentItem);
+                }
 
             }
         });
