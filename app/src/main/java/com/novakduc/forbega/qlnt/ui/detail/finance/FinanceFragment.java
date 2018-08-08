@@ -25,6 +25,7 @@ public class FinanceFragment extends android.support.v4.app.Fragment
     private long mActiveProject = -1;
     private FinanceFragmentViewModel mViewModel;
 
+
     public static FinanceFragment getInstance(@NonNull long activeId) {
         Bundle bundle = new Bundle();
         bundle.putLong(ACTIVE_PROJECT_ID, activeId);
