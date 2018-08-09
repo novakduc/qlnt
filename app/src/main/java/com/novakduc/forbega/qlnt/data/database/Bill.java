@@ -168,6 +168,14 @@ public class Bill implements ItemWithId {
         this.description = description;
     }
 
+    public int getIsPaid() {
+        return isPaid;
+    }
+
+    public void setIsPaid(int isPaid) {
+        this.isPaid = isPaid;
+    }
+
     @Override
     public long getId() {
         return this.id;
