@@ -1,6 +1,7 @@
 package com.novakduc.forbega.qlnt.ui.detail.finance;
 
 import android.arch.lifecycle.ViewModelProviders;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -9,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.novakduc.forbega.qlnt.R;
+import com.novakduc.forbega.qlnt.databinding.FragmentFinanceTabBinding;
 import com.novakduc.forbega.qlnt.ui.detail.room.RoomsRecyclerViewAdapter;
 import com.novakduc.forbega.qlnt.utilities.InjectorUtils;
 import com.novakduc.forbega.qlnt.utilities.ItemListAdapterActionHandler;
@@ -24,7 +27,7 @@ public class FinanceFragment extends android.support.v4.app.Fragment
     private RoomsRecyclerViewAdapter mRoomsRecyclerViewAdapter;
     private long mActiveProject = -1;
     private FinanceFragmentViewModel mViewModel;
-//    private FragmentFinanceTabBinding mBinding;
+    private FragmentFinanceTabBinding mBinding;
 
     public static FinanceFragment getInstance(@NonNull long activeId) {
         Bundle bundle = new Bundle();
@@ -62,10 +65,10 @@ public class FinanceFragment extends android.support.v4.app.Fragment
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         //Data binding
-//        mBinding = DataBindingUtil.inflate(inflater,
-//                R.layout.fragment_finance_tab, container, false);
+        mBinding = DataBindingUtil.inflate(inflater,
+                R.layout.fragment_finance_tab, container, false);
 
-        final View view = null; //mBinding.getRoot();
+        final View view = mBinding.getRoot();
 
         return view;
     }
