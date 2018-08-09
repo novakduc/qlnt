@@ -69,6 +69,7 @@ public class FinanceFragment extends android.support.v4.app.Fragment
                 R.layout.fragment_finance_tab, container, false);
 
         final View view = mBinding.getRoot();
+        //Start from here
 
         return view;
     }
