@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.novakduc.forbega.qlnt.ui.detail.finance.FinanceFragment;
+import com.novakduc.forbega.qlnt.ui.detail.report.ReportFragment;
 import com.novakduc.forbega.qlnt.ui.detail.room.RoomListFragment;
 
 /**
@@ -28,6 +29,8 @@ public class TabAdapter extends FragmentPagerAdapter {
                 return RoomListFragment.getInstance(mActivieProjectId);
             case 1:
                 return FinanceFragment.getInstance(mActivieProjectId);
+            case 3:
+                return ReportFragment.getInstance(mActivieProjectId);
         }
         TabPosition tabPosition = TabPosition.values()[position];
         return TabFragment.getInstance(tabPosition);
