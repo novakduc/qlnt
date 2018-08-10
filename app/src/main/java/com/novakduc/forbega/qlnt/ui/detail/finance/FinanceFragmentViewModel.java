@@ -11,11 +11,19 @@ import java.util.List;
 public class FinanceFragmentViewModel extends ViewModel {
     private ProjectRepo mProjectRepo;
     private LiveData<ProjectFinanceTab> mProjectFinanceInfo;
-    private LiveData<List> mRecentItem;
+    private LiveData<List> mRecentItems;
 
     public FinanceFragmentViewModel(ProjectRepo projectRepo) {
         mProjectRepo = projectRepo;
         mProjectFinanceInfo = mProjectRepo.getProjectFinanceInfo();
-        mRecentItem = mProjectRepo.getRecentFinanceItem(3);
+        mRecentItems = mProjectRepo.getRecentFinanceItem(3);
+    }
+
+    public LiveData<ProjectFinanceTab> getProjectFinanceInfo() {
+        return mProjectFinanceInfo;
+    }
+
+    public LiveData<List> getRecentItems() {
+        return mRecentItems;
     }
 }

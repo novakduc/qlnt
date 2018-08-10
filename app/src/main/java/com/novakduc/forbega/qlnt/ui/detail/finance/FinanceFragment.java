@@ -1,5 +1,6 @@
 package com.novakduc.forbega.qlnt.ui.detail.finance;
 
+import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -11,10 +12,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.novakduc.forbega.qlnt.R;
+import com.novakduc.forbega.qlnt.data.query.finance_tab.ProjectFinanceTab;
 import com.novakduc.forbega.qlnt.databinding.FragmentFinanceTabBinding;
 import com.novakduc.forbega.qlnt.ui.detail.room.RoomsRecyclerViewAdapter;
 import com.novakduc.forbega.qlnt.utilities.InjectorUtils;
 import com.novakduc.forbega.qlnt.utilities.ItemListAdapterActionHandler;
+
+import java.util.List;
 
 /**
  * Created by n.thanh on 9/29/2016.
@@ -70,6 +74,26 @@ public class FinanceFragment extends android.support.v4.app.Fragment
 
         final View view = mBinding.getRoot();
         //Start from here
+        mViewModel.getProjectFinanceInfo().observe(this, new Observer<ProjectFinanceTab>() {
+            @Override
+            public void onChanged(@Nullable ProjectFinanceTab pProjectFinanceTab) {
+                if (pProjectFinanceTab != null) {
+                    mBinding.txtCostAmount.setText(String.valueOf(pProjectFinanceTab.getCost()));
+                    mBinding.txtDeptAmount.setText(String.valueOf(pProjectFinanceTab.getDept()));
+                    mBinding.txtIncomeAmount.setText(String.valueOf(pProjectFinanceTab.getIncome()));
+                    mBinding.txtRevenueAmount.setText(String.valueOf(pProjectFinanceTab.getRevenue()));
+                }
+            }
+        });
+
+        mViewModel.getRecentItems().observe(this, new Observer<List>() {
+            @Override
+            public void onChanged(@Nullable List pList) {
+                if (pList != null) {
+
+                }
+            }
+        });
 
         return view;
     }
