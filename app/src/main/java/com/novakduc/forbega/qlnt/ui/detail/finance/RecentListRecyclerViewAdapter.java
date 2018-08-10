@@ -4,10 +4,12 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.novakduc.forbega.qlnt.data.query.finance_tab.CostRecentItem;
 import com.novakduc.forbega.qlnt.databinding.RecycleViewEarnCostItemBinding;
+import com.novakduc.forbega.qlnt.utilities.ConverterUtilities;
 import com.novakduc.forbega.qlnt.utilities.ItemListAdapterActionHandler;
 
 import java.util.List;
@@ -52,8 +54,19 @@ public class RecentListRecyclerViewAdapter
         final Object recentItem = mRecentList.get(position);
         if (recentItem instanceof CostRecentItem) {
             CostRecentItem lCostRecentItem = (CostRecentItem) recentItem;
-
+            holder.mBinding.textViewRoomName.setText(String.valueOf(lCostRecentItem.getAmount()));
+            holder.mBinding.txtDate.setText(ConverterUtilities.calendarToString(lCostRecentItem.getDate()));
+            //Description
+            String description = lCostRecentItem.getDescription();
+            holder.mBinding.txtDescription.setText(description);
         }
+
+        holder.mBinding.ibtDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View pView) {
+                // TODO: 8/10/2018 delete related recent item
+            }
+        });
 
     }
 

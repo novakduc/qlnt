@@ -19,14 +19,16 @@ public class Cost implements ItemWithId{
     private long amount;
     private CostType type;
     private long projectId;
+    private String description;
 
     //For room only
-    public Cost(long id, long date, long amount, CostType type, long projectId) {
+    public Cost(long id, long date, long amount, CostType type, long projectId, String description) {
         this.amount = amount;
         this.id = id;
         this.date = date;
         this.type = type;
         this.projectId = projectId;
+        this.description = description;
     }
 
     @Ignore
@@ -36,6 +38,7 @@ public class Cost implements ItemWithId{
         this.amount = amount;
         this.type = type;
         this.projectId = projectId;
+        this.description = "none";
     }
 
     public CostType getType() {
@@ -75,5 +78,13 @@ public class Cost implements ItemWithId{
 
     public long getProjectId() {
         return projectId;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String pDescription) {
+        description = pDescription;
     }
 }

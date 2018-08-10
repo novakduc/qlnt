@@ -15,12 +15,15 @@ public class CostRecentItem {
     private long date;
     @ColumnInfo(name = "type")
     private CostType type;
+    @ColumnInfo(name = "description")
+    private String description;
 
     //For room only
-    public CostRecentItem(long date, long amount, CostType type) {
+    public CostRecentItem(long date, long amount, CostType type, String description) {
         this.amount = amount;
         this.date = date;
         this.type = type;
+        this.description = description;
     }
 
     public long getDate() {
@@ -36,6 +39,10 @@ public class CostRecentItem {
     }
 
     public static CostRecentItem getInstance() {
-        return new CostRecentItem(0, 0, CostType.OTHERS);
+        return new CostRecentItem(0, 0, CostType.OTHERS, "none");
+    }
+
+    public String getDescription() {
+        return description;
     }
 }

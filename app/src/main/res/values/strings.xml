@@ -135,4 +135,5 @@
     <string name="delete_room_confirmation">Delete room?</string>
     <string name="titleAddRoom">Add Room</string>
     <string name="roomChargeHint">Room charge</string>
+    <string name="waterCostDesciption">Water fee</string>
 </resources>

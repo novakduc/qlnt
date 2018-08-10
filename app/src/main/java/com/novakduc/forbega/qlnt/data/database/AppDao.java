@@ -174,6 +174,6 @@ public interface AppDao {
     @Query("SELECT amount, paymentDate, description  FROM bill WHERE paymentDate > :timeFrame AND isPaid > 0")
     List<BillRecentItem> getRecentBills(long timeFrame);
 
-    @Query("SELECT amount, date, type FROM cost WHERE date > :timeFrame")
+    @Query("SELECT amount, date, type, description FROM cost WHERE date > :timeFrame")
     List<CostRecentItem> getRecentCosts(long timeFrame);
 }
