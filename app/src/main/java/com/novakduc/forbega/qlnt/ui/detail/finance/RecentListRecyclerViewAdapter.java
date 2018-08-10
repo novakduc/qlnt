@@ -52,14 +52,20 @@ public class RecentListRecyclerViewAdapter
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         final Object recentItem = mRecentList.get(position);
+        String amount = "none";
+        String description = "none";
+        long date = 0;
         if (recentItem instanceof CostRecentItem) {
             CostRecentItem lCostRecentItem = (CostRecentItem) recentItem;
-            holder.mBinding.textViewRoomName.setText(String.valueOf(lCostRecentItem.getAmount()));
-            holder.mBinding.txtDate.setText(ConverterUtilities.calendarToString(lCostRecentItem.getDate()));
+            amount = String.valueOf(lCostRecentItem.getAmount());
+            date = lCostRecentItem.getDate());
             //Description
-            String description = lCostRecentItem.getDescription();
-            holder.mBinding.txtDescription.setText(description);
+            description = lCostRecentItem.getDescription();
         }
+
+        holder.mBinding.textViewRoomName.setText(amount);
+        holder.mBinding.txtDate.setText(ConverterUtilities.calendarToString(date));
+        holder.mBinding.txtDescription.setText(description);
 
         holder.mBinding.ibtDelete.setOnClickListener(new View.OnClickListener() {
             @Override
