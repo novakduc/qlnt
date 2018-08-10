@@ -58,7 +58,7 @@ public class RecentListRecyclerViewAdapter
         if (recentItem instanceof CostRecentItem) {
             CostRecentItem lCostRecentItem = (CostRecentItem) recentItem;
             amount = String.valueOf(lCostRecentItem.getAmount());
-            date = lCostRecentItem.getDate());
+            date = lCostRecentItem.getDate();
             //Description
             description = lCostRecentItem.getDescription();
         }
