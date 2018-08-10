@@ -6,6 +6,9 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +17,6 @@ import android.view.ViewGroup;
 import com.novakduc.forbega.qlnt.R;
 import com.novakduc.forbega.qlnt.data.query.finance_tab.ProjectFinanceTab;
 import com.novakduc.forbega.qlnt.databinding.FragmentFinanceTabBinding;
-import com.novakduc.forbega.qlnt.ui.detail.room.RoomsRecyclerViewAdapter;
 import com.novakduc.forbega.qlnt.utilities.InjectorUtils;
 import com.novakduc.forbega.qlnt.utilities.ItemListAdapterActionHandler;
 
@@ -28,7 +30,7 @@ public class FinanceFragment extends android.support.v4.app.Fragment
         implements ItemListAdapterActionHandler {
     public static final String ACTIVE_PROJECT_ID = "active_project_id";
     private static final String LOG_TAG = FinanceFragment.class.getSimpleName();
-    private RoomsRecyclerViewAdapter mRoomsRecyclerViewAdapter;
+    private RecentListRecyclerViewAdapter mRecentListRecyclerViewAdapter;
     private long mActiveProject = -1;
     private FinanceFragmentViewModel mViewModel;
     private FragmentFinanceTabBinding mBinding;
@@ -74,6 +76,16 @@ public class FinanceFragment extends android.support.v4.app.Fragment
 
         final View view = mBinding.getRoot();
         //Start from here
+
+        final AppCompatActivity activity = (AppCompatActivity) getActivity();
+
+        mRecentListRecyclerViewAdapter = new RecentListRecyclerViewAdapter(activity, this);
+        RecyclerView recyclerView = mBinding.recentActivityRecyclerView;
+        LinearLayoutManager layoutManager = new LinearLayoutManager(activity);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setAdapter(mRecentListRecyclerViewAdapter);
+
         mViewModel.getProjectFinanceInfo().observe(this, new Observer<ProjectFinanceTab>() {
             @Override
             public void onChanged(@Nullable ProjectFinanceTab pProjectFinanceTab) {
