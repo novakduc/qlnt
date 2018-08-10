@@ -11,6 +11,7 @@ import com.novakduc.forbega.qlnt.databinding.RecycleViewEarnCostItemBinding;
 import com.novakduc.forbega.qlnt.utilities.ConverterUtilities;
 import com.novakduc.forbega.qlnt.utilities.ItemListAdapterActionHandler;
 
+import java.text.NumberFormat;
 import java.util.List;
 
 /**
@@ -56,7 +57,7 @@ public class RecentListRecyclerViewAdapter
         long date = 0;
         if (recentItem instanceof CostRecentItem) {
             CostRecentItem lCostRecentItem = (CostRecentItem) recentItem;
-            amount = String.valueOf(lCostRecentItem.getAmount());
+            amount = NumberFormat.getInstance().format(lCostRecentItem.getAmount());
             date = lCostRecentItem.getDate();
             //Description
             description = lCostRecentItem.getDescription();
