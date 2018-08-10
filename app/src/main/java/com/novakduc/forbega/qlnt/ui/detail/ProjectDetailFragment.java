@@ -1,5 +1,7 @@
 package com.novakduc.forbega.qlnt.ui.detail;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -15,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.novakduc.forbega.qlnt.R;
+import com.novakduc.forbega.qlnt.utilities.InjectorUtils;
 
 /**
  * Created by n.thanh on 10/12/2016.
@@ -26,6 +29,7 @@ public class ProjectDetailFragment extends android.support.v4.app.Fragment {
     private static final String ACTIVE_PROJECT_ID = "active_project_id";
     private final int numberOfPage = 3;
     private long mActiveProjectId = -1;
+    private ProjectDetailFragmentViewModel mViewModel;
     // TODO: 10/12/2016
 
 
@@ -43,6 +47,11 @@ public class ProjectDetailFragment extends android.support.v4.app.Fragment {
         setHasOptionsMenu(true);
 
         mActiveProjectId = getArguments().getLong(ACTIVE_PROJECT_ID);
+
+        ProjectDetailViewModelFactory factory =
+                InjectorUtils.provideProjectDetailViewModelFactory(getActivity(), mActiveProjectId);
+
+        mViewModel = ViewModelProviders.of(this, factory).get(ProjectDetailFragmentViewModel.class);
     }
 
     @Override
@@ -67,7 +76,7 @@ public class ProjectDetailFragment extends android.support.v4.app.Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_project_detail, container, false);
-        Toolbar toolbar = view.findViewById(R.id.toolbar);
+        final Toolbar toolbar = view.findViewById(R.id.toolbar);
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         activity.setSupportActionBar(toolbar);
 
@@ -76,6 +85,13 @@ public class ProjectDetailFragment extends android.support.v4.app.Fragment {
             actionBar.setHomeAsUpIndicator(R.drawable.ic_view_list);
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
+
+        mViewModel.getProjectName().observe(this, new Observer<ProjectNameQuery>() {
+            @Override
+            public void onChanged(@Nullable ProjectNameQuery pProjectNameQuery) {
+                toolbar.setTitle(pProjectNameQuery.getName());
+            }
+        });
 
         //Load active project ID
 //        SharedPreferences preferences = getActivity().getSharedPreferences(PREF_QLNT, 0);

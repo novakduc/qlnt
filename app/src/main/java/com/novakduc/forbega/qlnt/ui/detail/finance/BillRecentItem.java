@@ -1,4 +1,4 @@
-package com.novakduc.forbega.qlnt.data.query.finance_tab;
+package com.novakduc.forbega.qlnt.ui.detail.finance;
 
 import android.arch.persistence.room.ColumnInfo;
 

@@ -11,11 +11,12 @@ import com.novakduc.forbega.qlnt.data.database.Loan;
 import com.novakduc.forbega.qlnt.data.database.Project;
 import com.novakduc.forbega.qlnt.data.database.RoomForRent;
 import com.novakduc.forbega.qlnt.data.database.UnitPrice;
-import com.novakduc.forbega.qlnt.data.query.finance_tab.BillRecentItem;
-import com.novakduc.forbega.qlnt.data.query.finance_tab.CostRecentItem;
-import com.novakduc.forbega.qlnt.data.query.finance_tab.ProjectFinanceTab;
-import com.novakduc.forbega.qlnt.data.query.room_list_tab.GuestForRoomItemView;
-import com.novakduc.forbega.qlnt.data.query.room_list_tab.ListViewRoomItem;
+import com.novakduc.forbega.qlnt.ui.detail.ProjectNameQuery;
+import com.novakduc.forbega.qlnt.ui.detail.finance.BillRecentItem;
+import com.novakduc.forbega.qlnt.ui.detail.finance.CostRecentItem;
+import com.novakduc.forbega.qlnt.ui.detail.finance.ProjectFinanceTab;
+import com.novakduc.forbega.qlnt.ui.detail.room.GuestForRoomItemView;
+import com.novakduc.forbega.qlnt.ui.detail.room.ListViewRoomItem;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -297,5 +298,9 @@ public class ProjectRepo {
             }
         });
         return recentFinanceItem;
+    }
+
+    public LiveData<ProjectNameQuery> getProjectName() {
+        return mAppDao.getProjectName(mProjectId);
     }
 }

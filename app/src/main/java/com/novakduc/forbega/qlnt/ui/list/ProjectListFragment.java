@@ -22,8 +22,6 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.novakduc.forbega.qlnt.R;
 import com.novakduc.forbega.qlnt.data.database.Project;
-import com.novakduc.forbega.qlnt.data.query.project_list.ListViewProjectItem;
-import com.novakduc.forbega.qlnt.data.query.project_list.LoanAmount;
 import com.novakduc.forbega.qlnt.ui.ConfirmationDialogFragment;
 import com.novakduc.forbega.qlnt.ui.config.EditProjectActivity;
 import com.novakduc.forbega.qlnt.ui.config.ProjectConfigurationActivity;

@@ -16,8 +16,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.novakduc.forbega.qlnt.R;
-import com.novakduc.forbega.qlnt.data.query.room_list_tab.GuestForRoomItemView;
-import com.novakduc.forbega.qlnt.data.query.room_list_tab.ListViewRoomItem;
 import com.novakduc.forbega.qlnt.databinding.FragmentRoomListTabBinding;
 import com.novakduc.forbega.qlnt.ui.ConfirmationDialogFragment;
 import com.novakduc.forbega.qlnt.ui.detail.room.add_room.AddRoomActivity;

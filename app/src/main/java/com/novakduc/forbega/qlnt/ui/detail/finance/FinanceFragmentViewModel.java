@@ -4,7 +4,6 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModel;
 
 import com.novakduc.forbega.qlnt.data.ProjectRepo;
-import com.novakduc.forbega.qlnt.data.query.finance_tab.ProjectFinanceTab;
 
 import java.util.List;
 

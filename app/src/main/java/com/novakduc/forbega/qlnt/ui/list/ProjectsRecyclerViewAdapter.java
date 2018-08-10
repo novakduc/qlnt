@@ -12,8 +12,6 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.novakduc.forbega.qlnt.R;
-import com.novakduc.forbega.qlnt.data.query.project_list.ListViewProjectItem;
-import com.novakduc.forbega.qlnt.data.query.project_list.LoanAmount;
 import com.novakduc.forbega.qlnt.utilities.ConverterUtilities;
 import com.novakduc.forbega.qlnt.utilities.CurrencyUnit;
 import com.novakduc.forbega.qlnt.utilities.ItemListAdapterActionHandler;

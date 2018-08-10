@@ -1,4 +1,4 @@
-package com.novakduc.forbega.qlnt.data.query.room_list_tab;
+package com.novakduc.forbega.qlnt.ui.detail.room;
 
 import android.arch.persistence.room.ColumnInfo;
 

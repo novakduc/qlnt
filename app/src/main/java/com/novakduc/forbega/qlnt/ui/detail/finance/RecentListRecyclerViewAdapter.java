@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.novakduc.forbega.qlnt.data.query.finance_tab.CostRecentItem;
 import com.novakduc.forbega.qlnt.databinding.RecycleViewEarnCostItemBinding;
 import com.novakduc.forbega.qlnt.utilities.ConverterUtilities;
 import com.novakduc.forbega.qlnt.utilities.ItemListAdapterActionHandler;
@@ -63,7 +62,7 @@ public class RecentListRecyclerViewAdapter
             description = lCostRecentItem.getDescription();
         }
 
-        holder.mBinding.textViewRoomName.setText(amount);
+        holder.mBinding.textViewAmount.setText(amount);
         holder.mBinding.txtDate.setText(ConverterUtilities.calendarToString(date));
         holder.mBinding.txtDescription.setText(description);
 

@@ -136,4 +136,5 @@
     <string name="titleAddRoom">Add Room</string>
     <string name="roomChargeHint">Room charge</string>
     <string name="waterCostDesciption">Water fee</string>
+    <string name="no_recent_item_announcement">no recent financial activity</string>
 </resources>

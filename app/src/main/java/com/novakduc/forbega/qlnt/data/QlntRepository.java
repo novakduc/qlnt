@@ -12,8 +12,8 @@ import com.novakduc.forbega.qlnt.data.database.Project;
 import com.novakduc.forbega.qlnt.data.database.RoomForRent;
 import com.novakduc.forbega.qlnt.data.database.RoomList;
 import com.novakduc.forbega.qlnt.data.database.UnitPrice;
-import com.novakduc.forbega.qlnt.data.query.project_list.ListViewProjectItem;
-import com.novakduc.forbega.qlnt.data.query.project_list.LoanAmount;
+import com.novakduc.forbega.qlnt.ui.list.ListViewProjectItem;
+import com.novakduc.forbega.qlnt.ui.list.LoanAmount;
 
 import java.util.ArrayList;
 import java.util.List;

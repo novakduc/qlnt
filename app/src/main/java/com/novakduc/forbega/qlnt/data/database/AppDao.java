@@ -8,13 +8,14 @@ import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
 
-import com.novakduc.forbega.qlnt.data.query.finance_tab.BillRecentItem;
-import com.novakduc.forbega.qlnt.data.query.finance_tab.CostRecentItem;
-import com.novakduc.forbega.qlnt.data.query.finance_tab.ProjectFinanceTab;
-import com.novakduc.forbega.qlnt.data.query.project_list.ListViewProjectItem;
-import com.novakduc.forbega.qlnt.data.query.project_list.LoanAmount;
-import com.novakduc.forbega.qlnt.data.query.room_list_tab.GuestForRoomItemView;
-import com.novakduc.forbega.qlnt.data.query.room_list_tab.ListViewRoomItem;
+import com.novakduc.forbega.qlnt.ui.detail.ProjectNameQuery;
+import com.novakduc.forbega.qlnt.ui.detail.finance.BillRecentItem;
+import com.novakduc.forbega.qlnt.ui.detail.finance.CostRecentItem;
+import com.novakduc.forbega.qlnt.ui.detail.finance.ProjectFinanceTab;
+import com.novakduc.forbega.qlnt.ui.detail.room.GuestForRoomItemView;
+import com.novakduc.forbega.qlnt.ui.detail.room.ListViewRoomItem;
+import com.novakduc.forbega.qlnt.ui.list.ListViewProjectItem;
+import com.novakduc.forbega.qlnt.ui.list.LoanAmount;
 
 import java.util.List;
 
@@ -176,4 +177,7 @@ public interface AppDao {
 
     @Query("SELECT amount, date, type, description FROM cost WHERE date > :timeFrame")
     List<CostRecentItem> getRecentCosts(long timeFrame);
+
+    @Query("SELECT name FROM project WHERE projectId = :pProjectId")
+    LiveData<ProjectNameQuery> getProjectName(long pProjectId);
 }
