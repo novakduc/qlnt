@@ -20,49 +20,72 @@
 
 
         <TextView
+            android:id="@+id/txtTotalCharge"
+            style="@style/TextAppearance.AppCompat.Subhead"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:paddingStart="0dp"
+            android:text="@string/totalCharge"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/guideline5" />
+
+
+        <TextView
             android:id="@+id/textView"
             style="@style/TextAppearance.AppCompat.Body1"
-            android:layout_width="56dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:gravity="center"
+            android:gravity="left"
             android:paddingStart="@dimen/paddingStart"
             android:text="01-03 2018"
             app:layout_constraintBottom_toBottomOf="@+id/totalCharge"
+            app:layout_constraintEnd_toStartOf="@+id/guideline6"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/totalCharge" />
 
         <TextView
             android:id="@+id/totalCharge"
             style="@style/TextAppearance.AppCompat.Headline"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:gravity="center"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="8dp"
+            android:gravity="right"
             android:paddingEnd="4dp"
             android:paddingStart="4dp"
             android:text="23,452,100"
             android:textColor="@color/secondaryColor"
-            app:layout_constraintBottom_toBottomOf="@+id/btGetPaid"
-            app:layout_constraintEnd_toStartOf="@+id/btGetPaid"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.553"
             app:layout_constraintStart_toEndOf="@+id/textView"
-            app:layout_constraintTop_toTopOf="@+id/btGetPaid" />
+            app:layout_constraintTop_toBottomOf="@+id/guideline5" />
 
         <Button
             android:id="@+id/btGetPaid"
             style="?android:borderlessButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:text="@string/btCheckOut"
             android:textColor="@color/secondaryColor"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/appbarSection" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/totalCharge" />
 
 
         <view
             style="@style/Divider"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btGetPaid" />
+            app:layout_constraintTop_toBottomOf="@+id/guideline5" />
 
         <TextView
             android:id="@+id/itemNo1"
@@ -100,7 +123,7 @@
             android:text="23,452,100"
             android:textColor="@color/secondaryColor"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/guideline5" />
+            app:layout_constraintTop_toBottomOf="@id/appbarSection" />
 
 
         <TextView
@@ -310,8 +333,8 @@
 
         <view
             style="@style/Divider"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginStart="32dp"
             android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -360,7 +383,6 @@
             style="@style/TextAppearance.AppCompat.Subhead"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:gravity="center"
             android:text="231,857"
             android:textColor="@color/secondaryColor"
@@ -573,23 +595,6 @@
             app:layout_constraintTop_toBottomOf="@+id/securityCharge" />
 
 
-        <TextView
-            android:id="@+id/txtGuideLine"
-            style="@style/TextAppearance.AppCompat.Body1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:gravity="center"
-            android:text="@string/createBillGuide"
-            android:textColor="@color/secondaryDarkColor"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/otherCharge" />
-
         <android.support.constraint.Guideline
             android:id="@+id/guideline6"
             android:layout_width="wrap_content"
@@ -616,14 +621,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_begin="104dp" />
+            app:layout_constraintGuide_begin="354dp" />
 
         <android.support.constraint.Guideline
             android:id="@+id/guideline7"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_begin="278dp" />
+            app:layout_constraintGuide_begin="226dp" />
 
     </android.support.constraint.ConstraintLayout>
 </layout>
