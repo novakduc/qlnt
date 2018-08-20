@@ -29,7 +29,7 @@ public class TabAdapter extends FragmentPagerAdapter {
                 return RoomListFragment.getInstance(mActivieProjectId);
             case 1:
                 return FinanceFragment.getInstance(mActivieProjectId);
-            case 3:
+            case 2:
                 return ReportFragment.getInstance(mActivieProjectId);
         }
         TabPosition tabPosition = TabPosition.values()[position];

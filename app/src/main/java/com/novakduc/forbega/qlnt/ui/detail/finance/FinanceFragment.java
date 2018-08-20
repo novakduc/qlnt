@@ -78,6 +78,7 @@ public class FinanceFragment extends android.support.v4.app.Fragment
 
         final AppCompatActivity activity = (AppCompatActivity) getActivity();
 
+
         mRecentListRecyclerViewAdapter = new RecentListRecyclerViewAdapter(activity, this);
         RecyclerView recyclerView = mBinding.recentActivityRecyclerView;
         LinearLayoutManager layoutManager = new LinearLayoutManager(activity);

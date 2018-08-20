@@ -29,7 +29,7 @@ public class ProjectDetailActivity extends SimpleFragmentActivity
             for (Fragment f :
                     fragments) {
                 if (f instanceof RoomListFragment) {
-                    ((RoomListFragment) f).deleteRoom();  //delete project from project list
+                    ((RoomListFragment) f).deleteRoom();  //delete room from room list
                     return;
                 }
             }
