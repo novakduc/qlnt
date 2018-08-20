@@ -31,9 +31,9 @@ public class TabAdapter extends FragmentPagerAdapter {
                 return FinanceFragment.getInstance(mActivieProjectId);
             case 2:
                 return ReportFragment.getInstance(mActivieProjectId);
+            default:
+                return FinanceFragment.getInstance(mActivieProjectId);
         }
-        TabPosition tabPosition = TabPosition.values()[position];
-        return TabFragment.getInstance(tabPosition);
     }
 
     @Override

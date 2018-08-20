@@ -69,6 +69,10 @@ public class ProjectDetailFragment extends android.support.v4.app.Fragment {
             return true;
         }
 
+        if (id == R.id.homeAsUp) {
+            getActivity().finish();
+        }
+
         return super.onOptionsItemSelected(item);
     }
 
