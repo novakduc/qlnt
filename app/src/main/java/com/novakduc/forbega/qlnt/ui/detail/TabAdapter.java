@@ -28,8 +28,10 @@ public class TabAdapter extends FragmentPagerAdapter {
             case 0:
                 return RoomListFragment.getInstance(mActivieProjectId);
             case 1:
+                //return ReportFragment.getInstance(mActivieProjectId);
                 return FinanceFragment.getInstance(mActivieProjectId);
             case 2:
+                //return FinanceFragment.getInstance(mActivieProjectId);
                 return ReportFragment.getInstance(mActivieProjectId);
             default:
                 return FinanceFragment.getInstance(mActivieProjectId);
