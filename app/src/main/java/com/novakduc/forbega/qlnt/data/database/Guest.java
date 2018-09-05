@@ -65,6 +65,14 @@ public class Guest extends Observable implements Cloneable {
         return guest;
     }
 
+    public long getCheckOutDate() {
+        return checkOutDate;
+    }
+
+    public void setCheckOutDate(long pCheckOutDate) {
+        checkOutDate = pCheckOutDate;
+    }
+
     //Getter setter
     public String getName() {
         return name;
