@@ -19,10 +19,11 @@ public class Guest extends Observable implements Cloneable {
     private boolean keyContact;
     private long roomId;
     private long projectId;
+    private long checkOutDate;
 
     //For Room only
     public Guest(long id, String name, String phoneNumber, String guestId,
-                 Boolean keyContact, long roomId, long projectId) {
+                 Boolean keyContact, long roomId, long projectId, long checkOutDate) {
         this.id = id;
         this.name = name;
         this.phoneNumber = phoneNumber;
@@ -30,6 +31,7 @@ public class Guest extends Observable implements Cloneable {
         this.keyContact = keyContact;
         this.roomId = roomId;
         this.projectId = projectId;
+        this.checkOutDate = checkOutDate;
     }
 
     @Ignore
@@ -40,6 +42,7 @@ public class Guest extends Observable implements Cloneable {
         this.keyContact = false;
         this.roomId = roomId;
         this.projectId = projectId;
+        this.checkOutDate = -1;
     }
 
     public static Guest getInstance(String name, String guestId, String phoneNumber,
