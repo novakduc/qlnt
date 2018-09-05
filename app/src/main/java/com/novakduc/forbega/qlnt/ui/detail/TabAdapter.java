@@ -26,12 +26,13 @@ public class TabAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
+                //return TabFragment.getInstance(TabPosition.PROJECT_MANAGEMENT);
                 return RoomListFragment.getInstance(mActivieProjectId);
             case 1:
-                //return ReportFragment.getInstance(mActivieProjectId);
+                //return TabFragment.getInstance(TabPosition.INFORMATION);
                 return FinanceFragment.getInstance(mActivieProjectId);
             case 2:
-                //return FinanceFragment.getInstance(mActivieProjectId);
+                //return TabFragment.getInstance(TabPosition.REPORT);
                 return ReportFragment.getInstance(mActivieProjectId);
             default:
                 return FinanceFragment.getInstance(mActivieProjectId);
