@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -52,6 +53,12 @@ public class EditRoomFragment extends Fragment {
         mBinding = DataBindingUtil.inflate(inflater,
                 R.layout.fragment_add_room, container, false);
         View view = mBinding.getRoot();
+
+        android.support.v7.widget.Toolbar toolbar = mBinding.appbarSection.toolbar;
+
+        toolbar.setTitle(getResources().getString(R.string.project_create_confirm));
+        final AppCompatActivity activity = (AppCompatActivity) getActivity();
+        activity.setSupportActionBar(toolbar);
 
         mBinding.txtRoomName.addTextChangedListener(new TextWatcher() {
             @Override
@@ -110,6 +117,8 @@ public class EditRoomFragment extends Fragment {
                     mRoomForRent = roomForRent;
                     mBinding.txtRoomName.setText(mRoomForRent.getName());
                     mBinding.txtRoomPrice.setText(String.valueOf(mRoomForRent.getCharge()));
+                    String title = getString(R.string.edit_room_title) + " " + mRoomForRent.getName();
+                    mBinding.appbarSection.toolbar.setTitle(title);
                 }
             }
         });

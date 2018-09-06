@@ -10,6 +10,9 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -101,5 +104,22 @@ public class CheckInFragment extends Fragment implements ItemListAdapterActionHa
         CheckInFragment lCheckInFragment = new CheckInFragment();
         lCheckInFragment.setArguments(bundle);
         return lCheckInFragment;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.close_toolbar, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.close) {
+            mCallBack.discardConfirmation(R.string.project_create_discard);
+        }
+
+        if (item.getItemId() == android.R.id.home)
+            getFragmentManager().popBackStack();
+        return super.onOptionsItemSelected(item);
     }
 }
