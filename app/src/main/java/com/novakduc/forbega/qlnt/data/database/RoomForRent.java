@@ -16,14 +16,16 @@ public class RoomForRent implements Cloneable, ItemWithId {
     private long charge;
     private RoomStatus status;
     private long projectId;
+    private long depositAmount;
 
     //For Room only
-    public RoomForRent(long id, String name, long charge, RoomStatus status, long projectId) {
+    public RoomForRent(long id, String name, long charge, RoomStatus status, long projectId, long depositAmount) {
         this.id = id;
         this.name = name;
         this.charge = charge;
         this.status = status;
         this.projectId = projectId;
+        this.depositAmount = depositAmount;
     }
 
     @Ignore
@@ -31,11 +33,20 @@ public class RoomForRent implements Cloneable, ItemWithId {
         this.projectId = projectId;
         this.name = name;
         this.charge = charge;
-        status = RoomStatus.AVAILABLE;
+        this.status = RoomStatus.AVAILABLE;
+        this.depositAmount = 0;
     }
 
     public static RoomForRent getInstance(long projectId, String name, long charge) {
         return new RoomForRent(projectId, name, charge);
+    }
+
+    public long getDepositAmount() {
+        return depositAmount;
+    }
+
+    public void setDepositAmount(long pDepositAmount) {
+        depositAmount = pDepositAmount;
     }
 
     @Override

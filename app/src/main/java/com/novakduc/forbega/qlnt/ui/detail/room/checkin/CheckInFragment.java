@@ -13,6 +13,7 @@ import com.novakduc.forbega.qlnt.utilities.ItemListAdapterActionHandler;
 public class CheckInFragment extends Fragment implements ItemListAdapterActionHandler {
     public static final String ACTIVE_PROJECT_ID = "active_project_id";
     private static final String LOG_TAG = CheckInFragment.class.getSimpleName();
+    public static final String ROOM_ID = CheckInFragment.class.getName() + ".roomId";
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -43,5 +44,13 @@ public class CheckInFragment extends Fragment implements ItemListAdapterActionHa
     @Override
     public void onItemClick(long id) {
 
+    }
+
+    public static CheckInFragment getInstance(long pRoomId) {
+        Bundle bundle = new Bundle();
+        bundle.putLong(ROOM_ID, pRoomId);
+        CheckInFragment lCheckInFragment = new CheckInFragment();
+        lCheckInFragment.setArguments(bundle);
+        return lCheckInFragment;
     }
 }
