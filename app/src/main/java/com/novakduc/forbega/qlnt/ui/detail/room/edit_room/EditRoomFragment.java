@@ -7,10 +7,14 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -27,6 +31,7 @@ public class EditRoomFragment extends Fragment {
     private RoomForRent mRoomForRent;
     private long mRoomId;
     private FragmentAddRoomBinding mBinding;
+    private EditRoomActivityListener mCallBack;
 
     public static EditRoomFragment getInstance(@NonNull long roomId) {
         Bundle bundle = new Bundle();
@@ -45,6 +50,7 @@ public class EditRoomFragment extends Fragment {
                 InjectorUtils.provideEditRoomViewModelFactory(getActivity(), mRoomId);
 
         mViewModel = ViewModelProviders.of(this, factory).get(EditRoomViewModel.class);
+        setHasOptionsMenu(true);
     }
 
     @Nullable
@@ -59,6 +65,13 @@ public class EditRoomFragment extends Fragment {
         toolbar.setTitle(getResources().getString(R.string.project_create_confirm));
         final AppCompatActivity activity = (AppCompatActivity) getActivity();
         activity.setSupportActionBar(toolbar);
+        mCallBack = (EditRoomActivityListener) activity;
+
+        final ActionBar actionBar = activity.getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setHomeAsUpIndicator(R.drawable.ic_navigate_before);
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
 
         mBinding.txtRoomName.addTextChangedListener(new TextWatcher() {
             @Override
@@ -124,5 +137,23 @@ public class EditRoomFragment extends Fragment {
         });
 
         return view;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.confirm_toolbar, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.confirm) {
+            mViewModel.updateRoom(mRoomForRent);
+            getActivity().finish();
+        }
+
+        if (item.getItemId() == android.R.id.home)
+            mCallBack.discardConfirmation(R.string.announce_discard_edit_room);
+        return super.onOptionsItemSelected(item);
     }
 }

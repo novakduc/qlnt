@@ -129,7 +129,7 @@ public class ProjectEditFragment extends android.support.v4.app.Fragment
 
         final ActionBar actionBar = activity.getSupportActionBar();
         if (actionBar != null) {
-            actionBar.setHomeAsUpIndicator(R.drawable.ic_navigate_before);
+            actionBar.setHomeAsUpIndicator(R.drawable.ic_close);
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
@@ -553,18 +553,22 @@ public class ProjectEditFragment extends android.support.v4.app.Fragment
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.close_toolbar, menu);
+        inflater.inflate(R.menu.confirm_toolbar, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.close) {
-            mCallBack.discardConfirmation(R.string.project_create_discard);
+        if (item.getItemId() == R.id.confirm) {
+            if (!mError)
+                nextAction();   //confirm to create project
+            else
+                Toast.makeText(getActivity(), getResources().getString(R.string.invalid_input_error),
+                        Toast.LENGTH_SHORT).show();
         }
 
         if (item.getItemId() == android.R.id.home)
-            getFragmentManager().popBackStack();
+            mCallBack.discardConfirmation(R.string.project_create_discard);
         return super.onOptionsItemSelected(item);
     }
 

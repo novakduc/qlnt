@@ -3,6 +3,7 @@ package com.novakduc.forbega.qlnt.ui;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
 
 import com.novakduc.forbega.qlnt.R;
@@ -46,5 +47,15 @@ public class ConfirmationDialogFragment extends android.support.v4.app.DialogFra
 
     public interface ConfirmListener {
         void action(int result);
+    }
+
+    public static void showDialog(String pMessage, FragmentManager pFragmentManager) {
+        Bundle bundle = new Bundle();
+        //dialog title in bundle
+        bundle.putString(ConfirmationDialogFragment.MESSAGE,
+                pMessage);
+        android.support.v4.app.DialogFragment dialogFragment = new ConfirmationDialogFragment();
+        dialogFragment.setArguments(bundle);
+        dialogFragment.show(pFragmentManager, "discardConfirm");
     }
 }

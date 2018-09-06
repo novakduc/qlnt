@@ -280,11 +280,11 @@ public class ProjectBaseConfigFragment extends android.support.v4.app.Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.close) {
-            mCallback.discardConfirmation(R.string.project_create_discard); //close action;
+            mCallback.discardConfirmation(R.string.project_create_discard); //close action
         }
 
         if (item.getItemId() == android.R.id.home)
-            mCallback.discardConfirmation(R.string.project_create_discard);
+            mCallback.discardConfirmation(R.string.project_create_discard); //close action
 
         return super.onOptionsItemSelected(item);
     }

@@ -319,7 +319,6 @@ public class LoanDeclareFragment extends android.support.v4.app.Fragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        //inflater.inflate(R.menu.close_toolbar, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
 

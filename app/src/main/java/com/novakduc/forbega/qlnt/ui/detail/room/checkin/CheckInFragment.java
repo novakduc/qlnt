@@ -30,6 +30,7 @@ public class CheckInFragment extends Fragment implements ItemListAdapterActionHa
     private RoomForRent mRoomForRent;
     private long mRoomId;
     private FragmentCheckinBinding mBinding;
+    private CheckInActivityListener mCallBack;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,6 +41,8 @@ public class CheckInFragment extends Fragment implements ItemListAdapterActionHa
                 InjectorUtils.provideCheckInViewModelFactory(getActivity(), mRoomId);
 
         mViewModel = ViewModelProviders.of(this, factory).get(CheckInViewModel.class);
+
+        setHasOptionsMenu(true);
     }
 
     @Nullable
@@ -54,6 +57,7 @@ public class CheckInFragment extends Fragment implements ItemListAdapterActionHa
         toolbar.setTitle(getResources().getString(R.string.project_create_confirm));
         final AppCompatActivity activity = (AppCompatActivity) getActivity();
         activity.setSupportActionBar(toolbar);
+        mCallBack = (CheckInActivityListener) activity;
 
         final ActionBar actionBar = activity.getSupportActionBar();
         if (actionBar != null) {
@@ -108,18 +112,18 @@ public class CheckInFragment extends Fragment implements ItemListAdapterActionHa
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.close_toolbar, menu);
+        inflater.inflate(R.menu.confirm_toolbar, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.close) {
-            mCallBack.discardConfirmation(R.string.project_create_discard);
+        if (item.getItemId() == R.id.confirm) {
+            // TODO: 9/6/2018  
         }
 
         if (item.getItemId() == android.R.id.home)
-            getFragmentManager().popBackStack();
+            mCallBack.discardConfirmation(R.string.announce_discard_checkIn);
         return super.onOptionsItemSelected(item);
     }
 }
