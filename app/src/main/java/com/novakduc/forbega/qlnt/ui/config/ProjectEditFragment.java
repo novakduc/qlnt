@@ -79,6 +79,7 @@ public class ProjectEditFragment extends android.support.v4.app.Fragment
             mInternetLayout, mTvLayout, mLayoutAmount;
     private EditText mEditTextElecticity, mEditTextWater, mEditTextSecurity, mEditTextTrash,
             mEditTextInternet, mEditTextTv;
+    private Toolbar mToolbar;
     private UpdateListener mCallBack;
 
     private ProjectFinanceConfigViewModel mFinanceConfigViewModel;
@@ -121,10 +122,10 @@ public class ProjectEditFragment extends android.support.v4.app.Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_project_confirmation, container, false);
 
-        Toolbar toolbar = view.findViewById(R.id.toolbar);
-        toolbar.setTitle(getResources().getString(R.string.project_create_confirm));
+        mToolbar = view.findViewById(R.id.toolbar);
+        mToolbar.setTitle(getResources().getString(R.string.project_create_confirm));
         final AppCompatActivity activity = (AppCompatActivity) getActivity();
-        activity.setSupportActionBar(toolbar);
+        activity.setSupportActionBar(mToolbar);
 
         final ActionBar actionBar = activity.getSupportActionBar();
         if (actionBar != null) {
@@ -540,6 +541,8 @@ public class ProjectEditFragment extends android.support.v4.app.Fragment
         mEditTextInvestmentAmount.setText(s);
         mAmount = mTempProject.getInvestmentAmount();
         mLayoutAmount.setErrorEnabled(false);
+        String title = getResources().getString(R.string.project_edit_title) + " " + mTempProject.getName();
+        mToolbar.setTitle(title);
     }
 
     private void showDialog(android.support.v4.app.DialogFragment fragment, int target) {

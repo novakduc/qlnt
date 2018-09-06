@@ -19,10 +19,11 @@ import com.novakduc.forbega.qlnt.R;
 import com.novakduc.forbega.qlnt.databinding.FragmentRoomListTabBinding;
 import com.novakduc.forbega.qlnt.ui.ConfirmationDialogFragment;
 import com.novakduc.forbega.qlnt.ui.detail.room.add_room.AddRoomActivity;
+import com.novakduc.forbega.qlnt.ui.detail.room.checkin.CheckInActivity;
+import com.novakduc.forbega.qlnt.ui.detail.room.checkin.CheckInFragment;
 import com.novakduc.forbega.qlnt.ui.detail.room.edit_room.EditRoomActivity;
 import com.novakduc.forbega.qlnt.ui.detail.room.edit_room.EditRoomFragment;
 import com.novakduc.forbega.qlnt.utilities.InjectorUtils;
-import com.novakduc.forbega.qlnt.utilities.ItemListAdapterActionHandler;
 
 import java.util.List;
 
@@ -31,7 +32,7 @@ import java.util.List;
  */
 
 public class RoomListFragment extends android.support.v4.app.Fragment
-        implements ItemListAdapterActionHandler {
+        implements RoomListAdapterActionHandler {
     public static final String ACTIVE_PROJECT_ID = "active_project_id";
     private static final String LOG_TAG = RoomListFragment.class.getSimpleName();
     private RoomsRecyclerViewAdapter mRoomsRecyclerViewAdapter;
@@ -166,9 +167,33 @@ public class RoomListFragment extends android.support.v4.app.Fragment
 
     @Override
     public void onItemClick(long id) {
-//        Log.d(LOG_TAG, "Clicked on project item with id: " + id);
-//        Intent intent = new Intent(getActivity(), ProjectDetailActivity.class);
-//        intent.putExtra(ACTIVE_PROJECT_ID, mActiveProject);
-//        startActivity(intent);
+
+    }
+
+    @Override
+    public void onCheckIn(long id) {
+        Intent intent = new Intent(getActivity(), CheckInActivity.class);
+        intent.putExtra(CheckInFragment.ROOM_ID, id);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onCheckOut(long id) {
+
+    }
+
+    @Override
+    public void onBill(long id) {
+
+    }
+
+    @Override
+    public void onCallGuest(long id) {
+
+    }
+
+    @Override
+    public void onSendMessageToGuest(long id) {
+
     }
 }

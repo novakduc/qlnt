@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import com.novakduc.forbega.qlnt.R;
 import com.novakduc.forbega.qlnt.data.database.RoomStatus;
 import com.novakduc.forbega.qlnt.databinding.RecycleViewRoomItemBinding;
-import com.novakduc.forbega.qlnt.utilities.ItemListAdapterActionHandler;
 
 import java.util.List;
 
@@ -24,10 +23,10 @@ public class RoomsRecyclerViewAdapter
     private List<ListViewRoomItem> mRoomList;
     private List<GuestForRoomItemView> mKeyContactList;
     private Context mContext;
-    private ItemListAdapterActionHandler mActionHandler;
+    private RoomListAdapterActionHandler mActionHandler;
 
     public RoomsRecyclerViewAdapter(@NonNull Context context,
-                                    ItemListAdapterActionHandler actionHandler) {
+                                    RoomListAdapterActionHandler actionHandler) {
         mContext = context;
         mActionHandler = actionHandler;
     }
@@ -72,7 +71,7 @@ public class RoomsRecyclerViewAdapter
                 holder.mBinding.btCheckInOut.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        // TODO: 5/7/2018 go to check in activity
+                        mActionHandler.onCheckIn(roomItem.getId());
                     }
                 });
         }
@@ -82,14 +81,14 @@ public class RoomsRecyclerViewAdapter
             holder.mBinding.btBill.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    // TODO: 5/7/2018 go to bill activity
+                    mActionHandler.onBill(roomItem.getId());
                 }
             });
             holder.mBinding.btCheckInOut.setText(R.string.btCheckOut);
             holder.mBinding.btCheckInOut.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    // TODO: 5/7/2018 go to check out activity
+                    mActionHandler.onCheckOut(roomItem.getId());
                 }
             });
         }
@@ -102,7 +101,7 @@ public class RoomsRecyclerViewAdapter
             holder.mBinding.imageButtonCall.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    // TODO: 5/7/2018 call guest
+                    mActionHandler.onCallGuest(roomItem.getId());
                 }
             });
             holder.mBinding.imageButtonMessage.setEnabled(true);
@@ -110,7 +109,7 @@ public class RoomsRecyclerViewAdapter
             holder.mBinding.imageButtonMessage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    // TODO: 5/7/2018 send message to guest
+                    mActionHandler.onSendMessageToGuest(roomItem.getId());
                 }
             });
         } else {
