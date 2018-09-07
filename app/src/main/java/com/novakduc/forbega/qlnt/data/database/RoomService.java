@@ -78,9 +78,9 @@ public class RoomService implements RoomServiceInterface {
             case WATER:
                 return true;
             case INTERNET:
-                return true;
+                return false;
             case TV_CABLE:
-                return true;
+                return false;
             case ELECTRICITY:
                 return true;
             case SECURITY:

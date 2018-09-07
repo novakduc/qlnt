@@ -10,6 +10,7 @@ public class CheckInViewModel extends ViewModel {
     private RoomForRentRepo mRoomForRentRepo;
     private LiveData<RoomForRent> mRoomForRentLiveData;
 
+
     public CheckInViewModel(RoomForRentRepo roomForRentRepo) {
         mRoomForRentRepo = roomForRentRepo;
         mRoomForRentLiveData = mRoomForRentRepo.getRoomForRent();

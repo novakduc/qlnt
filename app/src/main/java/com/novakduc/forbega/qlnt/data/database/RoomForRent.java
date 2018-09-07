@@ -17,15 +17,20 @@ public class RoomForRent implements Cloneable, ItemWithId {
     private RoomStatus status;
     private long projectId;
     private long depositAmount;
+    private long checkInDate;
+    private int billDate;   //Calendar.DAY_OF_DATE
 
     //For Room only
-    public RoomForRent(long id, String name, long charge, RoomStatus status, long projectId, long depositAmount) {
+    public RoomForRent(long id, String name, long charge, RoomStatus status, long projectId,
+                       long depositAmount, long checkInDate, int billDate) {
         this.id = id;
         this.name = name;
         this.charge = charge;
         this.status = status;
         this.projectId = projectId;
         this.depositAmount = depositAmount;
+        this.checkInDate = checkInDate;
+        this.billDate = billDate;
     }
 
     @Ignore
@@ -35,6 +40,8 @@ public class RoomForRent implements Cloneable, ItemWithId {
         this.charge = charge;
         this.status = RoomStatus.AVAILABLE;
         this.depositAmount = 0;
+        this.billDate = -1;
+        this.checkInDate = -1;
     }
 
     public static RoomForRent getInstance(long projectId, String name, long charge) {
@@ -98,7 +105,23 @@ public class RoomForRent implements Cloneable, ItemWithId {
         return projectId;
     }
 
-    public void setProjectId(long newProjectId) {
+    private void setProjectId(long newProjectId) {
         this.projectId = newProjectId;
+    }
+
+    public long getCheckInDate() {
+        return checkInDate;
+    }
+
+    public void setCheckInDate(long pCheckInDate) {
+        checkInDate = pCheckInDate;
+    }
+
+    public int getBillDate() {
+        return billDate;
+    }
+
+    public void setBillDate(int pBillDate) {
+        billDate = pBillDate;
     }
 }

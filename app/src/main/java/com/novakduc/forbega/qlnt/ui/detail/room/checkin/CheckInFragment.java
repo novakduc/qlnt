@@ -69,7 +69,8 @@ public class CheckInFragment extends Fragment implements ItemListAdapterActionHa
             @Override
             public void onChanged(@Nullable RoomForRent pRoomForRent) {
                 if (pRoomForRent != null) {
-                    bindRoomInfoToUI(pRoomForRent);
+                    mRoomForRent = pRoomForRent;
+                    bindRoomInfoToUI();
                 }
             }
         });
@@ -77,8 +78,8 @@ public class CheckInFragment extends Fragment implements ItemListAdapterActionHa
         return view;
     }
 
-    private void bindRoomInfoToUI(RoomForRent pRoomForRent) {
-        String title = getString(R.string.checkIn_room_title) + " " + pRoomForRent.getName();
+    private void bindRoomInfoToUI() {
+        String title = getString(R.string.checkIn_room_title) + " " + mRoomForRent.getName();
         mBinding.appbarSection.toolbar.setTitle(title);
     }
 

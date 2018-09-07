@@ -29,6 +29,7 @@
             app:layout_constraintTop_toBottomOf="@id/appbarSection">
 
             <android.support.design.widget.TextInputEditText
+                style="@style/Base.TextAppearance.AppCompat.Body1"
                 android:id="@+id/roomCharge"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -54,6 +55,7 @@
             app:layout_constraintTop_toBottomOf="@id/appbarSection">
 
             <android.support.design.widget.TextInputEditText
+                style="@style/Base.TextAppearance.AppCompat.Body1"
                 android:id="@+id/depositAmount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -73,6 +75,7 @@
             app:layout_constraintTop_toBottomOf="@id/txtLayoutDeposit">
 
             <android.support.design.widget.TextInputEditText
+                style="@style/Base.TextAppearance.AppCompat.Body1"
                 android:id="@+id/editTextStartDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -84,6 +87,7 @@
         </android.support.design.widget.TextInputLayout>
 
         <TextView
+            style="@style/TextAppearance.AppCompat.Body1"
             android:id="@+id/billDateTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -93,12 +97,12 @@
             android:layout_marginTop="8dp"
             android:paddingStart="@dimen/paddingStart"
             android:text="@string/billDate"
-            android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="@+id/txtLayoutStartDate"
             app:layout_constraintStart_toStartOf="@+id/guideline4"
             app:layout_constraintTop_toTopOf="@+id/txtLayoutStartDate" />
 
         <Spinner
+            style="@style/TextAppearance.AppCompat.Body1"
             android:id="@+id/spinnerBillDate"
             android:layout_width="48dp"
             android:layout_height="wrap_content"
@@ -135,6 +139,7 @@
                 android:layout_weight="1">
 
                 <android.support.design.widget.TextInputEditText
+                    style="@style/TextAppearance.AppCompat.Body1"
                     android:id="@+id/electricity"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -158,6 +163,7 @@
                 android:layout_weight="1">
 
                 <android.support.design.widget.TextInputEditText
+                    style="@style/TextAppearance.AppCompat.Body1"
                     android:id="@+id/water"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -184,12 +190,12 @@
                 android:layout_margin="@dimen/layout_marginStart" />
 
             <TextView
+                style="@style/TextAppearance.AppCompat.Body1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="2"
-                android:text="@string/internet_label"
-                android:textSize="20sp" />
+                android:text="@string/internet_label" />
 
             <CheckBox
                 android:id="@+id/checkBoxTv"
@@ -198,12 +204,12 @@
                 android:layout_margin="@dimen/layout_marginStart" />
 
             <TextView
+                style="@style/TextAppearance.AppCompat.Body1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="2"
-                android:text="@string/TV_label"
-                android:textSize="20sp" />
+                android:text="@string/TV_label" />
 
         </LinearLayout>
 
@@ -220,13 +226,13 @@
             app:layout_constraintTop_toBottomOf="@id/divider">
 
             <TextView
+                style="@style/TextAppearance.AppCompat.Subhead"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="@dimen/layout_marginStart"
                 android:layout_weight="2"
-                android:text="@string/guestList"
-                android:textSize="20sp" />
+                android:text="@string/guestList" />
 
             <Button
                 android:id="@+id/btAddGuest"
