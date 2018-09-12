@@ -4,8 +4,6 @@ import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 
-import java.util.Calendar;
-
 @Entity(tableName = "bill")
 public class Bill implements ItemWithId {
     @PrimaryKey
@@ -53,7 +51,7 @@ public class Bill implements ItemWithId {
         this.roomId = roomId;
         this.isPaid = 0;
         this.paymentDate = -1;
-        this.id = Calendar.getInstance().getTimeInMillis();
+        this.id = System.currentTimeMillis();
     }
 
     public long getProjectId() {

@@ -4,8 +4,6 @@ import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 
-import java.util.Calendar;
-
 /**
  * Created by n.thanh on 11/25/2016.
  */
@@ -33,7 +31,7 @@ public class Cost implements ItemWithId{
 
     @Ignore
     public Cost(long date, long amount, CostType type, long projectId) {
-        this.id = Calendar.getInstance().getTimeInMillis();
+        this.id = System.currentTimeMillis();
         this.date = date;
         this.amount = amount;
         this.type = type;

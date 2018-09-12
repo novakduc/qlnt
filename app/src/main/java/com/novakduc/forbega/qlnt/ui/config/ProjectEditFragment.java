@@ -44,9 +44,9 @@ import com.novakduc.forbega.qlnt.ui.config.unitprice.UnitPriceConfigFragmentView
 import com.novakduc.forbega.qlnt.ui.config.unitprice.UnitPriceConfigViewModelFactory;
 import com.novakduc.forbega.qlnt.utilities.ConverterUtilities;
 import com.novakduc.forbega.qlnt.utilities.CurrencyUnit;
+import com.novakduc.forbega.qlnt.utilities.DatePickerFragment;
 import com.novakduc.forbega.qlnt.utilities.InjectorUtils;
 
-import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -590,8 +590,11 @@ public class ProjectEditFragment extends android.support.v4.app.Fragment
         //RESULT FROM DATE PICKER
         if (requestCode == DatePickerFragment.START_DATE_PICKED) {
             if (resultCode != AppCompatActivity.RESULT_OK) return;
-            Calendar tmpCalendar = (Calendar) data.getSerializableExtra(DatePickerFragment.PICKED_DATE);
-            mTempProject.setStartDate(tmpCalendar.getTimeInMillis());
+            long pickDate = data.getLongExtra(DatePickerFragment.PICKED_DATE, -1);
+            if (pickDate == -1) {
+                return;
+            }
+            mTempProject.setStartDate(pickDate);
             mEditTextStartDate.setText(ConverterUtilities.calendarToString(mTempProject.getStartDate()));
             TypedArray themeArray = getActivity().getTheme().obtainStyledAttributes(
                     new int[]{android.R.attr.editTextColor});

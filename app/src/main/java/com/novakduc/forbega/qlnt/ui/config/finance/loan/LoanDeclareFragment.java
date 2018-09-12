@@ -26,11 +26,9 @@ import android.widget.EditText;
 import com.novakduc.baselibrary.NumbericTextWatcher;
 import com.novakduc.forbega.qlnt.R;
 import com.novakduc.forbega.qlnt.data.database.Loan;
-import com.novakduc.forbega.qlnt.ui.config.DatePickerFragment;
 import com.novakduc.forbega.qlnt.utilities.ConverterUtilities;
+import com.novakduc.forbega.qlnt.utilities.DatePickerFragment;
 import com.novakduc.forbega.qlnt.utilities.InjectorUtils;
-
-import java.util.Calendar;
 
 /**
  * Created by n.thanh on 10/21/2016.
@@ -299,9 +297,12 @@ public class LoanDeclareFragment extends android.support.v4.app.Fragment {
         //RESULT FROM DATE PICKER
         if (requestCode == DatePickerFragment.START_DATE_PICKED) {
             if (resultCode != AppCompatActivity.RESULT_OK) return;
-            Calendar tmpCalendar = (Calendar) data.getSerializableExtra(DatePickerFragment.PICKED_DATE);
-            mLoanDate = tmpCalendar.getTimeInMillis();
-            mEdtLoanDate.setText(ConverterUtilities.calendarToString(tmpCalendar.getTimeInMillis()));
+            long pickDate = data.getLongExtra(DatePickerFragment.PICKED_DATE, -1);
+            if (pickDate == -1) {
+                return;
+            }
+            mLoanDate = pickDate;
+            mEdtLoanDate.setText(ConverterUtilities.calendarToString(mLoanDate));
             TypedArray themeArray = getActivity().getTheme().obtainStyledAttributes(
                     new int[]{android.R.attr.editTextColor});
             try {

@@ -26,10 +26,10 @@ import android.widget.EditText;
 
 import com.novakduc.forbega.qlnt.R;
 import com.novakduc.forbega.qlnt.data.database.Project;
-import com.novakduc.forbega.qlnt.ui.config.DatePickerFragment;
 import com.novakduc.forbega.qlnt.ui.config.UpdateListener;
 import com.novakduc.forbega.qlnt.ui.config.finance.ProjectFinanceConfigFragment;
 import com.novakduc.forbega.qlnt.utilities.ConverterUtilities;
+import com.novakduc.forbega.qlnt.utilities.DatePickerFragment;
 import com.novakduc.forbega.qlnt.utilities.InjectorUtils;
 
 import java.util.Calendar;
@@ -181,8 +181,7 @@ public class ProjectBaseConfigFragment extends android.support.v4.app.Fragment {
             }
         });
         mEditTextStartDate = view.findViewById(R.id.editTextStartDate);
-        Calendar tmp = Calendar.getInstance();
-        mStartDate = tmp.getTimeInMillis();
+        mStartDate = System.currentTimeMillis();
         mEditTextStartDate.setText(ConverterUtilities.calendarToString(mStartDate));
         mEditTextStartDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -246,8 +245,11 @@ public class ProjectBaseConfigFragment extends android.support.v4.app.Fragment {
         //RESULT FROM DATE PICKER
         if (requestCode == DatePickerFragment.START_DATE_PICKED) {
             if (resultCode != AppCompatActivity.RESULT_OK) return;
-            Calendar tmpCalendar = (Calendar) data.getSerializableExtra(DatePickerFragment.PICKED_DATE);
-            mStartDate = tmpCalendar.getTimeInMillis();
+            long pickDate = data.getLongExtra(DatePickerFragment.PICKED_DATE, -1);
+            if (pickDate == -1) {
+                return;
+            }
+            mStartDate = pickDate;
             mEditTextStartDate.setText(ConverterUtilities.calendarToString(mStartDate));
             TypedArray themeArray = getActivity().getTheme().obtainStyledAttributes(
                     new int[]{android.R.attr.editTextColor});
@@ -261,7 +263,8 @@ public class ProjectBaseConfigFragment extends android.support.v4.app.Fragment {
                 themeArray.recycle();
             }
             if (mDuration > 0 && mDuration <= 100) {
-                Calendar endDate = (Calendar) tmpCalendar.clone();
+                Calendar endDate = Calendar.getInstance();
+                endDate.setTimeInMillis(pickDate);
                 endDate.add(Calendar.YEAR, mDuration);
                 mEditTextEndDate.setText(ConverterUtilities.calendarToString(endDate.getTimeInMillis()));
             } else {

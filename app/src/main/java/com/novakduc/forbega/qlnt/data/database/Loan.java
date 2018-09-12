@@ -4,7 +4,6 @@ import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 
-import java.util.Calendar;
 import java.util.Observable;
 
 /**
@@ -36,7 +35,7 @@ public class Loan extends Observable implements Cloneable, ItemWithId {
     private Loan(String name, long projectId) {
         this.name = name;
         this.projectId = projectId;
-        this.loanDate = Calendar.getInstance().getTimeInMillis();
+        this.loanDate = System.currentTimeMillis();
     }
 
     public static Loan getInstance(String bankName, long projectId) {

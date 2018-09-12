@@ -1,4 +1,4 @@
-package com.novakduc.forbega.qlnt.ui.config;
+package com.novakduc.forbega.qlnt.utilities;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -39,7 +39,7 @@ public class DatePickerFragment extends android.support.v4.app.DialogFragment
         setDate.set(Calendar.DAY_OF_MONTH, dateOfMonth);
 
         Intent intent = new Intent();
-        intent.putExtra(PICKED_DATE, setDate);
+        intent.putExtra(PICKED_DATE, setDate.getTimeInMillis());
 
         getTargetFragment().onActivityResult(START_DATE_PICKED, AppCompatActivity.RESULT_OK, intent);
     }
