@@ -3,12 +3,10 @@ package com.novakduc.forbega.qlnt.ui.detail.room.checkin.add_guest;
 import android.os.Bundle;
 
 import com.novakduc.baselibrary.SimpleFragmentActivity;
-import com.novakduc.forbega.qlnt.R;
 import com.novakduc.forbega.qlnt.ui.ConfirmationDialogFragment;
-import com.novakduc.forbega.qlnt.ui.config.finance.loan.LoanDeclareFragmentListener;
 
 public class AddGuestActivity extends SimpleFragmentActivity
-        implements ConfirmationDialogFragment.ConfirmListener, LoanDeclareFragmentListener {
+        implements ConfirmationDialogFragment.ConfirmListener, AddGuestActivityListener {
 
     @Override
     protected android.support.v4.app.Fragment createFragment() {
@@ -35,13 +33,7 @@ public class AddGuestActivity extends SimpleFragmentActivity
     }
 
     @Override
-    public void discardConfirm() {
-        Bundle bundle = new Bundle();
-        //dialog title in bundle
-        bundle.putString(ConfirmationDialogFragment.MESSAGE,
-                getResources().getString(R.string.loanDiscardConfirm));
-        android.support.v4.app.DialogFragment dialogFragment = new ConfirmationDialogFragment();
-        dialogFragment.setArguments(bundle);
-        dialogFragment.show(getSupportFragmentManager(), "discardConfirm");
+    public void discardConfirmation(int messageId) {
+        ConfirmationDialogFragment.showDialog(getString(messageId), getSupportFragmentManager());
     }
 }

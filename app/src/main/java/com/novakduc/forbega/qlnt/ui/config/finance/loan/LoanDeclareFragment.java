@@ -326,7 +326,7 @@ public class LoanDeclareFragment extends android.support.v4.app.Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
-            mCallBack.discardConfirm();
+            mCallBack.discardConfirmation(R.string.loanDiscardConfirm);
         }
         return super.onOptionsItemSelected(item);
     }

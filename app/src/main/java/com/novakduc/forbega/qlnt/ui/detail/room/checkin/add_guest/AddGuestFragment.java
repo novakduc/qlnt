@@ -21,10 +21,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 
 import com.novakduc.baselibrary.NumbericTextWatcher;
 import com.novakduc.forbega.qlnt.R;
+import com.novakduc.forbega.qlnt.data.database.Guest;
 import com.novakduc.forbega.qlnt.data.database.Loan;
 import com.novakduc.forbega.qlnt.ui.config.finance.loan.LoanDeclareFragmentListener;
 import com.novakduc.forbega.qlnt.ui.config.finance.loan.LoanDeclareFragmentViewModel;
@@ -45,17 +47,15 @@ public class AddGuestFragment extends android.support.v4.app.Fragment {
     public static final String TYPE_KEY = "com.novakduc.forbega.qlnt.new_or_edit";
     public static final String PROJECT_ID = "com.novakduc.forbega.qlnt.projectId";
     private static final String LOG_TAG = AddGuestFragment.class.getSimpleName();
-    private String mBankName;
-    private long mAmount = -1;
-    private double mRate = 0;
-    private long mLoanDate;
-    private long mLoanId;
-    private Loan mLoan;
-    private TextInputLayout mLayoutBank, mLayoutAmount, mLayoutRate, mLayoutDate;
-    private EditText mEdtLoanDate;
-    private LoanDeclareFragmentListener mCallBack;
-    private LoanDeclareFragmentViewModel mViewModel;
-    private EditText edtBankName, edtLoanAmount, edtRate;
+    private String mName, mIdPassport, mPhoneNo;
+    private boolean mIsKeyContact;
+    private long mGuestId;
+    private Guest mGuest;
+    private TextInputLayout mLayoutName, mLayoutId, mLayoutPhoneNo;
+    private AddGuestActivityListener mCallBack;
+    private AddGuestFragmentViewModel mViewModel;
+    private EditText edtName, edtIdPassport, edtPhoneNo;
+    private CheckBox mCbKeyContact;
     private Boolean isNew;
 
     public static AddGuestFragment newInstance() {
@@ -63,9 +63,9 @@ public class AddGuestFragment extends android.support.v4.app.Fragment {
         return new AddGuestFragment();
     }
 
-    public static AddGuestFragment newInstance(long loanId) {
+    public static AddGuestFragment newInstance(long pGuestIdId) {
         Bundle bundle = new Bundle();
-        bundle.putLong(LOAN_ID_KEY, loanId);
+        bundle.putLong(GUEST_ID_KEY, pGuestIdId);
         AddGuestFragment fragment = new AddGuestFragment();
         fragment.setArguments(bundle);
         return fragment;
@@ -82,8 +82,8 @@ public class AddGuestFragment extends android.support.v4.app.Fragment {
         isNew = intent.getBooleanExtra(TYPE_KEY, false);
         if (!isNew) {
             //Not create new loan, edit existed loan
-            mLoanId = intent.getLongExtra(LOAN_TO_EDIT, -1);
-            if (mLoanId == -1) {
+            mGuestId = intent.getLongExtra(GUEST_TO_EDIT, -1);
+            if (mGuestId == -1) {
                 isNew = true;
             }
         }
