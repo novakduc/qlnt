@@ -1,10 +1,12 @@
 package com.novakduc.forbega.qlnt.data;
 
 import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.MutableLiveData;
 import android.util.Log;
 
 import com.novakduc.baselibrary.AppExecutors;
 import com.novakduc.forbega.qlnt.data.database.AppDao;
+import com.novakduc.forbega.qlnt.data.database.Guest;
 import com.novakduc.forbega.qlnt.data.database.RoomForRent;
 
 /**
@@ -64,5 +66,18 @@ public class RoomForRentRepo {
                 mAppDao.updateRoomForRent(roomForRent);
             }
         });
+    }
+
+    public LiveData<Guest> createTempGuest() {
+        final MutableLiveData<Guest> guestMutableLiveData = new MutableLiveData<Guest>();
+        mExecutors.diskIO().execute(new Runnable() {
+            @Override
+            public void run() {
+                Guest guest = Guest.getInstance();
+                guest.setId(mAppDao.insert(guest));
+                guestMutableLiveData.postValue(guest);
+            }
+        });
+        return guestMutableLiveData;
     }
 }

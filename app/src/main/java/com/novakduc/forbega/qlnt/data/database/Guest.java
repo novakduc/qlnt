@@ -45,8 +45,7 @@ public class Guest extends Observable implements Cloneable {
         this.checkOutDate = -1;
     }
 
-    public static Guest getInstance(String name, String guestId, String phoneNumber,
-                                    long roomId, long projectId) {
+    public static Guest getInstance(String name, long roomId, long projectId) {
         return new Guest(name, guestId, phoneNumber, roomId, projectId);
     }
 
