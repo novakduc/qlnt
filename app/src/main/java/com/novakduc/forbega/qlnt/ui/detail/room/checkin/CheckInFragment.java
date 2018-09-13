@@ -17,6 +17,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -132,6 +133,53 @@ public class CheckInFragment extends Fragment implements ItemListAdapterActionHa
                 SpinnerItemArrayProvider.calendarDateArrayAdapter(31));
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mBinding.spinnerBillDate.setAdapter(arrayAdapter);
+        mBinding.spinnerBillDate.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> pAdapterView, View pView, int pI, long pL) {
+                mBillDate = pI + 1;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> pAdapterView) {
+
+            }
+        });
+
+        mBinding.electricity.addTextChangedListener(new NumbericTextWatcher(mBinding.electricity) {
+            @Override
+            public void executeAfterTextChanged(String value) {
+                try {
+                    mElectricalInitialIndex = Long.valueOf(value);
+                    if (mElectricalInitialIndex < 0) {
+                        throw new NumberFormatException();
+                    } else {
+                        mBinding.txtLayoutElectricity.setErrorEnabled(false);
+                    }
+                } catch (NumberFormatException pE) {
+                    mBinding.txtLayoutElectricity.setError(getString(R.string.invalid_input_error));
+                    mBinding.txtLayoutElectricity.setErrorEnabled(true);
+                    mElectricalInitialIndex = -1;
+                }
+            }
+        });
+
+        mBinding.water.addTextChangedListener(new NumbericTextWatcher(mBinding.water) {
+            @Override
+            public void executeAfterTextChanged(String value) {
+                try {
+                    mWaterInitialIndex = Long.valueOf(value);
+                    if (mWaterInitialIndex < 0) {
+                        throw new NumberFormatException();
+                    } else {
+                        mBinding.txtLayoutWater.setErrorEnabled(false);
+                    }
+                } catch (NumberFormatException pE) {
+                    mBinding.txtLayoutWater.setError(getString(R.string.invalid_input_error));
+                    mBinding.txtLayoutWater.setErrorEnabled(true);
+                    mWaterInitialIndex = -1;
+                }
+            }
+        });
 
         mBinding.checkBoxInternet.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
