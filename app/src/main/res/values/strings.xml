@@ -145,4 +145,6 @@
     <string name="announce_discard_edit_room">Discard edit room?</string>
     <string name="option_menu_ok">Ok</string>
     <string name="option_menu_close">Close</string>
+    <string name="guestDiscardConfirm">Discard saving guest?</string>
+    <string name="addGuestTitle">Guest information</string>
 </resources>

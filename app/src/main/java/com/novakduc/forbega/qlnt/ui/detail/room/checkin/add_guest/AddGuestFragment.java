@@ -1,18 +1,14 @@
 package com.novakduc.forbega.qlnt.ui.detail.room.checkin.add_guest;
 
-import android.app.Activity;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
-import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -20,19 +16,11 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
-import com.novakduc.baselibrary.NumbericTextWatcher;
 import com.novakduc.forbega.qlnt.R;
 import com.novakduc.forbega.qlnt.data.database.Guest;
-import com.novakduc.forbega.qlnt.data.database.Loan;
-import com.novakduc.forbega.qlnt.ui.config.finance.loan.LoanDeclareFragmentListener;
-import com.novakduc.forbega.qlnt.ui.config.finance.loan.LoanDeclareFragmentViewModel;
-import com.novakduc.forbega.qlnt.ui.config.finance.loan.LoanDeclareViewModelFactory;
-import com.novakduc.forbega.qlnt.utilities.ConverterUtilities;
-import com.novakduc.forbega.qlnt.utilities.DatePickerFragment;
 import com.novakduc.forbega.qlnt.utilities.InjectorUtils;
 
 /**
@@ -45,7 +33,7 @@ public class AddGuestFragment extends android.support.v4.app.Fragment {
     public static final String GUEST_TO_EDIT = "com.novakduc.forbega.qlnt.guest.guestId";
     public static final int NEW_GUEST_FAKE_ID = -1;
     public static final String TYPE_KEY = "com.novakduc.forbega.qlnt.new_or_edit";
-    public static final String PROJECT_ID = "com.novakduc.forbega.qlnt.projectId";
+    public static final String ROOM_ID = "com.novakduc.forbega.qlnt.projectId";
     private static final String LOG_TAG = AddGuestFragment.class.getSimpleName();
     private String mName, mIdPassport, mPhoneNo;
     private boolean mIsKeyContact;
@@ -75,9 +63,9 @@ public class AddGuestFragment extends android.support.v4.app.Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         final Intent intent = getActivity().getIntent();
-        long projectId = intent.getLongExtra(PROJECT_ID, -1);
+        long roomId = intent.getLongExtra(ROOM_ID, -1);
 
-        Log.d(LOG_TAG, "Start create loan for project id: " + projectId);
+        Log.d(LOG_TAG, "Start create loan for project id: " + roomId);
 
         isNew = intent.getBooleanExtra(TYPE_KEY, false);
         if (!isNew) {
@@ -88,30 +76,21 @@ public class AddGuestFragment extends android.support.v4.app.Fragment {
             }
         }
 
-        LoanDeclareViewModelFactory factory =
-                InjectorUtils.provideLoanDeclareViewModelFactory(getActivity(), projectId, isNew);
+        AddGuestViewModelFactory factory =
+                InjectorUtils.provideAddGuestViewModelFactory(getActivity(), roomId, isNew);
 
-        mViewModel = ViewModelProviders.of(this, factory).get(LoanDeclareFragmentViewModel.class);
+        mViewModel = ViewModelProviders.of(this, factory).get(AddGuestFragmentViewModel.class);
 
         setHasOptionsMenu(true);
     }
 
-    private void bindLoanToView(Loan loan) {
-        mLoan = loan;
-        mLoanId = mLoan.getId();
+    private void bindGuestToView(Guest guest) {
+        mGuest = guest;
+        mGuestId = mGuest.getId();
         if (!isNew) {
-            mBankName = mLoan.getName();
-            edtBankName.setText(mBankName);
-
-            mAmount = mLoan.getAmount();
-            edtLoanAmount.setText(String.valueOf(mAmount));
-
-            mRate = mLoan.getInterestRate();
-            edtRate.setText(String.valueOf(mRate));
+            // TODO: 9/13/2018
         }
-        mLoanId = mLoan.getId();
-        mLoanDate = mLoan.getLoanDate();
-        mEdtLoanDate.setText(ConverterUtilities.calendarToString(mLoanDate));
+        // TODO: 9/13/2018  
     }
 
     @Nullable
@@ -119,7 +98,7 @@ public class AddGuestFragment extends android.support.v4.app.Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_loan_declare, container, false);
         Toolbar toolbar = view.findViewById(R.id.toolbar);
-        toolbar.setTitle(R.string.loanDeclareTitle);
+        toolbar.setTitle(R.string.addGuestTitle);
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         activity.setSupportActionBar(toolbar);
 
@@ -130,195 +109,25 @@ public class AddGuestFragment extends android.support.v4.app.Fragment {
         }
         //*/
 
-        mCallBack = (LoanDeclareFragmentListener) getActivity();
-        mLayoutBank = view.findViewById(R.id.txtLayoutBank);
-        mLayoutDate = view.findViewById(R.id.txtLayoutLoanDate);
-        mLayoutRate = view.findViewById(R.id.txtLayoutRate);
-        mLayoutAmount = view.findViewById(R.id.txtLayoutLoanAmount);
-        edtBankName = view.findViewById(R.id.edtInputLoanBank);
-
-        edtBankName.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                if (editable.length() == 0) {
-                    mLayoutBank.setError(getString(R.string.invalidBankName));
-                    mLayoutBank.setErrorEnabled(true);
-                    mBankName = null;
-                } else {
-                    mLayoutBank.setErrorEnabled(false);
-                    mBankName = editable.toString();
-                }
-            }
-        });
-
-        edtLoanAmount = view.findViewById(R.id.edtLoanAmount);
-
-        edtLoanAmount.addTextChangedListener(new NumbericTextWatcher(edtLoanAmount) {
-            @Override
-            public void executeAfterTextChanged(String value) {
-                try {
-                    mAmount = Long.valueOf(value);
-                    if (mAmount <= 0) {
-                        throw new NumberFormatException();
-                    } else {
-                        mLayoutAmount.setErrorEnabled(false);
-                    }
-                } catch (NumberFormatException e) {
-                    mLayoutAmount.setError(getString(R.string.invalidLoanAmount));
-                    mLayoutAmount.setErrorEnabled(true);
-                    mAmount = -1;
-                }
-            }
-        });
-
-        edtRate = view.findViewById(R.id.edtRate);
-
-        edtRate.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                try {
-                    mRate = Double.valueOf(editable.toString());
-                    if (mRate < 0 || mRate > 50) {
-                        throw new NumberFormatException();
-                    } else {
-                        mLayoutRate.setErrorEnabled(false);
-                    }
-                } catch (NumberFormatException e) {
-                    mLayoutRate.setError(getString(R.string.rateInputError));
-                    mLayoutRate.setErrorEnabled(true);
-                }
-            }
-        });
-
-        mEdtLoanDate = view.findViewById(R.id.edtLoanDate);
-
-        mEdtLoanDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showDialog(new DatePickerFragment(), DatePickerFragment.START_DATE_PICKED);
-            }
-        });
-
-        Button btCancel = view.findViewById(R.id.btCancel);
-        btCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getActivity().finish();
-            }
-        });
-        Button btConfirm = view.findViewById(R.id.btConfirm);
-        btConfirm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                boolean error = false;
-                if (mBankName == null) {
-                    mLayoutBank.setError(getString(R.string.invalidName));
-                    mLayoutBank.setErrorEnabled(true);
-                    error = true;
-                }
-                if (mAmount == -1) {
-                    mLayoutAmount.setError(getString(R.string.invalidLoanAmount));
-                    mLayoutAmount.setErrorEnabled(true);
-                    error = true;
-                }
-
-                if (mRate < 0 || mRate > 50) {
-                    mLayoutRate.setError(getString(R.string.rateInputError));
-                    mLayoutRate.setErrorEnabled(true);
-                    error = true;
-                }
-
-                if (error) {
-                    return;
-                }
-
-                //Add loan to project
-                mLoan.setName(mBankName);
-                mLoan.setLoanDate(mLoanDate);
-                mLoan.setInterestRate(mRate);
-                mLoan.setAmount(mAmount);
-
-                Log.d(LOG_TAG, "Create loan with id: " + mLoan.getId() + " in project: " + mLoan.getProjectId());
-
-                mViewModel.updateLoan(mLoan);
-                if (isNew) {
-                    mViewModel.addLoan(mLoan);
-                }
-                //return valid loan
-                Intent returnIntent = new Intent();
-                //returnIntent.putExtra(RETURN_LOAN, mLoan.getId());
-                getActivity().setResult(Activity.RESULT_OK, returnIntent);
-                getActivity().finish();
-            }
-        });
+        mCallBack = (AddGuestActivityListener) getActivity();
 
         if (isNew) {
-            mViewModel.getLoanLiveData().observe(this, new Observer<Loan>() {
+            mViewModel.getGuestLiveData().observe(this, new Observer<Guest>() {
                 @Override
-                public void onChanged(@Nullable Loan loan) {
-                    if (loan != null) {
-                        bindLoanToView(loan);
-                    }
+                public void onChanged(@Nullable Guest pGuest) {
+                    bindGuestToView(pGuest);
                 }
             });
         } else {
-            mViewModel.getLoanLiveData(mLoanId).observe(this, new Observer<Loan>() {
+            mViewModel.getGuestLiveData(mGuestId).observe(this, new Observer<Guest>() {
                 @Override
-                public void onChanged(@Nullable Loan loan) {
-                    if (loan != null) {
-                        bindLoanToView(loan);
-                    }
+                public void onChanged(@Nullable Guest pGuest) {
+                    bindGuestToView(pGuest);
                 }
             });
         }
 
         return view;
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        //RESULT FROM DATE PICKER
-        if (requestCode == DatePickerFragment.START_DATE_PICKED) {
-            if (resultCode != AppCompatActivity.RESULT_OK) return;
-            long pickDate = data.getLongExtra(DatePickerFragment.PICKED_DATE, -1);
-            if (pickDate == -1) {
-                return;
-            }
-            mLoanDate = pickDate;
-            mEdtLoanDate.setText(ConverterUtilities.calendarToString(mLoanDate));
-            TypedArray themeArray = getActivity().getTheme().obtainStyledAttributes(
-                    new int[]{android.R.attr.editTextColor});
-            try {
-                int index = 0;
-                int defaultColourValue = 0;
-                int editTextColour = themeArray.getColor(index, defaultColourValue);
-                mEdtLoanDate.setTextColor(editTextColour);
-            } finally {
-                // Calling recycle() is important. Especially if you use alot of TypedArrays
-                themeArray.recycle();
-            }
-        }
-        super.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override
@@ -329,7 +138,7 @@ public class AddGuestFragment extends android.support.v4.app.Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
-            mCallBack.discardConfirm();
+            mCallBack.discardConfirmation(R.string.guestDiscardConfirm);
         }
         return super.onOptionsItemSelected(item);
     }

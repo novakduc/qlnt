@@ -35,6 +35,7 @@ import com.novakduc.forbega.qlnt.ui.detail.report.ReportViewModelFactory;
 import com.novakduc.forbega.qlnt.ui.detail.room.RoomListViewModelFactory;
 import com.novakduc.forbega.qlnt.ui.detail.room.add_room.AddRoomViewModelFactory;
 import com.novakduc.forbega.qlnt.ui.detail.room.checkin.CheckInViewModelFactory;
+import com.novakduc.forbega.qlnt.ui.detail.room.checkin.add_guest.AddGuestViewModelFactory;
 import com.novakduc.forbega.qlnt.ui.detail.room.edit_room.EditRoomViewModelFactory;
 import com.novakduc.forbega.qlnt.ui.list.ProjectListViewModelFactory;
 
@@ -147,5 +148,10 @@ public class InjectorUtils {
     public static CheckInViewModelFactory provideCheckInViewModelFactory(Context pContext, long pRoomId) {
         RoomForRentRepo roomForRentRepo = provideRoomForRentRepo(pContext, pRoomId);
         return new CheckInViewModelFactory(roomForRentRepo);
+    }
+
+    public static AddGuestViewModelFactory provideAddGuestViewModelFactory(Context pContext, long pRoomId, Boolean pIsNew) {
+        RoomForRentRepo roomForRentRepo = provideRoomForRentRepo(pContext, pRoomId);
+        return new AddGuestViewModelFactory(roomForRentRepo, pIsNew);
     }
 }

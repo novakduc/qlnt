@@ -3,7 +3,8 @@ package com.novakduc.forbega.qlnt.ui.detail.room.checkin.add_guest;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModel;
 
-import com.novakduc.forbega.qlnt.data.ProjectRepo;
+import com.novakduc.forbega.qlnt.data.RoomForRentRepo;
+import com.novakduc.forbega.qlnt.data.database.Guest;
 import com.novakduc.forbega.qlnt.data.database.Loan;
 
 /**
@@ -11,40 +12,39 @@ import com.novakduc.forbega.qlnt.data.database.Loan;
  */
 
 public class AddGuestFragmentViewModel extends ViewModel {
-    private ProjectRepo mProjectRepo;
-    private LiveData<Loan> mLoanLiveData;
+    private RoomForRentRepo mRoomRepo;
+    private LiveData<Guest> mGuestLiveData;
     private boolean isNew;
 
-    public AddGuestFragmentViewModel(ProjectRepo projectRepo, boolean isNew) {
-        mProjectRepo = projectRepo;
-        //mLoanLiveData = mProjectRepo.createTempLoan();
+    public AddGuestFragmentViewModel(RoomForRentRepo pRoomRepo, boolean isNew) {
+        mRoomRepo = pRoomRepo;
         this.isNew = isNew;
     }
 
-    public LiveData<Loan> getLoanLiveData() {
-        mLoanLiveData = mProjectRepo.createTempLoan();
-        return mLoanLiveData;
+    public LiveData<Guest> getGuestLiveData() {
+        mGuestLiveData = mRoomRepo.createTempGuest();
+        return mGuestLiveData;
     }
 
-    public LiveData<Loan> getLoanLiveData(long loanId) {
-        mLoanLiveData = mProjectRepo.getLoan(loanId);
-        return mLoanLiveData;
+    public LiveData<Guest> getGuestLiveData(long guestId) {
+        mGuestLiveData = mRoomRepo.getGuest(guestId);
+        return mGuestLiveData;
     }
 
-    public void updateLoan(Loan loan) {
-        mProjectRepo.updateLoan(loan);
+    public void updateGuest(Guest guest) {
+        mRoomRepo.updateGuest(guest);
         isNew = false;
     }
 
     @Override
     protected void onCleared() {
         if (isNew) {
-            mProjectRepo.cleanLoanData();
+            mRoomRepo.cleanGuestData();
         }
         super.onCleared();
     }
 
-    public void addLoan(Loan loan) {
-        mProjectRepo.addLoan(loan);
+    public void addGuest(Loan guest) {
+        mRoomRepo.addGuest(guest);
     }
 }
