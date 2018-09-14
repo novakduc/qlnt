@@ -154,8 +154,8 @@ public interface AppDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     long insert(RoomForRent tmpRoomForRent);
 
-    @Query("SELECT name, phoneNumber, roomId FROM guest WHERE projectId = :projectId")
-    LiveData<List<GuestForRoomItemView>> getAllKeyContact(long projectId);
+    @Query("SELECT name, phoneNumber, roomId FROM guest WHERE keyContact > 0")
+    LiveData<List<GuestForRoomItemView>> getAllKeyContact();
 
     @Query("SELECT * FROM guest WHERE roomId = :roomId")
     List<Guest> getGuestsByRoom(long roomId);

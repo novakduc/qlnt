@@ -16,13 +16,13 @@ public class Guest extends Observable implements Cloneable {
     private String name;
     private String phoneNumber;
     private String guestId;
-    private boolean keyContact;
+    private int keyContact;
     private long roomId;
     private long checkOutDate;
 
     //For Room only
     public Guest(long id, String name, String phoneNumber, String guestId,
-                 Boolean keyContact, long roomId, long checkOutDate) {
+                 int keyContact, long roomId, long checkOutDate) {
         this.id = id;
         this.name = name;
         this.phoneNumber = phoneNumber;
@@ -100,11 +100,15 @@ public class Guest extends Observable implements Cloneable {
     }
 
     public boolean isKeyContact() {
+        return keyContact != 0;
+    }
+
+    public int getKeyContact() {
         return keyContact;
     }
 
     public void setKeyContact(boolean keyContact) {
-        this.keyContact = keyContact;
+        this.keyContact = keyContact ? 1 : 0;
     }
 
 }

@@ -174,7 +174,7 @@ public class ProjectRepo {
     }
 
     public LiveData<List<GuestForRoomItemView>> getAllKeyContact() {
-        return mAppDao.getAllKeyContact(mProjectId);
+        return mAppDao.getAllKeyContact();
     }
 
     public void deleteRoom(final long roomId) {
