@@ -18,42 +18,36 @@ public class Guest extends Observable implements Cloneable {
     private String guestId;
     private boolean keyContact;
     private long roomId;
-    private long projectId;
     private long checkOutDate;
 
     //For Room only
     public Guest(long id, String name, String phoneNumber, String guestId,
-                 Boolean keyContact, long roomId, long projectId, long checkOutDate) {
+                 Boolean keyContact, long roomId, long checkOutDate) {
         this.id = id;
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.guestId = guestId;
         this.keyContact = keyContact;
         this.roomId = roomId;
-        this.projectId = projectId;
         this.checkOutDate = checkOutDate;
     }
 
     @Ignore
-    private Guest(String name, String guestId, String phoneNumber, long roomId, long projectId) {
-        this.name = name;
-        this.phoneNumber = phoneNumber;
-        this.guestId = guestId;
-        this.keyContact = false;
-        this.roomId = roomId;
-        this.projectId = projectId;
+    public Guest(String pName, long pRoomId) {
+        name = pName;
+        roomId = pRoomId;
         this.checkOutDate = -1;
     }
 
-    public static Guest getInstance(String name, long roomId, long projectId) {
-        return new Guest(name, guestId, phoneNumber, roomId, projectId);
+    public static Guest getInstance(String name, long roomId) {
+        return new Guest(name, roomId);
     }
 
     public long getId() {
         return id;
     }
 
-    private void setId(long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -113,7 +107,4 @@ public class Guest extends Observable implements Cloneable {
         this.keyContact = keyContact;
     }
 
-    public long getProjectId() {
-        return projectId;
-    }
 }

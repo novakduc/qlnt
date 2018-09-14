@@ -7,7 +7,10 @@ import android.util.Log;
 import com.novakduc.baselibrary.AppExecutors;
 import com.novakduc.forbega.qlnt.data.database.AppDao;
 import com.novakduc.forbega.qlnt.data.database.Guest;
+import com.novakduc.forbega.qlnt.data.database.Loan;
 import com.novakduc.forbega.qlnt.data.database.RoomForRent;
+
+import java.util.List;
 
 /**
  * Created by Novak on 1/14/2018.
@@ -73,11 +76,48 @@ public class RoomForRentRepo {
         mExecutors.diskIO().execute(new Runnable() {
             @Override
             public void run() {
-                Guest guest = Guest.getInstance();
+                Guest guest = Guest.getInstance("", mRoomId);
                 guest.setId(mAppDao.insert(guest));
                 guestMutableLiveData.postValue(guest);
             }
         });
         return guestMutableLiveData;
+    }
+
+    public LiveData<Guest> getGuest(long pGuestId) {
+        return mAppDao.getLiveDataGuestById(pGuestId);
+    }
+
+    public void updateGuest(final Guest pGuest) {
+        mExecutors.diskIO().execute(new Runnable() {
+            @Override
+            public void run() {
+                mAppDao.updateGuest(pGuest);
+            }
+        });
+    }
+
+    public void cleanGuestData() {
+        mExecutors.diskIO().execute(new Runnable() {
+            @Override
+            public void run() {
+                List<Guest> guests = mAppDao.getInvalidGuests();
+                if (guests != null) {
+                    for (Guest l :
+                            guests) {
+                        mAppDao.removeGuest(l);
+                    }
+                }
+            }
+        });
+    }
+
+    public void addGuest(final Loan pGuest) {
+        mExecutors.diskIO().execute(new Runnable() {
+            @Override
+            public void run() {
+                mAppDao.insert(pGuest);
+            }
+        });
     }
 }

@@ -180,4 +180,17 @@ public interface AppDao {
 
     @Query("SELECT name FROM project WHERE projectId = :pProjectId")
     LiveData<ProjectNameQuery> getProjectName(long pProjectId);
+
+    //Insert a guest to database
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    long insert(Guest guest);
+
+    @Query("SELECT * FROM guest WHERE id = :pGuestId")
+    LiveData<Guest> getLiveDataGuestById(long pGuestId);
+
+    @Update
+    void updateGuest(Guest pGuest);
+
+    @Query("SELECT * FROM guest WHERE name = NULL")
+    List<Guest> getInvalidGuests();
 }
