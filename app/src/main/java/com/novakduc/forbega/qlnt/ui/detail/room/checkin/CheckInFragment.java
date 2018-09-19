@@ -322,10 +322,15 @@ public class CheckInFragment extends Fragment implements ItemListAdapterActionHa
         mIsValidCheckInInfo = mIsValidCheckInInfo && electricalIndexCondition; //need to input init electrical index
         mIsValidCheckInInfo = mIsValidCheckInInfo && waterIndexCondition;  //need to input init water index
         mIsValidCheckInInfo = mIsValidCheckInInfo && guestCondition; //at least 1 guest
+
         if (mIsValidCheckInInfo) {
             // TODO: 9/19/2018 checkin action
             //check in activity
-
+            mRoomForRent.setCharge(mRoomCharge);
+            mRoomForRent.setDepositAmount(mDepositAmount);
+            mRoomForRent.setBillDate(mBillDate);
+            mRoomForRent.setCheckInDate(mCheckInDate);
+            mViewModel.updateRoom(mRoomForRent);
         }
     }
 }
