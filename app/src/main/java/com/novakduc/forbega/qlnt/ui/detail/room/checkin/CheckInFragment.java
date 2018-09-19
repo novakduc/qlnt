@@ -24,6 +24,7 @@ import android.widget.EditText;
 
 import com.novakduc.baselibrary.NumbericTextWatcher;
 import com.novakduc.forbega.qlnt.R;
+import com.novakduc.forbega.qlnt.data.database.Guest;
 import com.novakduc.forbega.qlnt.data.database.RoomForRent;
 import com.novakduc.forbega.qlnt.databinding.FragmentCheckinBinding;
 import com.novakduc.forbega.qlnt.utilities.ConverterUtilities;
@@ -31,6 +32,8 @@ import com.novakduc.forbega.qlnt.utilities.DatePickerFragment;
 import com.novakduc.forbega.qlnt.utilities.InjectorUtils;
 import com.novakduc.forbega.qlnt.utilities.ItemListAdapterActionHandler;
 import com.novakduc.forbega.qlnt.utilities.SpinnerItemArrayProvider;
+
+import java.util.ArrayList;
 
 public class CheckInFragment extends Fragment implements ItemListAdapterActionHandler {
     public static final String ACTIVE_PROJECT_ID = "active_project_id";
@@ -46,12 +49,16 @@ public class CheckInFragment extends Fragment implements ItemListAdapterActionHa
     private long mDepositAmount = -1;
     private int mBillDate;
     private long mElectricalInitialIndex, mWaterInitialIndex;
-    private boolean mIsUsingTV, mIsUsingInternet;
+    private boolean mIsUsingTV, mIsUsingInternet, mIsValidCheckInInfo;
+    private ArrayList<Guest> mGuestArrayList;
 
     @Override
+
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mRoomId = getArguments().getLong(ROOM_ID);
+
+        mIsValidCheckInInfo = false;
 
         CheckInViewModelFactory factory =
                 InjectorUtils.provideCheckInViewModelFactory(getActivity(), mRoomId);
@@ -80,6 +87,11 @@ public class CheckInFragment extends Fragment implements ItemListAdapterActionHa
             actionBar.setHomeAsUpIndicator(R.drawable.ic_navigate_before);
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
+
+        mBinding.txtLayoutRoomCharge.setError(getString(R.string.invalid_input_error));
+        mBinding.txtLayoutDeposit.setError(getString(R.string.invalid_input_error));
+        mBinding.txtLayoutElectricity.setError(getString(R.string.invalid_input_error));
+        mBinding.txtLayoutWater.setError(getString(R.string.invalid_input_error));
 
         mCheckInDate = System.currentTimeMillis();
 
@@ -156,7 +168,6 @@ public class CheckInFragment extends Fragment implements ItemListAdapterActionHa
                         mBinding.txtLayoutElectricity.setErrorEnabled(false);
                     }
                 } catch (NumberFormatException pE) {
-                    mBinding.txtLayoutElectricity.setError(getString(R.string.invalid_input_error));
                     mBinding.txtLayoutElectricity.setErrorEnabled(true);
                     mElectricalInitialIndex = -1;
                 }
@@ -174,7 +185,6 @@ public class CheckInFragment extends Fragment implements ItemListAdapterActionHa
                         mBinding.txtLayoutWater.setErrorEnabled(false);
                     }
                 } catch (NumberFormatException pE) {
-                    mBinding.txtLayoutWater.setError(getString(R.string.invalid_input_error));
                     mBinding.txtLayoutWater.setErrorEnabled(true);
                     mWaterInitialIndex = -1;
                 }
@@ -290,5 +300,32 @@ public class CheckInFragment extends Fragment implements ItemListAdapterActionHa
         if (item.getItemId() == android.R.id.home)
             mCallBack.discardConfirmation(R.string.announce_discard_checkIn);
         return super.onOptionsItemSelected(item);
+    }
+
+    private void checkIn() {
+        boolean roomChargeCondition, depositCondition, electricalIndexCondition, waterIndexCondition,
+                guestCondition;
+
+        roomChargeCondition = mRoomCharge > 0;
+        depositCondition = mDepositAmount > 0;
+        electricalIndexCondition = mElectricalInitialIndex >= 0;
+        waterIndexCondition = mWaterInitialIndex >= 0;
+        guestCondition = !mGuestArrayList.isEmpty();
+
+        mBinding.txtLayoutRoomCharge.setErrorEnabled(!roomChargeCondition);
+        mBinding.txtLayoutDeposit.setErrorEnabled(!depositCondition);
+        mBinding.txtLayoutElectricity.setErrorEnabled(!electricalIndexCondition);
+        mBinding.txtLayoutWater.setErrorEnabled(!waterIndexCondition);
+
+        mIsValidCheckInInfo = roomChargeCondition;  //need to input room charge
+        mIsValidCheckInInfo = mIsUsingInternet && depositCondition; //need to input deposit amount
+        mIsValidCheckInInfo = mIsValidCheckInInfo && electricalIndexCondition; //need to input init electrical index
+        mIsValidCheckInInfo = mIsValidCheckInInfo && waterIndexCondition;  //need to input init water index
+        mIsValidCheckInInfo = mIsValidCheckInInfo && guestCondition; //at least 1 guest
+        if (mIsValidCheckInInfo) {
+            // TODO: 9/19/2018 checkin action
+            //check in activity
+
+        }
     }
 }
