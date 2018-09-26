@@ -49,6 +49,10 @@
             android:name=".ui.detail.room.checkin.CheckInActivity"
             android:label="@string/checkIn_room_title"
             android:theme="@style/AppTheme.NoActionBarNotTransparent" />
+        <activity
+            android:name=".ui.detail.room.checkin.add_guest.AddGuestActivity"
+            android:label="@string/add_guest_title"
+            android:theme="@style/AppTheme.NoActionBarNotTransparent" />
     </application>
 
 </manifest>

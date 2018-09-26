@@ -147,4 +147,6 @@
     <string name="option_menu_close">Close</string>
     <string name="guestDiscardConfirm">Discard saving guest?</string>
     <string name="addGuestTitle">Guest information</string>
+    <string name="roomIdError">Room ID error</string>
+    <string name="add_guest_title">Guest Information</string>
 </resources>

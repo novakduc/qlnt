@@ -11,6 +11,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -26,7 +27,10 @@ import com.novakduc.baselibrary.NumbericTextWatcher;
 import com.novakduc.forbega.qlnt.R;
 import com.novakduc.forbega.qlnt.data.database.Guest;
 import com.novakduc.forbega.qlnt.data.database.RoomForRent;
+import com.novakduc.forbega.qlnt.data.database.RoomStatus;
 import com.novakduc.forbega.qlnt.databinding.FragmentCheckinBinding;
+import com.novakduc.forbega.qlnt.ui.detail.room.checkin.add_guest.AddGuestActivity;
+import com.novakduc.forbega.qlnt.ui.detail.room.checkin.add_guest.AddGuestFragment;
 import com.novakduc.forbega.qlnt.utilities.ConverterUtilities;
 import com.novakduc.forbega.qlnt.utilities.DatePickerFragment;
 import com.novakduc.forbega.qlnt.utilities.InjectorUtils;
@@ -88,11 +92,6 @@ public class CheckInFragment extends Fragment implements ItemListAdapterActionHa
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-        mBinding.txtLayoutRoomCharge.setError(getString(R.string.invalid_input_error));
-        mBinding.txtLayoutDeposit.setError(getString(R.string.invalid_input_error));
-        mBinding.txtLayoutElectricity.setError(getString(R.string.invalid_input_error));
-        mBinding.txtLayoutWater.setError(getString(R.string.invalid_input_error));
-
         mCheckInDate = System.currentTimeMillis();
 
         EditText roomChargeEditText = mBinding.roomCharge;
@@ -111,6 +110,7 @@ public class CheckInFragment extends Fragment implements ItemListAdapterActionHa
                     mBinding.txtLayoutRoomCharge.setErrorEnabled(true);
                     mRoomCharge = -1;
                 }
+                Log.d(LOG_TAG, value + ": " + String.valueOf(mRoomCharge));
             }
         });
 
@@ -168,9 +168,11 @@ public class CheckInFragment extends Fragment implements ItemListAdapterActionHa
                         mBinding.txtLayoutElectricity.setErrorEnabled(false);
                     }
                 } catch (NumberFormatException pE) {
+                    mBinding.txtLayoutElectricity.setError(getString(R.string.invalid_input_error));
                     mBinding.txtLayoutElectricity.setErrorEnabled(true);
                     mElectricalInitialIndex = -1;
                 }
+                Log.d(LOG_TAG, value + ": " + String.valueOf(mElectricalInitialIndex));
             }
         });
 
@@ -185,9 +187,11 @@ public class CheckInFragment extends Fragment implements ItemListAdapterActionHa
                         mBinding.txtLayoutWater.setErrorEnabled(false);
                     }
                 } catch (NumberFormatException pE) {
+                    mBinding.txtLayoutWater.setError(getString(R.string.invalid_input_error));
                     mBinding.txtLayoutWater.setErrorEnabled(true);
                     mWaterInitialIndex = -1;
                 }
+                Log.d(LOG_TAG, value + ": " + String.valueOf(mWaterInitialIndex));
             }
         });
 
@@ -202,6 +206,15 @@ public class CheckInFragment extends Fragment implements ItemListAdapterActionHa
             @Override
             public void onCheckedChanged(CompoundButton pCompoundButton, boolean pB) {
                 mIsUsingTV = pB;
+            }
+        });
+
+        mBinding.btAddGuest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View pView) {
+                Intent intent = new Intent(getActivity(), AddGuestActivity.class);
+                intent.putExtra(AddGuestFragment.ROOM_ID, mRoomId);
+                startActivity(intent);
             }
         });
 
@@ -312,6 +325,11 @@ public class CheckInFragment extends Fragment implements ItemListAdapterActionHa
         waterIndexCondition = mWaterInitialIndex >= 0;
         guestCondition = !mGuestArrayList.isEmpty();
 
+        mBinding.txtLayoutRoomCharge.setError(getString(R.string.invalid_input_error));
+        mBinding.txtLayoutDeposit.setError(getString(R.string.invalid_input_error));
+        mBinding.txtLayoutElectricity.setError(getString(R.string.invalid_input_error));
+        mBinding.txtLayoutWater.setError(getString(R.string.invalid_input_error));
+
         mBinding.txtLayoutRoomCharge.setErrorEnabled(!roomChargeCondition);
         mBinding.txtLayoutDeposit.setErrorEnabled(!depositCondition);
         mBinding.txtLayoutElectricity.setErrorEnabled(!electricalIndexCondition);
@@ -330,6 +348,7 @@ public class CheckInFragment extends Fragment implements ItemListAdapterActionHa
             mRoomForRent.setDepositAmount(mDepositAmount);
             mRoomForRent.setBillDate(mBillDate);
             mRoomForRent.setCheckInDate(mCheckInDate);
+            mRoomForRent.setStatus(RoomStatus.NORMAL);
             mViewModel.updateRoom(mRoomForRent);
         }
     }

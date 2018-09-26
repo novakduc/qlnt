@@ -20,17 +20,17 @@
             android:layout_weight="5"
             android:background="@color/windowBackgroundColor"
             android:clipToPadding="false"
-            android:paddingBottom="@dimen/paddingBottom"
-            android:paddingEnd="@dimen/paddingEnd"
             android:paddingStart="@dimen/paddingStart"
             android:paddingTop="@dimen/paddingTop"
+            android:paddingEnd="@dimen/paddingEnd"
+            android:paddingBottom="@dimen/paddingBottom"
             app:layout_constraintEnd_toStartOf="@id/guideline20"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/appbarSection">
 
             <android.support.design.widget.TextInputEditText
-                style="@style/Base.TextAppearance.AppCompat.Body1"
                 android:id="@+id/roomCharge"
+                style="@style/Base.TextAppearance.AppCompat.Body1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:elevation="8dp"
@@ -46,17 +46,17 @@
             android:layout_weight="5"
             android:background="@color/windowBackgroundColor"
             android:clipToPadding="false"
-            android:paddingBottom="@dimen/paddingBottom"
-            android:paddingEnd="@dimen/paddingEnd"
             android:paddingStart="@dimen/paddingStart"
             android:paddingTop="@dimen/paddingTop"
+            android:paddingEnd="@dimen/paddingEnd"
+            android:paddingBottom="@dimen/paddingBottom"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline20"
             app:layout_constraintTop_toBottomOf="@id/appbarSection">
 
             <android.support.design.widget.TextInputEditText
-                style="@style/Base.TextAppearance.AppCompat.Body1"
                 android:id="@+id/depositAmount"
+                style="@style/Base.TextAppearance.AppCompat.Body1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:elevation="8dp"
@@ -64,19 +64,25 @@
                 android:inputType="number" />
         </android.support.design.widget.TextInputLayout>
 
+        <android.support.constraint.Barrier
+            android:id="@+id/barrier2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="txtLayoutRoomCharge, txtLayoutDeposit"/>
+
         <android.support.design.widget.TextInputLayout
             android:id="@+id/txtLayoutStartDate"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/layout_marginEnd"
-            android:layout_marginTop="@dimen/layout_marginTop"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/guideline20"
-            app:layout_constraintTop_toBottomOf="@id/txtLayoutDeposit">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/barrier2">
 
             <android.support.design.widget.TextInputEditText
-                style="@style/Base.TextAppearance.AppCompat.Body1"
                 android:id="@+id/editTextStartDate"
+                style="@style/Base.TextAppearance.AppCompat.Body1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -87,14 +93,14 @@
         </android.support.design.widget.TextInputLayout>
 
         <TextView
-            style="@style/TextAppearance.AppCompat.Body1"
             android:id="@+id/billDateTitle"
+            style="@style/TextAppearance.AppCompat.Body1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginBottom="8dp"
-            android:layout_marginTop="8dp"
             android:layout_marginStart="@dimen/marginNarrow"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:paddingStart="@dimen/paddingStart"
             android:text="@string/billDate"
             app:layout_constraintBottom_toBottomOf="@+id/txtLayoutStartDate"
@@ -102,89 +108,98 @@
             app:layout_constraintTop_toTopOf="@+id/txtLayoutStartDate" />
 
         <Spinner
-            style="@style/TextAppearance.AppCompat.Body1"
             android:id="@+id/spinnerBillDate"
+            style="@style/TextAppearance.AppCompat.Body1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
             android:prompt="@string/billDate"
+            android:text="@string/billDate"
             app:layout_constraintBottom_toBottomOf="@+id/billDateTitle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/billDateTitle"
             app:layout_constraintTop_toTopOf="@+id/billDateTitle" />
 
 
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/txtLayoutElectricity"
-                android:layout_width="0dp"
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/txtLayoutElectricity"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="@dimen/layout_marginStart"
+            android:layout_marginEnd="4dp"
+            app:layout_constraintEnd_toStartOf="@id/guideline20"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txtLayoutStartDate">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/electricity"
+                style="@style/TextAppearance.AppCompat.Body1"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="4dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="@dimen/layout_marginStart"
-                app:layout_constraintEnd_toStartOf="@id/guideline20"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/txtLayoutStartDate">
+                android:drawableStart="@drawable/ic_power_black_24dp"
+                android:hint="@string/inputElectricInitIndexHint"
+                android:inputType="number"
+                android:maxLength="10" />
+        </android.support.design.widget.TextInputLayout>
 
-                <android.support.design.widget.TextInputEditText
-                    style="@style/TextAppearance.AppCompat.Body1"
-                    android:id="@+id/electricity"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/ic_power_black_24dp"
-                    android:hint="@string/inputElectricInitIndexHint"
-                    android:inputType="number"
-                    android:maxLength="10" />
-            </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/txtLayoutWater"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="@dimen/layout_marginStart"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/guideline20"
+            app:layout_constraintTop_toBottomOf="@id/txtLayoutStartDate">
 
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/txtLayoutWater"
-                android:layout_width="0dp"
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/water"
+                style="@style/TextAppearance.AppCompat.Body1"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="@dimen/layout_marginStart"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/guideline20"
-                app:layout_constraintTop_toBottomOf="@id/txtLayoutStartDate">
+                android:drawableStart="@drawable/ic_local_drink_black_24dp"
+                android:hint="@string/inputWaterInitIndexHint"
+                android:inputType="number"
+                android:maxLength="10" />
+        </android.support.design.widget.TextInputLayout>
 
-                <android.support.design.widget.TextInputEditText
-                    style="@style/TextAppearance.AppCompat.Body1"
-                    android:id="@+id/water"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/ic_local_drink_black_24dp"
-                    android:hint="@string/inputWaterInitIndexHint"
-                    android:inputType="number"
-                    android:maxLength="10" />
-            </android.support.design.widget.TextInputLayout>
+        <android.support.constraint.Barrier
+            android:id="@+id/barrier1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="txtLayoutElectricity, txtLayoutWater"
+            />
 
-            <CheckBox
-                android:id="@+id/checkBoxInternet"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/layout_marginStart"
-                android:layout_marginEnd="@dimen/marginNarrow"
-                android:layout_marginStart="@dimen/layout_marginStart"
-                android:layout_marginTop="@dimen/layout_marginStart"
-                android:text="@string/internet_label"
-                app:layout_constraintEnd_toStartOf="@id/guideline20"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/txtLayoutElectricity" />
+        <CheckBox
+            android:id="@+id/checkBoxInternet"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/layout_marginStart"
+            android:layout_marginTop="@dimen/layout_marginStart"
+            android:layout_marginEnd="@dimen/marginNarrow"
+            android:layout_marginBottom="@dimen/layout_marginStart"
+            android:text="@string/internet_label"
+            app:layout_constraintEnd_toStartOf="@id/guideline20"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/barrier1" />
 
-            <CheckBox
-                android:id="@+id/checkBoxTv"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/layout_marginStart"
-                android:layout_marginEnd="@dimen/layout_marginEnd"
-                android:layout_marginStart="@dimen/marginNarrow"
-                android:layout_marginTop="@dimen/layout_marginStart"
-                android:text="@string/TV_label"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/guideline20"
-                app:layout_constraintTop_toBottomOf="@id/txtLayoutElectricity" />
+        <CheckBox
+            android:id="@+id/checkBoxTv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/marginNarrow"
+            android:layout_marginTop="@dimen/layout_marginStart"
+            android:layout_marginEnd="@dimen/layout_marginEnd"
+            android:layout_marginBottom="@dimen/layout_marginStart"
+            android:text="@string/TV_label"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/guideline20"
+            app:layout_constraintTop_toBottomOf="@id/barrier1" />
 
         <View
             android:id="@+id/divider"
@@ -224,9 +239,9 @@
             android:id="@+id/guestList"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginEnd="@dimen/layout_marginEnd"
             android:layout_marginStart="@dimen/layout_marginStart"
             android:layout_marginTop="@dimen/layout_marginTop"
+            android:layout_marginEnd="@dimen/layout_marginEnd"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

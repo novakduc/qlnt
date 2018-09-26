@@ -33,7 +33,7 @@ public class AddGuestFragment extends android.support.v4.app.Fragment {
     public static final String GUEST_TO_EDIT = "com.novakduc.forbega.qlnt.guest.guestId";
     public static final int NEW_GUEST_FAKE_ID = -1;
     public static final String TYPE_KEY = "com.novakduc.forbega.qlnt.new_or_edit";
-    public static final String ROOM_ID = "com.novakduc.forbega.qlnt.projectId";
+    public static final String ROOM_ID = "com.novakduc.forbega.qlnt.roomId";
     private static final String LOG_TAG = AddGuestFragment.class.getSimpleName();
     private String mName, mIdPassport, mPhoneNo;
     private boolean mIsKeyContact;
@@ -51,9 +51,9 @@ public class AddGuestFragment extends android.support.v4.app.Fragment {
         return new AddGuestFragment();
     }
 
-    public static AddGuestFragment newInstance(long pGuestIdId) {
+    public static AddGuestFragment newInstance(long pGuestId) {
         Bundle bundle = new Bundle();
-        bundle.putLong(GUEST_ID_KEY, pGuestIdId);
+        bundle.putLong(GUEST_ID_KEY, pGuestId);
         AddGuestFragment fragment = new AddGuestFragment();
         fragment.setArguments(bundle);
         return fragment;
@@ -65,7 +65,7 @@ public class AddGuestFragment extends android.support.v4.app.Fragment {
         final Intent intent = getActivity().getIntent();
         long roomId = intent.getLongExtra(ROOM_ID, -1);
 
-        Log.d(LOG_TAG, "Start create loan for project id: " + roomId);
+        Log.d(LOG_TAG, "Start create loan for room id: " + roomId);
 
         isNew = intent.getBooleanExtra(TYPE_KEY, false);
         if (!isNew) {
@@ -96,7 +96,7 @@ public class AddGuestFragment extends android.support.v4.app.Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_loan_declare, container, false);
+        View view = inflater.inflate(R.layout.fragment_guest_detail, container, false);
         Toolbar toolbar = view.findViewById(R.id.toolbar);
         toolbar.setTitle(R.string.addGuestTitle);
         AppCompatActivity activity = (AppCompatActivity) getActivity();

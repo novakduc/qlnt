@@ -2,6 +2,7 @@ package com.novakduc.baselibrary;
 
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.widget.EditText;
 
 import java.text.DecimalFormat;
@@ -14,7 +15,7 @@ import java.text.ParseException;
 public abstract class NumbericTextWatcher implements TextWatcher {
 
     @SuppressWarnings("unused")
-    private static final String TAG = "NumberTextWatcher";
+    private static final String TAG = NumbericTextWatcher.class.getSimpleName();
     private DecimalFormat df;
     private DecimalFormat dfnd;
     private boolean hasFractionalPart;
@@ -56,9 +57,9 @@ public abstract class NumbericTextWatcher implements TextWatcher {
 
             executeAfterTextChanged(v);
         } catch (NumberFormatException nfe) {
-            // do nothing?
+            Log.d(TAG, nfe.toString());
         } catch (ParseException e) {
-            // do nothing?
+            executeAfterTextChanged(null);
         }
         et.addTextChangedListener(this);
     }
