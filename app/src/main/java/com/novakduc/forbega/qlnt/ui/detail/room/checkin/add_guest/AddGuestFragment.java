@@ -10,6 +10,8 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -44,8 +46,6 @@ public class AddGuestFragment extends android.support.v4.app.Fragment {
     private TextInputLayout mLayoutName, mLayoutId, mLayoutPhoneNo;
     private AddGuestActivityListener mCallBack;
     private AddGuestFragmentViewModel mViewModel;
-    private EditText edtName, edtIdPassport, edtPhoneNo;
-    private CheckBox mCbKeyContact;
     private Boolean isNew;
     private FragmentGuestDetailBinding mBinding;
 
@@ -91,9 +91,17 @@ public class AddGuestFragment extends android.support.v4.app.Fragment {
         mGuest = guest;
         mGuestId = mGuest.getId();
         if (!isNew) {
-            // TODO: 9/13/2018
+            mName = guest.getName();
+            mBinding.edtInputGuestName.setText(mName);
+            mIdPassport = guest.getGuestId();
+            mBinding.edtGuestId.setText(mIdPassport);
+            mPhoneNo = guest.getPhoneNumber();
+            mBinding.edtPhone.setText(mPhoneNo);
+            mIsKeyContact = guest.isKeyContact();
+            mBinding.cbxKeyContact.setChecked(mIsKeyContact);
+        } else {
+            // TODO: 9/26/2018  
         }
-        // TODO: 9/13/2018  
     }
 
     @Nullable
@@ -115,6 +123,71 @@ public class AddGuestFragment extends android.support.v4.app.Fragment {
         //*/
 
         mCallBack = (AddGuestActivityListener) getActivity();
+
+        mBinding.edtInputGuestName.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence pCharSequence, int pI, int pI1, int pI2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence pCharSequence, int pI, int pI1, int pI2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable pEditable) {
+                if (pEditable.length() != 0) {
+                    mName = pEditable.toString();
+                    mBinding.txtLayoutName.setErrorEnabled(false);
+                } else {
+                    mName = null;
+                    mBinding.txtLayoutName.setError(getString(R.string.invalid_input_error));
+                    mBinding.txtLayoutName.setErrorEnabled(true);
+                }
+            }
+        });
+
+        mBinding.edtGuestId.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence pCharSequence, int pI, int pI1, int pI2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence pCharSequence, int pI, int pI1, int pI2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable pEditable) {
+                if (pEditable.length() != 0) {
+                    mIdPassport = pEditable.toString();
+                    mBinding.txtLayoutGuestId.setErrorEnabled(false);
+                } else {
+                    mIdPassport = null;
+                    mBinding.txtLayoutGuestId.setError(getString(R.string.invalid_input_error));
+                    mBinding.txtLayoutGuestId.setErrorEnabled(true);
+                }
+            }
+        });
+
+        mBinding.edtPhone.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence pCharSequence, int pI, int pI1, int pI2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence pCharSequence, int pI, int pI1, int pI2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable pEditable) {
+                mPhoneNo = pEditable.toString();
+            }
+        });
 
         if (isNew) {
             mViewModel.getGuestLiveData().observe(this, new Observer<Guest>() {
