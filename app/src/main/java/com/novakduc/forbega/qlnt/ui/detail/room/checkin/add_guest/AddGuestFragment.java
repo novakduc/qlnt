@@ -3,6 +3,7 @@ package com.novakduc.forbega.qlnt.ui.detail.room.checkin.add_guest;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
@@ -21,6 +22,7 @@ import android.widget.EditText;
 
 import com.novakduc.forbega.qlnt.R;
 import com.novakduc.forbega.qlnt.data.database.Guest;
+import com.novakduc.forbega.qlnt.databinding.FragmentGuestDetailBinding;
 import com.novakduc.forbega.qlnt.utilities.InjectorUtils;
 
 /**
@@ -45,6 +47,7 @@ public class AddGuestFragment extends android.support.v4.app.Fragment {
     private EditText edtName, edtIdPassport, edtPhoneNo;
     private CheckBox mCbKeyContact;
     private Boolean isNew;
+    private FragmentGuestDetailBinding mBinding;
 
     public static AddGuestFragment newInstance() {
 
@@ -96,8 +99,10 @@ public class AddGuestFragment extends android.support.v4.app.Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_guest_detail, container, false);
-        Toolbar toolbar = view.findViewById(R.id.toolbar);
+        mBinding = DataBindingUtil.inflate(inflater,
+                R.layout.fragment_guest_detail, container, false);
+        View view = mBinding.getRoot();
+        Toolbar toolbar = mBinding.appbarSection.toolbar;
         toolbar.setTitle(R.string.addGuestTitle);
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         activity.setSupportActionBar(toolbar);
