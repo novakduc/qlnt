@@ -43,8 +43,4 @@ public class LoanDeclareFragmentViewModel extends ViewModel {
         }
         super.onCleared();
     }
-
-    public void addLoan(Loan loan) {
-        mProjectRepo.addLoan(loan);
-    }
 }

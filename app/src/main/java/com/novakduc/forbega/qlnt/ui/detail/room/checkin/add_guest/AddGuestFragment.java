@@ -236,6 +236,7 @@ public class AddGuestFragment extends android.support.v4.app.Fragment {
             return;
         }
         mViewModel.updateGuest(mGuest);
+        getActivity().finish();
     }
 
     @Override

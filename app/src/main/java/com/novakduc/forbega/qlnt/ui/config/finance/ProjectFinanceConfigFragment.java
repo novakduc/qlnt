@@ -194,23 +194,6 @@ public class ProjectFinanceConfigFragment extends android.support.v4.app.Fragmen
         }
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == LoansAdapter.LOAN_CREATION) {
-            if (resultCode == Activity.RESULT_OK) {
-                //Update loan list
-            }
-        }
-        if (requestCode == LoansAdapter.LOAN_EDIT_REQUEST_FROM_ADAPTER) {
-
-            if (resultCode == Activity.RESULT_OK) {
-                //Update loan list
-                // TODO: 1/28/2018 update loan list
-            }
-        }
-    }
-
     private void updateLoanList() {
         mViewModel.getLoanListLiveData().observe(this, new Observer<List<Loan>>() {
             @Override

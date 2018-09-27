@@ -258,13 +258,7 @@ public class LoanDeclareFragment extends android.support.v4.app.Fragment {
                 Log.d(LOG_TAG, "Create loan with id: " + mLoan.getId() + " in project: " + mLoan.getProjectId());
 
                 mViewModel.updateLoan(mLoan);
-                if (isNew) {
-                    mViewModel.addLoan(mLoan);
-                }
-                //return valid loan
-                Intent returnIntent = new Intent();
-                //returnIntent.putExtra(RETURN_LOAN, mLoan.getId());
-                getActivity().setResult(Activity.RESULT_OK, returnIntent);
+
                 getActivity().finish();
             }
         });

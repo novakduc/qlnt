@@ -138,15 +138,6 @@ public class ProjectRepo {
         });
     }
 
-    public void addLoan(final Loan loan) {
-        mExecutors.diskIO().execute(new Runnable() {
-            @Override
-            public void run() {
-                mAppDao.insert(loan);
-            }
-        });
-    }
-
     public LiveData<UnitPrice> getUnitPrice() {
         mExecutors.diskIO().execute(new Runnable() {
             @Override
