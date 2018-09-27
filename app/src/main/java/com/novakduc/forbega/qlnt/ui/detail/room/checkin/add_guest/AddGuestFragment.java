@@ -163,11 +163,8 @@ public class AddGuestFragment extends android.support.v4.app.Fragment {
             public void afterTextChanged(Editable pEditable) {
                 if (pEditable.length() != 0) {
                     mIdPassport = pEditable.toString();
-                    mBinding.txtLayoutGuestId.setErrorEnabled(false);
                 } else {
                     mIdPassport = null;
-                    mBinding.txtLayoutGuestId.setError(getString(R.string.invalid_input_error));
-                    mBinding.txtLayoutGuestId.setErrorEnabled(true);
                 }
             }
         });
@@ -185,7 +182,12 @@ public class AddGuestFragment extends android.support.v4.app.Fragment {
 
             @Override
             public void afterTextChanged(Editable pEditable) {
-                mPhoneNo = pEditable.toString();
+                if (pEditable != null) {
+                    mPhoneNo = pEditable.toString();
+                } else {
+                    mPhoneNo = null;
+                }
+
             }
         });
 
@@ -205,16 +207,49 @@ public class AddGuestFragment extends android.support.v4.app.Fragment {
             });
         }
 
+        mBinding.btConfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View pView) {
+                saveGuest();
+            }
+        });
+
+        mBinding.btCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View pView) {
+                mCallBack.discardConfirmation(R.string.guestDiscardConfirm);
+            }
+        });
+
         return view;
+    }
+
+    private void saveGuest() {
+        if (mName != null) {
+            mGuest.setName(mName);
+            mGuest.setGuestId(mIdPassport);
+            mGuest.setPhoneNumber(mPhoneNo);
+            mGuest.setKeyContact(mIsKeyContact);
+        } else {
+            mBinding.txtLayoutName.setError(getString(R.string.invalid_input_error));
+            mBinding.txtLayoutName.setErrorEnabled(true);
+            return;
+        }
+        mViewModel.updateGuest(mGuest);
     }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.confirm_toolbar, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.confirm) {
+            saveGuest();
+        }
+
         if (item.getItemId() == android.R.id.home) {
             mCallBack.discardConfirmation(R.string.guestDiscardConfirm);
         }

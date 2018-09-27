@@ -76,7 +76,7 @@ public class RoomForRentRepo {
         mExecutors.diskIO().execute(new Runnable() {
             @Override
             public void run() {
-                Guest guest = Guest.getInstance("", mRoomId);
+                Guest guest = Guest.getInstance(null, mRoomId);
                 guest.setId(mAppDao.insert(guest));
                 guestMutableLiveData.postValue(guest);
             }
@@ -108,15 +108,6 @@ public class RoomForRentRepo {
                         mAppDao.removeGuest(l);
                     }
                 }
-            }
-        });
-    }
-
-    public void addGuest(final Loan pGuest) {
-        mExecutors.diskIO().execute(new Runnable() {
-            @Override
-            public void run() {
-                mAppDao.insert(pGuest);
             }
         });
     }

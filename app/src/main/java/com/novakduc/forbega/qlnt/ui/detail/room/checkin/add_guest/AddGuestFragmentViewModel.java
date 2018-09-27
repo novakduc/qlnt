@@ -43,8 +43,4 @@ public class AddGuestFragmentViewModel extends ViewModel {
         }
         super.onCleared();
     }
-
-    public void addGuest(Loan guest) {
-        mRoomRepo.addGuest(guest);
-    }
 }
