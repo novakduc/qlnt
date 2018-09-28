@@ -25,6 +25,7 @@ import android.widget.EditText;
 import com.novakduc.forbega.qlnt.R;
 import com.novakduc.forbega.qlnt.data.database.Guest;
 import com.novakduc.forbega.qlnt.databinding.FragmentGuestDetailBinding;
+import com.novakduc.forbega.qlnt.ui.detail.room.checkin.CheckInActivity;
 import com.novakduc.forbega.qlnt.utilities.InjectorUtils;
 
 /**
@@ -217,7 +218,7 @@ public class AddGuestFragment extends android.support.v4.app.Fragment {
         mBinding.btCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View pView) {
-                mCallBack.discardConfirmation(R.string.guestDiscardConfirm);
+                mCallBack.discardConfirmation(R.string.guestDiscardConfirm, CheckInActivity.DISCARD_CHECKIN_KEY);
             }
         });
 
@@ -252,7 +253,7 @@ public class AddGuestFragment extends android.support.v4.app.Fragment {
         }
 
         if (item.getItemId() == android.R.id.home) {
-            mCallBack.discardConfirmation(R.string.guestDiscardConfirm);
+            mCallBack.discardConfirmation(R.string.guestDiscardConfirm, CheckInActivity.DISCARD_CHECKIN_KEY);
         }
         return super.onOptionsItemSelected(item);
     }

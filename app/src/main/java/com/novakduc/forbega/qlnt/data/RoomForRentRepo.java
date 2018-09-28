@@ -111,4 +111,8 @@ public class RoomForRentRepo {
             }
         });
     }
+
+    public LiveData<List<Guest>> getGuestList() {
+        return mAppDao.getLiveDataGuestListByRoomId(mRoomId);
+    }
 }

@@ -20,6 +20,7 @@ import android.widget.EditText;
 import com.novakduc.baselibrary.NumbericTextWatcher;
 import com.novakduc.forbega.qlnt.R;
 import com.novakduc.forbega.qlnt.data.database.UnitPrice;
+import com.novakduc.forbega.qlnt.ui.config.ProjectConfigurationActivity;
 import com.novakduc.forbega.qlnt.ui.config.UpdateListener;
 import com.novakduc.forbega.qlnt.utilities.InjectorUtils;
 
@@ -301,7 +302,8 @@ public class ProjectUnitPriceConfigFragment extends android.support.v4.app.Fragm
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.close) {
-            mCallBack.discardConfirmation(R.string.project_create_discard);
+            mCallBack.discardConfirmation(R.string.project_create_discard,
+                    ProjectConfigurationActivity.DISCARD_CURRENT_PROJECT);
         }
 
         if (item.getItemId() == android.R.id.home)

@@ -11,6 +11,8 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -29,6 +31,8 @@ import com.novakduc.forbega.qlnt.data.database.Guest;
 import com.novakduc.forbega.qlnt.data.database.RoomForRent;
 import com.novakduc.forbega.qlnt.data.database.RoomStatus;
 import com.novakduc.forbega.qlnt.databinding.FragmentCheckinBinding;
+import com.novakduc.forbega.qlnt.ui.ConfirmationDialogFragment;
+import com.novakduc.forbega.qlnt.ui.detail.room.RoomsRecyclerViewAdapter;
 import com.novakduc.forbega.qlnt.ui.detail.room.checkin.add_guest.AddGuestActivity;
 import com.novakduc.forbega.qlnt.ui.detail.room.checkin.add_guest.AddGuestFragment;
 import com.novakduc.forbega.qlnt.utilities.ConverterUtilities;
@@ -38,8 +42,9 @@ import com.novakduc.forbega.qlnt.utilities.ItemListAdapterActionHandler;
 import com.novakduc.forbega.qlnt.utilities.SpinnerItemArrayProvider;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class CheckInFragment extends Fragment implements ItemListAdapterActionHandler {
+public class CheckInFragment extends Fragment implements GuestListAdapterActionHandler {
     public static final String ACTIVE_PROJECT_ID = "active_project_id";
     private static final String LOG_TAG = CheckInFragment.class.getSimpleName();
     public static final String ROOM_ID = CheckInFragment.class.getName() + ".roomId";
@@ -54,7 +59,8 @@ public class CheckInFragment extends Fragment implements ItemListAdapterActionHa
     private int mBillDate;
     private long mElectricalInitialIndex, mWaterInitialIndex;
     private boolean mIsUsingTV, mIsUsingInternet, mIsValidCheckInInfo;
-    private ArrayList<Guest> mGuestArrayList;
+    private GuestsRecyclerViewAdapter mGuestsRecyclerViewAdapter;
+    private long mTempGuestId;
 
     @Override
 
@@ -228,6 +234,25 @@ public class CheckInFragment extends Fragment implements ItemListAdapterActionHa
             }
         });
 
+        mGuestsRecyclerViewAdapter = new GuestsRecyclerViewAdapter(activity, this);
+        RecyclerView recyclerView = mBinding.guestList;
+        LinearLayoutManager layoutManager = new LinearLayoutManager(activity);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setAdapter(mGuestsRecyclerViewAdapter);
+
+        mViewModel.getGuestListLiveData().observe(this, new Observer<List<Guest>>() {
+            @Override
+            public void onChanged(@Nullable List<Guest> pGuests) {
+                if (pGuests != null) {
+                    if (!pGuests.isEmpty()) {
+                        mBinding.fab.show();
+                    }
+                    mGuestsRecyclerViewAdapter.swapList(pGuests);
+                }
+            }
+        });
+
         mBinding.fab.hide();
 
         return view;
@@ -272,7 +297,14 @@ public class CheckInFragment extends Fragment implements ItemListAdapterActionHa
 
     @Override
     public void onDeleteAction(long id) {
-
+        mTempGuestId = id;
+        Bundle bundle = new Bundle();
+        //dialog title in bundle
+        bundle.putString(ConfirmationDialogFragment.MESSAGE,
+                getResources().getString(R.string.delete_guest_confirmation));
+        android.support.v4.app.DialogFragment dialogFragment = new ConfirmationDialogFragment();
+        dialogFragment.setArguments(bundle);
+        dialogFragment.show(getActivity().getSupportFragmentManager(), "discardConfirm");
     }
 
     @Override
@@ -311,7 +343,7 @@ public class CheckInFragment extends Fragment implements ItemListAdapterActionHa
         }
 
         if (item.getItemId() == android.R.id.home)
-            mCallBack.discardConfirmation(R.string.announce_discard_checkIn);
+            mCallBack.discardConfirmation(R.string.announce_discard_checkIn, CheckInActivity.DISCARD_CHECKIN_KEY);
         return super.onOptionsItemSelected(item);
     }
 
@@ -323,7 +355,7 @@ public class CheckInFragment extends Fragment implements ItemListAdapterActionHa
         depositCondition = mDepositAmount > 0;
         electricalIndexCondition = mElectricalInitialIndex >= 0;
         waterIndexCondition = mWaterInitialIndex >= 0;
-        guestCondition = !mGuestArrayList.isEmpty();
+        guestCondition = mGuestsRecyclerViewAdapter.getItemCount() != 0;
 
         mBinding.txtLayoutRoomCharge.setError(getString(R.string.invalid_input_error));
         mBinding.txtLayoutDeposit.setError(getString(R.string.invalid_input_error));

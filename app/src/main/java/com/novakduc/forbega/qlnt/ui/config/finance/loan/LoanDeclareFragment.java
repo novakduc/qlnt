@@ -220,7 +220,8 @@ public class LoanDeclareFragment extends android.support.v4.app.Fragment {
         btCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getActivity().finish();
+                mCallBack.discardConfirmation(R.string.loanDiscardConfirm,
+                        LoanDeclareActivity.DISCARD_CONFIRMATION_KEY);
             }
         });
         Button btConfirm = view.findViewById(R.id.btConfirm);
@@ -320,7 +321,8 @@ public class LoanDeclareFragment extends android.support.v4.app.Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
-            mCallBack.discardConfirmation(R.string.loanDiscardConfirm);
+            mCallBack.discardConfirmation(R.string.loanDiscardConfirm,
+                    LoanDeclareActivity.DISCARD_CONFIRMATION_KEY);
         }
         return super.onOptionsItemSelected(item);
     }

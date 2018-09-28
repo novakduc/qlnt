@@ -149,4 +149,5 @@
     <string name="addGuestTitle">Guest information</string>
     <string name="roomIdError">Room ID error</string>
     <string name="add_guest_title">Guest Information</string>
+    <string name="delete_guest_confirmation">Delete guest?</string>
 </resources>

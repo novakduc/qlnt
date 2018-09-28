@@ -3,10 +3,13 @@ package com.novakduc.forbega.qlnt.ui.config.finance.loan;
 import android.os.Bundle;
 
 import com.novakduc.baselibrary.SimpleFragmentActivity;
+import com.novakduc.forbega.qlnt.R;
 import com.novakduc.forbega.qlnt.ui.ConfirmationDialogFragment;
 
 public class LoanDeclareActivity extends SimpleFragmentActivity
         implements ConfirmationDialogFragment.ConfirmListener, LoanDeclareFragmentListener {
+    public static final String DISCARD_CONFIRMATION_KEY = LoanDeclareActivity.class.getName() +
+            "discard_loan";
 
     @Override
     protected android.support.v4.app.Fragment createFragment() {
@@ -19,21 +22,22 @@ public class LoanDeclareActivity extends SimpleFragmentActivity
     }
 
     @Override
-    public void action(int result) {
+    public void action(int result, String purposeKey) {
         if (result == ConfirmationDialogFragment.RESULT_OK) {
-            //user confirm to discard project creation.
-            finish();
+            if (purposeKey == DISCARD_CONFIRMATION_KEY)
+                //user confirm to discard project creation.
+                finish();
         }
     }
 
     @Override
     public void onBackPressed() {
-        // TODO: 4/30/2017 confirm discard loan on back press. Consider State save solution!
-        super.onBackPressed();
+        discardConfirmation(R.string.loanDiscardConfirm,
+                LoanDeclareActivity.DISCARD_CONFIRMATION_KEY);
     }
 
     @Override
-    public void discardConfirmation(int messageId) {
-        ConfirmationDialogFragment.showDialog(getString(messageId), getSupportFragmentManager());
+    public void discardConfirmation(int messageId, String confirmPurpose) {
+        ConfirmationDialogFragment.showDialog(getString(messageId), confirmPurpose, getSupportFragmentManager());
     }
 }

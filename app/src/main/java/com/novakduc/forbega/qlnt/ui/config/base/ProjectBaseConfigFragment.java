@@ -26,6 +26,7 @@ import android.widget.EditText;
 
 import com.novakduc.forbega.qlnt.R;
 import com.novakduc.forbega.qlnt.data.database.Project;
+import com.novakduc.forbega.qlnt.ui.config.ProjectConfigurationActivity;
 import com.novakduc.forbega.qlnt.ui.config.UpdateListener;
 import com.novakduc.forbega.qlnt.ui.config.finance.ProjectFinanceConfigFragment;
 import com.novakduc.forbega.qlnt.utilities.ConverterUtilities;
@@ -283,11 +284,13 @@ public class ProjectBaseConfigFragment extends android.support.v4.app.Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.close) {
-            mCallback.discardConfirmation(R.string.project_create_discard); //close action
+            mCallback.discardConfirmation(R.string.project_create_discard,
+                    ProjectConfigurationActivity.DISCARD_CURRENT_PROJECT); //close action
         }
 
         if (item.getItemId() == android.R.id.home)
-            mCallback.discardConfirmation(R.string.project_create_discard); //close action
+            mCallback.discardConfirmation(R.string.project_create_discard,
+                    ProjectConfigurationActivity.DISCARD_CURRENT_PROJECT); //close action
 
         return super.onOptionsItemSelected(item);
     }

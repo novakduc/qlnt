@@ -16,12 +16,15 @@ public class ConfirmationDialogFragment extends android.support.v4.app.DialogFra
     public static final int RESULT_OK = 1001;
     public static final int RESULT_CANCEL = 1000;
     public static final java.lang.String MESSAGE = "com.novakduc.forbega.qlnt.confirmation_message";
+    public static final java.lang.String KEY = "com.novakduc.forbega.qlnt.confirmation_reuestSource";
     private ConfirmListener callback;
     private String mMessage;
+    private String mConfirmPurposeKey;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         mMessage = getArguments().getString(MESSAGE);
+        mConfirmPurposeKey = getArguments().getString(KEY);
         super.onCreate(savedInstanceState);
     }
 
@@ -33,27 +36,28 @@ public class ConfirmationDialogFragment extends android.support.v4.app.DialogFra
                 .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        callback.action(RESULT_OK);
+                        callback.action(RESULT_OK, mConfirmPurposeKey);
                     }
                 })
                 .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        callback.action(RESULT_CANCEL);
+                        callback.action(RESULT_CANCEL, mConfirmPurposeKey);
                     }
                 });
         return builder.create();
     }
 
     public interface ConfirmListener {
-        void action(int result);
+        void action(int result, String confirmPurposeKey);
     }
 
-    public static void showDialog(String pMessage, FragmentManager pFragmentManager) {
+    public static void showDialog(String pMessage, String pConfirmPurposeKey, FragmentManager pFragmentManager) {
         Bundle bundle = new Bundle();
         //dialog title in bundle
         bundle.putString(ConfirmationDialogFragment.MESSAGE,
                 pMessage);
+        bundle.putString(KEY, pConfirmPurposeKey);
         android.support.v4.app.DialogFragment dialogFragment = new ConfirmationDialogFragment();
         dialogFragment.setArguments(bundle);
         dialogFragment.show(pFragmentManager, "discardConfirm");

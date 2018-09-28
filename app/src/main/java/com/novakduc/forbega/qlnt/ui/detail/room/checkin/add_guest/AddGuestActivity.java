@@ -11,6 +11,8 @@ import com.novakduc.forbega.qlnt.ui.detail.room.checkin.CheckInFragment;
 public class AddGuestActivity extends SimpleFragmentActivity
         implements ConfirmationDialogFragment.ConfirmListener, AddGuestActivityListener {
 
+    public static final String DISCARD_ADD_GUEST = AddGuestActivity.class.getName() + "discardAddingGuest";
+
     @Override
     protected android.support.v4.app.Fragment createFragment() {
         return AddGuestFragment.newInstance();
@@ -22,10 +24,11 @@ public class AddGuestActivity extends SimpleFragmentActivity
     }
 
     @Override
-    public void action(int result) {
+    public void action(int result, String purposeKey) {
         if (result == ConfirmationDialogFragment.RESULT_OK) {
-            //user confirm to discard project creation.
-            finish();
+            if (purposeKey == DISCARD_ADD_GUEST)
+                //user confirm to discard adding guest creation.
+                finish();
         }
     }
 
@@ -36,7 +39,7 @@ public class AddGuestActivity extends SimpleFragmentActivity
     }
 
     @Override
-    public void discardConfirmation(int messageId) {
-        ConfirmationDialogFragment.showDialog(getString(messageId), getSupportFragmentManager());
+    public void discardConfirmation(int messageId, String purposeKey) {
+        ConfirmationDialogFragment.showDialog(getString(messageId), purposeKey, getSupportFragmentManager());
     }
 }

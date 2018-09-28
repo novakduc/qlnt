@@ -142,13 +142,8 @@ public class ProjectListFragment extends android.support.v4.app.Fragment
     @Override
     public void onDeleteAction(long projectId) {
         mTempProjectId = projectId;
-        Bundle bundle = new Bundle();
-        //dialog title in bundle
-        bundle.putString(ConfirmationDialogFragment.MESSAGE,
-                getResources().getString(R.string.delete_project_confirmation));
-        android.support.v4.app.DialogFragment dialogFragment = new ConfirmationDialogFragment();
-        dialogFragment.setArguments(bundle);
-        dialogFragment.show(getActivity().getSupportFragmentManager(), "discardConfirm");
+        ConfirmationDialogFragment.showDialog(getString(R.string.delete_project_confirmation),
+                ProjectListActivity.DELETE_PROJECT, getFragmentManager());
     }
 
     @Override

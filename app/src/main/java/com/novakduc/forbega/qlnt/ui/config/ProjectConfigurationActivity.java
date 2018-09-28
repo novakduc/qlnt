@@ -14,6 +14,7 @@ import com.novakduc.forbega.qlnt.utilities.InjectorUtils;
 public class ProjectConfigurationActivity extends SimpleFragmentActivity
         implements UpdateListener, ConfirmationDialogFragment.ConfirmListener {
     public static final String TEMP_PROJECT_ID = "com.novakduc.forbega.qlnt.tempprojectId";
+    public static final String DISCARD_CURRENT_PROJECT = ProjectConfigurationActivity.class.getName() + "discardCurrentProject";
     private static final String LOG_TAG = ProjectConfigurationActivity.class.getSimpleName();
     private long mTempProjectId;
     private ProjectConfigActivityViewModel mViewModel;
@@ -48,21 +49,15 @@ public class ProjectConfigurationActivity extends SimpleFragmentActivity
         int count = manager.getBackStackEntryCount();
         Log.i("count", String.valueOf(count));
         if (count == 0) {
-            discardConfirmation(R.string.project_create_discard);
+            discardConfirmation(R.string.project_create_discard, DISCARD_CURRENT_PROJECT);
         } else {
             super.onBackPressed();
         }
     }
 
     @Override
-    public void discardConfirmation(int messageId) {
-        Bundle bundle = new Bundle();
-        //dialog title in bundle
-        bundle.putString(ConfirmationDialogFragment.MESSAGE,
-                getResources().getString(messageId));
-        android.support.v4.app.DialogFragment dialogFragment = new ConfirmationDialogFragment();
-        dialogFragment.setArguments(bundle);
-        dialogFragment.show(getSupportFragmentManager(), "discardConfirm");
+    public void discardConfirmation(int messageId, String purposeKey) {
+        ConfirmationDialogFragment.showDialog(getString(messageId), purposeKey, getSupportFragmentManager());
     }
 
     @Override
@@ -87,10 +82,12 @@ public class ProjectConfigurationActivity extends SimpleFragmentActivity
     }
 
     @Override
-    public void action(int result) {
+    public void action(int result, String purposeKey) {
         if (result == ConfirmationDialogFragment.RESULT_OK) {
-            mViewModel.deleteProject(mTempProjectId);
-            finish();
+            if (purposeKey == DISCARD_CURRENT_PROJECT) {
+                mViewModel.deleteProject(mTempProjectId);
+                finish();
+            }
         }
     }
 

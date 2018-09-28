@@ -568,7 +568,8 @@ public class ProjectEditFragment extends android.support.v4.app.Fragment
         }
 
         if (item.getItemId() == android.R.id.home)
-            mCallBack.discardConfirmation(R.string.project_create_discard);
+            mCallBack.discardConfirmation(R.string.project_create_discard,
+                    EditProjectActivity.DISCARD_SAVING_PROJECT);
         return super.onOptionsItemSelected(item);
     }
 

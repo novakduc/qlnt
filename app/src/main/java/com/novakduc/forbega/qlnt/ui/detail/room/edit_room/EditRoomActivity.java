@@ -7,6 +7,8 @@ import com.novakduc.forbega.qlnt.ui.ConfirmationDialogFragment;
 
 public class EditRoomActivity extends SimpleFragmentActivity
         implements ConfirmationDialogFragment.ConfirmListener, EditRoomActivityListener {
+    public static final String DISCARD_SAVING_ROOM = EditRoomActivity.class + "discardSavingRoom";
+
     @Override
     protected Fragment createFragment() {
         long roomId = getIntent().getLongExtra(EditRoomFragment.ROOM_ID, -1);
@@ -17,15 +19,16 @@ public class EditRoomActivity extends SimpleFragmentActivity
     }
 
     @Override
-    public void action(int result) {
+    public void action(int result, String purposeKey) {
         if (result == ConfirmationDialogFragment.RESULT_OK) {
-            //user confirm to discard project creation.
-            finish();
+            if (purposeKey == DISCARD_SAVING_ROOM)
+                //user confirm to discard project creation.
+                finish();
         }
     }
 
     @Override
-    public void discardConfirmation(int messageId) {
-        ConfirmationDialogFragment.showDialog(getString(messageId), getSupportFragmentManager());
+    public void discardConfirmation(int messageId, String purposeKey) {
+        ConfirmationDialogFragment.showDialog(getString(messageId), purposeKey, getSupportFragmentManager());
     }
 }

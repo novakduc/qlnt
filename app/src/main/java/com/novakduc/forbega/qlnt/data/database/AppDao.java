@@ -193,4 +193,7 @@ public interface AppDao {
 
     @Query("SELECT * FROM guest WHERE name = NULL")
     List<Guest> getInvalidGuests();
+
+    @Query("SELECT * FROM guest WHERE roomId = :pRoomId")
+    LiveData<List<Guest>> getLiveDataGuestListByRoomId(long pRoomId);
 }

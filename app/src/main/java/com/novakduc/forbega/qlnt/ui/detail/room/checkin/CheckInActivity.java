@@ -6,9 +6,16 @@ import android.widget.Toast;
 import com.novakduc.baselibrary.SimpleFragmentActivity;
 import com.novakduc.forbega.qlnt.R;
 import com.novakduc.forbega.qlnt.ui.ConfirmationDialogFragment;
+import com.novakduc.forbega.qlnt.ui.detail.room.RoomListFragment;
+
+import java.util.List;
 
 public class CheckInActivity extends SimpleFragmentActivity
         implements ConfirmationDialogFragment.ConfirmListener, CheckInActivityListener {
+
+    public static final String DISCARD_CHECKIN_KEY = CheckInActivity.class.getName() + "discardCheckinProcess";
+    public static final String DELETE_ROOM_KEY = CheckInActivity.class.getName() + "deleteRoom";
+
     @Override
     protected Fragment createFragment() {
         long roomId = getIntent().getLongExtra(CheckInFragment.ROOM_ID, -1);
@@ -20,15 +27,30 @@ public class CheckInActivity extends SimpleFragmentActivity
     }
 
     @Override
-    public void action(int result) {
+    public void action(int result, String purposeKey) {
         if (result == ConfirmationDialogFragment.RESULT_OK) {
-            //user confirm to discard check in process
-            finish();
+            if (purposeKey == DISCARD_CHECKIN_KEY)
+                //user confirm to discard check in process
+                finish();
+        }
+
+        if (result == ConfirmationDialogFragment.RESULT_OK) {
+            if (purposeKey == DELETE_ROOM_KEY) {
+                //Delete room after confirm
+                List<Fragment> fragments = getSupportFragmentManager().getFragments();
+                for (Fragment f :
+                        fragments) {
+                    if (f instanceof RoomListFragment) {
+                        ((RoomListFragment) f).deleteRoom();  //delete room from room list
+                        return;
+                    }
+                }
+            }
         }
     }
 
     @Override
-    public void discardConfirmation(int messageId) {
-        ConfirmationDialogFragment.showDialog(getString(messageId), getSupportFragmentManager());
+    public void discardConfirmation(int messageId, String purposeKey) {
+        ConfirmationDialogFragment.showDialog(getString(messageId), purposeKey, getSupportFragmentManager());
     }
 }

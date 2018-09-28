@@ -17,7 +17,7 @@ public class AddRoomActivity extends SimpleFragmentActivity implements Confirmat
     }
 
     @Override
-    public void action(int result) {
+    public void action(int result, String purposeKey) {
 
     }
 }

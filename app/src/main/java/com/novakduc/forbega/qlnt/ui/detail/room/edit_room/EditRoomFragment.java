@@ -153,7 +153,7 @@ public class EditRoomFragment extends Fragment {
         }
 
         if (item.getItemId() == android.R.id.home)
-            mCallBack.discardConfirmation(R.string.announce_discard_edit_room);
+            mCallBack.discardConfirmation(R.string.announce_discard_edit_room, EditRoomActivity.DISCARD_SAVING_ROOM);
         return super.onOptionsItemSelected(item);
     }
 }

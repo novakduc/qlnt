@@ -14,15 +14,11 @@ import com.novakduc.forbega.qlnt.ui.ConfirmationDialogFragment;
 public class EditProjectActivity extends SimpleFragmentActivity
         implements UpdateListener, ConfirmationDialogFragment.ConfirmListener {
 
+    public static final String DISCARD_SAVING_PROJECT = EditProjectActivity.class.getName() + "discardSaving";
+
     @Override
-    public void discardConfirmation(int messageId) {
-        Bundle bundle = new Bundle();
-        //dialog title in bundle
-        bundle.putString(ConfirmationDialogFragment.MESSAGE,
-                getResources().getString(R.string.announce_project_not_save));
-        android.support.v4.app.DialogFragment dialogFragment = new ConfirmationDialogFragment();
-        dialogFragment.setArguments(bundle);
-        dialogFragment.show(getSupportFragmentManager(), "discardConfirm");
+    public void discardConfirmation(int messageId, String purposeKey) {
+        ConfirmationDialogFragment.showDialog(getString(messageId), purposeKey, getSupportFragmentManager());
     }
 
     @Override
@@ -42,7 +38,7 @@ public class EditProjectActivity extends SimpleFragmentActivity
 
     @Override
     public void onBackPressed() {
-        discardConfirmation(R.string.announce_project_not_save);
+        discardConfirmation(R.string.announce_project_not_save, DISCARD_SAVING_PROJECT);
     }
 
     @Override
@@ -52,10 +48,11 @@ public class EditProjectActivity extends SimpleFragmentActivity
     }
 
     @Override
-    public void action(int result) {
+    public void action(int result, String purposeKey) {
         if (result == ConfirmationDialogFragment.RESULT_OK) {
-            //user confirm to discard project creation.
-            finish();
+            if (purposeKey == DISCARD_SAVING_PROJECT)
+                //user confirm to discard project creation.
+                finish();
         }
     }
 }
