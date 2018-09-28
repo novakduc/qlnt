@@ -2,8 +2,10 @@ package com.novakduc.forbega.qlnt.ui.detail.room.checkin.add_guest;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
@@ -21,6 +23,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.novakduc.forbega.qlnt.R;
 import com.novakduc.forbega.qlnt.data.database.Guest;
@@ -208,6 +211,29 @@ public class AddGuestFragment extends android.support.v4.app.Fragment {
             });
         }
 
+        mBinding.imageButtonCall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View pView) {
+                if (mPhoneNo != null) {
+                    String uri = "tel:" + mPhoneNo.trim() ;
+                    Intent intent = new Intent(Intent.ACTION_DIAL);
+                    intent.setData(Uri.parse(uri));
+                    try {
+                        startActivity(intent);
+                    } catch (ActivityNotFoundException pE) {
+                        Toast.makeText(getContext(), getString(R.string.call_fail), Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+        });
+
+        mBinding.imageButtonMessage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View pView) {
+                sendSMS(mPhoneNo, getString(R.string.sms_tmp_appreciation));
+            }
+        });
+
         mBinding.btConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View pView) {
@@ -218,11 +244,29 @@ public class AddGuestFragment extends android.support.v4.app.Fragment {
         mBinding.btCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View pView) {
-                mCallBack.discardConfirmation(R.string.guestDiscardConfirm, CheckInActivity.DISCARD_CHECKIN_KEY);
+                mCallBack.discardConfirmation(R.string.guestDiscardConfirm, AddGuestActivity.DISCARD_ADD_GUEST);
             }
         });
 
         return view;
+    }
+
+    protected void sendSMS(String pPhoneNo, String pText) {
+        Log.i("Send SMS", "");
+        Intent smsIntent = new Intent(Intent.ACTION_VIEW);
+
+        smsIntent.setData(Uri.parse("smsto:"));
+        smsIntent.setType("vnd.android-dir/mms-sms");
+        smsIntent.putExtra("address", mPhoneNo.trim());
+        smsIntent.putExtra("sms_body", pText);
+
+        try {
+            startActivity(smsIntent);
+            Log.i("Finished sending SMS...", "");
+        } catch (android.content.ActivityNotFoundException ex) {
+            Toast.makeText(getContext(),
+                    getString(R.string.sms_fail), Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void saveGuest() {
@@ -253,14 +297,8 @@ public class AddGuestFragment extends android.support.v4.app.Fragment {
         }
 
         if (item.getItemId() == android.R.id.home) {
-            mCallBack.discardConfirmation(R.string.guestDiscardConfirm, CheckInActivity.DISCARD_CHECKIN_KEY);
+            mCallBack.discardConfirmation(R.string.guestDiscardConfirm, AddGuestActivity.DISCARD_ADD_GUEST);
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    private void showDialog(android.support.v4.app.DialogFragment fragment, int target) {
-        fragment.setTargetFragment(this, target);
-        fragment.show(getActivity().getSupportFragmentManager(),
-                "dialog");
     }
 }

@@ -298,13 +298,8 @@ public class CheckInFragment extends Fragment implements GuestListAdapterActionH
     @Override
     public void onDeleteAction(long id) {
         mTempGuestId = id;
-        Bundle bundle = new Bundle();
-        //dialog title in bundle
-        bundle.putString(ConfirmationDialogFragment.MESSAGE,
-                getResources().getString(R.string.delete_guest_confirmation));
-        android.support.v4.app.DialogFragment dialogFragment = new ConfirmationDialogFragment();
-        dialogFragment.setArguments(bundle);
-        dialogFragment.show(getActivity().getSupportFragmentManager(), "discardConfirm");
+        ConfirmationDialogFragment.showDialog(getString(R.string.delete_guest_confirmation),
+                CheckInActivity.DELETE_GUEST_KEY, getFragmentManager());
     }
 
     @Override
@@ -383,5 +378,9 @@ public class CheckInFragment extends Fragment implements GuestListAdapterActionH
             mRoomForRent.setStatus(RoomStatus.NORMAL);
             mViewModel.updateRoom(mRoomForRent);
         }
+    }
+
+    public void deleteGuest() {
+        mViewModel.deleteGuest(mTempGuestId);
     }
 }

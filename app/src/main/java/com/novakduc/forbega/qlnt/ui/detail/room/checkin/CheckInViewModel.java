@@ -32,4 +32,8 @@ public class CheckInViewModel extends ViewModel {
     public void updateRoom(RoomForRent roomForRent) {
         mRoomForRentRepo.updateRoom(roomForRent);
     }
+
+    public void deleteGuest(long pTempGuestId) {
+        mRoomForRentRepo.deleteGuest(pTempGuestId);
+    }
 }

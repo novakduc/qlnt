@@ -14,7 +14,7 @@ public class CheckInActivity extends SimpleFragmentActivity
         implements ConfirmationDialogFragment.ConfirmListener, CheckInActivityListener {
 
     public static final String DISCARD_CHECKIN_KEY = CheckInActivity.class.getName() + "discardCheckinProcess";
-    public static final String DELETE_ROOM_KEY = CheckInActivity.class.getName() + "deleteRoom";
+    public static final String DELETE_GUEST_KEY = CheckInActivity.class.getName() + "deleteGuest";
 
     @Override
     protected Fragment createFragment() {
@@ -35,13 +35,13 @@ public class CheckInActivity extends SimpleFragmentActivity
         }
 
         if (result == ConfirmationDialogFragment.RESULT_OK) {
-            if (purposeKey == DELETE_ROOM_KEY) {
+            if (purposeKey == DELETE_GUEST_KEY) {
                 //Delete room after confirm
                 List<Fragment> fragments = getSupportFragmentManager().getFragments();
                 for (Fragment f :
                         fragments) {
-                    if (f instanceof RoomListFragment) {
-                        ((RoomListFragment) f).deleteRoom();  //delete room from room list
+                    if (f instanceof CheckInFragment) {
+                        ((CheckInFragment) f).deleteGuest();  //delete room from room list
                         return;
                     }
                 }

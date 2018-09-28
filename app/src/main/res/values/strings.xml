@@ -150,4 +150,7 @@
     <string name="roomIdError">Room ID error</string>
     <string name="add_guest_title">Guest Information</string>
     <string name="delete_guest_confirmation">Delete guest?</string>
+    <string name="sms_fail">Fail to send SMS</string>
+    <string name="call_fail">No dial application</string>
+    <string name="sms_tmp_appreciation">Thank you for using our service</string>
 </resources>

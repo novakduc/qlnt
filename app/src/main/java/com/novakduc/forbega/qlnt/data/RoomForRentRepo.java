@@ -36,15 +36,15 @@ public class RoomForRentRepo {
             synchronized (LOCK) {
                 if (sInstance == null) {
                     sInstance = new RoomForRentRepo(appDao, executors, roomId);
-                    Log.d(LOG_TAG, "Create new product repo " + roomId);
+                    Log.d(LOG_TAG, "Create new room repo " + roomId);
                 } else {
                     sInstance.setRoomId(roomId);
-                    Log.d(LOG_TAG, "Lock repo to project id" + sInstance.getRoomId());
+                    Log.d(LOG_TAG, "Lock repo to room id" + sInstance.getRoomId());
                 }
             }
         } else {
             sInstance.setRoomId(roomId);
-            Log.d(LOG_TAG, "Lock repo to project id" + sInstance.getRoomId());
+            Log.d(LOG_TAG, "Lock repo to room id" + sInstance.getRoomId());
         }
         return sInstance;
     }
@@ -101,11 +101,13 @@ public class RoomForRentRepo {
         mExecutors.diskIO().execute(new Runnable() {
             @Override
             public void run() {
-                List<Guest> guests = mAppDao.getInvalidGuests();
+                List<Guest> guests = mAppDao.getGuestsByRoomId(mRoomId);
                 if (guests != null) {
-                    for (Guest l :
+                    for (Guest g :
                             guests) {
-                        mAppDao.removeGuest(l);
+                        if (g.getName() == null) {
+                            mAppDao.removeGuest(g);
+                        }
                     }
                 }
             }
@@ -114,5 +116,17 @@ public class RoomForRentRepo {
 
     public LiveData<List<Guest>> getGuestList() {
         return mAppDao.getLiveDataGuestListByRoomId(mRoomId);
+    }
+
+    public void deleteGuest(final long pGuestId) {
+        mExecutors.diskIO().execute(new Runnable() {
+            @Override
+            public void run() {
+                Guest guest = mAppDao.getGuestById(pGuestId);
+                if (guest != null) {
+                    mAppDao.removeGuest(guest);
+                }
+            }
+        });
     }
 }

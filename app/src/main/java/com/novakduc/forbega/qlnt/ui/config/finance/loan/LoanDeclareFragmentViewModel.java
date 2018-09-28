@@ -38,9 +38,7 @@ public class LoanDeclareFragmentViewModel extends ViewModel {
 
     @Override
     protected void onCleared() {
-        if (isNew) {
             mProjectRepo.cleanLoanData();
-        }
         super.onCleared();
     }
 }
