@@ -247,6 +247,8 @@ public class CheckInFragment extends Fragment implements GuestListAdapterActionH
                 if (pGuests != null) {
                     if (!pGuests.isEmpty()) {
                         mBinding.fab.show();
+                    } else {
+                        mBinding.fab.hide();
                     }
                     mGuestsRecyclerViewAdapter.swapList(pGuests);
                 }

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -18,6 +19,8 @@ import com.novakduc.baselibrary.NumbericTextWatcher;
 import com.novakduc.forbega.qlnt.R;
 import com.novakduc.forbega.qlnt.data.database.RoomForRent;
 import com.novakduc.forbega.qlnt.databinding.FragmentAddRoomBinding;
+import com.novakduc.forbega.qlnt.ui.detail.room.checkin.CheckInActivityListener;
+import com.novakduc.forbega.qlnt.utilities.ActivityListener;
 import com.novakduc.forbega.qlnt.utilities.InjectorUtils;
 
 public class AddRoomFragment extends Fragment {
@@ -26,6 +29,7 @@ public class AddRoomFragment extends Fragment {
     private AddRoomViewModel mViewModel;
     private RoomForRent mRoomForRent;
     private FragmentAddRoomBinding mBinding;
+    private ActivityListener mCallBack;
 
     public static AddRoomFragment getInstance(@NonNull long projectId) {
         Bundle bundle = new Bundle();
@@ -52,6 +56,13 @@ public class AddRoomFragment extends Fragment {
         mBinding = DataBindingUtil.inflate(inflater,
                 R.layout.fragment_add_room, container, false);
         View view = mBinding.getRoot();
+
+        android.support.v7.widget.Toolbar toolbar = mBinding.appbarSection.toolbar;
+
+        toolbar.setTitle(getResources().getString(R.string.titleAddRoom));
+        final AppCompatActivity activity = (AppCompatActivity) getActivity();
+        activity.setSupportActionBar(toolbar);
+        mCallBack = (AddRoomActivity) activity;
 
         mBinding.txtRoomName.addTextChangedListener(new TextWatcher() {
             @Override
