@@ -72,7 +72,7 @@ public class AddGuestFragment extends android.support.v4.app.Fragment {
         final Intent intent = getActivity().getIntent();
         long roomId = intent.getLongExtra(ROOM_ID, -1);
 
-        Log.d(LOG_TAG, "Start create loan for room id: " + roomId);
+        Log.d(LOG_TAG, "Start add guest for room id: " + roomId);
 
         isNew = intent.getBooleanExtra(TYPE_KEY, false);
         if (!isNew) {
