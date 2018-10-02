@@ -3,12 +3,15 @@ package com.novakduc.forbega.qlnt.data.database;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
+import android.util.Log;
 
 /**
  * Created by n.thanh on 12/2/2016.
  */
 @Entity(tableName = "room_service")
 public class RoomService implements RoomServiceInterface {
+    @Ignore
+    private static final String LOG_TAG = RoomService.class.getSimpleName().toString();
     @Ignore
     protected UnitPrice unitPrice;
     @PrimaryKey(autoGenerate = true)
@@ -49,11 +52,16 @@ public class RoomService implements RoomServiceInterface {
     @Override
     public long charge() {
         long factor = 1;
-        if (isWithIndex()) {
-            factor = this.newIndex - this.oldIndex > 0 ?
+        if (unitPrice != null) {
+            if (isWithIndex()) {
+                factor = this.newIndex - this.oldIndex > 0 ?
                         this.newIndex - this.oldIndex : 1;
+            }
+            return unitPrice.get(type) * factor;
+        } else {
+            Log.d(LOG_TAG, "Unexpected result. Unitprice is null");
+            return -1;
         }
-        return unitPrice.get(type) * factor;
     }
 
     @Override

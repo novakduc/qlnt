@@ -140,4 +140,35 @@ public class RoomForRentRepo {
             }
         });
     }
+
+    public void addInternetService() {
+        mExecutors.diskIO().execute(new Runnable() {
+            @Override
+            public void run() {
+                mAppDao.insert(new RoomService(CostType.INTERNET, mRoomId));
+            }
+        });
+    }
+
+    public void addWaterService(final long initIndex) {
+        mExecutors.diskIO().execute(new Runnable() {
+            @Override
+            public void run() {
+                RoomService waterService = new RoomService(CostType.WATER, getRoomId());
+                waterService.setNewIndex(initIndex);
+                mAppDao.insert(waterService);
+            }
+        });
+    }
+
+    public void addElectricityService(final long pInitIndex) {
+        mExecutors.diskIO().execute(new Runnable() {
+            @Override
+            public void run() {
+                RoomService electricityService = new RoomService(CostType.ELECTRICITY, getRoomId());
+                electricityService.setNewIndex(pInitIndex);
+                mAppDao.insert(electricityService);
+            }
+        });
+    }
 }

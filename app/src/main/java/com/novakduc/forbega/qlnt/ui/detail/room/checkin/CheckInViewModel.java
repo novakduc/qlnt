@@ -40,4 +40,16 @@ public class CheckInViewModel extends ViewModel {
     public void addTvService() {
         mRoomForRentRepo.addTvService();
     }
+
+    public void addInternetService() {
+        mRoomForRentRepo.addInternetService();
+    }
+
+    public void addWaterService(long initIndex) {
+        mRoomForRentRepo.addWaterService(initIndex);
+    }
+
+    public void addElectricityService(long initIndex) {
+        mRoomForRentRepo.addElectricityService(initIndex);
+    }
 }

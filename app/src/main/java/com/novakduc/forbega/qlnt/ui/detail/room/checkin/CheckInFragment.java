@@ -382,8 +382,8 @@ public class CheckInFragment extends Fragment implements GuestListAdapterActionH
             mRoomForRent.setCheckInDate(mCheckInDate);
             mRoomForRent.setStatus(RoomStatus.NORMAL);
 
-            mViewModel.addElectricityService();
-            mViewModel.addWaterService();
+            mViewModel.addElectricityService(mElectricalInitialIndex);
+            mViewModel.addWaterService(mWaterInitialIndex);
 
             if (mIsUsingInternet) {
                 mViewModel.addInternetService();
@@ -412,7 +412,7 @@ public class CheckInFragment extends Fragment implements GuestListAdapterActionH
         }
 
         //Delete all service just created
-        // TODO: 10/2/2018 detele all services
+        // TODO: 10/2/2018 delete all services
 
         getActivity().finish();
     }
