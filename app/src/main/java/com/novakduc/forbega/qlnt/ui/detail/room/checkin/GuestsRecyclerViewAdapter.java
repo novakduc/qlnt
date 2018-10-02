@@ -59,6 +59,14 @@ public class GuestsRecyclerViewAdapter
         final Guest guest = mGuestList.get(position);
         holder.mBinding.textViewGuestName.setText(guest.getName());
 
+        if (guest.isKeyContact()) {
+            holder.mBinding.textViewGuestName.setTextColor(
+                    mContext.getResources().getColor(R.color.redColor));
+        } else {
+            holder.mBinding.textViewGuestName.setTextColor(
+                    mContext.getResources().getColor(android.R.color.black));
+        }
+
         holder.mBinding.ibtDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View pView) {
@@ -66,7 +74,7 @@ public class GuestsRecyclerViewAdapter
             }
         });
 
-        holder.mBinding.ibtEdit.setOnClickListener(new View.OnClickListener() {
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View pView) {
                 mActionHandler.onEditAction(guest.getId());

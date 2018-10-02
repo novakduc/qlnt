@@ -69,7 +69,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:barrierDirection="bottom"
-            app:constraint_referenced_ids="txtLayoutRoomCharge, txtLayoutDeposit"/>
+            app:constraint_referenced_ids="txtLayoutRoomCharge, txtLayoutDeposit" />
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/txtLayoutStartDate"
@@ -172,8 +172,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:barrierDirection="bottom"
-            app:constraint_referenced_ids="txtLayoutElectricity, txtLayoutWater"
-            />
+            app:constraint_referenced_ids="txtLayoutElectricity, txtLayoutWater" />
 
         <CheckBox
             android:id="@+id/checkBoxInternet"
@@ -253,9 +252,10 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/fab_margin"
             app:layout_anchor="@id/guestList"
-            app:layout_anchorGravity="bottom|end"
+            app:layout_anchorGravity="bottom|center"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:srcCompat="@drawable/ic_done_white_24dp" />
 
         <android.support.constraint.Guideline

@@ -32,6 +32,9 @@ import com.novakduc.forbega.qlnt.data.database.RoomForRent;
 import com.novakduc.forbega.qlnt.data.database.RoomStatus;
 import com.novakduc.forbega.qlnt.databinding.FragmentCheckinBinding;
 import com.novakduc.forbega.qlnt.ui.ConfirmationDialogFragment;
+import com.novakduc.forbega.qlnt.ui.config.finance.LoansAdapter;
+import com.novakduc.forbega.qlnt.ui.config.finance.loan.LoanDeclareActivity;
+import com.novakduc.forbega.qlnt.ui.config.finance.loan.LoanDeclareFragment;
 import com.novakduc.forbega.qlnt.ui.detail.room.RoomsRecyclerViewAdapter;
 import com.novakduc.forbega.qlnt.ui.detail.room.checkin.add_guest.AddGuestActivity;
 import com.novakduc.forbega.qlnt.ui.detail.room.checkin.add_guest.AddGuestFragment;
@@ -44,7 +47,7 @@ import com.novakduc.forbega.qlnt.utilities.SpinnerItemArrayProvider;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CheckInFragment extends Fragment implements GuestListAdapterActionHandler {
+public class CheckInFragment extends Fragment implements GuestListAdapterActionHandler{
     public static final String ACTIVE_PROJECT_ID = "active_project_id";
     private static final String LOG_TAG = CheckInFragment.class.getSimpleName();
     public static final String ROOM_ID = CheckInFragment.class.getName() + ".roomId";
@@ -311,12 +314,18 @@ public class CheckInFragment extends Fragment implements GuestListAdapterActionH
 
     @Override
     public void onEditAction(long id) {
-
+        Intent intent = new Intent(getActivity(), AddGuestActivity.class);
+        intent.putExtra(AddGuestFragment.ROOM_ID, mRoomId);
+        intent.putExtra(AddGuestFragment.GUEST_TO_EDIT, id);
+        startActivity(intent);
     }
 
     @Override
     public void onItemClick(long id) {
-
+        Intent intent = new Intent(getActivity(), AddGuestActivity.class);
+        intent.putExtra(AddGuestFragment.ROOM_ID, mRoomId);
+        intent.putExtra(AddGuestFragment.GUEST_TO_EDIT, id);
+        startActivity(intent);
     }
 
     public static CheckInFragment getInstance(long pRoomId) {

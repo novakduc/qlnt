@@ -22,29 +22,16 @@
             <TextView
                 style="@style/Base.TextAppearance.AppCompat.Body1"
                 android:id="@+id/textViewGuestName"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:gravity="center_vertical"
-                android:maxLength="20"
-                android:maxLines="1"
-                android:text="Bui Tin Trung Trung Trung"
+                android:maxLength="45"
+                android:maxLines="2"
+                android:text="Bui Tin Trung Trung Trung Bui Tin Trung Trung TrungBui Tin Trung Trung Trung"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
-
-
-            <ImageButton
-                android:id="@+id/ibtEdit"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="54dp"
-                android:layout_height="wrap_content"
-                android:paddingBottom="6dp"
-                android:paddingEnd="16dp"
-                android:paddingStart="16dp"
-                android:paddingTop="6dp"
-                android:src="@drawable/ic_edit_red_700_24dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/ibtDelete"/>
 
             <ImageButton
                 android:id="@+id/ibtDelete"
@@ -56,8 +43,8 @@
                 android:paddingStart="16dp"
                 android:paddingTop="6dp"
                 android:src="@drawable/ic_delete_red_700_24dp"
-                app:layout_constraintEnd_toStartOf="@id/ibtEdit"
-                app:layout_constraintTop_toTopOf="@id/ibtEdit" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
         </android.support.constraint.ConstraintLayout>
     </android.support.v7.widget.CardView>
 </layout>
