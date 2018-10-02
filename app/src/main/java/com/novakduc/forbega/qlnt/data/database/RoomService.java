@@ -16,25 +16,25 @@ public class RoomService implements RoomServiceInterface {
     private CostType type;
     private long oldIndex;
     private long newIndex;
+    private long roomId;
 
     //For Room only
-    public RoomService(long id, CostType type, long oldIndex, long newIndex) {
+    public RoomService(long id, CostType type, long oldIndex, long newIndex, long roomId) {
         this.id = id;
         this.type = type;
         this.oldIndex = oldIndex;
         this.newIndex = newIndex;
+        this.roomId = roomId;
     }
 
     @Ignore
-    protected RoomService(CostType type, UnitPrice unitPrice) {
+    public RoomService(CostType type, long roomId) {
         this.type = type;
-
-        this.unitPrice = unitPrice;
+        this.roomId = roomId;
     }
 
-    @Ignore
-    protected RoomService(CostType type) {
-        this.type = type;
+    public long getRoomId() {
+        return roomId;
     }
 
     @Override

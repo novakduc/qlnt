@@ -36,4 +36,8 @@ public class CheckInViewModel extends ViewModel {
     public void deleteGuest(long pTempGuestId) {
         mRoomForRentRepo.deleteGuest(pTempGuestId);
     }
+
+    public void addTvService() {
+        mRoomForRentRepo.addTvService();
+    }
 }

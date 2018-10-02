@@ -27,6 +27,7 @@ import android.widget.EditText;
 
 import com.novakduc.baselibrary.NumbericTextWatcher;
 import com.novakduc.forbega.qlnt.R;
+import com.novakduc.forbega.qlnt.data.database.CostType;
 import com.novakduc.forbega.qlnt.data.database.Guest;
 import com.novakduc.forbega.qlnt.data.database.RoomForRent;
 import com.novakduc.forbega.qlnt.data.database.RoomStatus;
@@ -248,17 +249,10 @@ public class CheckInFragment extends Fragment implements GuestListAdapterActionH
             @Override
             public void onChanged(@Nullable List<Guest> pGuests) {
                 if (pGuests != null) {
-                    if (!pGuests.isEmpty()) {
-                        mBinding.fab.show();
-                    } else {
-                        mBinding.fab.hide();
-                    }
                     mGuestsRecyclerViewAdapter.swapList(pGuests);
                 }
             }
         });
-
-        mBinding.fab.hide();
 
         return view;
     }
@@ -387,11 +381,39 @@ public class CheckInFragment extends Fragment implements GuestListAdapterActionH
             mRoomForRent.setBillDate(mBillDate);
             mRoomForRent.setCheckInDate(mCheckInDate);
             mRoomForRent.setStatus(RoomStatus.NORMAL);
+
+            mViewModel.addElectricityService();
+            mViewModel.addWaterService();
+
+            if (mIsUsingInternet) {
+                mViewModel.addInternetService();
+            }
+
+            if (mIsUsingTV) {
+                mViewModel.addTvService();
+            }
+
             mViewModel.updateRoom(mRoomForRent);
         }
     }
 
     public void deleteGuest() {
         mViewModel.deleteGuest(mTempGuestId);
+    }
+
+    public void discardCheckIn() {
+        //Delete all guest just created
+        for (int i = 0; i < mGuestsRecyclerViewAdapter.getItemCount(); i++) {
+            Guest guest = mGuestsRecyclerViewAdapter.getValueAt(i);
+            if (guest.getCheckOutDate() == -1) {
+                Log.d(LOG_TAG, "Delete guest: " + String.valueOf(guest.getId()));
+                mViewModel.deleteGuest(guest.getId());
+            }
+        }
+
+        //Delete all service just created
+        // TODO: 10/2/2018 detele all services
+
+        getActivity().finish();
     }
 }

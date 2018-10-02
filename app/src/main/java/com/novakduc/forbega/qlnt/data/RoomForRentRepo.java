@@ -6,9 +6,11 @@ import android.util.Log;
 
 import com.novakduc.baselibrary.AppExecutors;
 import com.novakduc.forbega.qlnt.data.database.AppDao;
+import com.novakduc.forbega.qlnt.data.database.CostType;
 import com.novakduc.forbega.qlnt.data.database.Guest;
 import com.novakduc.forbega.qlnt.data.database.Loan;
 import com.novakduc.forbega.qlnt.data.database.RoomForRent;
+import com.novakduc.forbega.qlnt.data.database.RoomService;
 
 import java.util.List;
 
@@ -126,6 +128,15 @@ public class RoomForRentRepo {
                 if (guest != null) {
                     mAppDao.removeGuest(guest);
                 }
+            }
+        });
+    }
+
+    public void addTvService() {
+        mExecutors.diskIO().execute(new Runnable() {
+            @Override
+            public void run() {
+                mAppDao.insert(new RoomService(CostType.TV_CABLE, mRoomId));
             }
         });
     }

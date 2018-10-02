@@ -29,24 +29,38 @@ public class CheckInActivity extends SimpleFragmentActivity
     @Override
     public void action(int result, String purposeKey) {
         if (result == ConfirmationDialogFragment.RESULT_OK) {
-            if (purposeKey == DISCARD_CHECKIN_KEY)
+            if (purposeKey == DISCARD_CHECKIN_KEY) {
                 //user confirm to discard check in process
-                finish();
-        }
-
-        if (result == ConfirmationDialogFragment.RESULT_OK) {
-            if (purposeKey == DELETE_GUEST_KEY) {
-                //Delete room after confirm
                 List<Fragment> fragments = getSupportFragmentManager().getFragments();
                 for (Fragment f :
                         fragments) {
                     if (f instanceof CheckInFragment) {
-                        ((CheckInFragment) f).deleteGuest();  //delete room from room list
+                        ((CheckInFragment) f).discardCheckIn();  //delete guest from guest list
                         return;
                     }
                 }
             }
         }
+
+        if (result == ConfirmationDialogFragment.RESULT_OK) {
+            if (purposeKey == DELETE_GUEST_KEY) {
+                //Delete guest after confirm
+                List<Fragment> fragments = getSupportFragmentManager().getFragments();
+                for (Fragment f :
+                        fragments) {
+                    if (f instanceof CheckInFragment) {
+                        ((CheckInFragment) f).deleteGuest();  //delete guest from guest list
+                        return;
+                    }
+                }
+            }
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        discardConfirmation(R.string.announce_discard_checkIn, DISCARD_CHECKIN_KEY);
+        //super.onBackPressed();
     }
 
     @Override

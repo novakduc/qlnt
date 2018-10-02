@@ -199,4 +199,8 @@ public interface AppDao {
 
     @Query("SELECT * FROM guest WHERE id = :pGuestId")
     Guest getGuestById(long pGuestId);
+
+    //Insert a room service to database
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    long insert(RoomService roomService);
 }
