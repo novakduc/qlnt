@@ -24,6 +24,7 @@ public class RoomsRecyclerViewAdapter
     private List<GuestForRoomItemView> mKeyContactList;
     private Context mContext;
     private RoomListAdapterActionHandler mActionHandler;
+    private int mRoomStatus;
 
     public RoomsRecyclerViewAdapter(@NonNull Context context,
                                     RoomListAdapterActionHandler actionHandler) {
@@ -57,12 +58,15 @@ public class RoomsRecyclerViewAdapter
         switch (roomItem.getStatus()) {
             case NORMAL:
                 holder.mBinding.textViewToDo.setText(R.string.todo_relax);
+                mRoomStatus = -1;
                 break;
             case WAITING_FOR_BILL:
                 holder.mBinding.textViewToDo.setText(R.string.todo_billing);
+                mRoomStatus = R.string.messege_to_ask_for_indexes;
                 break;
             case WAITING_FOR_PAYMENT:
                 holder.mBinding.textViewToDo.setText(R.string.todo_get_payment);
+                mRoomStatus = R.string.messege_ask_for_payment;
                 break;
             case AVAILABLE:
                 holder.mBinding.textViewToDo.setText(R.string.todo_checkIn);
@@ -101,7 +105,7 @@ public class RoomsRecyclerViewAdapter
             holder.mBinding.imageButtonCall.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    mActionHandler.onCallGuest(roomItem.getId());
+                    mActionHandler.onCallGuest(roomItem.getKeyContact().getPhoneNumber());
                 }
             });
             holder.mBinding.imageButtonMessage.setEnabled(true);
@@ -109,7 +113,7 @@ public class RoomsRecyclerViewAdapter
             holder.mBinding.imageButtonMessage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    mActionHandler.onSendMessageToGuest(roomItem.getId());
+                    mActionHandler.onSendMessageToGuest(roomItem.getKeyContact().getPhoneNumber(), getRoomStatus());
                 }
             });
         } else {
@@ -126,13 +130,18 @@ public class RoomsRecyclerViewAdapter
                 mActionHandler.onDeleteAction(roomItem.getId());
             }
         });
+
         //edit action
-        holder.mBinding.ibtEdit.setOnClickListener(new View.OnClickListener() {
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View pView) {
                 mActionHandler.onEditAction(roomItem.getId());
             }
         });
+    }
+
+    private String getRoomStatus() {
+        return mRoomStatus != -1 ? mContext.getResources().getString(mRoomStatus) : "";
     }
 
     @Override

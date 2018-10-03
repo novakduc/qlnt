@@ -154,4 +154,6 @@
     <string name="call_fail">No dial application</string>
     <string name="sms_tmp_appreciation">Thank you for using our service</string>
     <string name="guestCheckInCondition">No guest. Are you kidding me!?</string>
+    <string name="messege_to_ask_for_indexes">Please help check water and electrical indexes. Thank you!</string>
+    <string name="messege_ask_for_payment">Please process payment for room rental. Please ignore if you already paid.</string>
 </resources>

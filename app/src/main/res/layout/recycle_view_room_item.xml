@@ -25,41 +25,25 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
-                android:maxLength="20"
+                android:maxLength="30"
                 android:maxLines="1"
                 android:text="Room 1"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
-
-
-            <ImageButton
-                android:id="@+id/ibtEdit"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="54dp"
-                android:layout_height="wrap_content"
-                android:paddingBottom="6dp"
-                android:paddingEnd="16dp"
-                android:paddingStart="16dp"
-                android:paddingTop="6dp"
-                android:src="@drawable/ic_edit_red_700_24dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageButton
                 android:id="@+id/ibtDelete"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="54dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
+                android:layout_marginEnd="4dp"
                 android:paddingBottom="6dp"
                 android:paddingEnd="16dp"
                 android:paddingStart="16dp"
                 android:paddingTop="6dp"
                 android:src="@drawable/ic_delete_red_700_24dp"
-                app:layout_constraintBottom_toBottomOf="@id/ibtEdit"
-                app:layout_constraintEnd_toStartOf="@id/ibtEdit"
-                app:layout_constraintStart_toStartOf="@+id/guideline14"
-                app:layout_constraintTop_toTopOf="@id/ibtEdit" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <View
                 android:id="@+id/lineSeparate"

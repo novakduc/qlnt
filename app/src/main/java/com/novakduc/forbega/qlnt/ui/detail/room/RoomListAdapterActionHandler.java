@@ -9,7 +9,7 @@ public interface RoomListAdapterActionHandler extends ItemListAdapterActionHandl
 
     void onBill(long id);
 
-    void onCallGuest(long id);
+    void onCallGuest(String phoneNo);
 
-    void onSendMessageToGuest(long id);
+    void onSendMessageToGuest(String phoneNo, String message);
 }

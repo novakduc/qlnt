@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import com.novakduc.forbega.qlnt.R;
 import com.novakduc.forbega.qlnt.databinding.FragmentRoomListTabBinding;
 import com.novakduc.forbega.qlnt.ui.ConfirmationDialogFragment;
+import com.novakduc.forbega.qlnt.ui.DialSMSFragment;
 import com.novakduc.forbega.qlnt.ui.detail.ProjectDetailActivity;
 import com.novakduc.forbega.qlnt.ui.detail.room.add_room.AddRoomActivity;
 import com.novakduc.forbega.qlnt.ui.detail.room.checkin.CheckInActivity;
@@ -32,7 +33,7 @@ import java.util.List;
  * Created by n.thanh on 9/29/2016.
  */
 
-public class RoomListFragment extends android.support.v4.app.Fragment
+public class RoomListFragment extends DialSMSFragment
         implements RoomListAdapterActionHandler {
     public static final String ACTIVE_PROJECT_ID = "active_project_id";
     private static final String LOG_TAG = RoomListFragment.class.getSimpleName();
@@ -184,12 +185,12 @@ public class RoomListFragment extends android.support.v4.app.Fragment
     }
 
     @Override
-    public void onCallGuest(long id) {
-
+    public void onCallGuest(String phoneNo) {
+        dial(phoneNo);
     }
 
     @Override
-    public void onSendMessageToGuest(long id) {
-
+    public void onSendMessageToGuest(String phoneNo, String messege) {
+        sendSMS(phoneNo, messege);
     }
 }

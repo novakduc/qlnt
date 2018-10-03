@@ -29,6 +29,7 @@ import android.widget.Toast;
 import com.novakduc.forbega.qlnt.R;
 import com.novakduc.forbega.qlnt.data.database.Guest;
 import com.novakduc.forbega.qlnt.databinding.FragmentGuestDetailBinding;
+import com.novakduc.forbega.qlnt.ui.DialSMSFragment;
 import com.novakduc.forbega.qlnt.ui.detail.room.checkin.CheckInActivity;
 import com.novakduc.forbega.qlnt.utilities.InjectorUtils;
 
@@ -36,7 +37,7 @@ import com.novakduc.forbega.qlnt.utilities.InjectorUtils;
  * Created by n.thanh on 10/21/2016.
  */
 
-public class AddGuestFragment extends android.support.v4.app.Fragment {
+public class AddGuestFragment extends DialSMSFragment {
     public static final String GUEST_ID_KEY = "com.novakduc.forbega.qlnt.tempGuest";
     public static final String RETURN_GUEST = "com.forbega.qlnt.room.checkIn.returnGuest";
     public static final String GUEST_TO_EDIT = "com.novakduc.forbega.qlnt.guest.guestId";
@@ -223,14 +224,7 @@ public class AddGuestFragment extends android.support.v4.app.Fragment {
             @Override
             public void onClick(View pView) {
                 if (mPhoneNo != null) {
-                    String uri = "tel:" + mPhoneNo.trim() ;
-                    Intent intent = new Intent(Intent.ACTION_DIAL);
-                    intent.setData(Uri.parse(uri));
-                    try {
-                        startActivity(intent);
-                    } catch (ActivityNotFoundException pE) {
-                        Toast.makeText(getContext(), getString(R.string.call_fail), Toast.LENGTH_SHORT).show();
-                    }
+                    dial(mPhoneNo);
                 }
             }
         });
@@ -257,24 +251,6 @@ public class AddGuestFragment extends android.support.v4.app.Fragment {
         });
 
         return view;
-    }
-
-    protected void sendSMS(String pPhoneNo, String pText) {
-        Log.i("Send SMS", "");
-        Intent smsIntent = new Intent(Intent.ACTION_VIEW);
-
-        smsIntent.setData(Uri.parse("smsto:"));
-        smsIntent.setType("vnd.android-dir/mms-sms");
-        smsIntent.putExtra("address", mPhoneNo.trim());
-        smsIntent.putExtra("sms_body", pText);
-
-        try {
-            startActivity(smsIntent);
-            Log.i("Finished sending SMS...", "");
-        } catch (android.content.ActivityNotFoundException ex) {
-            Toast.makeText(getContext(),
-                    getString(R.string.sms_fail), Toast.LENGTH_SHORT).show();
-        }
     }
 
     private void saveGuest() {
