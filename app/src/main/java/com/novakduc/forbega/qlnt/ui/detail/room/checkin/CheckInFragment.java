@@ -389,8 +389,7 @@ public class CheckInFragment extends Fragment implements GuestListAdapterActionH
         }
 
         if (mIsValidCheckInInfo) {
-            // TODO: 9/19/2018 checkin action
-            //check in activity
+                        //check in activity
             mRoomForRent.setCharge(mRoomCharge);
             mRoomForRent.setDepositAmount(mDepositAmount);
             mRoomForRent.setBillDate(mBillDate);
