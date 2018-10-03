@@ -203,4 +203,10 @@ public interface AppDao {
     //Insert a room service to database
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     long insert(RoomService roomService);
+
+    @Query("SELECT * FROM room_service WHERE id = :pRoomId")
+    List<RoomService> getAllServicesByRoomId(long pRoomId);
+
+    @Delete
+    void removeRoomService(RoomService pRoomService);
 }

@@ -153,4 +153,5 @@
     <string name="sms_fail">Fail to send SMS</string>
     <string name="call_fail">No dial application</string>
     <string name="sms_tmp_appreciation">Thank you for using our service</string>
+    <string name="guestCheckInCondition">No guest. Are you kidding me!?</string>
 </resources>

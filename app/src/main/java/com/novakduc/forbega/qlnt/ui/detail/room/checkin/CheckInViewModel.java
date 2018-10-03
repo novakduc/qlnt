@@ -52,4 +52,13 @@ public class CheckInViewModel extends ViewModel {
     public void addElectricityService(long initIndex) {
         mRoomForRentRepo.addElectricityService(initIndex);
     }
+
+    public void deleteServices() {
+        mRoomForRentRepo.deleteServices();
+    }
+
+
+    public void confirmKeyContact() {
+        mRoomForRentRepo.confirmAssignKeyContact();
+    }
 }

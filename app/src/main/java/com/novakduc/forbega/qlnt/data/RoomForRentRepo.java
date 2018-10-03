@@ -171,4 +171,42 @@ public class RoomForRentRepo {
             }
         });
     }
+
+    public void deleteServices() {
+        mExecutors.diskIO().execute(new Runnable() {
+            @Override
+            public void run() {
+                List<RoomService> roomServices = mAppDao.getAllServicesByRoomId(mRoomId);
+                if (roomServices != null) {
+                    for (RoomService roomService :
+                            roomServices) {
+                        mAppDao.removeRoomService(roomService);
+                    }
+                }
+            }
+        });
+    }
+
+    public void confirmAssignKeyContact() {
+        mExecutors.diskIO().execute(new Runnable() {
+            @Override
+            public void run() {
+                List<Guest> guests = mAppDao.getGuestsByRoom(mRoomId);
+                if (guests != null) {
+                    boolean isKeyContact = false;
+                    for (Guest guest :
+                            guests) {
+                        isKeyContact = guest.isKeyContact();
+                        if (isKeyContact) {
+                            return;
+                        }
+                    }
+
+                    Guest guest = guests.get(0);
+                    guest.setKeyContact(true);
+                    mAppDao.updateGuest(guest);
+                }
+            }
+        });
+    }
 }

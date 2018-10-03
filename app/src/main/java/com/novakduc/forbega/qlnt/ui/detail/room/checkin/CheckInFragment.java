@@ -24,6 +24,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.novakduc.baselibrary.NumbericTextWatcher;
 import com.novakduc.forbega.qlnt.R;
@@ -61,7 +62,7 @@ public class CheckInFragment extends Fragment implements GuestListAdapterActionH
     private long mRoomCharge = -1;
     private long mDepositAmount = -1;
     private int mBillDate;
-    private long mElectricalInitialIndex, mWaterInitialIndex;
+    private long mElectricalInitialIndex = -1 , mWaterInitialIndex = - 1;
     private boolean mIsUsingTV, mIsUsingInternet, mIsValidCheckInInfo;
     private GuestsRecyclerViewAdapter mGuestsRecyclerViewAdapter;
     private long mTempGuestId;
@@ -260,6 +261,11 @@ public class CheckInFragment extends Fragment implements GuestListAdapterActionH
     private void bindRoomInfoToUI() {
         String title = getString(R.string.checkIn_room_title) + " " + mRoomForRent.getName();
         mBinding.appbarSection.toolbar.setTitle(title);
+
+        mRoomCharge = mRoomForRent.getCharge();
+        mBinding.roomCharge.setText(String.valueOf(mRoomCharge));
+        mDepositAmount = mRoomForRent.getCharge();
+        mBinding.depositAmount.setText(String.valueOf(mDepositAmount));
     }
 
     @Override
@@ -339,7 +345,7 @@ public class CheckInFragment extends Fragment implements GuestListAdapterActionH
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.confirm) {
-            // TODO: 9/6/2018  
+            checkIn();
         }
 
         if (item.getItemId() == android.R.id.home)
@@ -367,11 +373,20 @@ public class CheckInFragment extends Fragment implements GuestListAdapterActionH
         mBinding.txtLayoutElectricity.setErrorEnabled(!electricalIndexCondition);
         mBinding.txtLayoutWater.setErrorEnabled(!waterIndexCondition);
 
-        mIsValidCheckInInfo = roomChargeCondition;  //need to input room charge
-        mIsValidCheckInInfo = mIsUsingInternet && depositCondition; //need to input deposit amount
-        mIsValidCheckInInfo = mIsValidCheckInInfo && electricalIndexCondition; //need to input init electrical index
-        mIsValidCheckInInfo = mIsValidCheckInInfo && waterIndexCondition;  //need to input init water index
-        mIsValidCheckInInfo = mIsValidCheckInInfo && guestCondition; //at least 1 guest
+        mIsValidCheckInInfo = roomChargeCondition && depositCondition && electricalIndexCondition
+                && waterIndexCondition && guestCondition;
+
+        Log.d(LOG_TAG, "Condition: " + String.valueOf(mIsValidCheckInInfo)
+                + "\nRoom charge condition: " + String.valueOf(roomChargeCondition)
+                + "\nDeposit condition: " + String.valueOf(depositCondition)
+                + "\nElectrical index condition: " + String.valueOf(electricalIndexCondition)
+                + "\nWater index condition: " + String.valueOf(waterIndexCondition)
+                + "\nGuest condition: " + String.valueOf(guestCondition)
+                + " - " + String.valueOf(mGuestsRecyclerViewAdapter.getItemCount()));
+
+        if (!guestCondition) {
+            Toast.makeText(getContext(), getString(R.string.guestCheckInCondition), Toast.LENGTH_SHORT).show();
+        }
 
         if (mIsValidCheckInInfo) {
             // TODO: 9/19/2018 checkin action
@@ -394,6 +409,8 @@ public class CheckInFragment extends Fragment implements GuestListAdapterActionH
             }
 
             mViewModel.updateRoom(mRoomForRent);
+            mViewModel.confirmKeyContact();
+            getActivity().finish();
         }
     }
 
@@ -411,8 +428,8 @@ public class CheckInFragment extends Fragment implements GuestListAdapterActionH
             }
         }
 
-        //Delete all service just created
-        // TODO: 10/2/2018 delete all services
+        //Delete all services just created
+        mViewModel.deleteServices();
 
         getActivity().finish();
     }
