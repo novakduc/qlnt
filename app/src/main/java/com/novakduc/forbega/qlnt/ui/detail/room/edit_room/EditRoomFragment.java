@@ -51,4 +51,9 @@ public class EditRoomFragment extends CheckInFragment {
         setCheckInDate(getRoomForRent().getCheckInDate());
         getBinding().editTextStartDate.setText(ConverterUtilities.calendarToString(getCheckInDate()));
     }
+
+    @Override
+    protected void checkIn() {
+
+    }
 }

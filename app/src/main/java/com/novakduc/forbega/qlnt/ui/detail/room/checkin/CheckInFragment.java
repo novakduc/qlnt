@@ -406,7 +406,7 @@ public class CheckInFragment extends Fragment implements GuestListAdapterActionH
         }
     }
 
-    private void checkIn() {
+    protected void checkIn() {
         setRoomStatus(RoomStatus.NORMAL);
     }
 
