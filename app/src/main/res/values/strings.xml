@@ -156,4 +156,6 @@
     <string name="guestCheckInCondition">No guest. Are you kidding me!?</string>
     <string name="messege_to_ask_for_indexes">Please help check water and electrical indexes. Thank you!</string>
     <string name="messege_ask_for_payment">Please process payment for room rental. Please ignore if you already paid.</string>
+    <string name="chargeTitle">Charge:</string>
+    <string name="depositTitle">Deposit:</string>
 </resources>
