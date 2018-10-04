@@ -22,6 +22,7 @@ import com.novakduc.baselibrary.NumbericTextWatcher;
 import com.novakduc.forbega.qlnt.R;
 import com.novakduc.forbega.qlnt.data.database.RoomForRent;
 import com.novakduc.forbega.qlnt.databinding.FragmentAddRoomBinding;
+import com.novakduc.forbega.qlnt.databinding.FragmentRoomDetailBinding;
 import com.novakduc.forbega.qlnt.utilities.InjectorUtils;
 
 public class EditRoomFragment extends Fragment {
@@ -30,7 +31,7 @@ public class EditRoomFragment extends Fragment {
     private EditRoomViewModel mViewModel;
     private RoomForRent mRoomForRent;
     private long mRoomId;
-    private FragmentAddRoomBinding mBinding;
+    private FragmentRoomDetailBinding mBinding;
     private EditRoomActivityListener mCallBack;
 
     public static EditRoomFragment getInstance(@NonNull long roomId) {
@@ -57,7 +58,7 @@ public class EditRoomFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mBinding = DataBindingUtil.inflate(inflater,
-                R.layout.fragment_add_room, container, false);
+                R.layout.fragment_room_detail, container, false);
         View view = mBinding.getRoot();
 
         android.support.v7.widget.Toolbar toolbar = mBinding.appbarSection.toolbar;
@@ -73,63 +74,13 @@ public class EditRoomFragment extends Fragment {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-        mBinding.txtRoomName.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                if (editable.length() == 0) {
-                    mBinding.txtLayoutName.setError(getString(R.string.invalidName));
-                    mBinding.txtLayoutName.setErrorEnabled(true);
-                } else {
-                    mBinding.txtLayoutName.setErrorEnabled(false);
-                    mRoomForRent.setName(editable.toString());
-                }
-            }
-        });
-        mBinding.txtRoomPrice.addTextChangedListener(new NumbericTextWatcher(mBinding.txtRoomPrice) {
-            @Override
-            public void executeAfterTextChanged(String value) {
-                try {
-                    long amount;
-                    amount = Long.valueOf(value);
-                    if (amount < 0) {
-                        throw new NumberFormatException();
-                    } else {
-                        mRoomForRent.setCharge(amount);
-                        mBinding.txtLayoutPrice.setErrorEnabled(false);
-                    }
-                } catch (NumberFormatException e) {
-                    mBinding.txtLayoutPrice.setError(getString(R.string.invesment_amount_error));
-                    mBinding.txtLayoutPrice.setErrorEnabled(true);
-                    mRoomForRent.setCharge(-1);
-                }
-            }
-        });
-
-        mBinding.fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mViewModel.updateRoom(mRoomForRent);
-                getActivity().finish();
-            }
-        });
-
         mViewModel.getRoomForRentLiveData().observe(this, new Observer<RoomForRent>() {
             @Override
             public void onChanged(@Nullable RoomForRent roomForRent) {
                 if (roomForRent != null) {
                     mRoomForRent = roomForRent;
-                    mBinding.txtRoomName.setText(mRoomForRent.getName());
-                    mBinding.txtRoomPrice.setText(String.valueOf(mRoomForRent.getCharge()));
+                    mBinding.txtRoomDepositAmount.setText(String.valueOf(mRoomForRent.getDepositAmount()));
+                    mBinding.txtRoomChargeAmount.setText(String.valueOf(mRoomForRent.getCharge()));
                     String title = getString(R.string.edit_room_title) + " " + mRoomForRent.getName();
                     mBinding.appbarSection.toolbar.setTitle(title);
                 }
