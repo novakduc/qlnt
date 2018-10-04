@@ -45,11 +45,12 @@ import com.novakduc.forbega.qlnt.utilities.DatePickerFragment;
 import com.novakduc.forbega.qlnt.utilities.InjectorUtils;
 import com.novakduc.forbega.qlnt.utilities.ItemListAdapterActionHandler;
 import com.novakduc.forbega.qlnt.utilities.SpinnerItemArrayProvider;
+import com.novakduc.forbega.qlnt.utilities.UseViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CheckInFragment extends Fragment implements GuestListAdapterActionHandler{
+public class CheckInFragment extends Fragment implements GuestListAdapterActionHandler, UseViewModel<CheckInViewModel> {
     public static final String ACTIVE_PROJECT_ID = "active_project_id";
     private static final String LOG_TAG = CheckInFragment.class.getSimpleName();
     public static final String ROOM_ID = CheckInFragment.class.getName() + ".roomId";
@@ -75,10 +76,7 @@ public class CheckInFragment extends Fragment implements GuestListAdapterActionH
 
         mIsValidCheckInInfo = false;
 
-        CheckInViewModelFactory factory =
-                InjectorUtils.provideCheckInViewModelFactory(getActivity(), mRoomId);
-
-        mViewModel = ViewModelProviders.of(this, factory).get(CheckInViewModel.class);
+        mViewModel = getViewModel();
 
         setHasOptionsMenu(true);
     }
@@ -431,5 +429,13 @@ public class CheckInFragment extends Fragment implements GuestListAdapterActionH
         mViewModel.deleteServices();
 
         getActivity().finish();
+    }
+
+    @Override
+    public CheckInViewModel getViewModel() {
+        CheckInViewModelFactory factory =
+                InjectorUtils.provideCheckInViewModelFactory(getActivity(), mRoomId);
+
+        return  ViewModelProviders.of(this, factory).get(CheckInViewModel.class);
     }
 }
