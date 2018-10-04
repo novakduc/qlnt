@@ -1,6 +1,7 @@
 package com.novakduc.forbega.qlnt.ui.detail.room.checkin;
 
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.novakduc.baselibrary.SimpleFragmentActivity;
@@ -15,11 +16,13 @@ public class CheckInActivity extends SimpleFragmentActivity
 
     public static final String DISCARD_CHECKIN_KEY = CheckInActivity.class.getName() + "discardCheckinProcess";
     public static final String DELETE_GUEST_KEY = CheckInActivity.class.getName() + "deleteGuest";
+    private static final String LOG_TAG = CheckInActivity.class.getSimpleName();
 
     @Override
     protected Fragment createFragment() {
         long roomId = getIntent().getLongExtra(CheckInFragment.ROOM_ID, -1);
         if (roomId != -1) {
+            Log.d(LOG_TAG, "get CheckInFragment");
             return CheckInFragment.getInstance(roomId);
         }
         Toast.makeText(this, getString(R.string.roomIdError), Toast.LENGTH_SHORT).show();

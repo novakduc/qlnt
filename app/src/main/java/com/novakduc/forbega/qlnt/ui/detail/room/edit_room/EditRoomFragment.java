@@ -11,6 +11,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -29,14 +30,26 @@ import com.novakduc.forbega.qlnt.utilities.ConverterUtilities;
 import com.novakduc.forbega.qlnt.utilities.InjectorUtils;
 
 public class EditRoomFragment extends CheckInFragment {
+    private static final String LOG_TAG = EditRoomFragment.class.getSimpleName();
+
+    public static EditRoomFragment newInstance(long roomId) {
+
+        Bundle args = new Bundle();
+        args.putLong(ROOM_ID, roomId);
+        EditRoomFragment fragment = new EditRoomFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
 
     @Override
     public void discardCheckIn() {
+        Log.d(LOG_TAG, "Back discard edit");
         getActivity().finish();
     }
 
     @Override
     public CheckInViewModel getViewModel() {
+        Log.d(LOG_TAG, "get Edit room view model");
         EditRoomViewModelFactory factory =
                 InjectorUtils.provideEditRoomViewModelFactory(getActivity(), getRoomId());
 
@@ -50,10 +63,12 @@ public class EditRoomFragment extends CheckInFragment {
         getBinding().spinnerBillDate.setId(getBillDate());
         setCheckInDate(getRoomForRent().getCheckInDate());
         getBinding().editTextStartDate.setText(ConverterUtilities.calendarToString(getCheckInDate()));
+        setRoomStatus(getRoomForRent().getStatus());
+        Log.d(LOG_TAG, "Binded room info to UI");
     }
 
     @Override
     protected void checkIn() {
-
+        Log.d(LOG_TAG, "This is not check in fragment but Edit ROOM fragment");
     }
 }

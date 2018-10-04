@@ -407,10 +407,11 @@ public class CheckInFragment extends Fragment implements GuestListAdapterActionH
     }
 
     protected void checkIn() {
+        Log.d(LOG_TAG, "Check in fragment change room status");
         setRoomStatus(RoomStatus.NORMAL);
     }
 
-    private void setRoomStatus(RoomStatus pRoomStatus) {
+    public void setRoomStatus(RoomStatus pRoomStatus) {
         mRoomStatus = pRoomStatus;
     }
 
@@ -419,6 +420,7 @@ public class CheckInFragment extends Fragment implements GuestListAdapterActionH
     }
 
     public void discardCheckIn() {
+        Log.d(LOG_TAG, "Discard check in");
         //Delete all guest just created
         for (int i = 0; i < mGuestsRecyclerViewAdapter.getItemCount(); i++) {
             Guest guest = mGuestsRecyclerViewAdapter.getValueAt(i);
@@ -436,6 +438,10 @@ public class CheckInFragment extends Fragment implements GuestListAdapterActionH
 
     public long getRoomId() {
         return mRoomId;
+    }
+
+    public RoomStatus getRoomStatus() {
+        return mRoomStatus;
     }
 
     public FragmentCheckinBinding getBinding() {
@@ -528,6 +534,7 @@ public class CheckInFragment extends Fragment implements GuestListAdapterActionH
 
     @Override
     public CheckInViewModel getViewModel() {
+        Log.d(LOG_TAG, "Get checkin view model");
         CheckInViewModelFactory factory =
                 InjectorUtils.provideCheckInViewModelFactory(getActivity(), getRoomId());
 
