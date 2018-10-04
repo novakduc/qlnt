@@ -37,26 +37,25 @@ public class CheckInViewModel extends ViewModel {
         mRoomForRentRepo.deleteGuest(pTempGuestId);
     }
 
-    public void addTvService() {
+    public void updateTvService() {
         mRoomForRentRepo.addTvService();
     }
 
-    public void addInternetService() {
+    public void updateInternetService() {
         mRoomForRentRepo.addInternetService();
     }
 
-    public void addWaterService(long initIndex) {
+    public void updateWaterService(long initIndex) {
         mRoomForRentRepo.addWaterService(initIndex);
     }
 
-    public void addElectricityService(long initIndex) {
+    public void updateElectricalService(long initIndex) {
         mRoomForRentRepo.addElectricityService(initIndex);
     }
 
     public void deleteServices() {
         mRoomForRentRepo.deleteServices();
     }
-
 
     public void confirmKeyContact() {
         mRoomForRentRepo.confirmAssignKeyContact();

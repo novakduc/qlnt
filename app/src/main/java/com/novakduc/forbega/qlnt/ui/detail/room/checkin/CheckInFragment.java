@@ -28,26 +28,19 @@ import android.widget.Toast;
 
 import com.novakduc.baselibrary.NumbericTextWatcher;
 import com.novakduc.forbega.qlnt.R;
-import com.novakduc.forbega.qlnt.data.database.CostType;
 import com.novakduc.forbega.qlnt.data.database.Guest;
 import com.novakduc.forbega.qlnt.data.database.RoomForRent;
 import com.novakduc.forbega.qlnt.data.database.RoomStatus;
 import com.novakduc.forbega.qlnt.databinding.FragmentCheckinBinding;
 import com.novakduc.forbega.qlnt.ui.ConfirmationDialogFragment;
-import com.novakduc.forbega.qlnt.ui.config.finance.LoansAdapter;
-import com.novakduc.forbega.qlnt.ui.config.finance.loan.LoanDeclareActivity;
-import com.novakduc.forbega.qlnt.ui.config.finance.loan.LoanDeclareFragment;
-import com.novakduc.forbega.qlnt.ui.detail.room.RoomsRecyclerViewAdapter;
 import com.novakduc.forbega.qlnt.ui.detail.room.checkin.add_guest.AddGuestActivity;
 import com.novakduc.forbega.qlnt.ui.detail.room.checkin.add_guest.AddGuestFragment;
 import com.novakduc.forbega.qlnt.utilities.ConverterUtilities;
 import com.novakduc.forbega.qlnt.utilities.DatePickerFragment;
 import com.novakduc.forbega.qlnt.utilities.InjectorUtils;
-import com.novakduc.forbega.qlnt.utilities.ItemListAdapterActionHandler;
 import com.novakduc.forbega.qlnt.utilities.SpinnerItemArrayProvider;
 import com.novakduc.forbega.qlnt.utilities.UseViewModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class CheckInFragment extends Fragment implements GuestListAdapterActionHandler, UseViewModel<CheckInViewModel> {
@@ -67,6 +60,7 @@ public class CheckInFragment extends Fragment implements GuestListAdapterActionH
     private boolean mIsUsingTV, mIsUsingInternet, mIsValidCheckInInfo;
     private GuestsRecyclerViewAdapter mGuestsRecyclerViewAdapter;
     private long mTempGuestId;
+    private RoomStatus mRoomStatus = RoomStatus.AVAILABLE;
 
     @Override
 
@@ -256,7 +250,7 @@ public class CheckInFragment extends Fragment implements GuestListAdapterActionH
         return view;
     }
 
-    private void bindRoomInfoToUI() {
+    protected void bindRoomInfoToUI() {
         String title = getString(R.string.checkIn_room_title) + " " + mRoomForRent.getName();
         mBinding.appbarSection.toolbar.setTitle(title);
 
@@ -343,7 +337,7 @@ public class CheckInFragment extends Fragment implements GuestListAdapterActionH
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.confirm) {
-            checkIn();
+            confirmAction();
         }
 
         if (item.getItemId() == android.R.id.home)
@@ -351,7 +345,7 @@ public class CheckInFragment extends Fragment implements GuestListAdapterActionH
         return super.onOptionsItemSelected(item);
     }
 
-    private void checkIn() {
+    private void confirmAction() {
         boolean roomChargeCondition, depositCondition, electricalIndexCondition, waterIndexCondition,
                 guestCondition;
 
@@ -392,23 +386,32 @@ public class CheckInFragment extends Fragment implements GuestListAdapterActionH
             mRoomForRent.setDepositAmount(mDepositAmount);
             mRoomForRent.setBillDate(mBillDate);
             mRoomForRent.setCheckInDate(mCheckInDate);
-            mRoomForRent.setStatus(RoomStatus.NORMAL);
+            checkIn();  //change room status
+            mRoomForRent.setStatus(mRoomStatus);
 
-            mViewModel.addElectricityService(mElectricalInitialIndex);
-            mViewModel.addWaterService(mWaterInitialIndex);
+            mViewModel.updateElectricalService(mElectricalInitialIndex);
+            mViewModel.updateWaterService(mWaterInitialIndex);
 
             if (mIsUsingInternet) {
-                mViewModel.addInternetService();
+                mViewModel.updateInternetService();
             }
 
             if (mIsUsingTV) {
-                mViewModel.addTvService();
+                mViewModel.updateTvService();
             }
 
             mViewModel.updateRoom(mRoomForRent);
             mViewModel.confirmKeyContact();
             getActivity().finish();
         }
+    }
+
+    private void checkIn() {
+        setRoomStatus(RoomStatus.NORMAL);
+    }
+
+    private void setRoomStatus(RoomStatus pRoomStatus) {
+        mRoomStatus = pRoomStatus;
     }
 
     public void deleteGuest() {
@@ -431,10 +434,102 @@ public class CheckInFragment extends Fragment implements GuestListAdapterActionH
         getActivity().finish();
     }
 
+    public long getRoomId() {
+        return mRoomId;
+    }
+
+    public FragmentCheckinBinding getBinding() {
+        return mBinding;
+    }
+
+    public RoomForRent getRoomForRent() {
+        return mRoomForRent;
+    }
+
+    public void setRoomForRent(RoomForRent pRoomForRent) {
+        mRoomForRent = pRoomForRent;
+    }
+
+    public void setRoomId(long pRoomId) {
+        mRoomId = pRoomId;
+    }
+
+    public long getCheckInDate() {
+        return mCheckInDate;
+    }
+
+    public void setCheckInDate(long pCheckInDate) {
+        mCheckInDate = pCheckInDate;
+    }
+
+    public long getRoomCharge() {
+        return mRoomCharge;
+    }
+
+    public void setRoomCharge(long pRoomCharge) {
+        mRoomCharge = pRoomCharge;
+    }
+
+    public long getDepositAmount() {
+        return mDepositAmount;
+    }
+
+    public void setDepositAmount(long pDepositAmount) {
+        mDepositAmount = pDepositAmount;
+    }
+
+    public int getBillDate() {
+        return mBillDate;
+    }
+
+    public void setBillDate(int pBillDate) {
+        mBillDate = pBillDate;
+    }
+
+    public long getElectricalInitialIndex() {
+        return mElectricalInitialIndex;
+    }
+
+    public void setElectricalInitialIndex(long pElectricalInitialIndex) {
+        mElectricalInitialIndex = pElectricalInitialIndex;
+    }
+
+    public long getWaterInitialIndex() {
+        return mWaterInitialIndex;
+    }
+
+    public void setWaterInitialIndex(long pWaterInitialIndex) {
+        mWaterInitialIndex = pWaterInitialIndex;
+    }
+
+    public boolean isUsingTV() {
+        return mIsUsingTV;
+    }
+
+    public void setUsingTV(boolean pUsingTV) {
+        mIsUsingTV = pUsingTV;
+    }
+
+    public boolean isUsingInternet() {
+        return mIsUsingInternet;
+    }
+
+    public void setUsingInternet(boolean pUsingInternet) {
+        mIsUsingInternet = pUsingInternet;
+    }
+
+    public long getTempGuestId() {
+        return mTempGuestId;
+    }
+
+    public void setTempGuestId(long pTempGuestId) {
+        mTempGuestId = pTempGuestId;
+    }
+
     @Override
     public CheckInViewModel getViewModel() {
         CheckInViewModelFactory factory =
-                InjectorUtils.provideCheckInViewModelFactory(getActivity(), mRoomId);
+                InjectorUtils.provideCheckInViewModelFactory(getActivity(), getRoomId());
 
         return  ViewModelProviders.of(this, factory).get(CheckInViewModel.class);
     }
