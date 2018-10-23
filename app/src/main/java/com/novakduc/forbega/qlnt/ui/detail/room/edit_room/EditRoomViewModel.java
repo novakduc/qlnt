@@ -28,4 +28,8 @@ public class EditRoomViewModel extends ViewModel {
     public LiveData<List<Guest>> getGuestListLiveData() {
         return mGuestListLiveData;
     }
+
+    public void deleteGuest(long pTempGuestId) {
+        mRoomForRentRepo.deleteGuest(pTempGuestId);
+    }
 }
