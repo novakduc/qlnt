@@ -209,4 +209,8 @@ public class RoomForRentRepo {
             }
         });
     }
+
+    public LiveData<List<RoomService>> getServices() {
+        return mAppDao.getLiveDataServices(mRoomId);
+    }
 }

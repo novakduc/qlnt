@@ -209,4 +209,7 @@ public interface AppDao {
 
     @Delete
     void removeRoomService(RoomService pRoomService);
+
+    @Query("SELECT * FROM room_service WHERE id = :pRoomId")
+    LiveData<List<RoomService>> getLiveDataServices(long pRoomId);
 }

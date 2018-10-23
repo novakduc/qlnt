@@ -30,12 +30,15 @@ import android.widget.Toast;
 
 import com.novakduc.baselibrary.NumbericTextWatcher;
 import com.novakduc.forbega.qlnt.R;
+import com.novakduc.forbega.qlnt.data.database.CostType;
 import com.novakduc.forbega.qlnt.data.database.Guest;
 import com.novakduc.forbega.qlnt.data.database.RoomForRent;
+import com.novakduc.forbega.qlnt.data.database.RoomService;
 import com.novakduc.forbega.qlnt.data.database.RoomStatus;
 import com.novakduc.forbega.qlnt.databinding.FragmentAddRoomBinding;
 import com.novakduc.forbega.qlnt.databinding.FragmentEditRoomBinding;
 import com.novakduc.forbega.qlnt.ui.ConfirmationDialogFragment;
+import com.novakduc.forbega.qlnt.ui.detail.room.checkin.CheckInActivity;
 import com.novakduc.forbega.qlnt.ui.detail.room.checkin.CheckInActivityListener;
 import com.novakduc.forbega.qlnt.ui.detail.room.checkin.CheckInFragment;
 import com.novakduc.forbega.qlnt.ui.detail.room.checkin.CheckInViewModel;
@@ -67,7 +70,8 @@ public class EditRoomFragment extends Fragment implements GuestListAdapterAction
     private long mCheckInDate;
     private long mDepositAmount = -1;
     private long mElectricalInitialIndex = -1 , mWaterInitialIndex = - 1;
-    private boolean mIsUsingTV, mIsUsingInternet, mIsValidCheckInInfo;
+    private boolean mIsUsingTV, mIsUsingInternet;
+    private RoomService mElectricalService, mWaterService, mTVService, mInternetService;
 
     public static EditRoomFragment newInstance(long roomId) {
 
@@ -293,6 +297,34 @@ public class EditRoomFragment extends Fragment implements GuestListAdapterAction
             }
         });
 
+        mViewModel.getServicesLiveData().observe(this, new Observer<List<RoomService>>() {
+            @Override
+            public void onChanged(@Nullable List<RoomService> pRoomServices) {
+                if (pRoomServices != null) {
+                    for (RoomService roomService :
+                            pRoomServices) {
+                        switch (roomService.getType()) {
+                            case WATER:
+                                mWaterService = roomService;
+                                mBinding.water.setText(String.valueOf(mWaterService.getAmount()));
+                                break;
+                            case ELECTRICITY:
+                                mElectricalService = roomService;
+                                mBinding.electricity.setText(String.valueOf(mElectricalService.getAmount()));
+                                break;
+                            case TV_CABLE:
+                                mTVService = roomService;
+                                mBinding.checkBoxTv.setChecked(true);
+                                break;
+                            case INTERNET:
+                                mInternetService = roomService;
+                                mBinding.checkBoxInternet.setChecked(true);
+                        }
+                    }
+                }
+            }
+        });
+
         return view;
     }
 
@@ -387,11 +419,35 @@ public class EditRoomFragment extends Fragment implements GuestListAdapterAction
 
     @Override
     public void onEditAction(long id) {
-
+        Intent intent = new Intent(getActivity(), AddGuestActivity.class);
+        intent.putExtra(AddGuestFragment.ROOM_ID, mRoomId);
+        intent.putExtra(AddGuestFragment.GUEST_TO_EDIT, id);
+        startActivity(intent);
     }
 
     @Override
     public void onItemClick(long id) {
 
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.confirm_toolbar, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.confirm) {
+            confirmAction();
+        }
+
+        if (item.getItemId() == android.R.id.home)
+            mCallBack.discardConfirmation(R.string.announce_discard_checkIn, EditRoomActivity.DISCARD_EDIT_ROOM_KEY);
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void confirmAction() {
+        // TODO: 10/23/2018 confirm edit room
     }
 }
