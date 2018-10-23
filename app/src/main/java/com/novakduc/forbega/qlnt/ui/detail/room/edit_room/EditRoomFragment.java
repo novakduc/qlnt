@@ -60,7 +60,7 @@ public class EditRoomFragment extends Fragment {
     }
 
     private EditRoomViewModel getViewModel() {
-        Log.d(LOG_TAG, "Get checkin view model");
+        Log.d(LOG_TAG, "Get edit room view model");
         EditRoomViewModelFactory factory =
                 InjectorUtils.provideEditRoomViewModelFactory(getActivity(), mRoomId);
 
