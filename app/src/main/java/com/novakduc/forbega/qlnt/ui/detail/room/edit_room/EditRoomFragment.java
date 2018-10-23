@@ -36,6 +36,9 @@ public class EditRoomFragment extends Fragment {
     public static final String ROOM_ID = EditRoomFragment.class.getName() + ".roomId";
     private FragmentEditRoomBinding mBinding;
     private EditRoomActivityListener mCallBack;
+    private long mRoomId;
+    private EditRoomViewModel mViewModel;
+    private RoomForRent mRoomForRent;
 
     public static EditRoomFragment newInstance(long roomId) {
 
@@ -49,6 +52,19 @@ public class EditRoomFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mRoomId = getArguments().getLong(ROOM_ID);
+
+        mViewModel = getViewModel();
+
+        setHasOptionsMenu(true);
+    }
+
+    private EditRoomViewModel getViewModel() {
+        Log.d(LOG_TAG, "Get checkin view model");
+        EditRoomViewModelFactory factory =
+                InjectorUtils.provideEditRoomViewModelFactory(getActivity(), mRoomId);
+
+        return  ViewModelProviders.of(this, factory).get(EditRoomViewModel.class);
     }
 
     @Nullable
@@ -70,7 +86,25 @@ public class EditRoomFragment extends Fragment {
             actionBar.setHomeAsUpIndicator(R.drawable.ic_navigate_before);
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
+
+        mViewModel.getRoomForRentLiveData().observe(this, new Observer<RoomForRent>() {
+            @Override
+            public void onChanged(@Nullable RoomForRent pRoomForRent) {
+                if (pRoomForRent != null) {
+                    mRoomForRent = pRoomForRent;
+                    bindRoomToUI();
+                }
+            }
+        });
+
         return view;
+    }
+
+    private void bindRoomToUI() {
+        mBinding.txtRoomName.setText(mRoomForRent.getName());
+        mBinding.appbarSection.toolbar.setTitle(
+                getString(R.string.edit_room_title) + " " + mRoomForRent.getName());
+        mBinding.roomCharge.setText(String.valueOf(mRoomForRent.getCharge()));
     }
 
     public void discardEditRoom() {
