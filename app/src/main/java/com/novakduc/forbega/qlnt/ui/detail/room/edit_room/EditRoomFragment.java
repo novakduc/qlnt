@@ -23,14 +23,19 @@ import com.novakduc.baselibrary.NumbericTextWatcher;
 import com.novakduc.forbega.qlnt.R;
 import com.novakduc.forbega.qlnt.data.database.RoomForRent;
 import com.novakduc.forbega.qlnt.databinding.FragmentAddRoomBinding;
+import com.novakduc.forbega.qlnt.databinding.FragmentEditRoomBinding;
+import com.novakduc.forbega.qlnt.ui.detail.room.checkin.CheckInActivityListener;
 import com.novakduc.forbega.qlnt.ui.detail.room.checkin.CheckInFragment;
 import com.novakduc.forbega.qlnt.ui.detail.room.checkin.CheckInViewModel;
 import com.novakduc.forbega.qlnt.ui.detail.room.checkin.CheckInViewModelFactory;
 import com.novakduc.forbega.qlnt.utilities.ConverterUtilities;
 import com.novakduc.forbega.qlnt.utilities.InjectorUtils;
 
-public class EditRoomFragment extends CheckInFragment {
+public class EditRoomFragment extends Fragment {
     private static final String LOG_TAG = EditRoomFragment.class.getSimpleName();
+    public static final String ROOM_ID = EditRoomFragment.class.getName() + ".roomId";
+    private FragmentEditRoomBinding mBinding;
+    private EditRoomActivityListener mCallBack;
 
     public static EditRoomFragment newInstance(long roomId) {
 
@@ -42,33 +47,38 @@ public class EditRoomFragment extends CheckInFragment {
     }
 
     @Override
-    public void discardCheckIn() {
-        Log.d(LOG_TAG, "Back discard edit");
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        mBinding = DataBindingUtil.inflate(inflater,
+                R.layout.fragment_edit_room, container, false);
+        View view = mBinding.getRoot();
+
+        android.support.v7.widget.Toolbar toolbar = mBinding.appbarSection.toolbar;
+
+        toolbar.setTitle(getResources().getString(R.string.project_create_confirm));
+        final AppCompatActivity activity = (AppCompatActivity) getActivity();
+        activity.setSupportActionBar(toolbar);
+        mCallBack = (EditRoomActivityListener) activity;
+
+        final ActionBar actionBar = activity.getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setHomeAsUpIndicator(R.drawable.ic_navigate_before);
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+        return view;
+    }
+
+    public void discardEditRoom() {
+        //discard saving edited information
         getActivity().finish();
     }
 
-    @Override
-    public CheckInViewModel getViewModel() {
-        Log.d(LOG_TAG, "get Edit room view model");
-        EditRoomViewModelFactory factory =
-                InjectorUtils.provideEditRoomViewModelFactory(getActivity(), getRoomId());
-
-        return  ViewModelProviders.of(this, factory).get(EditRoomViewModel.class);
-    }
-
-    @Override
-    protected void bindRoomInfoToUI() {
-        super.bindRoomInfoToUI();
-        setBillDate(getRoomForRent().getBillDate());
-        getBinding().spinnerBillDate.setId(getBillDate());
-        setCheckInDate(getRoomForRent().getCheckInDate());
-        getBinding().editTextStartDate.setText(ConverterUtilities.calendarToString(getCheckInDate()));
-        setRoomStatus(getRoomForRent().getStatus());
-        Log.d(LOG_TAG, "Binded room info to UI");
-    }
-
-    @Override
-    protected void checkIn() {
-        Log.d(LOG_TAG, "This is not check in fragment but Edit ROOM fragment");
+    public void deleteGuest() {
+        // TODO: 10/23/2018 delete guest
     }
 }

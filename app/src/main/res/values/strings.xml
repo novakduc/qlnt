@@ -159,4 +159,6 @@
     <string name="chargeTitle">Charge:</string>
     <string name="depositTitle">Deposit:</string>
     <string name="startDateTitle">From:</string>
+    <string name="no_guest_announcement">There is no guest. Add guest for checking in</string>
+    <string name="not_yet_checkin_announcement">Room has not been checked in. Please check in asap.</string>
 </resources>

@@ -243,6 +243,11 @@ public class CheckInFragment extends Fragment implements GuestListAdapterActionH
             public void onChanged(@Nullable List<Guest> pGuests) {
                 if (pGuests != null) {
                     mGuestsRecyclerViewAdapter.swapList(pGuests);
+                    if (pGuests.isEmpty()) {
+                        mBinding.textViewNoGuest.setVisibility(View.VISIBLE);
+                    } else {
+                        mBinding.textViewNoGuest.setVisibility(View.INVISIBLE);
+                    }
                 }
             }
         });
