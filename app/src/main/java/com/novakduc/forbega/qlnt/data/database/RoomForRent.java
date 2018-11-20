@@ -124,4 +124,9 @@ public class RoomForRent implements Cloneable, ItemWithId {
     public void setBillDate(int pBillDate) {
         billDate = pBillDate;
     }
+
+    @Override
+    public String toString() {
+        return "\nId:" + id + "; room name:" + name;
+    }
 }

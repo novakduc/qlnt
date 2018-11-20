@@ -111,4 +111,8 @@ public class Guest extends Observable implements Cloneable {
         this.keyContact = keyContact ? 1 : 0;
     }
 
+    @Override
+    public String toString() {
+        return "\nId:" + id + "; name:" + name;
+    }
 }

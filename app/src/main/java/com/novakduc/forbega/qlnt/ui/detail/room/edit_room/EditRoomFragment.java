@@ -309,11 +309,11 @@ public class EditRoomFragment extends Fragment implements GuestListAdapterAction
                         switch (roomService.getType()) {
                             case WATER:
                                 mWaterService = roomService;
-                                mBinding.water.setText(String.valueOf(mWaterService.getAmount()));
+                                mBinding.water.setText(String.valueOf(mWaterService.getNewIndex()));
                                 break;
                             case ELECTRICITY:
                                 mElectricalService = roomService;
-                                mBinding.electricity.setText(String.valueOf(mElectricalService.getAmount()));
+                                mBinding.electricity.setText(String.valueOf(mElectricalService.getNewIndex()));
                                 break;
                             case TV_CABLE:
                                 mTVService = roomService;

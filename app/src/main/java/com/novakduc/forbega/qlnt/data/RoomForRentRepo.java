@@ -136,7 +136,10 @@ public class RoomForRentRepo {
         mExecutors.diskIO().execute(new Runnable() {
             @Override
             public void run() {
-                mAppDao.insert(new RoomService(CostType.TV_CABLE, mRoomId));
+                RoomService tvService = new RoomService(CostType.TV_CABLE, mRoomId);
+                long id = mAppDao.insert(tvService);
+                tvService.setId(id);
+                Log.d(LOG_TAG, "Saved tv service: " + tvService.toString());
             }
         });
     }
@@ -145,7 +148,10 @@ public class RoomForRentRepo {
         mExecutors.diskIO().execute(new Runnable() {
             @Override
             public void run() {
-                mAppDao.insert(new RoomService(CostType.INTERNET, mRoomId));
+                RoomService internetService = new RoomService(CostType.INTERNET, mRoomId);
+                long id = mAppDao.insert(internetService);
+                internetService.setId(id);
+                Log.d(LOG_TAG, "Saved internet service: " + internetService.toString());
             }
         });
     }
@@ -156,7 +162,9 @@ public class RoomForRentRepo {
             public void run() {
                 RoomService waterService = new RoomService(CostType.WATER, getRoomId());
                 waterService.setNewIndex(initIndex);
-                mAppDao.insert(waterService);
+                long id = mAppDao.insert(waterService);
+                waterService.setId(id);
+                Log.d(LOG_TAG, "Saved water service: " + waterService.toString());
             }
         });
     }
@@ -167,7 +175,9 @@ public class RoomForRentRepo {
             public void run() {
                 RoomService electricityService = new RoomService(CostType.ELECTRICITY, getRoomId());
                 electricityService.setNewIndex(pInitIndex);
-                mAppDao.insert(electricityService);
+                long id = mAppDao.insert(electricityService);
+                electricityService.setId(id);
+                Log.d(LOG_TAG, "Saved electricity service: " + electricityService.toString());
             }
         });
     }

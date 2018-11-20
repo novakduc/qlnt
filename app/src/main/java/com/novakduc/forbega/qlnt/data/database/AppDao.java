@@ -210,6 +210,6 @@ public interface AppDao {
     @Delete
     void removeRoomService(RoomService pRoomService);
 
-    @Query("SELECT * FROM room_service WHERE id = :pRoomId")
+    @Query("SELECT * FROM room_service WHERE roomId = :pRoomId")
     LiveData<List<RoomService>> getLiveDataServices(long pRoomId);
 }

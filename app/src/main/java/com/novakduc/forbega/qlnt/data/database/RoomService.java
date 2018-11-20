@@ -117,4 +117,9 @@ public class RoomService implements RoomServiceInterface {
     public long getAmount() {
         return charge();
     }
+
+    @Override
+    public String toString() {
+        return "\nId:" + id + "; type:" + type.toString() + "; room Id:" + roomId + "; index:" + newIndex;
+    }
 }

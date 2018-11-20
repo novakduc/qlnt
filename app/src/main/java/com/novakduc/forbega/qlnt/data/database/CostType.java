@@ -23,4 +23,26 @@ public enum CostType {
     public int getOrder() {
         return order;
     }
+
+    @Override
+    public String toString() {
+        switch (getOrder()) {
+            case 0:
+                return "electricity";
+            case 1:
+                return "water";
+            case 2:
+                return "tv";
+            case 3:
+                return "internet";
+            case 4:
+                return "trash collection";
+            case 5:
+                return "security";
+            case 6:
+                return "maintenance";
+                default:
+                    return "other";
+        }
+    }
 }
