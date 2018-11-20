@@ -126,6 +126,7 @@ public class EditRoomFragment extends Fragment implements GuestListAdapterAction
                 if (pRoomForRent != null) {
                     mRoomForRent = pRoomForRent;
                     bindRoomToUI();
+                    Log.d(LOG_TAG, "Got roomForRent live data: " + pRoomForRent.toString());
                 }
             }
         });
@@ -170,6 +171,7 @@ public class EditRoomFragment extends Fragment implements GuestListAdapterAction
                     } else {
                         mBinding.textViewNotCheckInYet.setVisibility(View.INVISIBLE);
                     }
+                    Log.d(LOG_TAG, "Got guest live data: " + pGuests.toString());
                 }
             }
         });
@@ -300,6 +302,7 @@ public class EditRoomFragment extends Fragment implements GuestListAdapterAction
         mViewModel.getServicesLiveData().observe(this, new Observer<List<RoomService>>() {
             @Override
             public void onChanged(@Nullable List<RoomService> pRoomServices) {
+                Log.d(LOG_TAG, "Got services live data: " + pRoomServices.toString());
                 if (pRoomServices != null) {
                     for (RoomService roomService :
                             pRoomServices) {
