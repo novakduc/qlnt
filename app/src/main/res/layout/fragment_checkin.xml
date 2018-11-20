@@ -29,11 +29,10 @@
             app:layout_constraintTop_toBottomOf="@id/appbarSection">
 
             <android.support.design.widget.TextInputEditText
-                android:id="@+id/roomCharge"
                 style="@style/Base.TextAppearance.AppCompat.Body1"
+                android:id="@+id/roomCharge"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:elevation="8dp"
                 android:hint="@string/roomChargeHint"
                 android:inputType="number" />
         </android.support.design.widget.TextInputLayout>
@@ -42,9 +41,8 @@
             android:id="@+id/txtLayoutDeposit"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="4dp"
             android:layout_weight="5"
-            android:background="@color/windowBackgroundColor"
             android:clipToPadding="false"
             android:paddingStart="@dimen/paddingStart"
             android:paddingTop="@dimen/paddingTop"
@@ -55,11 +53,10 @@
             app:layout_constraintTop_toBottomOf="@id/appbarSection">
 
             <android.support.design.widget.TextInputEditText
-                android:id="@+id/depositAmount"
                 style="@style/Base.TextAppearance.AppCompat.Body1"
+                android:id="@+id/depositAmount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:elevation="8dp"
                 android:hint="@string/inputDepositHint"
                 android:inputType="number" />
         </android.support.design.widget.TextInputLayout>
