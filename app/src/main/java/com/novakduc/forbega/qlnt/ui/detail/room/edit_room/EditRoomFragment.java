@@ -71,6 +71,7 @@ public class EditRoomFragment extends Fragment implements GuestListAdapterAction
     private long mDepositAmount = -1;
     private long mElectricalInitialIndex = -1 , mWaterInitialIndex = - 1;
     private boolean mIsUsingTV, mIsUsingInternet;
+    private boolean mIsDataValidated;
     private RoomService mElectricalService, mWaterService, mTVService, mInternetService;
 
     public static EditRoomFragment newInstance(long roomId) {
@@ -149,7 +150,8 @@ public class EditRoomFragment extends Fragment implements GuestListAdapterAction
                     mBinding.txtLayoutName.setErrorEnabled(true);
                 } else {
                     mBinding.txtLayoutName.setErrorEnabled(false);
-                    mRoomForRent.setName(editable.toString());
+                    mRoomName = editable.toString();
+                    mRoomForRent.setName(mRoomName);
                 }
             }
         });
@@ -184,6 +186,7 @@ public class EditRoomFragment extends Fragment implements GuestListAdapterAction
             @Override
             public void onItemSelected(AdapterView<?> pAdapterView, View pView, int pI, long pL) {
                 mBillDate = pI + 1;
+                mRoomForRent.setBillDate(mBillDate);
             }
 
             @Override
@@ -202,6 +205,7 @@ public class EditRoomFragment extends Fragment implements GuestListAdapterAction
                         throw new NumberFormatException();
                     } else {
                         mBinding.txtLayoutRoomCharge.setErrorEnabled(false);
+                        mRoomForRent.setCharge(mRoomCharge);
                     }
                 } catch (NumberFormatException pE) {
                     mBinding.txtLayoutRoomCharge.setError(getString(R.string.invalid_input_error));
@@ -452,5 +456,61 @@ public class EditRoomFragment extends Fragment implements GuestListAdapterAction
 
     private void confirmAction() {
         // TODO: 10/23/2018 confirm edit room
+        boolean roomChargeCondition, depositCondition, electricalIndexCondition, waterIndexCondition,
+                guestCondition;
+
+        roomChargeCondition = mRoomCharge > 0;
+        depositCondition = mDepositAmount > 0;
+        electricalIndexCondition = mElectricalInitialIndex >= 0;
+        waterIndexCondition = mWaterInitialIndex >= 0;
+        guestCondition = mGuestsRecyclerViewAdapter.getItemCount() != 0;
+
+        mBinding.txtLayoutRoomCharge.setError(getString(R.string.invalid_input_error));
+        mBinding.txtLayoutDeposit.setError(getString(R.string.invalid_input_error));
+        mBinding.txtLayoutElectricity.setError(getString(R.string.invalid_input_error));
+        mBinding.txtLayoutWater.setError(getString(R.string.invalid_input_error));
+
+        mBinding.txtLayoutRoomCharge.setErrorEnabled(!roomChargeCondition);
+        mBinding.txtLayoutDeposit.setErrorEnabled(!depositCondition);
+        mBinding.txtLayoutElectricity.setErrorEnabled(!electricalIndexCondition);
+        mBinding.txtLayoutWater.setErrorEnabled(!waterIndexCondition);
+
+        mIsDataValidated = roomChargeCondition && depositCondition && electricalIndexCondition
+                && waterIndexCondition && guestCondition;
+
+        Log.d(LOG_TAG, "Condition: " + String.valueOf(mIsDataValidated)
+                + "\nRoom charge condition: " + String.valueOf(roomChargeCondition)
+                + "\nDeposit condition: " + String.valueOf(depositCondition)
+                + "\nElectrical index condition: " + String.valueOf(electricalIndexCondition)
+                + "\nWater index condition: " + String.valueOf(waterIndexCondition)
+                + "\nGuest condition: " + String.valueOf(guestCondition)
+                + " - " + String.valueOf(mGuestsRecyclerViewAdapter.getItemCount()));
+
+        if (!guestCondition) {
+            Toast.makeText(getContext(), getString(R.string.guestCheckInCondition), Toast.LENGTH_SHORT).show();
+        }
+
+        if (mIsDataValidated) {
+            //check in activity
+            mRoomForRent.setCharge(mRoomCharge);
+            mRoomForRent.setDepositAmount(mDepositAmount);
+            mRoomForRent.setBillDate(mBillDate);
+            mRoomForRent.setCheckInDate(mCheckInDate);
+
+            mViewModel.updateElectricalService(mElectricalInitialIndex);
+            mViewModel.updateWaterService(mWaterInitialIndex);
+
+            if (mIsUsingInternet) {
+                mViewModel.updateInternetService();
+            }
+
+            if (mIsUsingTV) {
+                mViewModel.updateTvService();
+            }
+
+            mViewModel.updateRoom(mRoomForRent);
+            mViewModel.confirmKeyContact();
+            getActivity().finish();
+        }
     }
 }
