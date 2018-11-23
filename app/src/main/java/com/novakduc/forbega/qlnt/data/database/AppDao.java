@@ -212,4 +212,7 @@ public interface AppDao {
 
     @Query("SELECT * FROM room_service WHERE roomId = :pRoomId")
     LiveData<List<RoomService>> getLiveDataServices(long pRoomId);
+
+    @Update
+    void updateService(RoomService pService);
 }

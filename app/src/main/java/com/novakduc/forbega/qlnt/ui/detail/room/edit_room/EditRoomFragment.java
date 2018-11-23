@@ -1,7 +1,9 @@
 package com.novakduc.forbega.qlnt.ui.detail.room.edit_room;
 
+import android.app.Activity;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.TypedArray;
 import android.databinding.DataBindingUtil;
@@ -22,6 +24,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
@@ -112,14 +115,15 @@ public class EditRoomFragment extends Fragment implements GuestListAdapterAction
 
         toolbar.setTitle(getResources().getString(R.string.project_create_confirm));
         final AppCompatActivity activity = (AppCompatActivity) getActivity();
-        activity.setSupportActionBar(toolbar);
-        mCallBack = (EditRoomActivityListener) activity;
-
-        final ActionBar actionBar = activity.getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setHomeAsUpIndicator(R.drawable.ic_navigate_before);
-            actionBar.setDisplayHomeAsUpEnabled(true);
+        if (activity != null) {
+            activity.setSupportActionBar(toolbar);
+            final ActionBar actionBar = activity.getSupportActionBar();
+            if (actionBar != null) {
+                actionBar.setHomeAsUpIndicator(R.drawable.ic_navigate_before);
+                actionBar.setDisplayHomeAsUpEnabled(true);
+            }
         }
+        mCallBack = (EditRoomActivityListener) activity;
 
         mViewModel.getRoomForRentLiveData().observe(this, new Observer<RoomForRent>() {
             @Override
@@ -148,6 +152,7 @@ public class EditRoomFragment extends Fragment implements GuestListAdapterAction
                 if (editable.length() == 0) {
                     mBinding.txtLayoutName.setError(getString(R.string.invalidName));
                     mBinding.txtLayoutName.setErrorEnabled(true);
+                    mRoomName = "";
                 } else {
                     mBinding.txtLayoutName.setErrorEnabled(false);
                     mRoomName = editable.toString();
@@ -155,6 +160,7 @@ public class EditRoomFragment extends Fragment implements GuestListAdapterAction
                 }
             }
         });
+
 
         mGuestsRecyclerViewAdapter = new GuestsRecyclerViewAdapter(activity, this);
         RecyclerView recyclerView = mBinding.guestList;
@@ -303,10 +309,11 @@ public class EditRoomFragment extends Fragment implements GuestListAdapterAction
             }
         });
 
+        mBinding.checkBoxInternet.requestFocus();
+
         mViewModel.getServicesLiveData().observe(this, new Observer<List<RoomService>>() {
             @Override
             public void onChanged(@Nullable List<RoomService> pRoomServices) {
-                Log.d(LOG_TAG, "Got services live data: " + pRoomServices.toString());
                 if (pRoomServices != null) {
                     for (RoomService roomService :
                             pRoomServices) {
@@ -321,13 +328,17 @@ public class EditRoomFragment extends Fragment implements GuestListAdapterAction
                                 break;
                             case TV_CABLE:
                                 mTVService = roomService;
-                                mBinding.checkBoxTv.setChecked(true);
+                                mIsUsingTV = mTVService.isApplied();
+                                mBinding.checkBoxTv.setChecked(mIsUsingTV);
                                 break;
                             case INTERNET:
                                 mInternetService = roomService;
-                                mBinding.checkBoxInternet.setChecked(true);
+                                mIsUsingInternet = mInternetService.isApplied();
+                                mBinding.checkBoxInternet.setChecked(mIsUsingInternet);
                         }
                     }
+
+                    Log.d(LOG_TAG, "Got services live data: " + pRoomServices.toString());
                 }
             }
         });
@@ -456,27 +467,30 @@ public class EditRoomFragment extends Fragment implements GuestListAdapterAction
 
     private void confirmAction() {
         // TODO: 10/23/2018 confirm edit room
-        boolean roomChargeCondition, depositCondition, electricalIndexCondition, waterIndexCondition,
+        boolean roomNameCondition, roomChargeCondition, depositCondition, electricalIndexCondition, waterIndexCondition,
                 guestCondition;
 
+        roomNameCondition = !mRoomName.isEmpty();
         roomChargeCondition = mRoomCharge > 0;
         depositCondition = mDepositAmount > 0;
         electricalIndexCondition = mElectricalInitialIndex >= 0;
         waterIndexCondition = mWaterInitialIndex >= 0;
         guestCondition = mGuestsRecyclerViewAdapter.getItemCount() != 0;
 
+        mBinding.txtLayoutName.setError(getString(R.string.invalid_input_error));
         mBinding.txtLayoutRoomCharge.setError(getString(R.string.invalid_input_error));
         mBinding.txtLayoutDeposit.setError(getString(R.string.invalid_input_error));
         mBinding.txtLayoutElectricity.setError(getString(R.string.invalid_input_error));
         mBinding.txtLayoutWater.setError(getString(R.string.invalid_input_error));
 
+        mBinding.txtLayoutName.setErrorEnabled(!roomNameCondition);
         mBinding.txtLayoutRoomCharge.setErrorEnabled(!roomChargeCondition);
         mBinding.txtLayoutDeposit.setErrorEnabled(!depositCondition);
         mBinding.txtLayoutElectricity.setErrorEnabled(!electricalIndexCondition);
         mBinding.txtLayoutWater.setErrorEnabled(!waterIndexCondition);
 
-        mIsDataValidated = roomChargeCondition && depositCondition && electricalIndexCondition
-                && waterIndexCondition && guestCondition;
+        mIsDataValidated = roomNameCondition && roomChargeCondition && depositCondition
+                && electricalIndexCondition && waterIndexCondition && guestCondition;
 
         Log.d(LOG_TAG, "Condition: " + String.valueOf(mIsDataValidated)
                 + "\nRoom charge condition: " + String.valueOf(roomChargeCondition)
@@ -492,21 +506,22 @@ public class EditRoomFragment extends Fragment implements GuestListAdapterAction
 
         if (mIsDataValidated) {
             //check in activity
+            mRoomForRent.setName(mRoomName);
             mRoomForRent.setCharge(mRoomCharge);
             mRoomForRent.setDepositAmount(mDepositAmount);
             mRoomForRent.setBillDate(mBillDate);
             mRoomForRent.setCheckInDate(mCheckInDate);
 
-            mViewModel.updateElectricalService(mElectricalInitialIndex);
-            mViewModel.updateWaterService(mWaterInitialIndex);
+            mElectricalService.setNewIndex(mElectricalInitialIndex);
+            mViewModel.updateService(mElectricalService);
+            mWaterService.setNewIndex(mWaterInitialIndex);
+            mViewModel.updateService(mWaterService);
 
-            if (mIsUsingInternet) {
-                mViewModel.updateInternetService();
-            }
+            mInternetService.setApplied(mIsUsingInternet);
+            mViewModel.updateService(mInternetService);
 
-            if (mIsUsingTV) {
-                mViewModel.updateTvService();
-            }
+            mTVService.setApplied(mIsUsingTV);
+            mViewModel.updateService(mTVService);
 
             mViewModel.updateRoom(mRoomForRent);
             mViewModel.confirmKeyContact();

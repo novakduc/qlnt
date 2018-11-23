@@ -6,10 +6,12 @@ import android.util.Log;
 
 import com.novakduc.baselibrary.AppExecutors;
 import com.novakduc.forbega.qlnt.data.database.AppDao;
+import com.novakduc.forbega.qlnt.data.database.CostType;
 import com.novakduc.forbega.qlnt.data.database.Guest;
 import com.novakduc.forbega.qlnt.data.database.Loan;
 import com.novakduc.forbega.qlnt.data.database.Project;
 import com.novakduc.forbega.qlnt.data.database.RoomForRent;
+import com.novakduc.forbega.qlnt.data.database.RoomService;
 import com.novakduc.forbega.qlnt.data.database.UnitPrice;
 import com.novakduc.forbega.qlnt.ui.detail.ProjectNameQuery;
 import com.novakduc.forbega.qlnt.ui.detail.finance.BillRecentItem;
@@ -180,7 +182,14 @@ public class ProjectRepo {
                         mAppDao.removeGuest(guest);
                     }
                 }
-                // TODO: 5/8/2018 delete other thing belong to room
+
+                List<RoomService> services = mAppDao.getAllServicesByRoomId(roomId);
+                if (services != null) {
+                    for (RoomService roomService :
+                            services) {
+                        mAppDao.removeRoomService(roomService);
+                    }
+                }
 
                 RoomForRent roomForRent = mAppDao.getRoomById(roomId);
                 if (roomForRent != null) {
@@ -196,8 +205,14 @@ public class ProjectRepo {
             @Override
             public void run() {
                 RoomForRent roomForRent = RoomForRent.getInstance(mProjectId, "", -1);
-                roomForRent.setId(mAppDao.insert(roomForRent));
+                long roomId = mAppDao.insert(roomForRent);
+                roomForRent.setId(roomId);
                 roomForRentMutableLiveData.postValue(roomForRent);
+
+                mAppDao.insert(RoomService.getInstance(CostType.ELECTRICITY, roomId));
+                mAppDao.insert(RoomService.getInstance(CostType.WATER, roomId));
+                mAppDao.insert(RoomService.getInstance(CostType.INTERNET, roomId));
+                mAppDao.insert(RoomService.getInstance(CostType.TV_CABLE, roomId));
             }
         });
         return roomForRentMutableLiveData;

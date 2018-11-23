@@ -39,4 +39,16 @@ public class EditRoomViewModel extends ViewModel {
     public LiveData<List<RoomService>> getServicesLiveData() {
         return mServicesLiveData;
     }
+
+    public void updateService(RoomService pService) {
+        mRoomForRentRepo.updateService(pService);
+    }
+
+    public void updateRoom(RoomForRent pRoomForRent) {
+        mRoomForRentRepo.updateRoom(pRoomForRent);
+    }
+
+    public void confirmKeyContact() {
+        mRoomForRentRepo.confirmAssignKeyContact();
+    }
 }

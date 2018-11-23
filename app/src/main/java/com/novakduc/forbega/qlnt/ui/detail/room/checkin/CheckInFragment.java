@@ -30,6 +30,7 @@ import com.novakduc.baselibrary.NumbericTextWatcher;
 import com.novakduc.forbega.qlnt.R;
 import com.novakduc.forbega.qlnt.data.database.Guest;
 import com.novakduc.forbega.qlnt.data.database.RoomForRent;
+import com.novakduc.forbega.qlnt.data.database.RoomService;
 import com.novakduc.forbega.qlnt.data.database.RoomStatus;
 import com.novakduc.forbega.qlnt.databinding.FragmentCheckinBinding;
 import com.novakduc.forbega.qlnt.ui.ConfirmationDialogFragment;
@@ -61,6 +62,7 @@ public class CheckInFragment extends Fragment implements GuestListAdapterActionH
     private GuestsRecyclerViewAdapter mGuestsRecyclerViewAdapter;
     private long mTempGuestId;
     private RoomStatus mRoomStatus = RoomStatus.AVAILABLE;
+    private RoomService mElectricalService, mWaterService, mTVService, mInternetService;
 
     @Override
 
@@ -231,6 +233,38 @@ public class CheckInFragment extends Fragment implements GuestListAdapterActionH
             }
         });
 
+        mViewModel.getServicesLiveData().observe(this, new Observer<List<RoomService>>() {
+            @Override
+            public void onChanged(@Nullable List<RoomService> pRoomServices) {
+                if (pRoomServices != null) {
+                    for (RoomService roomService :
+                            pRoomServices) {
+                        switch (roomService.getType()) {
+                            case WATER:
+                                mWaterService = roomService;
+                                mWaterInitialIndex = mWaterService.getNewIndex();
+                                mBinding.water.setText(String.valueOf(mWaterInitialIndex));
+                                break;
+                            case ELECTRICITY:
+                                mElectricalService = roomService;
+                                mElectricalInitialIndex = mElectricalService.getNewIndex();
+                                mBinding.electricity.setText(String.valueOf(mElectricalInitialIndex));
+                                break;
+                            case TV_CABLE:
+                                mTVService = roomService;
+                                mIsUsingTV = mTVService.isApplied();
+                                mBinding.checkBoxTv.setChecked(mIsUsingTV);
+                                break;
+                            case INTERNET:
+                                mInternetService = roomService;
+                                mIsUsingInternet = mInternetService.isApplied();
+                                mBinding.checkBoxInternet.setChecked(mIsUsingInternet);
+                        }
+                    }
+                }
+            }
+        });
+
         mGuestsRecyclerViewAdapter = new GuestsRecyclerViewAdapter(activity, this);
         RecyclerView recyclerView = mBinding.guestList;
         LinearLayoutManager layoutManager = new LinearLayoutManager(activity);
@@ -394,16 +428,17 @@ public class CheckInFragment extends Fragment implements GuestListAdapterActionH
             checkIn();  //change room status
             mRoomForRent.setStatus(mRoomStatus);
 
-            mViewModel.updateElectricalService(mElectricalInitialIndex);
-            mViewModel.updateWaterService(mWaterInitialIndex);
+            mElectricalService.setNewIndex(mElectricalInitialIndex);
+            mViewModel.updateElectricalService(mElectricalService);
+            mWaterService.setNewIndex(mWaterInitialIndex);
+            mViewModel.updateWaterService(mWaterService);
 
-            if (mIsUsingInternet) {
-                mViewModel.updateInternetService();
-            }
+            mInternetService.setApplied(mIsUsingInternet);
+            mViewModel.updateInternetService(mInternetService);
 
-            if (mIsUsingTV) {
-                mViewModel.updateTvService();
-            }
+            mTVService.setApplied(mIsUsingTV);
+                mViewModel.updateTvService(mTVService);
+
 
             mViewModel.updateRoom(mRoomForRent);
             mViewModel.confirmKeyContact();
@@ -434,9 +469,6 @@ public class CheckInFragment extends Fragment implements GuestListAdapterActionH
                 mViewModel.deleteGuest(guest.getId());
             }
         }
-
-        //Delete all services just created
-        mViewModel.deleteServices();
 
         getActivity().finish();
     }

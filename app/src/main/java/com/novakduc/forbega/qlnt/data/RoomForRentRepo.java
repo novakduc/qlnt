@@ -132,71 +132,6 @@ public class RoomForRentRepo {
         });
     }
 
-    public void addTvService() {
-        mExecutors.diskIO().execute(new Runnable() {
-            @Override
-            public void run() {
-                RoomService tvService = new RoomService(CostType.TV_CABLE, mRoomId);
-                long id = mAppDao.insert(tvService);
-                tvService.setId(id);
-                Log.d(LOG_TAG, "Saved tv service: " + tvService.toString());
-            }
-        });
-    }
-
-    public void addInternetService() {
-        mExecutors.diskIO().execute(new Runnable() {
-            @Override
-            public void run() {
-                RoomService internetService = new RoomService(CostType.INTERNET, mRoomId);
-                long id = mAppDao.insert(internetService);
-                internetService.setId(id);
-                Log.d(LOG_TAG, "Saved internet service: " + internetService.toString());
-            }
-        });
-    }
-
-    public void addWaterService(final long initIndex) {
-        mExecutors.diskIO().execute(new Runnable() {
-            @Override
-            public void run() {
-                RoomService waterService = new RoomService(CostType.WATER, getRoomId());
-                waterService.setNewIndex(initIndex);
-                long id = mAppDao.insert(waterService);
-                waterService.setId(id);
-                Log.d(LOG_TAG, "Saved water service: " + waterService.toString());
-            }
-        });
-    }
-
-    public void addElectricityService(final long pInitIndex) {
-        mExecutors.diskIO().execute(new Runnable() {
-            @Override
-            public void run() {
-                RoomService electricityService = new RoomService(CostType.ELECTRICITY, getRoomId());
-                electricityService.setNewIndex(pInitIndex);
-                long id = mAppDao.insert(electricityService);
-                electricityService.setId(id);
-                Log.d(LOG_TAG, "Saved electricity service: " + electricityService.toString());
-            }
-        });
-    }
-
-    public void deleteServices() {
-        mExecutors.diskIO().execute(new Runnable() {
-            @Override
-            public void run() {
-                List<RoomService> roomServices = mAppDao.getAllServicesByRoomId(mRoomId);
-                if (roomServices != null) {
-                    for (RoomService roomService :
-                            roomServices) {
-                        mAppDao.removeRoomService(roomService);
-                    }
-                }
-            }
-        });
-    }
-
     public void confirmAssignKeyContact() {
         mExecutors.diskIO().execute(new Runnable() {
             @Override
@@ -222,5 +157,14 @@ public class RoomForRentRepo {
 
     public LiveData<List<RoomService>> getServices() {
         return mAppDao.getLiveDataServices(mRoomId);
+    }
+
+    public void updateService(final RoomService pService) {
+        mExecutors.diskIO().execute(new Runnable() {
+            @Override
+            public void run() {
+                mAppDao.updateService(pService);
+            }
+        });
     }
 }

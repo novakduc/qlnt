@@ -20,20 +20,27 @@ public class RoomService implements RoomServiceInterface {
     private long oldIndex;
     private long newIndex;
     private long roomId;
+    private boolean isApplied;
 
     //For Room only
-    public RoomService(long id, CostType type, long oldIndex, long newIndex, long roomId) {
+    public RoomService(long id, CostType type, long oldIndex, long newIndex, long roomId, boolean isApplied) {
         this.id = id;
         this.type = type;
         this.oldIndex = oldIndex;
         this.newIndex = newIndex;
         this.roomId = roomId;
+        this.isApplied = isApplied;
     }
 
     @Ignore
-    public RoomService(CostType type, long roomId) {
+    private RoomService(CostType type, long roomId) {
         this.type = type;
         this.roomId = roomId;
+        this.isApplied = true;
+    }
+
+    public static RoomService getInstance(CostType pCostType, long pRoomId) {
+        return new RoomService(pCostType, pRoomId);
     }
 
     public long getRoomId() {
@@ -103,6 +110,14 @@ public class RoomService implements RoomServiceInterface {
         return false;
     }
 
+    public boolean isApplied() {
+        return isApplied;
+    }
+
+    public void setApplied(boolean pApplied) {
+        isApplied = pApplied;
+    }
+
     @Override
     public long getId() {
         return this.id;
@@ -120,6 +135,6 @@ public class RoomService implements RoomServiceInterface {
 
     @Override
     public String toString() {
-        return "\nId:" + id + "; type:" + type.toString() + "; room Id:" + roomId + "; index:" + newIndex;
+        return "\nId:" + id + "; type:" + type.toString() + "; room Id:" + roomId + "; index:" + newIndex + "; applied:" + isApplied;
     }
 }
