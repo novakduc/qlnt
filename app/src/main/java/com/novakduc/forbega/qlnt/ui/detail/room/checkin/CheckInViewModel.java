@@ -69,14 +69,14 @@ public class CheckInViewModel extends ViewModel {
 
     public void turnOnBillReminder() {
         PeriodicWorkRequest.Builder builder =
-                new PeriodicWorkRequest.Builder(BillRemindWorker.class, 30, TimeUnit.DAYS);
-        builder.setInputData(createDataInput());
+                new PeriodicWorkRequest.Builder(BillRemindWorker.class, 24, TimeUnit.HOURS);
+        builder.setInputData(createInputRoomData());
         PeriodicWorkRequest workRequest = builder.build();
 
         WorkManager.getInstance().enqueue(workRequest);
     }
 
-    private Data createDataInput() {
+    private Data createInputRoomData() {
         Data.Builder builder = new Data.Builder();
         if (mRoomName != null) {
             builder.putString(Constants.ROOM_NAME_KEY, mRoomName);
