@@ -1,9 +1,7 @@
 package com.novakduc.forbega.qlnt.ui.detail.room.edit_room;
 
-import android.app.Activity;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
-import android.content.Context;
 import android.content.Intent;
 import android.content.res.TypedArray;
 import android.databinding.DataBindingUtil;
@@ -24,7 +22,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
@@ -33,19 +30,12 @@ import android.widget.Toast;
 
 import com.novakduc.baselibrary.NumbericTextWatcher;
 import com.novakduc.forbega.qlnt.R;
-import com.novakduc.forbega.qlnt.data.database.CostType;
 import com.novakduc.forbega.qlnt.data.database.Guest;
 import com.novakduc.forbega.qlnt.data.database.RoomForRent;
 import com.novakduc.forbega.qlnt.data.database.RoomService;
 import com.novakduc.forbega.qlnt.data.database.RoomStatus;
-import com.novakduc.forbega.qlnt.databinding.FragmentAddRoomBinding;
 import com.novakduc.forbega.qlnt.databinding.FragmentEditRoomBinding;
 import com.novakduc.forbega.qlnt.ui.ConfirmationDialogFragment;
-import com.novakduc.forbega.qlnt.ui.detail.room.checkin.CheckInActivity;
-import com.novakduc.forbega.qlnt.ui.detail.room.checkin.CheckInActivityListener;
-import com.novakduc.forbega.qlnt.ui.detail.room.checkin.CheckInFragment;
-import com.novakduc.forbega.qlnt.ui.detail.room.checkin.CheckInViewModel;
-import com.novakduc.forbega.qlnt.ui.detail.room.checkin.CheckInViewModelFactory;
 import com.novakduc.forbega.qlnt.ui.detail.room.checkin.GuestListAdapterActionHandler;
 import com.novakduc.forbega.qlnt.ui.detail.room.checkin.GuestsRecyclerViewAdapter;
 import com.novakduc.forbega.qlnt.ui.detail.room.checkin.add_guest.AddGuestActivity;
@@ -54,6 +44,7 @@ import com.novakduc.forbega.qlnt.utilities.ConverterUtilities;
 import com.novakduc.forbega.qlnt.utilities.DatePickerFragment;
 import com.novakduc.forbega.qlnt.utilities.InjectorUtils;
 import com.novakduc.forbega.qlnt.utilities.SpinnerItemArrayProvider;
+import com.novakduc.forbega.qlnt.workers.WorkerUtils;
 
 import java.util.List;
 
@@ -525,6 +516,7 @@ public class EditRoomFragment extends Fragment implements GuestListAdapterAction
 
             mViewModel.updateRoom(mRoomForRent);
             mViewModel.confirmKeyContact();
+            WorkerUtils.makeStatusNotification("Chào anh Đực!", getActivity());
             getActivity().finish();
         }
     }

@@ -12,7 +12,7 @@ import java.util.Date;
  * Created by Nguyen Quoc Thanh on 1/19/2018.
  */
 
-public class ConverterUtilities {
+public final class ConverterUtilities {
     private ConverterUtilities() {
     }
 

@@ -22,18 +22,18 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
+import android.renderscript.Allocation;
+import android.renderscript.Element;
+import android.renderscript.RenderScript;
+import android.renderscript.ScriptIntrinsicBlur;
 import android.support.annotation.NonNull;
 import android.support.annotation.WorkerThread;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
-import android.support.v8.renderscript.Allocation;
-import android.support.v8.renderscript.Element;
-import android.support.v8.renderscript.RenderScript;
-import android.support.v8.renderscript.ScriptIntrinsicBlur;
 import android.util.Log;
 
-import com.example.background.Constants;
-import com.example.background.R;
+import com.novakduc.forbega.qlnt.R;
+import com.novakduc.forbega.qlnt.utilities.Constants;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -41,11 +41,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.UUID;
 
-import static com.example.background.Constants.CHANNEL_ID;
-import static com.example.background.Constants.DELAY_TIME_MILLIS;
-
-
-final class WorkerUtils {
+public final class WorkerUtils {
     private static final String TAG = WorkerUtils.class.getSimpleName();
 
     /**
@@ -57,7 +53,7 @@ final class WorkerUtils {
      * @param message Message shown on the notification
      * @param context Context needed to create Toast
      */
-    static void makeStatusNotification(String message, Context context) {
+    public static void makeStatusNotification(String message, Context context) {
 
         // Make a channel if necessary
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -80,8 +76,8 @@ final class WorkerUtils {
         }
 
         // Create the notification
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)
-                .setSmallIcon(R.drawable.ic_launcher_foreground)
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, Constants.CHANNEL_ID)
+                .setSmallIcon(R.drawable.ic_edit_red_700_24dp)
                 .setContentTitle(Constants.NOTIFICATION_TITLE)
                 .setContentText(message)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
@@ -94,9 +90,9 @@ final class WorkerUtils {
     /**
      * Method for sleeping for a fixed about of time to emulate slower work
      */
-    static void sleep() {
+    public static void sleep() {
         try {
-            Thread.sleep(DELAY_TIME_MILLIS, 0);
+            Thread.sleep(Constants.DELAY_TIME_MILLIS, 0);
         } catch (InterruptedException e) {
             Log.d(TAG, e.getMessage());
         }
@@ -109,7 +105,7 @@ final class WorkerUtils {
      * @return Blurred bitmap image
      */
     @WorkerThread
-    static Bitmap blurBitmap(@NonNull Bitmap bitmap,
+    public static Bitmap blurBitmap(@NonNull Bitmap bitmap,
                              @NonNull Context applicationContext) {
 
         RenderScript rsContext = null;
@@ -145,7 +141,7 @@ final class WorkerUtils {
      * @return Uri for temp file with bitmap
      * @throws FileNotFoundException Throws if bitmap file cannot be found
      */
-    static Uri writeBitmapToFile(
+    public static Uri writeBitmapToFile(
             @NonNull Context applicationContext,
             @NonNull Bitmap bitmap) throws FileNotFoundException {
 

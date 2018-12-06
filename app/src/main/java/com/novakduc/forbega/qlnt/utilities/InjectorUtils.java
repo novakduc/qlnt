@@ -42,7 +42,9 @@ import com.novakduc.forbega.qlnt.ui.list.ProjectListViewModelFactory;
 /**
  * Provides static methods to inject the various classes needed for QLNT
  */
-public class InjectorUtils {
+public final class InjectorUtils {
+
+    private InjectorUtils() { }
 
     public static QlntRepository provideRepository(Context context) {
         AppDatabase database = AppDatabase.getInstance(context);
