@@ -22,7 +22,8 @@ public final class Constants {
 
     // Name of Notification Channel for verbose notifications of background work
     public static final CharSequence VERBOSE_NOTIFICATION_CHANNEL_NAME =
-            "Verbose WorkManager Notifications";
+            "Verbose QLNT Notifications";
+    public static final String ROOM_NAME_KEY = "qlnt.roomname";
     public static String VERBOSE_NOTIFICATION_CHANNEL_DESCRIPTION =
             "Shows notifications whenever work starts";
     public static final CharSequence NOTIFICATION_TITLE = "WorkRequest Starting";

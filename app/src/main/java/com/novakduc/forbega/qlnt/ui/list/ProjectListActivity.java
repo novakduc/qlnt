@@ -4,7 +4,6 @@ import android.support.v4.app.Fragment;
 
 import com.novakduc.baselibrary.SimpleFragmentActivity;
 import com.novakduc.forbega.qlnt.ui.ConfirmationDialogFragment;
-import com.novakduc.forbega.qlnt.ui.config.finance.loan.LoanDeclareActivity;
 
 import java.util.List;
 

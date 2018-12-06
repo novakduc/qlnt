@@ -2,10 +2,8 @@ package com.novakduc.forbega.qlnt.ui.detail.room.checkin.add_guest;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
-import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
@@ -21,16 +19,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.EditText;
-import android.widget.Toast;
 
 import com.novakduc.forbega.qlnt.R;
 import com.novakduc.forbega.qlnt.data.database.Guest;
 import com.novakduc.forbega.qlnt.databinding.FragmentGuestDetailBinding;
 import com.novakduc.forbega.qlnt.ui.DialSMSFragment;
-import com.novakduc.forbega.qlnt.ui.detail.room.checkin.CheckInActivity;
 import com.novakduc.forbega.qlnt.utilities.InjectorUtils;
 
 /**

@@ -1,6 +1,5 @@
 package com.novakduc.forbega.qlnt.ui.config;
 
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
 import com.novakduc.baselibrary.SimpleFragmentActivity;

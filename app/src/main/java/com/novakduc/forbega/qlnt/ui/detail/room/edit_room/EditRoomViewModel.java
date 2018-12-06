@@ -7,7 +7,6 @@ import com.novakduc.forbega.qlnt.data.RoomForRentRepo;
 import com.novakduc.forbega.qlnt.data.database.Guest;
 import com.novakduc.forbega.qlnt.data.database.RoomForRent;
 import com.novakduc.forbega.qlnt.data.database.RoomService;
-import com.novakduc.forbega.qlnt.ui.detail.room.checkin.CheckInViewModel;
 
 import java.util.List;
 

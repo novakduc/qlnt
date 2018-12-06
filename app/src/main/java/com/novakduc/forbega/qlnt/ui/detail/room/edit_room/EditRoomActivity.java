@@ -6,8 +6,6 @@ import android.util.Log;
 import com.novakduc.baselibrary.SimpleFragmentActivity;
 import com.novakduc.forbega.qlnt.R;
 import com.novakduc.forbega.qlnt.ui.ConfirmationDialogFragment;
-import com.novakduc.forbega.qlnt.ui.detail.room.checkin.CheckInActivity;
-import com.novakduc.forbega.qlnt.ui.detail.room.checkin.CheckInFragment;
 
 import java.util.List;
 

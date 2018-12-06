@@ -1,6 +1,5 @@
 package com.novakduc.forbega.qlnt.ui.config.finance.loan;
 
-import android.app.Activity;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;

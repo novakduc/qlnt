@@ -1,12 +1,9 @@
 package com.novakduc.forbega.qlnt.ui.detail.room.checkin.add_guest;
 
 import android.os.Bundle;
-import android.widget.Toast;
 
 import com.novakduc.baselibrary.SimpleFragmentActivity;
-import com.novakduc.forbega.qlnt.R;
 import com.novakduc.forbega.qlnt.ui.ConfirmationDialogFragment;
-import com.novakduc.forbega.qlnt.ui.detail.room.checkin.CheckInFragment;
 
 public class AddGuestActivity extends SimpleFragmentActivity
         implements ConfirmationDialogFragment.ConfirmListener, AddGuestActivityListener {

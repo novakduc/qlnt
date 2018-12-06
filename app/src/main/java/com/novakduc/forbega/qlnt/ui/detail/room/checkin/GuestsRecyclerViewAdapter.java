@@ -9,11 +9,8 @@ import android.view.ViewGroup;
 
 import com.novakduc.forbega.qlnt.R;
 import com.novakduc.forbega.qlnt.data.database.Guest;
-import com.novakduc.forbega.qlnt.data.database.RoomStatus;
 import com.novakduc.forbega.qlnt.databinding.RecycleViewGuestItemBinding;
-import com.novakduc.forbega.qlnt.databinding.RecycleViewRoomItemBinding;
 import com.novakduc.forbega.qlnt.ui.detail.room.GuestForRoomItemView;
-import com.novakduc.forbega.qlnt.ui.detail.room.ListViewRoomItem;
 
 import java.util.List;
 

@@ -7,15 +7,22 @@ import com.novakduc.forbega.qlnt.data.RoomForRentRepo;
 import com.novakduc.forbega.qlnt.data.database.Guest;
 import com.novakduc.forbega.qlnt.data.database.RoomForRent;
 import com.novakduc.forbega.qlnt.data.database.RoomService;
-import com.novakduc.forbega.qlnt.ui.detail.room.GuestForRoomItemView;
+import com.novakduc.forbega.qlnt.utilities.Constants;
+import com.novakduc.forbega.qlnt.workers.BillRemindWorker;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import androidx.work.Data;
+import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkManager;
 
 public class CheckInViewModel extends ViewModel {
     private RoomForRentRepo mRoomForRentRepo;
     private LiveData<RoomForRent> mRoomForRentLiveData;
     private LiveData<List<Guest>> mGuestListLiveData;
     private LiveData<List<RoomService>> mServicesLiveData;
+    private String mRoomName;
 
     public CheckInViewModel(RoomForRentRepo roomForRentRepo) {
         mRoomForRentRepo = roomForRentRepo;
@@ -60,7 +67,33 @@ public class CheckInViewModel extends ViewModel {
         mRoomForRentRepo.updateService(electricalService);
     }
 
+    public void turnOnBillReminder() {
+        PeriodicWorkRequest.Builder builder =
+                new PeriodicWorkRequest.Builder(BillRemindWorker.class, 30, TimeUnit.DAYS);
+        builder.setInputData(createDataInput());
+        PeriodicWorkRequest workRequest = builder.build();
+
+        WorkManager.getInstance().enqueue(workRequest);
+    }
+
+    private Data createDataInput() {
+        Data.Builder builder = new Data.Builder();
+        if (mRoomName != null) {
+            builder.putString(Constants.ROOM_NAME_KEY, mRoomName);
+        }
+
+        return builder.build();
+    }
+
     public void confirmKeyContact() {
         mRoomForRentRepo.confirmAssignKeyContact();
+    }
+
+    public String getRoomName() {
+        return mRoomName;
+    }
+
+    public void setRoomName(String pRoomName) {
+        mRoomName = pRoomName;
     }
 }

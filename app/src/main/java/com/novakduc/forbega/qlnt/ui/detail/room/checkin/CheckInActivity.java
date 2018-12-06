@@ -7,7 +7,6 @@ import android.widget.Toast;
 import com.novakduc.baselibrary.SimpleFragmentActivity;
 import com.novakduc.forbega.qlnt.R;
 import com.novakduc.forbega.qlnt.ui.ConfirmationDialogFragment;
-import com.novakduc.forbega.qlnt.ui.detail.room.RoomListFragment;
 
 import java.util.List;
 

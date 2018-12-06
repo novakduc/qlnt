@@ -4,7 +4,6 @@ import android.support.v4.app.Fragment;
 
 import com.novakduc.baselibrary.SimpleFragmentActivity;
 import com.novakduc.forbega.qlnt.ui.ConfirmationDialogFragment;
-import com.novakduc.forbega.qlnt.ui.config.ProjectConfigurationActivity;
 import com.novakduc.forbega.qlnt.ui.detail.room.RoomListFragment;
 import com.novakduc.forbega.qlnt.ui.list.ProjectListFragment;
 

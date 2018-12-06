@@ -6,7 +6,6 @@ import android.util.Log;
 
 import com.novakduc.forbega.qlnt.data.RoomForRentRepo;
 import com.novakduc.forbega.qlnt.data.database.Guest;
-import com.novakduc.forbega.qlnt.data.database.Loan;
 
 /**
  * Created by Novak on 1/28/2018.

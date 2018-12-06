@@ -441,6 +441,11 @@ public class CheckInFragment extends Fragment implements GuestListAdapterActionH
 
 
             mViewModel.updateRoom(mRoomForRent);
+
+            //Turn on bill reminder
+            mViewModel.setRoomName(mRoomForRent.getName());
+            mViewModel.turnOnBillReminder();
+
             mViewModel.confirmKeyContact();
             getActivity().finish();
         }

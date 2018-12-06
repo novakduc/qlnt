@@ -19,7 +19,6 @@ import com.novakduc.baselibrary.NumbericTextWatcher;
 import com.novakduc.forbega.qlnt.R;
 import com.novakduc.forbega.qlnt.data.database.RoomForRent;
 import com.novakduc.forbega.qlnt.databinding.FragmentAddRoomBinding;
-import com.novakduc.forbega.qlnt.ui.detail.room.checkin.CheckInActivityListener;
 import com.novakduc.forbega.qlnt.utilities.ActivityListener;
 import com.novakduc.forbega.qlnt.utilities.InjectorUtils;
 
