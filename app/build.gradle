@@ -25,8 +25,8 @@ android {
         }
     }
     compileOptions {
-        targetCompatibility 1.7
-        sourceCompatibility 1.7
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
     }
 
     //Use data binding
@@ -38,13 +38,6 @@ android {
 //apply plugin: 'com.neenbedankt.android-apt'
 
 dependencies {
-    def work_version = "1.0.0-alpha12"
-
-    implementation "android.arch.work:work-runtime:$work_version" // use -ktx for Kotlin+Coroutines
-
-    // optional - RxJava2 support
-    implementation "android.arch.work:work-rxjava2:$work_version"
-
     // optional - Test helpers
     androidTestImplementation "android.arch.work:work-testing:$work_version"
     //implementation 'com.google.android.material:material:1.0.0-alpha1'
@@ -63,7 +56,7 @@ dependencies {
     implementation project(path: ':baselibrary')
     implementation "com.android.support:recyclerview-v7:$support_version"
     implementation 'com.github.bumptech.glide:glide:4.8.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.3.1'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
     implementation 'de.hdodenhof:circleimageview:2.2.0'
     //annotationProcessor 'de.hdodenhof:circleimageview:2.2.0'
     implementation 'com.rengwuxian.materialedittext:library:2.1.4'
@@ -96,6 +89,20 @@ dependencies {
 
     implementation 'com.google.code.gson:gson:2.8.2'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    //Navigation component
+    implementation "android.arch.navigation:navigation-fragment:$nav_version" // use -ktx for Kotlin
+    implementation "android.arch.navigation:navigation-ui:$nav_version" // use -ktx for Kotlin
+
+    // optional - Test helpers
+    // this library depends on the Kotlin standard library
+    androidTestImplementation "android.arch.navigation:navigation-testing:$nav_version"
+
+    //Work manager component
+    implementation "android.arch.work:work-runtime:$work_version" // use -ktx for Kotlin+Coroutines
+
+    // optional - RxJava2 support
+    implementation "android.arch.work:work-rxjava2:$work_version"
 }
 apply plugin: 'com.google.gms.google-services'
 repositories {
