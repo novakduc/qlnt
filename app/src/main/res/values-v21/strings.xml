@@ -5,4 +5,6 @@
     <string name="page3_title">Report</string>
     <string name="page4_title">Setting</string>
     <string name="project_deleted_confirm">Project has been deleted</string>
+    <string name="navigation_drawer_header_content_description">Navigation logo header logo</string>
+    <string name="navigation_drawer_header_title">QLNT</string>
 </resources>

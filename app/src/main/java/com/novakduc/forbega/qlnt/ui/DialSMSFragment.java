@@ -3,11 +3,12 @@ package com.novakduc.forbega.qlnt.ui;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.novakduc.forbega.qlnt.R;
+
+import androidx.fragment.app.Fragment;
 
 public class DialSMSFragment extends Fragment {
     protected void sendSMS(String pPhoneNo, String pText) {
@@ -29,7 +30,7 @@ public class DialSMSFragment extends Fragment {
     }
 
     protected void dial(String phoneNo) {
-        String uri = "tel:" + phoneNo.trim() ;
+        String uri = "tel:" + phoneNo.trim();
         Intent intent = new Intent(Intent.ACTION_DIAL);
         intent.setData(Uri.parse(uri));
         try {

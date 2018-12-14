@@ -4,17 +4,19 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.DatePicker;
 
 import java.util.Calendar;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 
 /**
  * Created by Novak on 4/30/2017.
  */
 
-public class DatePickerFragment extends android.support.v4.app.DialogFragment
+public class DatePickerFragment extends DialogFragment
         implements DatePickerDialog.OnDateSetListener {
     //Date picker
     public static final String PICKED_DATE = "qlnt.config.base.startDate";

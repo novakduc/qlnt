@@ -6,13 +6,15 @@ import com.novakduc.baselibrary.SimpleFragmentActivity;
 import com.novakduc.forbega.qlnt.R;
 import com.novakduc.forbega.qlnt.ui.ConfirmationDialogFragment;
 
+import androidx.fragment.app.Fragment;
+
 public class LoanDeclareActivity extends SimpleFragmentActivity
         implements ConfirmationDialogFragment.ConfirmListener, LoanDeclareFragmentListener {
     public static final String DISCARD_CONFIRMATION_KEY = LoanDeclareActivity.class.getName() +
             "discard_loan";
 
     @Override
-    protected android.support.v4.app.Fragment createFragment() {
+    protected Fragment createFragment() {
         return LoanDeclareFragment.newInstance();
     }
 

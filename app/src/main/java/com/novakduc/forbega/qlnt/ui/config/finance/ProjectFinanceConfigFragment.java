@@ -1,17 +1,7 @@
 package com.novakduc.forbega.qlnt.ui.config.finance;
 
-import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.TextInputLayout;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -23,6 +13,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.textfield.TextInputLayout;
 import com.novakduc.baselibrary.NumbericTextWatcher;
 import com.novakduc.forbega.qlnt.R;
 import com.novakduc.forbega.qlnt.data.database.Loan;
@@ -39,11 +31,22 @@ import com.novakduc.forbega.qlnt.utilities.InjectorUtils;
 
 import java.util.List;
 
+import javax.annotation.Nullable;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 /**
  * Created by n.thanh on 10/21/2016.
  */
 
-public class ProjectFinanceConfigFragment extends android.support.v4.app.Fragment
+public class ProjectFinanceConfigFragment extends Fragment
         implements LoanAdapterHandler {
     public static final String TEMP_PROJECT = "com.novakduc.forbega.qlnt.tempproject";
     private static final String LOG_TAG = ProjectFinanceConfigFragment.class.getSimpleName();
@@ -94,7 +97,7 @@ public class ProjectFinanceConfigFragment extends android.support.v4.app.Fragmen
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_project_finance_config, container, false);
-        Toolbar toolbar = view.findViewById(R.id.toolbar);
+        androidx.appcompat.widget.Toolbar toolbar = view.findViewById(R.id.toolbar);
         toolbar.setTitle(R.string.financeConfigTitle);
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         activity.setSupportActionBar(toolbar);
@@ -185,7 +188,7 @@ public class ProjectFinanceConfigFragment extends android.support.v4.app.Fragmen
         if (mAmount != -1) {
             mProject.setInvestmentAmount(mAmount);
             mViewModel.updateProject(mProject);
-            android.support.v4.app.FragmentManager manager = getActivity().getSupportFragmentManager();
+            FragmentManager manager = getActivity().getSupportFragmentManager();
             manager.beginTransaction().replace(R.id.fragmentContainer,
                     ProjectUnitPriceConfigFragment.newInstance(mProject.getProjectId()))
                     .addToBackStack(null).commit();

@@ -49,8 +49,8 @@ import com.novakduc.forbega.qlnt.workers.WorkerUtils;
 import java.util.List;
 
 public class EditRoomFragment extends Fragment implements GuestListAdapterActionHandler {
-    private static final String LOG_TAG = EditRoomFragment.class.getSimpleName();
     public static final String ROOM_ID = EditRoomFragment.class.getName() + ".roomId";
+    private static final String LOG_TAG = EditRoomFragment.class.getSimpleName();
     private FragmentEditRoomBinding mBinding;
     private EditRoomActivityListener mCallBack;
     private long mRoomId;
@@ -63,7 +63,7 @@ public class EditRoomFragment extends Fragment implements GuestListAdapterAction
     private int mBillDate;
     private long mCheckInDate;
     private long mDepositAmount = -1;
-    private long mElectricalInitialIndex = -1 , mWaterInitialIndex = - 1;
+    private long mElectricalInitialIndex = -1, mWaterInitialIndex = -1;
     private boolean mIsUsingTV, mIsUsingInternet;
     private boolean mIsDataValidated;
     private RoomService mElectricalService, mWaterService, mTVService, mInternetService;

@@ -6,9 +6,7 @@ import android.util.Log;
 
 import com.novakduc.baselibrary.AppExecutors;
 import com.novakduc.forbega.qlnt.data.database.AppDao;
-import com.novakduc.forbega.qlnt.data.database.CostType;
 import com.novakduc.forbega.qlnt.data.database.Guest;
-import com.novakduc.forbega.qlnt.data.database.Loan;
 import com.novakduc.forbega.qlnt.data.database.RoomForRent;
 import com.novakduc.forbega.qlnt.data.database.RoomService;
 

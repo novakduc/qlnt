@@ -1,8 +1,5 @@
 package com.novakduc.forbega.qlnt.data;
 
-import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.MutableLiveData;
-
 import com.novakduc.baselibrary.AppExecutors;
 import com.novakduc.forbega.qlnt.data.database.AppDao;
 import com.novakduc.forbega.qlnt.data.database.Cost;
@@ -17,6 +14,9 @@ import com.novakduc.forbega.qlnt.ui.list.LoanAmount;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 /**
  * Created by n.thanh on 9/20/2016.
@@ -82,7 +82,7 @@ public class QlntRepository {
             for (Loan loan :
                     loans) {
                 if (loan != null) {
-                        mAppDao.removeLoan(loan);  //remove loan entity
+                    mAppDao.removeLoan(loan);  //remove loan entity
                 }
             }
         }

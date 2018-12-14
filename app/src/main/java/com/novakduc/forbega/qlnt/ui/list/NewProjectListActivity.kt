@@ -2,12 +2,11 @@ package com.novakduc.forbega.qlnt.ui.list
 
 import android.os.Bundle
 import android.os.PersistableBundle
-import android.support.v4.view.GravityCompat
-import android.support.v4.widget.DrawerLayout
-import android.support.v7.app.AppCompatActivity
-import androidx.navigation.NavController
-import androidx.navigation.Navigation
-import androidx.navigation.ui.AppBarConfiguration
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
+import androidx.databinding.DataBindingUtil
+import androidx.drawerlayout.widget.DrawerLayout
+import com.novakduc.forbega.qlnt.databinding.ActivityProjectListBinding
 
 class NewProjectListActivity : AppCompatActivity() {
     private lateinit var drawerLayout: DrawerLayout
@@ -16,12 +15,14 @@ class NewProjectListActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
         super.onCreate(savedInstanceState, persistentState)
 
-        val binding: ActivityGardenBinding = DataBindingUtil.setContentView(this,
-                R.layout.activity_garden)
+        val binding: ActivityProjectListBinding = DataBindingUtil.setContentView(this,
+                R.layout.activity_project_list)
         drawerLayout = binding.drawerLayout
 
         navController = Navigation.findNavController(this, R.id.garden_nav_fragment)
-        appBarConfiguration = AppBarConfiguration(navController.graph, drawerLayout)
+        appBarConfiguration = AppBarConfiguration.Builder(navController.graph)
+                .setDrawerLayout(drawerLayout)
+                .build()
 
         // Set up ActionBar
         setSupportActionBar(binding.toolbar)

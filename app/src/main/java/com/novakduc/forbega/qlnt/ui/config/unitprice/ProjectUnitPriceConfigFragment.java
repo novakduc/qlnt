@@ -1,14 +1,6 @@
 package com.novakduc.forbega.qlnt.ui.config.unitprice;
 
-import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.TextInputLayout;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -17,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.textfield.TextInputLayout;
 import com.novakduc.baselibrary.NumbericTextWatcher;
 import com.novakduc.forbega.qlnt.R;
 import com.novakduc.forbega.qlnt.data.database.UnitPrice;
@@ -24,11 +18,20 @@ import com.novakduc.forbega.qlnt.ui.config.ProjectConfigurationActivity;
 import com.novakduc.forbega.qlnt.ui.config.UpdateListener;
 import com.novakduc.forbega.qlnt.utilities.InjectorUtils;
 
+import javax.annotation.Nullable;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
+
 /**
  * Created by n.thanh on 10/21/2016.
  */
 
-public class ProjectUnitPriceConfigFragment extends android.support.v4.app.Fragment {
+public class ProjectUnitPriceConfigFragment extends Fragment {
     public static final String TEMP_PROJECT_ID = "com.novakduc.forbega.qlnt.tempproject";
 
     private TextInputLayout mElectricityLayout, mWaterLayout, mSecurityLayout, mTrashLayout,

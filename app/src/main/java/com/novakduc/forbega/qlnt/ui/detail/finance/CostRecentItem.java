@@ -26,6 +26,10 @@ public class CostRecentItem {
         this.description = description;
     }
 
+    public static CostRecentItem getInstance() {
+        return new CostRecentItem(0, 0, CostType.OTHERS, "none");
+    }
+
     public long getDate() {
         return date;
     }
@@ -36,10 +40,6 @@ public class CostRecentItem {
 
     public long getAmount() {
         return amount;
-    }
-
-    public static CostRecentItem getInstance() {
-        return new CostRecentItem(0, 0, CostType.OTHERS, "none");
     }
 
     public String getDescription() {

@@ -11,6 +11,9 @@ import com.novakduc.forbega.qlnt.ui.ConfirmationDialogFragment;
 import com.novakduc.forbega.qlnt.ui.config.base.ProjectBaseConfigFragment;
 import com.novakduc.forbega.qlnt.utilities.InjectorUtils;
 
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
+
 public class ProjectConfigurationActivity extends SimpleFragmentActivity
         implements UpdateListener, ConfirmationDialogFragment.ConfirmListener {
     public static final String TEMP_PROJECT_ID = "com.novakduc.forbega.qlnt.tempprojectId";
@@ -39,13 +42,13 @@ public class ProjectConfigurationActivity extends SimpleFragmentActivity
     }
 
     @Override
-    protected android.support.v4.app.Fragment createFragment() {
+    protected Fragment createFragment() {
         return ProjectBaseConfigFragment.newInstance();
     }
 
     @Override
     public void onBackPressed() {
-        FragmentManager manager = getFragmentManager();
+        androidx.fragment.app.FragmentManager manager = getSupportFragmentManager();
         int count = manager.getBackStackEntryCount();
         Log.i("count", String.valueOf(count));
         if (count == 0) {
@@ -71,7 +74,7 @@ public class ProjectConfigurationActivity extends SimpleFragmentActivity
     public void finalCheck() {
         Log.d(LOG_TAG, "Project id before confirming: " + mTempProjectId);
 
-        android.support.v4.app.FragmentManager manager = getSupportFragmentManager();
+        androidx.fragment.app.FragmentManager manager = getSupportFragmentManager();
         manager.beginTransaction().replace(R.id.fragmentContainer,
                 ProjectEditFragment.newInstance(mTempProjectId)).addToBackStack(null).commit();
     }

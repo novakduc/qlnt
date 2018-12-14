@@ -1,12 +1,12 @@
 package com.novakduc.forbega.qlnt.data.database;
 
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.Ignore;
-import android.arch.persistence.room.Index;
-import android.arch.persistence.room.PrimaryKey;
-
 import java.util.ArrayList;
 import java.util.Collection;
+
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.Index;
+import androidx.room.PrimaryKey;
 
 /**
  * Created by n.thanh on 3/29/2017.

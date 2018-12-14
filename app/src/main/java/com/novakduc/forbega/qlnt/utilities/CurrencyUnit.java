@@ -11,6 +11,7 @@ public enum CurrencyUnit {
     BIL_BASE(1000000000);
 
     private int unit;
+
     CurrencyUnit(int unit) {
         this.unit = unit;
     }

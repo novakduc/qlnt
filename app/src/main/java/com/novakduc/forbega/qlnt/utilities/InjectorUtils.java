@@ -44,7 +44,8 @@ import com.novakduc.forbega.qlnt.ui.list.ProjectListViewModelFactory;
  */
 public final class InjectorUtils {
 
-    private InjectorUtils() { }
+    private InjectorUtils() {
+    }
 
     public static QlntRepository provideRepository(Context context) {
         AppDatabase database = AppDatabase.getInstance(context);

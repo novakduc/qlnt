@@ -1,7 +1,5 @@
 package com.novakduc.forbega.qlnt.data;
 
-import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.MutableLiveData;
 import android.util.Log;
 
 import com.novakduc.baselibrary.AppExecutors;
@@ -23,6 +21,9 @@ import com.novakduc.forbega.qlnt.ui.detail.room.ListViewRoomItem;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 /**
  * Created by Novak on 1/14/2018.

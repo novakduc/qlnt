@@ -1,6 +1,6 @@
 package com.novakduc.forbega.qlnt.data.database;
 
-import android.arch.persistence.room.TypeConverter;
+import androidx.room.TypeConverter;
 
 /**
  * Created by Nguyen Quoc Thanh on 1/3/2018.

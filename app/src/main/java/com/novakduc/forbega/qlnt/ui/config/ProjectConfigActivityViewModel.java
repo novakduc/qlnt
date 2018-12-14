@@ -1,9 +1,10 @@
 package com.novakduc.forbega.qlnt.ui.config;
 
-import android.arch.lifecycle.ViewModel;
 import android.util.Log;
 
 import com.novakduc.forbega.qlnt.data.QlntRepository;
+
+import androidx.lifecycle.ViewModel;
 
 /**
  * Created by Nguyen Quoc Thanh on 1/30/2018.

@@ -1,10 +1,10 @@
 package com.novakduc.forbega.qlnt.ui.config.finance.loan;
 
-import android.arch.lifecycle.ViewModel;
-import android.arch.lifecycle.ViewModelProvider;
-import android.support.annotation.NonNull;
-
 import com.novakduc.forbega.qlnt.data.ProjectRepo;
+
+import androidx.annotation.NonNull;
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
 
 /**
  * Created by Novak on 1/28/2018.

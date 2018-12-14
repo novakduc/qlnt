@@ -1,13 +1,13 @@
 package com.novakduc.forbega.qlnt.ui.config.finance;
 
-import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.ViewModel;
-
 import com.novakduc.forbega.qlnt.data.ProjectRepo;
 import com.novakduc.forbega.qlnt.data.database.Loan;
 import com.novakduc.forbega.qlnt.data.database.Project;
 
 import java.util.List;
+
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.ViewModel;
 
 /**
  * Created by Novak on 1/27/2018.

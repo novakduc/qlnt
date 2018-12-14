@@ -27,7 +27,8 @@ public abstract class MyArrayList<E> extends ArrayList<E> implements ArrayListGs
 
     @Override
     public ArrayList gSonStringToList() {
-        Type collectionType = new TypeToken<ArrayList>() {}.getType();
+        Type collectionType = new TypeToken<ArrayList>() {
+        }.getType();
         return gson.fromJson(getIdListGSonString(), collectionType);
     }
 

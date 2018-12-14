@@ -1,16 +1,8 @@
 package com.novakduc.forbega.qlnt.ui.config.base;
 
-import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.content.res.TypedArray;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.TextInputLayout;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -24,6 +16,8 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.textfield.TextInputLayout;
 import com.novakduc.forbega.qlnt.R;
 import com.novakduc.forbega.qlnt.data.database.Project;
 import com.novakduc.forbega.qlnt.ui.config.ProjectConfigurationActivity;
@@ -35,11 +29,22 @@ import com.novakduc.forbega.qlnt.utilities.InjectorUtils;
 
 import java.util.Calendar;
 
+import javax.annotation.Nullable;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
+
 /**
  * Created by n.thanh on 10/21/2016.
  */
 
-public class ProjectBaseConfigFragment extends android.support.v4.app.Fragment {
+public class ProjectBaseConfigFragment extends Fragment {
     public static final String TEMP_PROJECT = "com.novakduc.forbega.qlnt.tempproject";
     public static final String FRAGMENT_TAG = "FINANCE_CONFIG_TAG";
     private static final String LOG_TAG = ProjectBaseConfigFragment.class.getSimpleName();
@@ -275,7 +280,7 @@ public class ProjectBaseConfigFragment extends android.support.v4.app.Fragment {
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    private void showDialog(android.support.v4.app.DialogFragment fragment, int target) {
+    private void showDialog(DialogFragment fragment, int target) {
         fragment.setTargetFragment(this, target);
         fragment.show(getActivity().getSupportFragmentManager(),
                 "dialog");
@@ -325,7 +330,7 @@ public class ProjectBaseConfigFragment extends android.support.v4.app.Fragment {
         mViewModel.updateProject(mProject);
 
         Log.d(LOG_TAG, "Start finance config for project id: " + mProject.getId());
-        android.support.v4.app.FragmentManager manager = getActivity().getSupportFragmentManager();
+        FragmentManager manager = getActivity().getSupportFragmentManager();
         manager.beginTransaction().
                 replace(R.id.fragmentContainer, ProjectFinanceConfigFragment.
                         newInstance(mProject.getId()), FRAGMENT_TAG).addToBackStack(null).commit();

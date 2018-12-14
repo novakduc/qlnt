@@ -163,4 +163,8 @@
     <string name="not_yet_checkin_announcement">Room has not been checked in. Please check in asap.</string>
     <string name="should_not_delete_guest">At least one guest is neccessary. You might check out instead.</string>
     <string name="bill_reminder">It is time for bill. Room:</string>
+    <string name="navigation_drawer_header_content_description">Navigation logo header logo</string>
+    <string name="navigation_drawer_header_title">QLNT</string>
+    <string name="current_project_title">Current Project</string>
+    <string name="project_list_title">Project List</string>
 </resources>

@@ -1,10 +1,10 @@
 package com.novakduc.forbega.qlnt.ui.config.unitprice;
 
-import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.ViewModel;
-
 import com.novakduc.forbega.qlnt.data.ProjectRepo;
 import com.novakduc.forbega.qlnt.data.database.UnitPrice;
+
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.ViewModel;
 
 /**
  * Created by Nguyen Quoc Thanh on 1/30/2018.

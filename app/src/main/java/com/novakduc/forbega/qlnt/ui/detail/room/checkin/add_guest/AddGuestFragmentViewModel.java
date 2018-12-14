@@ -12,10 +12,10 @@ import com.novakduc.forbega.qlnt.data.database.Guest;
  */
 
 public class AddGuestFragmentViewModel extends ViewModel {
+    private static final String TAG = AddGuestFragment.class.getSimpleName();
     private RoomForRentRepo mRoomRepo;
     private LiveData<Guest> mGuestLiveData;
     private boolean isNew;
-    private static final String TAG = AddGuestFragment.class.getSimpleName();
 
     public AddGuestFragmentViewModel(RoomForRentRepo pRoomRepo, boolean isNew) {
         mRoomRepo = pRoomRepo;
@@ -39,7 +39,7 @@ public class AddGuestFragmentViewModel extends ViewModel {
 
     @Override
     protected void onCleared() {
-            mRoomRepo.cleanGuestData();
+        mRoomRepo.cleanGuestData();
         Log.d(TAG, "Cleared invalid guest");
         super.onCleared();
     }

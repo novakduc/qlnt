@@ -17,6 +17,10 @@ public class BillRecentItem {
         this.description = description;
     }
 
+    public static BillRecentItem getInstance() {
+        return new BillRecentItem(0, 0, "temp");
+    }
+
     public long getAmount() {
         return amount;
     }
@@ -27,9 +31,5 @@ public class BillRecentItem {
 
     public String getDescription() {
         return description;
-    }
-
-    public static BillRecentItem getInstance() {
-        return new BillRecentItem(0, 0, "temp");
     }
 }

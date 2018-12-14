@@ -46,8 +46,8 @@ import java.util.List;
 
 public class CheckInFragment extends Fragment implements GuestListAdapterActionHandler, UseViewModel<CheckInViewModel> {
     public static final String ACTIVE_PROJECT_ID = "active_project_id";
-    private static final String LOG_TAG = CheckInFragment.class.getSimpleName();
     public static final String ROOM_ID = CheckInFragment.class.getName() + ".roomId";
+    private static final String LOG_TAG = CheckInFragment.class.getSimpleName();
     private CheckInViewModel mViewModel;
     private RoomForRent mRoomForRent;
     private long mRoomId;
@@ -57,12 +57,20 @@ public class CheckInFragment extends Fragment implements GuestListAdapterActionH
     private long mRoomCharge = -1;
     private long mDepositAmount = -1;
     private int mBillDate;
-    private long mElectricalInitialIndex = -1 , mWaterInitialIndex = - 1;
+    private long mElectricalInitialIndex = -1, mWaterInitialIndex = -1;
     private boolean mIsUsingTV, mIsUsingInternet, mIsValidCheckInInfo;
     private GuestsRecyclerViewAdapter mGuestsRecyclerViewAdapter;
     private long mTempGuestId;
     private RoomStatus mRoomStatus = RoomStatus.AVAILABLE;
     private RoomService mElectricalService, mWaterService, mTVService, mInternetService;
+
+    public static CheckInFragment getInstance(long pRoomId) {
+        Bundle bundle = new Bundle();
+        bundle.putLong(ROOM_ID, pRoomId);
+        CheckInFragment lCheckInFragment = new CheckInFragment();
+        lCheckInFragment.setArguments(bundle);
+        return lCheckInFragment;
+    }
 
     @Override
 
@@ -359,14 +367,6 @@ public class CheckInFragment extends Fragment implements GuestListAdapterActionH
         startActivity(intent);
     }
 
-    public static CheckInFragment getInstance(long pRoomId) {
-        Bundle bundle = new Bundle();
-        bundle.putLong(ROOM_ID, pRoomId);
-        CheckInFragment lCheckInFragment = new CheckInFragment();
-        lCheckInFragment.setArguments(bundle);
-        return lCheckInFragment;
-    }
-
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.confirm_toolbar, menu);
@@ -420,7 +420,7 @@ public class CheckInFragment extends Fragment implements GuestListAdapterActionH
         }
 
         if (mIsValidCheckInInfo) {
-                        //check in activity
+            //check in activity
             mRoomForRent.setCharge(mRoomCharge);
             mRoomForRent.setDepositAmount(mDepositAmount);
             mRoomForRent.setBillDate(mBillDate);
@@ -437,7 +437,7 @@ public class CheckInFragment extends Fragment implements GuestListAdapterActionH
             mViewModel.updateInternetService(mInternetService);
 
             mTVService.setApplied(mIsUsingTV);
-                mViewModel.updateTvService(mTVService);
+            mViewModel.updateTvService(mTVService);
 
 
             mViewModel.updateRoom(mRoomForRent);
@@ -454,10 +454,6 @@ public class CheckInFragment extends Fragment implements GuestListAdapterActionH
     protected void checkIn() {
         Log.d(LOG_TAG, "Check in fragment change room status");
         setRoomStatus(RoomStatus.NORMAL);
-    }
-
-    public void setRoomStatus(RoomStatus pRoomStatus) {
-        mRoomStatus = pRoomStatus;
     }
 
     public void deleteGuest() {
@@ -482,8 +478,16 @@ public class CheckInFragment extends Fragment implements GuestListAdapterActionH
         return mRoomId;
     }
 
+    public void setRoomId(long pRoomId) {
+        mRoomId = pRoomId;
+    }
+
     public RoomStatus getRoomStatus() {
         return mRoomStatus;
+    }
+
+    public void setRoomStatus(RoomStatus pRoomStatus) {
+        mRoomStatus = pRoomStatus;
     }
 
     public FragmentCheckinBinding getBinding() {
@@ -496,10 +500,6 @@ public class CheckInFragment extends Fragment implements GuestListAdapterActionH
 
     public void setRoomForRent(RoomForRent pRoomForRent) {
         mRoomForRent = pRoomForRent;
-    }
-
-    public void setRoomId(long pRoomId) {
-        mRoomId = pRoomId;
     }
 
     public long getCheckInDate() {
@@ -580,6 +580,6 @@ public class CheckInFragment extends Fragment implements GuestListAdapterActionH
         CheckInViewModelFactory factory =
                 InjectorUtils.provideCheckInViewModelFactory(getActivity(), getRoomId());
 
-        return  ViewModelProviders.of(this, factory).get(CheckInViewModel.class);
+        return ViewModelProviders.of(this, factory).get(CheckInViewModel.class);
     }
 }

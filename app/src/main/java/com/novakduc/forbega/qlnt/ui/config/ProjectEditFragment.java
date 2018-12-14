@@ -1,19 +1,9 @@
 package com.novakduc.forbega.qlnt.ui.config;
 
 import android.app.Activity;
-import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.content.res.TypedArray;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.TextInputLayout;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -28,6 +18,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.textfield.TextInputLayout;
 import com.novakduc.baselibrary.NumbericTextWatcher;
 import com.novakduc.forbega.qlnt.R;
 import com.novakduc.forbega.qlnt.data.database.Loan;
@@ -49,14 +41,26 @@ import com.novakduc.forbega.qlnt.utilities.InjectorUtils;
 
 import java.util.List;
 
+import javax.annotation.Nullable;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 /**
  * Created by n.thanh on 10/21/2016.
  */
 
-public class ProjectEditFragment extends android.support.v4.app.Fragment
+public class ProjectEditFragment extends Fragment
         implements LoanAdapterHandler {
-    private static final String LOG_TAG = ProjectEditFragment.class.getSimpleName();
     public static final String TEMP_PROJECT_ID = "com.novakduc.forbega.qlnt.tempproject";
+    private static final String LOG_TAG = ProjectEditFragment.class.getSimpleName();
     RecyclerView mRecyclerView;
     LoansAdapter mLoansAdapter;
     TextView mTotalLoanTextView;
@@ -545,7 +549,7 @@ public class ProjectEditFragment extends android.support.v4.app.Fragment
         mToolbar.setTitle(title);
     }
 
-    private void showDialog(android.support.v4.app.DialogFragment fragment, int target) {
+    private void showDialog(DialogFragment fragment, int target) {
         fragment.setTargetFragment(this, target);
         fragment.show(getActivity().getSupportFragmentManager(),
                 "dialog");

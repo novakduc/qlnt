@@ -12,11 +12,11 @@ import androidx.work.Worker;
 import androidx.work.WorkerParameters;
 
 public class BillRemindWorker extends Worker {
+    private static final String TAG = BillRemindWorker.class.getSimpleName();
+
     public BillRemindWorker(@NonNull Context context, @NonNull WorkerParameters workerParams) {
         super(context, workerParams);
     }
-
-    private static final String TAG = BillRemindWorker.class.getSimpleName();
 
     @NonNull
     @Override

@@ -41,8 +41,8 @@ public enum CostType {
                 return "security";
             case 6:
                 return "maintenance";
-                default:
-                    return "other";
+            default:
+                return "other";
         }
     }
 }

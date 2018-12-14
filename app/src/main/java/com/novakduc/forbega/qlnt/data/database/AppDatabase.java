@@ -1,10 +1,11 @@
 package com.novakduc.forbega.qlnt.data.database;
 
-import android.arch.persistence.room.Database;
-import android.arch.persistence.room.Room;
-import android.arch.persistence.room.RoomDatabase;
-import android.arch.persistence.room.TypeConverters;
 import android.content.Context;
+
+import androidx.room.Database;
+import androidx.room.Room;
+import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
 
 /**
  * Created by Nguyen Quoc Thanh on 1/3/2018.

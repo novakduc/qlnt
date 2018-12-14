@@ -6,7 +6,7 @@ android {
     buildToolsVersion '28.0.3'
     defaultConfig {
         applicationId "com.novakduc.forbega.qlnt"
-        minSdkVersion 19
+        minSdkVersion 21
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -40,7 +40,7 @@ android {
 dependencies {
 
     // optional - Test helpers
-    androidTestImplementation "android.arch.work:work-testing:$work_version"
+    androidTestImplementation "android.arch.work:work-testing:$rootProject.workVersion"
 
     //implementation 'com.google.android.material:material:1.0.0-alpha1'
     implementation fileTree(include: ['*.jar'], dir: 'libs')
@@ -49,14 +49,10 @@ dependencies {
     androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    implementation "com.android.support:appcompat-v7:$support_version"
-    implementation "com.android.support:design:$support_version"
-    implementation "com.android.support:support-v13:$support_version"
+
     testImplementation 'junit:junit:4.12'
-    implementation "com.android.support:cardview-v7:$support_version"
-    implementation "com.android.support:palette-v7:$support_version"
+
     implementation project(path: ':baselibrary')
-    implementation "com.android.support:recyclerview-v7:$support_version"
     implementation 'com.github.bumptech.glide:glide:4.8.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
     implementation 'de.hdodenhof:circleimageview:2.2.0'
@@ -78,46 +74,31 @@ dependencies {
 
     //    annotationProcessor 'com.google.dagger:dagger-compiler:2.14.1'
 
-    // ViewModel and LiveData
-    implementation 'android.arch.lifecycle:extensions:1.1.1'
-    annotationProcessor "android.arch.lifecycle:compiler:1.1.1"
+    kapt "androidx.room:room-compiler:$rootProject.roomVersion"
+    kapt "com.github.bumptech.glide:compiler:$rootProject.glideVersion"
+    implementation "android.arch.navigation:navigation-fragment-ktx:$rootProject.navigationVersion"
+    implementation "android.arch.navigation:navigation-ui-ktx:$rootProject.navigationVersion"
+    implementation "android.arch.work:work-runtime-ktx:$rootProject.workVersion"
+    implementation "androidx.appcompat:appcompat:$rootProject.supportLibraryVersion"
+    implementation "androidx.constraintlayout:constraintlayout:$rootProject.constraintLayoutVersion"
+    implementation "androidx.core:core-ktx:$rootProject.ktxVersion"
+    implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.lifecycleVersion"
+    implementation "androidx.recyclerview:recyclerview:$rootProject.recyclerViewVersion"
+    implementation "androidx.room:room-runtime:$rootProject.roomVersion"
+    implementation "com.github.bumptech.glide:glide:$rootProject.glideVersion"
+    implementation "com.google.android.material:material:$rootProject.materialVersion"
+    implementation "com.google.code.gson:gson:$rootProject.gsonVersion"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$rootProject.kotlinVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$rootProject.coroutinesVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$rootProject.coroutinesVersion"
 
-    // Room
-    implementation 'android.arch.persistence.room:runtime:1.1.1'
-    annotationProcessor "android.arch.persistence.room:compiler:1.1.1"
-
-    // Paging
-    implementation 'android.arch.paging:runtime:1.0.1'
-
-    // Test helpers for LiveData
-    testImplementation 'android.arch.core:core-testing:1.1.1'
-
-    // Test helpers for Room
-    testImplementation 'android.arch.persistence.room:testing:1.1.1'
-    implementation 'com.google.code.gson:gson:2.8.2'
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-
-    //Navigation component
-    implementation "android.arch.navigation:navigation-fragment:$nav_version"
-
-    // use -ktx for Kotlin
-    implementation "android.arch.navigation:navigation-ui:$nav_version"
-
-    // use -ktx for Kotlin
-
-    // optional - Test helpers
-
-    // this library depends on the Kotlin standard library
-    androidTestImplementation "android.arch.navigation:navigation-testing:$nav_version"
-
-    //Work manager component
-    implementation "android.arch.work:work-runtime:$work_version"
-
-    // use -ktx for Kotlin+Coroutines
-
-    // optional - RxJava2 support
-    implementation "android.arch.work:work-rxjava2:$work_version"
-    implementation 'com.android.support:support-v13:28.0.0'
+    // Testing dependencies
+    androidTestImplementation "androidx.arch.core:core-testing:$rootProject.coreTestingVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-contrib:$rootProject.espressoVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.espressoVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-intents:$rootProject.espressoVersion"
+    androidTestImplementation "androidx.test.uiautomator:uiautomator:$rootProject.uiAutomatorVersion"
+    testImplementation "junit:junit:$rootProject.junitVersion"
 }
 apply plugin: 'com.google.gms.google-services'
 repositories {

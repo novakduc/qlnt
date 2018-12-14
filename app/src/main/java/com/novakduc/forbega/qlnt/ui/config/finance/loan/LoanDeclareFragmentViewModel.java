@@ -1,10 +1,10 @@
 package com.novakduc.forbega.qlnt.ui.config.finance.loan;
 
-import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.ViewModel;
-
 import com.novakduc.forbega.qlnt.data.ProjectRepo;
 import com.novakduc.forbega.qlnt.data.database.Loan;
+
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.ViewModel;
 
 /**
  * Created by Novak on 1/28/2018.
@@ -38,7 +38,7 @@ public class LoanDeclareFragmentViewModel extends ViewModel {
 
     @Override
     protected void onCleared() {
-            mProjectRepo.cleanLoanData();
+        mProjectRepo.cleanLoanData();
         super.onCleared();
     }
 }

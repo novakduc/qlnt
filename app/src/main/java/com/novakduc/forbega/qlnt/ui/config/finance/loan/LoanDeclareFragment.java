@@ -1,15 +1,8 @@
 package com.novakduc.forbega.qlnt.ui.config.finance.loan;
 
-import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.content.res.TypedArray;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.design.widget.TextInputLayout;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -22,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.google.android.material.textfield.TextInputLayout;
 import com.novakduc.baselibrary.NumbericTextWatcher;
 import com.novakduc.forbega.qlnt.R;
 import com.novakduc.forbega.qlnt.data.database.Loan;
@@ -29,11 +23,21 @@ import com.novakduc.forbega.qlnt.utilities.ConverterUtilities;
 import com.novakduc.forbega.qlnt.utilities.DatePickerFragment;
 import com.novakduc.forbega.qlnt.utilities.InjectorUtils;
 
+import javax.annotation.Nullable;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
+
 /**
  * Created by n.thanh on 10/21/2016.
  */
 
-public class LoanDeclareFragment extends android.support.v4.app.Fragment {
+public class LoanDeclareFragment extends Fragment {
     public static final String LOAN_ID_KEY = "com.novakduc.forbega.qlnt.tempLoan";
     public static final String RETURN_LOAN = "com.forbega.qlnt.temproject.loandeclare.returnloan";
     public static final String LOAN_TO_EDIT = "com.novakduc.forbega.qlnt.loanDeclare.loanId";
@@ -326,7 +330,7 @@ public class LoanDeclareFragment extends android.support.v4.app.Fragment {
         return super.onOptionsItemSelected(item);
     }
 
-    private void showDialog(android.support.v4.app.DialogFragment fragment, int target) {
+    private void showDialog(DialogFragment fragment, int target) {
         fragment.setTargetFragment(this, target);
         fragment.show(getActivity().getSupportFragmentManager(),
                 "dialog");

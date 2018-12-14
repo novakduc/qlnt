@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="navigation_drawer_header_content_description">Navigation logo header logo</string>
+    <string name="navigation_drawer_header_title">QLNT</string>
 </resources>
