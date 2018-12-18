@@ -26,7 +26,7 @@ class NewProjectListActivity : AppCompatActivity() {
                 R.layout.activity_project_list)
         drawerLayout = binding.drawerLayout
 
-        navController = Navigation.findNavController(this, R.id.garden_nav_fragment)
+        navController = Navigation.findNavController(this, R.id.qlnt_nav_fragment)
         appBarConfiguration = AppBarConfiguration.Builder(navController.graph)
                 .setDrawerLayout(drawerLayout)
                 .build()
