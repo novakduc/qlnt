@@ -17,7 +17,7 @@
 package com.novakduc.forbega.qlnt.utilities;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.novakduc.baselibrary.AppExecutors;
 import com.novakduc.forbega.qlnt.data.ProjectRepo;
@@ -38,6 +38,8 @@ import com.novakduc.forbega.qlnt.ui.detail.room.checkin.CheckInViewModelFactory;
 import com.novakduc.forbega.qlnt.ui.detail.room.checkin.add_guest.AddGuestViewModelFactory;
 import com.novakduc.forbega.qlnt.ui.detail.room.edit_room.EditRoomViewModelFactory;
 import com.novakduc.forbega.qlnt.ui.list.ProjectListViewModelFactory;
+
+import androidx.annotation.NonNull;
 
 /**
  * Provides static methods to inject the various classes needed for QLNT

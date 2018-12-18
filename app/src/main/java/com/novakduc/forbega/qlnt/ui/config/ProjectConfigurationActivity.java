@@ -1,7 +1,5 @@
 package com.novakduc.forbega.qlnt.ui.config;
 
-import android.app.FragmentManager;
-import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.util.Log;
 

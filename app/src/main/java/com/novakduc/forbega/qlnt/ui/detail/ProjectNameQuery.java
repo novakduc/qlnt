@@ -1,6 +1,6 @@
 package com.novakduc.forbega.qlnt.ui.detail;
 
-import android.arch.persistence.room.ColumnInfo;
+import androidx.room.ColumnInfo;
 
 public class ProjectNameQuery {
     @ColumnInfo(name = "name")

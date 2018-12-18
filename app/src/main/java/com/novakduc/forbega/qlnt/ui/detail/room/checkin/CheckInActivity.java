@@ -1,6 +1,5 @@
 package com.novakduc.forbega.qlnt.ui.detail.room.checkin;
 
-import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -9,6 +8,8 @@ import com.novakduc.forbega.qlnt.R;
 import com.novakduc.forbega.qlnt.ui.ConfirmationDialogFragment;
 
 import java.util.List;
+
+import androidx.fragment.app.Fragment;
 
 public class CheckInActivity extends SimpleFragmentActivity
         implements ConfirmationDialogFragment.ConfirmListener, CheckInActivityListener {

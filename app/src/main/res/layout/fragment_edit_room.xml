@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true">
@@ -13,7 +13,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/txtLayoutName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -24,16 +24,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/appbarSection">
 
-            <android.support.design.widget.TextInputEditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/txtRoomName"
                 style="@style/Base.TextAppearance.AppCompat.Body1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/inputRoomNameHint"
                 android:inputType="textCapWords" />
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/txtLayoutRoomCharge"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -48,16 +48,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/txtLayoutName">
 
-            <android.support.design.widget.TextInputEditText
+            <com.google.android.material.textfield.TextInputEditText
                 style="@style/Base.TextAppearance.AppCompat.Body1"
                 android:id="@+id/roomCharge"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/roomChargeHint"
                 android:inputType="number" />
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/txtLayoutDeposit"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -69,23 +69,23 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline20"
             app:layout_constraintTop_toBottomOf="@id/txtLayoutName">
-            <android.support.design.widget.TextInputEditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/depositAmount"
                 style="@style/Base.TextAppearance.AppCompat.Body1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/inputDepositHint"
                 android:inputType="number"/>
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <android.support.constraint.Barrier
+        <androidx.constraintlayout.widget.Barrier
             android:id="@+id/barrier2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:barrierDirection="bottom"
             app:constraint_referenced_ids="txtLayoutRoomCharge, txtLayoutDeposit" />
 
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/txtLayoutStartDate"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -94,7 +94,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/barrier2">
 
-            <android.support.design.widget.TextInputEditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/editTextStartDate"
                 style="@style/Base.TextAppearance.AppCompat.Body1"
                 android:layout_width="match_parent"
@@ -104,7 +104,7 @@
                 android:focusableInTouchMode="false"
                 android:hint="@string/startDate"
                 android:inputType="date" />
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
             android:id="@+id/billDateTitle"
@@ -137,7 +137,7 @@
             app:layout_constraintTop_toTopOf="@+id/billDateTitle" />
 
 
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/txtLayoutElectricity"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -148,7 +148,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/txtLayoutStartDate">
 
-            <android.support.design.widget.TextInputEditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/electricity"
                 style="@style/TextAppearance.AppCompat.Body1"
                 android:layout_width="match_parent"
@@ -157,9 +157,9 @@
                 android:hint="@string/inputElectricInitIndexHint"
                 android:inputType="number"
                 android:maxLength="10" />
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/txtLayoutWater"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -170,7 +170,7 @@
             app:layout_constraintStart_toEndOf="@id/guideline20"
             app:layout_constraintTop_toBottomOf="@id/txtLayoutStartDate">
 
-            <android.support.design.widget.TextInputEditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/water"
                 style="@style/TextAppearance.AppCompat.Body1"
                 android:layout_width="match_parent"
@@ -179,9 +179,9 @@
                 android:hint="@string/inputWaterInitIndexHint"
                 android:inputType="number"
                 android:maxLength="10" />
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <android.support.constraint.Barrier
+        <androidx.constraintlayout.widget.Barrier
             android:id="@+id/barrier1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -248,7 +248,7 @@
                 android:textColor="@color/secondaryColor" />
         </LinearLayout>
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/guestList"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -269,33 +269,33 @@
             android:text="@string/not_yet_checkin_announcement"
             app:layout_constraintTop_toBottomOf="@id/layoutAddGuest"/>
 
-        <android.support.constraint.Guideline
+        <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintGuide_begin="190dp" />
 
-        <android.support.constraint.Guideline
+        <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintGuide_begin="255dp" />
 
-        <android.support.constraint.Guideline
+        <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_begin="215dp" />
 
-        <android.support.constraint.Guideline
+        <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline20"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.5" />
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

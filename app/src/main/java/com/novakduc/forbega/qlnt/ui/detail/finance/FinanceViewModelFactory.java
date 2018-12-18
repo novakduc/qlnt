@@ -1,10 +1,11 @@
 package com.novakduc.forbega.qlnt.ui.detail.finance;
 
-import android.arch.lifecycle.ViewModel;
-import android.arch.lifecycle.ViewModelProvider;
-import android.support.annotation.NonNull;
-
 import com.novakduc.forbega.qlnt.data.ProjectRepo;
+
+import javax.annotation.Nonnull;
+
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
 
 public class FinanceViewModelFactory extends ViewModelProvider.NewInstanceFactory {
     private ProjectRepo mProjectRepo;
@@ -13,9 +14,9 @@ public class FinanceViewModelFactory extends ViewModelProvider.NewInstanceFactor
         mProjectRepo = projectRepo;
     }
 
-    @NonNull
+    @Nonnull
     @Override
-    public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
+    public <T extends ViewModel> T create(@Nonnull Class<T> modelClass) {
         return (T) new FinanceFragmentViewModel(mProjectRepo);
     }
 }

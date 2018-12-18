@@ -1,12 +1,12 @@
 package com.novakduc.forbega.qlnt.ui.detail.report;
 
-import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.ViewModel;
-
 import com.novakduc.forbega.qlnt.data.ProjectRepo;
 import com.novakduc.forbega.qlnt.ui.detail.finance.ProjectFinanceTab;
 
 import java.util.List;
+
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.ViewModel;
 
 public class ReportFragmentViewModel extends ViewModel {
     private ProjectRepo mProjectRepo;

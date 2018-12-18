@@ -1,11 +1,6 @@
 package com.novakduc.forbega.qlnt.ui.detail.report;
 
-import android.arch.lifecycle.ViewModelProviders;
-import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,11 +12,19 @@ import com.novakduc.forbega.qlnt.ui.detail.finance.RecentListRecyclerViewAdapter
 import com.novakduc.forbega.qlnt.utilities.InjectorUtils;
 import com.novakduc.forbega.qlnt.utilities.ItemListAdapterActionHandler;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
+
 /**
  * Created by n.thanh on 9/29/2016.
  */
 
-public class ReportFragment extends android.support.v4.app.Fragment
+public class ReportFragment extends Fragment
         implements ItemListAdapterActionHandler {
     public static final String ACTIVE_PROJECT_ID = "active_project_id";
     private static final String LOG_TAG = ReportFragment.class.getSimpleName();
@@ -30,7 +33,7 @@ public class ReportFragment extends android.support.v4.app.Fragment
     private ReportFragmentViewModel mViewModel;
     private FragmentReportTabBinding mBinding;
 
-    public static ReportFragment getInstance(@NonNull long activeId) {
+    public static ReportFragment getInstance(@Nonnull long activeId) {
         Bundle bundle = new Bundle();
         bundle.putLong(ACTIVE_PROJECT_ID, activeId);
         ReportFragment lReportFragment = new ReportFragment();

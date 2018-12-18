@@ -1,11 +1,11 @@
 package com.novakduc.forbega.qlnt.ui.detail.finance;
 
-import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.ViewModel;
-
 import com.novakduc.forbega.qlnt.data.ProjectRepo;
 
 import java.util.List;
+
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.ViewModel;
 
 public class FinanceFragmentViewModel extends ViewModel {
     private ProjectRepo mProjectRepo;

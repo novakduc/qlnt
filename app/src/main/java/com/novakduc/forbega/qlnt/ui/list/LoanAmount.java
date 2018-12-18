@@ -1,6 +1,6 @@
 package com.novakduc.forbega.qlnt.ui.list;
 
-import android.arch.persistence.room.ColumnInfo;
+import androidx.room.ColumnInfo;
 
 /**
  * Created by Nguyen Quoc Thanh on 2/6/2018.

@@ -1,7 +1,6 @@
 package com.novakduc.forbega.qlnt.data;
 
-import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.MutableLiveData;
+import androidx.lifecycle.MutableLiveData;
 import android.util.Log;
 
 import com.novakduc.baselibrary.AppExecutors;
@@ -11,6 +10,8 @@ import com.novakduc.forbega.qlnt.data.database.RoomForRent;
 import com.novakduc.forbega.qlnt.data.database.RoomService;
 
 import java.util.List;
+
+import androidx.lifecycle.LiveData;
 
 /**
  * Created by Novak on 1/14/2018.

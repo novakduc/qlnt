@@ -1,9 +1,9 @@
 package com.novakduc.forbega.qlnt.ui.detail.room;
 
-import android.arch.persistence.room.ColumnInfo;
-import android.arch.persistence.room.Ignore;
-
 import com.novakduc.forbega.qlnt.data.database.RoomStatus;
+
+import androidx.room.ColumnInfo;
+import androidx.room.Ignore;
 
 /**
  * Created by n.thanh on 9/30/2016.

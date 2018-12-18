@@ -1,11 +1,11 @@
 package com.novakduc.forbega.qlnt.ui.list;
 
-import android.support.v4.app.Fragment;
-
 import com.novakduc.baselibrary.SimpleFragmentActivity;
 import com.novakduc.forbega.qlnt.ui.ConfirmationDialogFragment;
 
 import java.util.List;
+
+import androidx.fragment.app.Fragment;
 
 public class ProjectListActivity extends SimpleFragmentActivity
         implements ConfirmationDialogFragment.ConfirmListener {
@@ -14,7 +14,7 @@ public class ProjectListActivity extends SimpleFragmentActivity
             "deleteProject";
 
     @Override
-    protected android.support.v4.app.Fragment createFragment() {
+    protected Fragment createFragment() {
         return new ProjectListFragment();
     }
 

@@ -1,8 +1,8 @@
 package com.novakduc.forbega.qlnt.ui.detail.finance;
 
-import android.arch.persistence.room.ColumnInfo;
-
 import com.novakduc.forbega.qlnt.data.database.CostType;
+
+import androidx.room.ColumnInfo;
 
 /**
  * Created by Nguyen Quoc Thanh on 2/6/2018.

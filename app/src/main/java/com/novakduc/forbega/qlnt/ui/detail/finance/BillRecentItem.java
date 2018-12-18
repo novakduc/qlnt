@@ -1,6 +1,6 @@
 package com.novakduc.forbega.qlnt.ui.detail.finance;
 
-import android.arch.persistence.room.ColumnInfo;
+import androidx.room.ColumnInfo;
 
 public class BillRecentItem {
     @ColumnInfo(name = "amount")

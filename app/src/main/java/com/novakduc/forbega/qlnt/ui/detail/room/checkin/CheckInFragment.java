@@ -1,18 +1,8 @@
 package com.novakduc.forbega.qlnt.ui.detail.room.checkin;
 
-import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.content.res.TypedArray;
-import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -43,6 +33,19 @@ import com.novakduc.forbega.qlnt.utilities.SpinnerItemArrayProvider;
 import com.novakduc.forbega.qlnt.utilities.UseViewModel;
 
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class CheckInFragment extends Fragment implements GuestListAdapterActionHandler, UseViewModel<CheckInViewModel> {
     public static final String ACTIVE_PROJECT_ID = "active_project_id";
@@ -92,7 +95,7 @@ public class CheckInFragment extends Fragment implements GuestListAdapterActionH
                 R.layout.fragment_checkin, container, false);
         View view = mBinding.getRoot();
 
-        android.support.v7.widget.Toolbar toolbar = mBinding.appbarSection.toolbar;
+        Toolbar toolbar = mBinding.appbarSection.toolbar;
 
         toolbar.setTitle(getResources().getString(R.string.project_create_confirm));
         final AppCompatActivity activity = (AppCompatActivity) getActivity();
@@ -333,7 +336,7 @@ public class CheckInFragment extends Fragment implements GuestListAdapterActionH
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    private void showDialog(android.support.v4.app.DialogFragment fragment, int target) {
+    private void showDialog(DialogFragment fragment, int target) {
         fragment.setTargetFragment(this, target);
         fragment.show(getActivity().getSupportFragmentManager(),
                 "dialog");

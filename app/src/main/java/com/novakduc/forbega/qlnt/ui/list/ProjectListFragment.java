@@ -1,17 +1,8 @@
 package com.novakduc.forbega.qlnt.ui.list;
 
-import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +11,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.novakduc.forbega.qlnt.R;
 import com.novakduc.forbega.qlnt.data.database.Project;
 import com.novakduc.forbega.qlnt.ui.ConfirmationDialogFragment;
@@ -31,6 +23,16 @@ import com.novakduc.forbega.qlnt.utilities.InjectorUtils;
 import com.novakduc.forbega.qlnt.utilities.ItemListAdapterActionHandler;
 
 import java.util.List;
+import java.util.Observer;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -38,7 +40,7 @@ import static android.content.Context.MODE_PRIVATE;
  * Created by n.thanh on 9/29/2016.
  */
 
-public class ProjectListFragment extends android.support.v4.app.Fragment
+public class ProjectListFragment extends Fragment
         implements ItemListAdapterActionHandler {
     public static final String PREF_QLNT = "com.novak.forbequ.qlnt";
     public static final String ACTIVE_PROJECT_ID = "active_project_id";
@@ -57,7 +59,7 @@ public class ProjectListFragment extends android.support.v4.app.Fragment
                 InjectorUtils.provideProjectListViewModelFactory(getActivity());
 
         mViewModel = ViewModelProviders.of(this, factory).get(ProjectListFragmentViewModel.class);
-        mViewModel.getProjects().observe(this, new Observer<List<ListViewProjectItem>>() {
+        mViewModel.getProjects().observe(this, new androidx.lifecycle.Observer<List<ListViewProjectItem>>() {
             @Override
             public void onChanged(@Nullable List<ListViewProjectItem> projects) {
                 if (projects != null) {
@@ -69,12 +71,9 @@ public class ProjectListFragment extends android.support.v4.app.Fragment
             }
         });
 
-        mViewModel.getLoanAmounts().observe(this, new Observer<List<LoanAmount>>() {
-            @Override
-            public void onChanged(@Nullable List<LoanAmount> loanAmounts) {
-                if (loanAmounts != null) {
-                    mProjectsRecyclerViewAdapter.updateLoanAmounts(loanAmounts);
-                }
+        mViewModel.getLoanAmounts().observe(this, loanAmounts -> {
+            if (loanAmounts != null) {
+                mProjectsRecyclerViewAdapter.updateLoanAmounts(loanAmounts);
             }
         });
     }
@@ -109,10 +108,10 @@ public class ProjectListFragment extends android.support.v4.app.Fragment
         }
 
         final ImageView imageView = view.findViewById(R.id.backdrop);
-        Glide.with(this)
-                .load(R.drawable.pic)
-                .apply(RequestOptions.centerCropTransform())
-                .into(imageView);
+//        Glide.with(this)
+//                .load(R.drawable.pic)
+//                .apply(RequestOptions.centerCropTransform())
+//                .into(imageView);
 
         mProjectsRecyclerViewAdapter = new ProjectsRecyclerViewAdapter(activity, this);
         RecyclerView recyclerView = view.findViewById(R.id.rv_project_list);

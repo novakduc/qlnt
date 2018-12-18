@@ -1,10 +1,10 @@
 package com.novakduc.forbega.qlnt.ui.detail.room.add_room;
 
-import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.ViewModel;
-
 import com.novakduc.forbega.qlnt.data.ProjectRepo;
 import com.novakduc.forbega.qlnt.data.database.RoomForRent;
+
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.ViewModel;
 
 public class AddRoomViewModel extends ViewModel {
     private ProjectRepo mProjectRepo;

@@ -1,12 +1,12 @@
 package com.novakduc.forbega.qlnt.ui.detail;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-
 import com.novakduc.forbega.qlnt.ui.detail.finance.FinanceFragment;
 import com.novakduc.forbega.qlnt.ui.detail.report.ReportFragment;
 import com.novakduc.forbega.qlnt.ui.detail.room.RoomListFragment;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
 
 /**
  * Created by Novak on 9/25/2016.

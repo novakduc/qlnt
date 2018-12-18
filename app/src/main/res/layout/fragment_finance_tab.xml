@@ -2,11 +2,11 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.v7.widget.CardView
+        <androidx.cardview.widget.CardView
             android:id="@+id/containerRevenue"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -46,9 +46,9 @@
                     android:text="1234234055"
                     android:textColor="@color/primaryLightColor" />
             </LinearLayout>
-        </android.support.v7.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
-        <android.support.v7.widget.CardView
+        <androidx.cardview.widget.CardView
             android:id="@+id/containerIncome"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -88,9 +88,9 @@
                     android:text="1234234055"
                     android:textColor="@color/primaryLightColor" />
             </LinearLayout>
-        </android.support.v7.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
-        <android.support.v7.widget.CardView
+        <androidx.cardview.widget.CardView
             android:id="@+id/containerDept"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -130,9 +130,9 @@
                     android:text="1234234055"
                     android:textColor="@color/redColor" />
             </LinearLayout>
-        </android.support.v7.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
-        <android.support.v7.widget.CardView
+        <androidx.cardview.widget.CardView
             android:id="@+id/containerCost"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -191,23 +191,23 @@
                     android:textColor="@color/redColor" />
 
             </LinearLayout>
-        </android.support.v7.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
-        <android.support.constraint.Guideline
+        <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline12"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.5" />
 
-        <android.support.constraint.Guideline
+        <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline13"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintGuide_begin="184dp" />
 
-        <android.support.v7.widget.CardView
+        <androidx.cardview.widget.CardView
             android:id="@+id/containerRecentActivity"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -236,7 +236,7 @@
                     android:textColor="@color/whiteColor"
                     android:text="@string/recentActivity" />
 
-                <android.support.v7.widget.RecyclerView
+                <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recentActivityRecyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -254,7 +254,7 @@
                     android:text="@string/no_recent_item_announcement" />
 
             </LinearLayout>
-        </android.support.v7.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

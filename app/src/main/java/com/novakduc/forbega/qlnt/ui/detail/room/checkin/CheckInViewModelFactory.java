@@ -1,10 +1,10 @@
 package com.novakduc.forbega.qlnt.ui.detail.room.checkin;
 
-import android.arch.lifecycle.ViewModel;
-import android.arch.lifecycle.ViewModelProvider;
-import android.support.annotation.NonNull;
-
 import com.novakduc.forbega.qlnt.data.RoomForRentRepo;
+
+import androidx.annotation.NonNull;
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
 
 public class CheckInViewModelFactory extends ViewModelProvider.NewInstanceFactory {
     private RoomForRentRepo mRoomForRentRepo;

@@ -1,11 +1,13 @@
 package com.novakduc.forbega.qlnt.ui.list;
 
 import android.content.Context;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
 import android.view.View;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.core.view.ViewCompat;
 
 /**
  * Created by n.thanh on 10/20/2016.
@@ -31,14 +33,14 @@ public class ScrollAwareFABBehavior extends FloatingActionButton.Behavior {
                 dyConsumed, dxUnconsumed, dyUnconsumed, ViewCompat.TYPE_TOUCH);
 
         if (dyConsumed > 0 && child.getVisibility() == View.VISIBLE) {
-            child.hide(new FloatingActionButton.OnVisibilityChangedListener() {
-                //this is written because of a bug from support library v.25.3.1 - Issue 230298
-                @Override
-                public void onHidden(FloatingActionButton fab) {
-                    super.onHidden(fab);
-                    fab.setVisibility(View.INVISIBLE);
-                }
-            });
+//            child.hide(new FloatingActionButton.OnVisibilityChangedListener() {
+//                //this is written because of a bug from support library v.25.3.1 - Issue 230298
+//                @Override
+//                public void onHidden(FloatingActionButton fab) {
+//                    super.onHidden(fab);
+//                    fab.setVisibility(View.INVISIBLE);
+//                }
+//            });
         } else if (dyConsumed < 0 && child.getVisibility() != View.VISIBLE) {
             child.show();
         }

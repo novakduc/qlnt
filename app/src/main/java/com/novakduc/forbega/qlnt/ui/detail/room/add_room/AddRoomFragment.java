@@ -1,13 +1,6 @@
 package com.novakduc.forbega.qlnt.ui.detail.room.add_room;
 
-import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProviders;
-import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -21,6 +14,15 @@ import com.novakduc.forbega.qlnt.data.database.RoomForRent;
 import com.novakduc.forbega.qlnt.databinding.FragmentAddRoomBinding;
 import com.novakduc.forbega.qlnt.utilities.ActivityListener;
 import com.novakduc.forbega.qlnt.utilities.InjectorUtils;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 
 public class AddRoomFragment extends Fragment {
     public static final String ACTIVE_PROJECT_ID = "active_project_id";
@@ -56,7 +58,7 @@ public class AddRoomFragment extends Fragment {
                 R.layout.fragment_add_room, container, false);
         View view = mBinding.getRoot();
 
-        android.support.v7.widget.Toolbar toolbar = mBinding.appbarSection.toolbar;
+        Toolbar toolbar = mBinding.appbarSection.toolbar;
 
         toolbar.setTitle(getResources().getString(R.string.titleAddRoom));
         final AppCompatActivity activity = (AppCompatActivity) getActivity();

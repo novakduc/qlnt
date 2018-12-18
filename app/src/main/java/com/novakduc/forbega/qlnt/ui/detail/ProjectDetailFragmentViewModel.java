@@ -1,9 +1,9 @@
 package com.novakduc.forbega.qlnt.ui.detail;
 
-import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.ViewModel;
-
 import com.novakduc.forbega.qlnt.data.ProjectRepo;
+
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.ViewModel;
 
 public class ProjectDetailFragmentViewModel extends ViewModel {
     private ProjectRepo mProjectRepo;

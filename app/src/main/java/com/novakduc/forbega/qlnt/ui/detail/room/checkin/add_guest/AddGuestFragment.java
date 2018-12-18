@@ -1,15 +1,7 @@
 package com.novakduc.forbega.qlnt.ui.detail.room.checkin.add_guest;
 
-import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
-import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.design.widget.TextInputLayout;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -21,11 +13,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 
+import com.google.android.material.textfield.TextInputLayout;
 import com.novakduc.forbega.qlnt.R;
 import com.novakduc.forbega.qlnt.data.database.Guest;
 import com.novakduc.forbega.qlnt.databinding.FragmentGuestDetailBinding;
 import com.novakduc.forbega.qlnt.ui.DialSMSFragment;
 import com.novakduc.forbega.qlnt.utilities.InjectorUtils;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 
 /**
  * Created by n.thanh on 10/21/2016.
@@ -110,7 +110,7 @@ public class AddGuestFragment extends DialSMSFragment {
         mBinding = DataBindingUtil.inflate(inflater,
                 R.layout.fragment_guest_detail, container, false);
         View view = mBinding.getRoot();
-        Toolbar toolbar = mBinding.appbarSection.toolbar;
+        androidx.appcompat.widget.Toolbar toolbar = mBinding.appbarSection.toolbar;
         toolbar.setTitle(R.string.addGuestTitle);
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         activity.setSupportActionBar(toolbar);

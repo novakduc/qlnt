@@ -1,7 +1,6 @@
 package com.novakduc.forbega.qlnt.ui.detail;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,11 +8,14 @@ import android.widget.TextView;
 
 import com.novakduc.forbega.qlnt.R;
 
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
 /**
  * Created by Novak on 9/25/2016.
  */
 
-public class TabFragment extends android.support.v4.app.Fragment {
+public class TabFragment extends Fragment {
     private static String TAB_POSITION_KEY = "qlnt.tab.position";
     TextView mTextView;
     private TabPosition position;

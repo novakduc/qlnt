@@ -1,9 +1,9 @@
 package com.novakduc.forbega.qlnt.ui.list;
 
-import android.arch.persistence.room.ColumnInfo;
-import android.arch.persistence.room.Ignore;
-
 import java.util.Calendar;
+
+import androidx.room.ColumnInfo;
+import androidx.room.Ignore;
 
 /**
  * Created by Nguyen Quoc Thanh on 2/6/2018.

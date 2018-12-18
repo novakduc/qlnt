@@ -1,6 +1,5 @@
 package com.novakduc.forbega.qlnt.ui.detail.room.edit_room;
 
-import android.support.v4.app.Fragment;
 import android.util.Log;
 
 import com.novakduc.baselibrary.SimpleFragmentActivity;
@@ -8,6 +7,8 @@ import com.novakduc.forbega.qlnt.R;
 import com.novakduc.forbega.qlnt.ui.ConfirmationDialogFragment;
 
 import java.util.List;
+
+import androidx.fragment.app.Fragment;
 
 public class EditRoomActivity extends SimpleFragmentActivity
         implements ConfirmationDialogFragment.ConfirmListener, EditRoomActivityListener {
