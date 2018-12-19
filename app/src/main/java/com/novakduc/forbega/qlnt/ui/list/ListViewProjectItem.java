@@ -2,6 +2,7 @@ package com.novakduc.forbega.qlnt.ui.list;
 
 import java.util.Calendar;
 
+import androidx.annotation.Nullable;
 import androidx.room.ColumnInfo;
 import androidx.room.Ignore;
 
@@ -136,5 +137,22 @@ public class ListViewProjectItem {
 
     public long getId() {
         return projectId;
+    }
+
+    @Override
+    public boolean equals(@Nullable Object obj) {
+        if (obj instanceof ListViewProjectItem) {
+            ListViewProjectItem listViewProjectItem = (ListViewProjectItem) obj;
+            return this.name == listViewProjectItem.name
+                    && this.income == listViewProjectItem.income
+                    && this.debt == listViewProjectItem.debt
+                    && this.investmentAmount == listViewProjectItem.investmentAmount
+                    && this.noOfAvailableRoom == listViewProjectItem.noOfAvailableRoom
+                    && this.noOfRoom == listViewProjectItem.noOfRoom
+                    && this.startDate == listViewProjectItem.startDate
+                    && this.yearDuration == listViewProjectItem.yearDuration
+                    && this.totalCostAmount == listViewProjectItem.totalCostAmount;
+        }
+        return false;
     }
 }
