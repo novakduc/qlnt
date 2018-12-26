@@ -2,6 +2,7 @@ package com.novakduc.forbega.qlnt.ui.list;
 
 import java.util.Calendar;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.room.ColumnInfo;
 import androidx.room.Ignore;
@@ -154,5 +155,14 @@ public class ListViewProjectItem {
                     && this.totalCostAmount == listViewProjectItem.totalCostAmount;
         }
         return false;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        String s = projectId + "; "
+                + name + "; "
+                + "\n";
+        return s;
     }
 }
