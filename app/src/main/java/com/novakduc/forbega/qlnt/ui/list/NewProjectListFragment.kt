@@ -11,7 +11,11 @@ import com.novakduc.forbega.qlnt.databinding.FragmentProjectListBinding
 import com.novakduc.forbega.qlnt.utilities.InjectorUtils
 
 class NewProjectListFragment: Fragment() {
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
+    ): View? {
         val binding = FragmentProjectListBinding.inflate(inflater, container, false)
         val adapter = NewProjectListAdapter(binding.root.context)
         binding.rvProjectList.adapter = adapter

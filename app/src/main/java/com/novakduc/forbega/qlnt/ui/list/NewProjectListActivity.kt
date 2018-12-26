@@ -19,17 +19,16 @@ class NewProjectListActivity : AppCompatActivity() {
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var navController: NavController
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onCreate(savedInstanceState, persistentState)
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
         val binding: ActivityProjectListBinding = DataBindingUtil.setContentView(this,
                 R.layout.activity_project_list)
         drawerLayout = binding.drawerLayout
 
         navController = Navigation.findNavController(this, R.id.qlnt_nav_fragment)
-        appBarConfiguration = AppBarConfiguration.Builder(navController.graph)
-                .setDrawerLayout(drawerLayout)
-                .build()
+        appBarConfiguration = AppBarConfiguration(navController.graph, drawerLayout)
 
         // Set up ActionBar
         setSupportActionBar(binding.toolbar)
